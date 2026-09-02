@@ -573,3 +573,8 @@
 - **File changed**: `flake.nix`, `flake.lock`, `nixos/configuration.nix`
 - **Mô tả**: Bổ sung kho `aagl-gtk-on-nix` vào flake, import module và cấu hình cache tương ứng vào NixOS. Kích hoạt tính năng `programs.anime-game-launcher.enable = true`.
 - **Lý do**: User yêu cầu tìm launcher phù hợp nhất để chơi Genshin Impact trên NixOS. AAGL là lựa chọn tối ưu nhất và được cộng đồng tin dùng.
+
+### [2026-09-02 21:13] - SỬA LỖI XUNG ĐỘT NIX SETTINGS
+- **File changed**: `nixos/configuration.nix`
+- **Mô tả**: Sửa lỗi báo trùng lặp từ khóa `nix.settings` bằng cách chuyển cấu hình cache của AAGL thành một inline module bên trong khối `imports`.
+- **Lý do**: File cấu hình bị lỗi `attribute 'nix.settings' already defined` không thể build được khi sử dụng lệnh cũ.

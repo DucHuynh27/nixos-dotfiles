@@ -22,10 +22,8 @@
     ./damx.nix
     inputs.mango.nixosModules.mango
     inputs.aagl.nixosModules.default
+    { nix.settings = inputs.aagl.nixConfig; }
   ];
-
-  # AAGL Cache configuration
-  nix.settings = inputs.aagl.nixConfig;
 
   nixpkgs = {
     # You can add overlays here
