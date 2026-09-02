@@ -568,3 +568,8 @@
   - Bật `services.gnome.gnome-keyring.enable = true` trong NixOS để cung cấp Secret Service cho Noctalia mã hóa file `index.enc`.
   - Thay đổi phím tắt `SUPER+M` của MangoWM từ lệnh `quit` (tắt đột ngột) sang `spawn,noctalia msg session logout` (thoát an toàn qua Noctalia).
 - **Lý do**: Khi tắt máy bằng `SUPER+M`, MangoWM sập quá nhanh khiến Noctalia không kịp lưu dữ liệu Ghim. Ngoài ra, việc thiếu `gnome-keyring` khiến Noctalia không có chìa khóa mã hóa để khôi phục dữ liệu ở lần khởi động sau.
+
+### [2026-09-02 21:11] - CÀI ĐẶT ANIME GAME LAUNCHER (GENSHIN IMPACT)
+- **File changed**: `flake.nix`, `flake.lock`, `nixos/configuration.nix`
+- **Mô tả**: Bổ sung kho `aagl-gtk-on-nix` vào flake, import module và cấu hình cache tương ứng vào NixOS. Kích hoạt tính năng `programs.anime-game-launcher.enable = true`.
+- **Lý do**: User yêu cầu tìm launcher phù hợp nhất để chơi Genshin Impact trên NixOS. AAGL là lựa chọn tối ưu nhất và được cộng đồng tin dùng.

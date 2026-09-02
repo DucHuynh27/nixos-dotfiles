@@ -21,7 +21,11 @@
     ./hardware-configuration.nix
     ./damx.nix
     inputs.mango.nixosModules.mango
+    inputs.aagl.nixosModules.default
   ];
+
+  # AAGL Cache configuration
+  nix.settings = inputs.aagl.nixConfig;
 
   nixpkgs = {
     # You can add overlays here
@@ -75,6 +79,7 @@
   programs.sway.enable = true;
   programs.mango.enable = true;
   programs.gpu-screen-recorder.enable = true;
+  programs.anime-game-launcher.enable = true;
 
   xdg.portal = {
     enable = true;

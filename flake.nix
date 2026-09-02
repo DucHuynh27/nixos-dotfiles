@@ -30,6 +30,10 @@
     mango.url = "github:mangowm/mango";
     mango.inputs.nixpkgs.follows = "nixpkgs";
 
+    # AAGL (An Anime Game Launcher)
+    aagl.url = "github:ezKEa/aagl-gtk-on-nix";
+    aagl.inputs.nixpkgs.follows = "nixpkgs";
+
     # DAMX Source (Local)
     damx.url = "path:/home/hinne/Projects/DAMX-1.0.2";
     damx.flake = false;
