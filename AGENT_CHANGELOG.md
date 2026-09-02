@@ -578,3 +578,8 @@
 - **File changed**: `nixos/configuration.nix`
 - **Mô tả**: Sửa lỗi báo trùng lặp từ khóa `nix.settings` bằng cách chuyển cấu hình cache của AAGL thành một inline module bên trong khối `imports`.
 - **Lý do**: File cấu hình bị lỗi `attribute 'nix.settings' already defined` không thể build được khi sử dụng lệnh cũ.
+
+### [2026-09-02 23:03] - CẤU HÌNH TẦN SỐ QUÉT MÀN HÌNH MANGOWM
+- **File changed**: `home-manager/mango/config.conf`
+- **Mô tả**: Bổ sung `monitorrule` để ép màn hình Laptop (`eDP-1`) chạy ở mức 144Hz và màn hình rời (`HDMI-A-1`) chạy ở mức 200Hz.
+- **Lý do**: Mặc định MangoWM chạy ở 60Hz khiến game (Xwayland) bị khóa cứng ở 60FPS. Cài đặt tần số quét cao giúp tool FPS Unlocker hoạt động và game đạt được 120 FPS.
