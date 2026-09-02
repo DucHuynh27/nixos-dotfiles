@@ -78,6 +78,7 @@
   programs.mango.enable = true;
   programs.gpu-screen-recorder.enable = true;
   programs.anime-game-launcher.enable = true;
+  programs.gamescope.enable = true;
 
   xdg.portal = {
     enable = true;

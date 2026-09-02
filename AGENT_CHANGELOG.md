@@ -583,3 +583,8 @@
 - **File changed**: `home-manager/mango/config.conf`
 - **Mô tả**: Bổ sung `monitorrule` để ép màn hình Laptop (`eDP-1`) chạy ở mức 144Hz và màn hình rời (`HDMI-A-1`) chạy ở mức 200Hz.
 - **Lý do**: Mặc định MangoWM chạy ở 60Hz khiến game (Xwayland) bị khóa cứng ở 60FPS. Cài đặt tần số quét cao giúp tool FPS Unlocker hoạt động và game đạt được 120 FPS.
+
+### [2026-09-02 23:38] - CÀI ĐẶT GAMESCOPE
+- **File changed**: `nixos/configuration.nix`
+- **Mô tả**: Kích hoạt `programs.gamescope.enable = true`.
+- **Lý do**: User bật Gamescope trong AAGL nhưng game không lên do hệ thống NixOS chưa cài đặt gói Gamescope.
