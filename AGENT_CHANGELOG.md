@@ -588,3 +588,8 @@
 - **File changed**: `nixos/configuration.nix`
 - **Mô tả**: Kích hoạt `programs.gamescope.enable = true`.
 - **Lý do**: User bật Gamescope trong AAGL nhưng game không lên do hệ thống NixOS chưa cài đặt gói Gamescope.
+
+### [2026-09-04 09:48] - CÀI ĐẶT CLOUDFLARE WARP
+- **File changed**: `nixos/configuration.nix`
+- **Mô tả**: Kích hoạt `services.cloudflare-warp.enable = true`.
+- **Lý do**: User yêu cầu cài đặt phần mềm 1.1.1.1 (Cloudflare WARP) làm VPN.

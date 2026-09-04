@@ -141,11 +141,39 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     jack.enable = true;
+    wireplumber.extraConfig = {
+      "10-disable-suspend" = {
+        "monitor.alsa.rules" = [
+          {
+            matches = [
+              { "node.name" = "~alsa_input.*"; }
+              { "node.name" = "~alsa_output.*"; }
+            ];
+            actions = {
+              update-props = {
+                "session.suspend-timeout-seconds" = 0;
+                "api.alsa.headroom" = 1024;
+              };
+            };
+          }
+        ];
+      };
+    };
+    extraConfig.pipewire = {
+      "92-low-latency" = {
+        "context.properties" = {
+          "default.clock.rate" = 48000;
+          "default.clock.quantum" = 1024;
+          "default.clock.min-quantum" = 32;
+          "default.clock.max-quantum" = 8192;
+        };
+      };
+    };
   };
 
   # Disable audio power saving to prevent stuttering/dropouts
   boot.extraModprobeConfig = ''
-    options snd_hda_intel power_save=0 power_save_controller=N
+    options snd_hda_intel power_save=0 power_save_controller=N enable_msi=1
   '';
 
   # Nvidia Optimus setup
@@ -289,6 +317,7 @@
     };
   };
   services.blueman.enable = true;
+  services.cloudflare-warp.enable = true;
 
   # Battery and Preformance
   services.upower.enable = true; # Dịch vụ đọc phần trăm pin laptop
