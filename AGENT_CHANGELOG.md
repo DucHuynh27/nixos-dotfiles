@@ -593,3 +593,7 @@
 - **File changed**: `nixos/configuration.nix`
 - **Mô tả**: Kích hoạt `services.cloudflare-warp.enable = true`.
 - **Lý do**: User yêu cầu cài đặt phần mềm 1.1.1.1 (Cloudflare WARP) làm VPN.
+### [2026-09-04 16:25] - SỬA VỊ TRÍ MÀN HÌNH MANGOWM
+- **File changed**: `home-manager/mango/config.conf`
+- **Mô tả**: Bổ sung tọa độ `x:0,y:0` cho màn hình laptop `eDP-1` (bên trái) và `x:1920,y:0` cho màn hình rời `HDMI-A-1` (bên phải).
+- **Lý do**: Cấu hình cũ bị thiếu tọa độ khiến MangoWM xếp sai vị trí màn hình, gây ngược hướng khi di chuyển chuột giữa 2 màn hình.
