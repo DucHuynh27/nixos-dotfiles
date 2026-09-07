@@ -163,8 +163,9 @@
       "92-low-latency" = {
         "context.properties" = {
           "default.clock.rate" = 48000;
+          "default.clock.allowed-rates" = [ 44100 48000 88200 96000 ];
           "default.clock.quantum" = 1024;
-          "default.clock.min-quantum" = 32;
+          "default.clock.min-quantum" = 512;
           "default.clock.max-quantum" = 8192;
         };
       };
@@ -243,6 +244,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    appimage-run
+    easyeffects
     git
     slurp
     grim
@@ -256,6 +259,7 @@
     jdk25
     glfw3-minecraft
     mangohud
+    inputs.look.packages.${pkgs.stdenv.hostPlatform.system}.default
     quickemu
     sbctl # tool for secure boot
     nest-cli

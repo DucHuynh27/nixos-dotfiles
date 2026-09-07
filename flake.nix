@@ -1,6 +1,11 @@
 {
   description = "Your new nix config";
 
+  nixConfig = {
+    extra-substituters = [ "https://look.cachix.org" ];
+    extra-trusted-public-keys = [ "look.cachix.org-1:8elPCeSVBzlDZXqIRKBK9GyLIK/Hoe1xiWZF0ir7uX4=" ];
+  };
+
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -37,6 +42,10 @@
     # DAMX Source (Local)
     damx.url = "path:/home/hinne/Projects/DAMX-1.0.2";
     damx.flake = false;
+
+    # Look Launcher
+    look.url = "github:kunkka19xx/look?dir=apps/linows";
+    look.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {

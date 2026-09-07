@@ -150,6 +150,29 @@
         "type": "github"
       }
     },
+    "look": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay_2"
+      },
+      "locked": {
+        "dir": "apps/linows",
+        "lastModified": 1788774376,
+        "narHash": "sha256-aAk3Cw7xyWKdkZYKvLbG4yrNQf7PoNTndNEKwRivXP0=",
+        "owner": "kunkka19xx",
+        "repo": "look",
+        "rev": "108709a2262977431f4689051051eed65ed4cb78",
+        "type": "github"
+      },
+      "original": {
+        "dir": "apps/linows",
+        "owner": "kunkka19xx",
+        "repo": "look",
+        "type": "github"
+      }
+    },
     "mango": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -225,6 +248,7 @@
         "antigravity": "antigravity",
         "damx": "damx",
         "home-manager": "home-manager",
+        "look": "look",
         "mango": "mango",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
@@ -246,6 +270,27 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "6ef009bf4c4873cdc1a621826722bdea7c03e62c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "look",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778296574,
+        "narHash": "sha256-DVmg1JCjG0VJTa+FF6tH6tkQChaxzK1EzPL98RiRWU0=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "1d634a90dffb59ec9ba52652de311b15528c1595",
         "type": "github"
       },
       "original": {

@@ -597,3 +597,11 @@
 - **File changed**: `home-manager/mango/config.conf`
 - **Mô tả**: Bổ sung tọa độ `x:0,y:0` cho màn hình laptop `eDP-1` (bên trái) và `x:1920,y:0` cho màn hình rời `HDMI-A-1` (bên phải).
 - **Lý do**: Cấu hình cũ bị thiếu tọa độ khiến MangoWM xếp sai vị trí màn hình, gây ngược hướng khi di chuyển chuột giữa 2 màn hình.
+
+### [2026-09-07 17:46] - CÀI ĐẶT LOOK LAUNCHER
+- **Files changed**: `flake.nix`, `nixos/configuration.nix`
+- **Mô tả**: 
+  - Khai báo nguồn tải mã nguồn Look từ `github:kunkka19xx/look`.
+  - Cấu hình server Cachix để kéo bản dựng sẵn.
+  - Thêm gói `look` vào danh sách ứng dụng hệ thống.
+- **Lý do**: User yêu cầu cài đặt phần mềm Look theo phương pháp Declarative chuẩn Flake.
