@@ -629,3 +629,13 @@
   - Thay thế lệnh `gdbus` thành `dbus-send` trong cấu hình phím tắt `Alt+Space` để tương thích với môi trường mặc định của NixOS.
   - Thêm `lookapp` vào danh sách ứng dụng tự khởi chạy (Autostart) lúc bật máy (`exec` cho Sway và `exec-once` cho MangoWM).
 - **Lý do**: Sửa lỗi bấm phím tắt không mở Look Launcher do ứng dụng chưa chạy ngầm và thiếu gói lệnh gdbus.
+
+### [2026-09-08 21:58] - ĐỔI ĐƠN VỊ ĐO LƯỜNG SANG HỆ MÉT (ĐỘ C)
+- **Files changed**: `nixos/configuration.nix`
+- **Mô tả**: Bổ sung `LC_MEASUREMENT = "vi_VN.UTF-8"` vào `i18n.extraLocaleSettings`.
+- **Lý do**: Ép hệ thống dùng hệ mét (độ C, cm, kg) thay vì hệ Mỹ, giúp Look Launcher hiển thị đúng nhiệt độ Celsius.
+
+### [2026-09-08 22:04] - SỬA LỖI BUILD GLIBC-LOCALES
+- **Files changed**: `nixos/configuration.nix`
+- **Mô tả**: Thay thế `LC_MEASUREMENT = "vi_VN.UTF-8"` bằng `"en_IE.UTF-8"`.
+- **Lý do**: Khắc phục lỗi `unsupported locales detected: vi_VN.UTF-8/UTF-8` do cơ chế tự sinh locale của NixOS bị sai cú pháp với mã `vi_VN` của glibc. Locale `en_IE.UTF-8` (Ireland) vừa hỗ trợ tiếng Anh chuẩn vừa sử dụng hệ mét (độ C) nên giải quyết được cả 2 vấn đề.
