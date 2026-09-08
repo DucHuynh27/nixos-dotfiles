@@ -644,3 +644,8 @@
 - **Files changed**: `home-manager/mango/config.conf`
 - **Mô tả**: Xóa bỏ dòng `mousebind=NONE,btn_middle,togglemaximizescreen,0`.
 - **Lý do**: Người dùng không muốn dùng nút cuộn chuột (middle click) để phóng to/thu nhỏ (maximize) cửa sổ trong MangoWM vì dễ bấm nhầm.
+
+### [2026-09-08 22:20] - SỬA LỖI CẢNH BÁO TÊN GÓI NODEJS
+- **Files changed**: `home-manager/home.nix`
+- **Mô tả**: Đổi tên gói `dockerfile-language-server-nodejs` thành `dockerfile-language-server`.
+- **Lý do**: Khắc phục cảnh báo (evaluation warning) khi chạy lệnh build do kho Nixpkgs đã đổi tên gói này.

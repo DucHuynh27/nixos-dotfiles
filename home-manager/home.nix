@@ -143,7 +143,7 @@
     tailwindcss-language-server
     vscode-langservers-extracted
     yaml-language-server
-    dockerfile-language-server-nodejs
+    dockerfile-language-server
     bash-language-server
     nil
     alejandra
