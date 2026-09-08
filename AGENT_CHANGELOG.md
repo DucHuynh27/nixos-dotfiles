@@ -661,3 +661,8 @@
   - Mở Noctalia Launcher: `Alt + Space`
   - Mở Look: `Super + D`
 - **Lý do**: Làm theo yêu cầu cấu hình thói quen của người dùng trên cả Sway và MangoWM.
+
+### [2026-09-08 23:25] - TỐI ƯU HIỆU ỨNG ANIMATION MANGOWM
+- **Files changed**: `home-manager/mango/config.conf`
+- **Mô tả**: Chuyển kiểu animation mặc định sang `zoom` và thay đổi tỷ lệ `zoom_initial_ratio` / `zoom_end_ratio` thành `0.85`.
+- **Lý do**: Tạo cảm giác mượt mà, dứt khoát và "nhanh gọn" hơn cho thao tác mở/đóng cửa sổ, hạn chế sự rườm rà của hiệu ứng slide trượt dài.
