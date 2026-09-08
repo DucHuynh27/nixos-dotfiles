@@ -654,3 +654,10 @@
 - **Files changed**: `home-manager/mango/config.conf`
 - **Mô tả**: Xóa bỏ các phím tắt theo yêu cầu: `Alt+Shift+F`, `Ctrl+Shift+Điều hướng`, `Ctrl+Alt+Điều hướng`, `Super+L`, và `Alt+E`.
 - **Lý do**: Người dùng không có nhu cầu sử dụng các tính năng này (Fake fullscreen, di chuyển/resize cửa sổ bằng bàn phím, chọn layout panel, và set proportion).
+
+### [2026-09-08 23:01] - ĐỔI PHÍM TẮT MỞ APP LAUNCHER
+- **Files changed**: `home-manager/mango/config.conf`, `home-manager/sway/config`
+- **Mô tả**: Tráo đổi phím tắt mở app launcher của Noctalia và Look cho nhau.
+  - Mở Noctalia Launcher: `Alt + Space`
+  - Mở Look: `Super + D`
+- **Lý do**: Làm theo yêu cầu cấu hình thói quen của người dùng trên cả Sway và MangoWM.
