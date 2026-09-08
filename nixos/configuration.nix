@@ -162,6 +162,8 @@
           actions = {
             update-props = {
               "session.suspend-timeout-seconds" = 0;
+              "api.alsa.period-size" = 1024;
+              "api.alsa.headroom" = 8192;
             };
           };
         }
@@ -178,13 +180,15 @@
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
     open = false;
     nvidiaSettings = true;
     nvidiaPersistenced = true;
     prime = {
-      sync.enable = true;
+      sync.enable = false;
+      offload.enable = true;
+      offload.enableOffloadCmd = true;
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
@@ -323,6 +327,10 @@
   # Battery and Preformance
   services.upower.enable = true; # Dịch vụ đọc phần trăm pin laptop
   services.power-profiles-daemon.enable = true; # Quản lý chế độ (Tiết kiệm pin / Hiệu năng cao)
+
+  # ZRAM Swap
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 50;
 
   # Gaming Optimizations
   programs.gamemode.enable = true;
