@@ -86,6 +86,7 @@ bindsym $mod+Shift+q exec noctalia msg panel-toggle session
 bindsym $mod+e exec $term -e yazi
 bindsym $mod+d exec $menu
 bindsym $mod+c exec $term -e nvim
+bindsym Mod1+space exec gdbus call --session --dest com.look.Desktop --object-path /com/look/Desktop --method com.look.Desktop.Toggle
 
 # ─── Window Management ───
 bindsym $mod+q kill

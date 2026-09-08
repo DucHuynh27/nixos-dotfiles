@@ -617,3 +617,8 @@
 - **File changed**: `home-manager/home.nix`
 - **Mô tả**: Sửa lỗi chính tả `thoirum` và bổ sung đuôi `.desktop` cho các khai báo trình duyệt mặc định `thorium-browser.desktop` trong `xdg.mimeApps`.
 - **Lý do**: Khắc phục lỗi cấu hình Mime để hệ thống nhận diện đúng trình duyệt Thorium khi mở các liên kết web.
+
+### [2026-09-08 17:56] - CẤU HÌNH PHÍM TẮT CHO LOOK LAUNCHER
+- **Files changed**: `home-manager/sway/config`, `home-manager/mango/config.conf`
+- **Mô tả**: Gán cứng tổ hợp phím `Alt + Space` để gọi lệnh D-Bus (`gdbus call --session ... com.look.Desktop.Toggle`) trong cấu hình của Sway và MangoWM.
+- **Lý do**: Khắc phục lỗi Look Launcher không tự động nhận diện được API phím tắt trên các Window Manager độc lập.
