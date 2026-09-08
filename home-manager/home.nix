@@ -165,6 +165,7 @@
     telegram-desktop
     vesktop
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
+    brave
 
     # ---------------------------------------------------
     # Media & Graphics

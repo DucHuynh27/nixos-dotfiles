@@ -73,7 +73,7 @@ default_floating_border normal 0
 gaps inner 5
 
 # ─── Window Rules ───
-for_window [title="Picture-in-Picture"] floating enable, sticky enable
+for_window [title="Picture in picture"] floating enable, sticky enable
 
 # Key bindings
 # ─── Applications ───

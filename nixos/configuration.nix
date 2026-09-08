@@ -140,9 +140,17 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
+    alsa.enable = false;
+    alsa.support32Bit = false;
     jack.enable = true;
+    extraConfig.pipewire."10-fix-audio" = {
+      "context.properties" = {
+        "default.clock.rate" = 48000;
+        "default.clock.quantum" = 1024;
+        "default.clock.min-quantum" = 1024;
+        "default.clock.max-quantum" = 8192;
+      };
+    };
   };
 
   # Disable audio power saving to prevent stuttering/dropouts
