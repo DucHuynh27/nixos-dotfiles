@@ -639,3 +639,8 @@
 - **Files changed**: `nixos/configuration.nix`
 - **Mô tả**: Thay thế `LC_MEASUREMENT = "vi_VN.UTF-8"` bằng `"en_IE.UTF-8"`.
 - **Lý do**: Khắc phục lỗi `unsupported locales detected: vi_VN.UTF-8/UTF-8` do cơ chế tự sinh locale của NixOS bị sai cú pháp với mã `vi_VN` của glibc. Locale `en_IE.UTF-8` (Ireland) vừa hỗ trợ tiếng Anh chuẩn vừa sử dụng hệ mét (độ C) nên giải quyết được cả 2 vấn đề.
+
+### [2026-09-08 22:17] - GỠ BỎ TÍNH NĂNG PHÓNG TO BẰNG CHUỘT GIỮA
+- **Files changed**: `home-manager/mango/config.conf`
+- **Mô tả**: Xóa bỏ dòng `mousebind=NONE,btn_middle,togglemaximizescreen,0`.
+- **Lý do**: Người dùng không muốn dùng nút cuộn chuột (middle click) để phóng to/thu nhỏ (maximize) cửa sổ trong MangoWM vì dễ bấm nhầm.
