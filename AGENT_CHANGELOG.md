@@ -605,3 +605,10 @@
   - Cấu hình server Cachix để kéo bản dựng sẵn.
   - Thêm gói `look` vào danh sách ứng dụng hệ thống.
 - **Lý do**: User yêu cầu cài đặt phần mềm Look theo phương pháp Declarative chuẩn Flake.
+
+### [2026-09-08 08:36] - SỬA LỖI CẢNH BÁO CACHIX CỦA LOOK LAUNCHER
+- **Files changed**: `flake.nix`, `nixos/configuration.nix`
+- **Mô tả**:
+  - Xóa `nixConfig` (chứa `look.cachix.org`) khỏi `flake.nix`.
+  - Chuyển `look.cachix.org` và public key tương ứng vào `nix.settings.substituters` và `nix.settings.trusted-public-keys` trong `nixos/configuration.nix`.
+- **Lý do**: Khắc phục cảnh báo "untrusted flake configuration setting" khi chạy `nh os switch`, giúp hệ thống tự động tin cậy server tải Look mà không cần hỏi cờ `--accept-flake-config`.

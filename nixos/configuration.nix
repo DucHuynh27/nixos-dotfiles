@@ -56,10 +56,12 @@
       substituters = [
         "https://cache.nixos.org"
         "https://noctalia.cachix.org"
+        "https://look.cachix.org"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "noctalia.cachix.org-1:Dr8Vop7J7fhFwzW/LGKsnpUTl/6dHDmQBLRVIoB6a5Q="
+        "look.cachix.org-1:8elPCeSVBzlDZXqIRKBK9GyLIK/Hoe1xiWZF0ir7uX4="
       ];
     };
     # Opinionated: disable channels
@@ -141,35 +143,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     jack.enable = true;
-    wireplumber.extraConfig = {
-      "10-disable-suspend" = {
-        "monitor.alsa.rules" = [
-          {
-            matches = [
-              { "node.name" = "~alsa_input.*"; }
-              { "node.name" = "~alsa_output.*"; }
-            ];
-            actions = {
-              update-props = {
-                "session.suspend-timeout-seconds" = 0;
-                "api.alsa.headroom" = 1024;
-              };
-            };
-          }
-        ];
-      };
-    };
-    extraConfig.pipewire = {
-      "92-low-latency" = {
-        "context.properties" = {
-          "default.clock.rate" = 48000;
-          "default.clock.allowed-rates" = [ 44100 48000 88200 96000 ];
-          "default.clock.quantum" = 1024;
-          "default.clock.min-quantum" = 512;
-          "default.clock.max-quantum" = 8192;
-        };
-      };
-    };
   };
 
   # Disable audio power saving to prevent stuttering/dropouts
