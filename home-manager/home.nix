@@ -57,7 +57,7 @@
     PNPM_HOME = "$HOME/.local/share/pnpm";
     EDITOR = "nvim";
     TERMINAL = "kitty";
-    BROWSER = "zen";
+    BROWSER = "thorium";
     # Wayland/Qt variables (ported from Niri)
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     QT_QPA_PLATFORM = "wayland";
@@ -104,6 +104,8 @@
     sops
     wl-clipboard
     xdg-utils
+    keepassxc
+    bilibili
 
     # ---------------------------------------------------
     # Desktop Shell & WM
@@ -134,6 +136,25 @@
     zed-editor
 
     # ---------------------------------------------------
+    # LSPs & Formatters (For Neovim)
+    # ---------------------------------------------------
+    typescript-language-server
+    prettier
+    tailwindcss-language-server
+    vscode-langservers-extracted
+    yaml-language-server
+    dockerfile-language-server-nodejs
+    bash-language-server
+    nil
+    alejandra
+    pyright
+    isort
+    black
+    jdt-language-server
+    tree-sitter
+    lua-language-server
+
+    # ---------------------------------------------------
     # General Apps
     # ---------------------------------------------------
     libreoffice
@@ -144,7 +165,6 @@
     telegram-desktop
     vesktop
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # ---------------------------------------------------
     # Media & Graphics
@@ -331,11 +351,11 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = "zen.desktop";
-      "x-scheme-handler/http" = "zen.desktop";
-      "x-scheme-handler/https" = "zen.desktop";
-      "x-scheme-handler/about" = "zen.desktop";
-      "x-scheme-handler/unknown" = "zen.desktop";
+      "text/html" = "thorium";
+      "x-scheme-handler/http" = "thorium";
+      "x-scheme-handler/https" = "thorium";
+      "x-scheme-handler/about" = "thoirum";
+      "x-scheme-handler/unknown" = "thorium";
 
       # File Manager
       "inode/directory" = "yazi.desktop";

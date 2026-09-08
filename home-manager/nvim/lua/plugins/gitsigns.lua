@@ -1,12 +1,27 @@
 return {
-  "lewis6991/gitsigns.nvim",
-  opts = {
-    attach_to_untracked = true, -- Ép hiển thị dấu thay đổi (+) cho cả file mới chưa git add
-    current_line_blame = true,  -- Bật tính năng hiển thị Git Blame (giống GitLens của VSCode) ở cuối dòng code
-    current_line_blame_opts = {
-      virt_text = true,
-      virt_text_pos = "eol", 
-      delay = 500, -- Đợi 0.5 giây sau khi dừng gõ thì mới hiện chữ mờ để đỡ rối mắt
-    },
-  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("gitsigns").setup({
+        signs = {
+          add = { text = "│" },
+          change = { text = "│" },
+          delete = { text = "_" },
+          topdelete = { text = "‾" },
+          changedelete = { text = "~" },
+        },
+        current_line_blame = true, -- Hiện tên người code dòng hiện tại (Git blame)
+        current_line_blame_opts = {
+          delay = 500,
+        },
+      })
+      
+      -- Phím tắt nhanh
+      local gs = package.loaded.gitsigns
+      vim.keymap.set("n", "]h", gs.next_hunk, { desc = "Đến đoạn code sửa tiếp theo (Git)" })
+      vim.keymap.set("n", "[h", gs.prev_hunk, { desc = "Về đoạn code sửa trước đó (Git)" })
+      vim.keymap.set("n", "<leader>hp", gs.preview_hunk, { desc = "Xem trước đoạn code bị xóa/sửa" })
+    end,
+  }
 }

@@ -85,7 +85,7 @@ bindsym $mod+Mod1+l exec noctalia msg session lock
 bindsym $mod+Shift+q exec noctalia msg panel-toggle session
 bindsym $mod+e exec $term -e yazi
 bindsym $mod+d exec $menu
-bindsym $mod+n exec $term -e nvim
+bindsym $mod+c exec $term -e nvim
 
 # ─── Window Management ───
 bindsym $mod+q kill
