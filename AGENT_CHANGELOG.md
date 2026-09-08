@@ -649,3 +649,8 @@
 - **Files changed**: `home-manager/home.nix`
 - **Mô tả**: Đổi tên gói `dockerfile-language-server-nodejs` thành `dockerfile-language-server`.
 - **Lý do**: Khắc phục cảnh báo (evaluation warning) khi chạy lệnh build do kho Nixpkgs đã đổi tên gói này.
+
+### [2026-09-08 22:32] - GỠ BỎ MỘT SỐ PHÍM TẮT MANGOWM
+- **Files changed**: `home-manager/mango/config.conf`
+- **Mô tả**: Xóa bỏ các phím tắt theo yêu cầu: `Alt+Shift+F`, `Ctrl+Shift+Điều hướng`, `Ctrl+Alt+Điều hướng`, `Super+L`, và `Alt+E`.
+- **Lý do**: Người dùng không có nhu cầu sử dụng các tính năng này (Fake fullscreen, di chuyển/resize cửa sổ bằng bàn phím, chọn layout panel, và set proportion).
