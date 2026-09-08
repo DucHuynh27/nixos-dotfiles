@@ -351,11 +351,11 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = "thorium";
-      "x-scheme-handler/http" = "thorium";
-      "x-scheme-handler/https" = "thorium";
-      "x-scheme-handler/about" = "thoirum";
-      "x-scheme-handler/unknown" = "thorium";
+      "text/html" = "thorium-browser.desktop";
+      "x-scheme-handler/http" = "thorium-browser.desktop";
+      "x-scheme-handler/https" = "thorium-browser.desktop";
+      "x-scheme-handler/about" = "thorium-browser.desktop";
+      "x-scheme-handler/unknown" = "thorium-browser.desktop";
 
       # File Manager
       "inode/directory" = "yazi.desktop";

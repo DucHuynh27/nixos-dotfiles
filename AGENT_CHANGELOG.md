@@ -612,3 +612,8 @@
   - Xóa `nixConfig` (chứa `look.cachix.org`) khỏi `flake.nix`.
   - Chuyển `look.cachix.org` và public key tương ứng vào `nix.settings.substituters` và `nix.settings.trusted-public-keys` trong `nixos/configuration.nix`.
 - **Lý do**: Khắc phục cảnh báo "untrusted flake configuration setting" khi chạy `nh os switch`, giúp hệ thống tự động tin cậy server tải Look mà không cần hỏi cờ `--accept-flake-config`.
+
+### [2026-09-08 08:55] - SỬA LỖI CẤU HÌNH TRÌNH DUYỆT MẶC ĐỊNH
+- **File changed**: `home-manager/home.nix`
+- **Mô tả**: Sửa lỗi chính tả `thoirum` và bổ sung đuôi `.desktop` cho các khai báo trình duyệt mặc định `thorium-browser.desktop` trong `xdg.mimeApps`.
+- **Lý do**: Khắc phục lỗi cấu hình Mime để hệ thống nhận diện đúng trình duyệt Thorium khi mở các liên kết web.
