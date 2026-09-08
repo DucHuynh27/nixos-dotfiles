@@ -86,7 +86,7 @@ bindsym $mod+Shift+q exec noctalia msg panel-toggle session
 bindsym $mod+e exec $term -e yazi
 bindsym $mod+d exec $menu
 bindsym $mod+c exec $term -e nvim
-bindsym Mod1+space exec gdbus call --session --dest com.look.Desktop --object-path /com/look/Desktop --method com.look.Desktop.Toggle
+bindsym Mod1+space exec dbus-send --type=method_call --session --dest=com.look.Desktop /com/look/Desktop com.look.Desktop.Toggle
 
 # ─── Window Management ───
 bindsym $mod+q kill
@@ -170,4 +170,5 @@ exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG
 exec systemctl --user start sway-session.target
 exec fcitx5 -d
 exec sh -c 'sleep 3 && systemctl --user restart pipewire pipewire-pulse wireplumber'
+exec lookapp
 exec sh -c 'sleep 1.5 && noctalia'

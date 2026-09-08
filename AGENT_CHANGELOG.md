@@ -622,3 +622,10 @@
 - **Files changed**: `home-manager/sway/config`, `home-manager/mango/config.conf`
 - **Mô tả**: Gán cứng tổ hợp phím `Alt + Space` để gọi lệnh D-Bus (`gdbus call --session ... com.look.Desktop.Toggle`) trong cấu hình của Sway và MangoWM.
 - **Lý do**: Khắc phục lỗi Look Launcher không tự động nhận diện được API phím tắt trên các Window Manager độc lập.
+
+### [2026-09-08 18:09] - VÁ LỖI PHÍM TẮT VÀ AUTOSTART CỦA LOOK LAUNCHER
+- **Files changed**: `home-manager/sway/config`, `home-manager/mango/config.conf`
+- **Mô tả**: 
+  - Thay thế lệnh `gdbus` thành `dbus-send` trong cấu hình phím tắt `Alt+Space` để tương thích với môi trường mặc định của NixOS.
+  - Thêm `lookapp` vào danh sách ứng dụng tự khởi chạy (Autostart) lúc bật máy (`exec` cho Sway và `exec-once` cho MangoWM).
+- **Lý do**: Sửa lỗi bấm phím tắt không mở Look Launcher do ứng dụng chưa chạy ngầm và thiếu gói lệnh gdbus.
