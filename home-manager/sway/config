@@ -164,8 +164,8 @@ bindsym $mod+Shift+c reload
 bindsym Ctrl+Mod1+Delete exec swaymsg exit
 
 # ─── Autostart ───
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE QT_QPA_PLATFORMTHEME
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE QT_QPA_PLATFORMTHEME
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE QT_QPA_PLATFORMTHEME NIXOS_OZONE_WL
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE QT_QPA_PLATFORMTHEME NIXOS_OZONE_WL
 exec systemctl --user start sway-session.target
 exec fcitx5 -d
 exec sh -c 'sleep 1.5 && noctalia'
