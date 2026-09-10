@@ -46,8 +46,8 @@
     "damx": {
       "flake": false,
       "locked": {
-        "lastModified": 1786197932,
-        "narHash": "sha256-WiT5/4mGPUhP0PrPs/DUN9u1atomd9PH1BUbInFC5oI=",
+        "lastModified": 1789053651,
+        "narHash": "sha256-bO2x05+Z9A3sQjvEWWH6aTzeWOHC4RAoSJS+aM2lHy4=",
         "path": "/home/hinne/Projects/DAMX-1.0.2",
         "type": "path"
       },
