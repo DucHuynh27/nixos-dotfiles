@@ -681,3 +681,8 @@
 - **Files changed**: `nixos/configuration.nix`
 - **Mô tả**: Sửa cờ `--keep-since 7d` thành `--keep-since 3d` cho công cụ dọn rác tự động của `nh`.
 - **Lý do**: Rút ngắn thời gian lưu trữ các bản Build (Generations) cũ xuống còn 3 ngày để giải phóng không gian ổ đĩa nhanh hơn.
+
+### [2026-09-10 21:22] - CẬP NHẬT FLAKE.LOCK VÀ KHO ỨNG DỤNG
+- **Files changed**: `flake.lock`
+- **Mô tả**: Cập nhật lại toàn bộ `flake inputs` lên phiên bản mới nhất theo lệnh thủ công của người dùng.
+- **Lý do**: Xử lý các dòng cảnh báo `stdenv.isLinux is deprecated` do các gói phần mềm (như thorium, zen-browser, aagl) trước đây chưa theo kịp chuẩn mới của NixOS.
