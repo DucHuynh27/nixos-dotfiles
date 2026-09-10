@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # Apps
-set $term kitty
+set $term wezterm
 set $menu noctalia msg panel-toggle launcher
 set $browser $BROWSER
 
@@ -16,7 +16,7 @@ for_window [app_id=".*"] title_format "<b>%app_id</b>  <i>%title</i>"
 for_window [class=".*"] title_format "<b>%class</b>  <i>%title</i>"
 
 # ─── Dynamic Window Icons ───
-for_window [app_id="(?i)kitty"] title_format "󰄛 <b>%app_id</b>  <i>%title</i>"
+for_window [app_id="org.wezfurlong.wezterm"] title_format "󰄛 <b>%app_id</b>  <i>%title</i>"
 for_window [app_id="(?i)zen.*"] title_format "󰈹 <b>%app_id</b>  <i>%title</i>"
 for_window [app_id="(?i)thorium.*|chromium|chrome"] title_format " <b>%app_id</b>  <i>%title</i>"
 for_window [app_id="(?i)firefox.*"] title_format "󰈹 <b>%app_id</b>  <i>%title</i>"

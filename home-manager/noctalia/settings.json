@@ -34,7 +34,7 @@
     "showCategories": true,
     "showIconBackground": false,
     "sortByMostUsed": true,
-    "terminalCommand": "kitty --hold -e",
+    "terminalCommand": "wezterm start --",
     "viewMode": "list"
   },
   "audio": {

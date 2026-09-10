@@ -22,7 +22,7 @@ screenshotAnnotationTool = ""
 showCategories = true
 showIconBackground = false
 sortByMostUsed = true
-terminalCommand = "/usr/bin/kitty -e"
+terminalCommand = "/run/current-system/sw/bin/wezterm start --"
 viewMode = "list"
 
 [[appLauncher.pinnedApps]]
@@ -271,7 +271,7 @@ screenLock = ""
 screenUnlock = ""
 session = ""
 startup = ""
-wallpaperChange = "matugen image \"$1\" --source-color-index 0 && pkill -USR1 nvim && pkill -USR1 kitty && nh home switch ~/nix-config &"
+wallpaperChange = "matugen image \"$1\" --source-color-index 0 && pkill -USR1 nvim && nh home switch ~/nix-config &"
 
 # Idle Settings
 [idle]
