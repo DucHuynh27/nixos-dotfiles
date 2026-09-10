@@ -26,6 +26,8 @@
 
       -- Load Matugen Colors
       local theme_path = "/home/hinne/.config/wezterm/colors/noctalia.lua"
+      wezterm.add_to_config_reload_watch_list(theme_path)
+      
       local colors = {}
       local file = io.open(theme_path, "r")
       if file then
