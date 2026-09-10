@@ -693,3 +693,8 @@
   - Đổi định dạng của cờ `nix.settings.experimental-features` sang dạng mảng (list) để tương thích với bản cập nhật mới nhất của NixOS.
   - Gỡ bỏ hoàn toàn khai báo `zen-browser` khỏi `flake.nix` và làm sạch `flake.lock`.
 - **Lý do**: Khắc phục lỗi Build bị văng do sai cú pháp, đồng thời dọn dẹp hệ thống theo yêu cầu của người dùng.
+
+### [2026-09-10 21:38] - GỠ BỎ EASY EFFECTS VÀ SBCTL
+- **Files changed**: `nixos/configuration.nix`
+- **Mô tả**: Xóa bỏ 2 gói ứng dụng cấp hệ thống là `easyeffects` (trình chỉnh âm thanh) và `sbctl` (công cụ Secure Boot) khỏi mảng `environment.systemPackages`.
+- **Lý do**: Thực hiện theo yêu cầu dọn dẹp hệ thống của người dùng.

@@ -246,7 +246,6 @@
 
   environment.systemPackages = with pkgs; [
     appimage-run
-    easyeffects
     git
     slurp
     grim
@@ -262,7 +261,6 @@
     mangohud
     inputs.look.packages.${pkgs.stdenv.hostPlatform.system}.default
     quickemu
-    sbctl # tool for secure boot
     nest-cli
   ];
 
