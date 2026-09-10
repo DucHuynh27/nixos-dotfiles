@@ -676,3 +676,8 @@
 - **Files changed**: `nixos/configuration.nix`, `home-manager/home.nix`
 - **Mô tả**: Chuyển biến môi trường `LC_MEASUREMENT = "en_IE.UTF-8"` từ cấu hình cấp hệ thống (OS) sang cấu hình người dùng (`home.sessionVariables`).
 - **Lý do**: Khắc phục lỗi khi Build NixOS phải tốn nhiều thời gian dịch gói ngôn ngữ `glibc-locales`, khiến hệ thống không được nạp thành công. Chuyển sang Home-Manager giúp áp dụng thay đổi ngay lập tức.
+
+### [2026-09-10 21:21] - GIẢM THỜI GIAN LƯU TRỮ RÁC (GENERATIONS)
+- **Files changed**: `nixos/configuration.nix`
+- **Mô tả**: Sửa cờ `--keep-since 7d` thành `--keep-since 3d` cho công cụ dọn rác tự động của `nh`.
+- **Lý do**: Rút ngắn thời gian lưu trữ các bản Build (Generations) cũ xuống còn 3 ngày để giải phóng không gian ổ đĩa nhanh hơn.
