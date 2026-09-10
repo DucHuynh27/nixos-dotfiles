@@ -686,3 +686,10 @@
 - **Files changed**: `flake.lock`
 - **Mô tả**: Cập nhật lại toàn bộ `flake inputs` lên phiên bản mới nhất theo lệnh thủ công của người dùng.
 - **Lý do**: Xử lý các dòng cảnh báo `stdenv.isLinux is deprecated` do các gói phần mềm (như thorium, zen-browser, aagl) trước đây chưa theo kịp chuẩn mới của NixOS.
+
+### [2026-09-10 21:29] - SỬA LỖI CÚ PHÁP & GỠ ZEN-BROWSER
+- **Files changed**: `nixos/configuration.nix`, `flake.nix`, `flake.lock`
+- **Mô tả**: 
+  - Đổi định dạng của cờ `nix.settings.experimental-features` sang dạng mảng (list) để tương thích với bản cập nhật mới nhất của NixOS.
+  - Gỡ bỏ hoàn toàn khai báo `zen-browser` khỏi `flake.nix` và làm sạch `flake.lock`.
+- **Lý do**: Khắc phục lỗi Build bị văng do sai cú pháp, đồng thời dọn dẹp hệ thống theo yêu cầu của người dùng.

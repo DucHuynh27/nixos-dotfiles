@@ -23,8 +23,6 @@
     thorium.inputs.nixpkgs.follows = "nixpkgs";
 
     # Zen Browser
-    zen-browser.url = "github:youwen5/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
     # MangoWM
     mango.url = "github:mangowm/mango";
