@@ -15,6 +15,10 @@
 #input_path = "/etc/xdg/quickshell/noctalia-shell/Assets/Templates/noctalia.json"
 #output_path = "/home/hinne/.cache/noctalia/placeholder.json"
 
+[templates.wezterm]
+input_path = "/home/hinne/.config/noctalia/wezterm.lua.template"
+output_path = "/home/hinne/.config/wezterm/colors/noctalia.lua"
+
 [templates.sway-reload]
 input_path = "/etc/xdg/quickshell/noctalia-shell/Assets/Templates/noctalia.json"
 output_path = "/tmp/noctalia-sway-dummy.json"

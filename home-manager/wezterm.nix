@@ -25,34 +25,15 @@
       config.scrollback_lines = 10000
 
       -- Load Matugen Colors
-      -- Sync colors directly from Kitty's theme file so it works with Noctalia Community Themes
-      local theme_path = "/home/hinne/.config/kitty/themes/noctalia.conf"
+      -- Load Noctalia Native Colors (Official Method via user-templates.toml)
+      local theme_path = "/home/hinne/.config/wezterm/colors/noctalia.lua"
       wezterm.add_to_config_reload_watch_list(theme_path)
       
-      local colors = { ansi = {}, brights = {}, tab_bar = { active_tab = {}, inactive_tab = {} } }
+      local colors = {}
       local file = io.open(theme_path, "r")
       if file then
-        for line in file:lines() do
-          local key, value = line:match("^([%w_]+)%s+(#[%w]+)")
-          if key and value then
-            if key == "foreground" then colors.foreground = value
-            elseif key == "background" then colors.background = value; colors.tab_bar.background = value
-            elseif key == "selection_foreground" then colors.selection_fg = value
-            elseif key == "selection_background" then colors.selection_bg = value
-            elseif key == "cursor" then colors.cursor_bg = value; colors.cursor_border = value
-            elseif key == "cursor_text_color" then colors.cursor_fg = value
-            elseif key == "active_tab_foreground" then colors.tab_bar.active_tab.fg_color = value
-            elseif key == "active_tab_background" then colors.tab_bar.active_tab.bg_color = value
-            elseif key == "inactive_tab_foreground" then colors.tab_bar.inactive_tab.fg_color = value
-            elseif key == "inactive_tab_background" then colors.tab_bar.inactive_tab.bg_color = value
-            elseif key:match("^color(%d+)$") then
-              local num = tonumber(key:match("^color(%d+)$"))
-              if num >= 0 and num <= 7 then colors.ansi[num + 1] = value
-              elseif num >= 8 and num <= 15 then colors.brights[num - 7] = value end
-            end
-          end
-        end
         file:close()
+        colors = dofile(theme_path)
         config.colors = colors
       end
 

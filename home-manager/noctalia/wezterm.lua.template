@@ -1,0 +1,42 @@
+return {
+  foreground = '{{mOnSurface}}',
+  background = '{{mSurface}}',
+  cursor_bg = '{{mPrimary}}',
+  cursor_fg = '{{mSurface}}',
+  cursor_border = '{{mPrimary}}',
+  selection_fg = '{{mOnSecondary}}',
+  selection_bg = '{{mSecondaryContainer}}',
+  
+  tab_bar = {
+    background = '{{mSurfaceContainerLow}}',
+    active_tab = {
+      bg_color = '{{mSecondaryContainer}}',
+      fg_color = '{{mOnSecondaryContainer}}',
+    },
+    inactive_tab = {
+      bg_color = '{{mSurfaceContainerLow}}',
+      fg_color = '{{mOnSurfaceVariant}}',
+    },
+  },
+  
+  ansi = {
+    '{{mSurface}}',
+    '{{mError}}',
+    '{{mPrimary}}',
+    '{{mSecondary}}',
+    '{{mPrimary}}',
+    '{{mTertiary}}',
+    '{{mSecondary}}',
+    '{{mOnSurface}}',
+  },
+  brights = {
+    '{{mSurfaceVariant}}',
+    '{{mError}}',
+    '{{mPrimary}}',
+    '{{mSecondary}}',
+    '{{mPrimary}}',
+    '{{mTertiary}}',
+    '{{mSecondary}}',
+    '{{mOnSurface}}',
+  },
+}
