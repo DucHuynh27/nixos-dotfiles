@@ -46,6 +46,19 @@
         { key = 'K', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Up' },
         { key = 'L', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Right' },
         
+        -- Tabs
+        { key = 'T', mods = 'CTRL|SHIFT', action = act.SpawnTab 'CurrentPaneDomain' },
+        { key = 'LeftArrow', mods = 'CTRL|SHIFT', action = act.ActivateTabRelative(-1) },
+        { key = 'RightArrow', mods = 'CTRL|SHIFT', action = act.ActivateTabRelative(1) },
+        { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
+        { key = 'Tab', mods = 'CTRL|SHIFT', action = act.ActivateTabRelative(-1) },
+        
+        -- Window / Pane Management
+        { key = 'W', mods = 'CTRL|SHIFT', action = act.CloseCurrentPane { confirm = false } },
+        
+        -- Search
+        { key = 'F', mods = 'CTRL|SHIFT', action = act.Search 'CurrentSelectionOrEmptyString' },
+        
         -- Zoom (Stack)
         { key = 'Z', mods = 'CTRL|SHIFT', action = act.TogglePaneZoomState },
       }
