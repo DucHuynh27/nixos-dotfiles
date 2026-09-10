@@ -166,6 +166,7 @@
     vesktop
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
     brave
+    kdePackages.okular
 
     # ---------------------------------------------------
     # Media & Graphics
@@ -357,6 +358,9 @@
       "x-scheme-handler/https" = "brave-browser.desktop";
       "x-scheme-handler/about" = "brave-browser.desktop";
       "x-scheme-handler/unknown" = "brave-browser.desktop";
+
+      # Documents
+      "application/pdf" = "org.kde.okular.desktop";
 
       # File Manager
       "inode/directory" = "yazi.desktop";

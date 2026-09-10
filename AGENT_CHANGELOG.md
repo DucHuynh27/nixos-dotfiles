@@ -666,3 +666,8 @@
 - **Files changed**: `home-manager/mango/config.conf`
 - **Mô tả**: Chuyển kiểu animation mặc định sang `zoom` và thay đổi tỷ lệ `zoom_initial_ratio` / `zoom_end_ratio` thành `0.85`.
 - **Lý do**: Tạo cảm giác mượt mà, dứt khoát và "nhanh gọn" hơn cho thao tác mở/đóng cửa sổ, hạn chế sự rườm rà của hiệu ứng slide trượt dài.
+
+### [2026-09-10 17:25] - CÀI ĐẶT OKULAR LÀM TRÌNH ĐỌC PDF MẶC ĐỊNH
+- **Files changed**: `home-manager/home.nix`
+- **Mô tả**: Thêm gói `kdePackages.okular` và thiết lập `org.kde.okular.desktop` làm ứng dụng mặc định cho file `application/pdf`.
+- **Lý do**: Xử lý lỗi trình duyệt tự động nhận file PDF. Okular hỗ trợ nhiều công cụ mạnh mẽ như tô sáng, chèn chữ, vẽ và ghi chú.
