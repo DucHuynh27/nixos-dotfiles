@@ -698,3 +698,8 @@
 - **Files changed**: `nixos/configuration.nix`
 - **Mô tả**: Xóa bỏ 2 gói ứng dụng cấp hệ thống là `easyeffects` (trình chỉnh âm thanh) và `sbctl` (công cụ Secure Boot) khỏi mảng `environment.systemPackages`.
 - **Lý do**: Thực hiện theo yêu cầu dọn dẹp hệ thống của người dùng.
+
+### [2026-09-10 21:52] - CÀI ĐẶT WEZTERM 
+- **Files changed**: `home-manager/home.nix`
+- **Mô tả**: Thêm gói ứng dụng `wezterm` (Trình giả lập Terminal) vào danh sách cài đặt của Home-Manager.
+- **Lý do**: Cài đặt WezTerm để hỗ trợ workflow chia đôi màn hình kết hợp code Neovim, quản lý file bằng Yazi và tương tác với AI Aider theo yêu cầu của người dùng.
