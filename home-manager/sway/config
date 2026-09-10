@@ -78,6 +78,7 @@ for_window [title="Picture in picture"] floating enable, sticky enable
 # Key bindings
 # ─── Applications ───
 bindsym $mod+Return exec $term
+bindsym $mod+t exec wezterm
 bindsym $mod+v exec noctalia msg panel-toggle clipper
 bindsym $mod+period exec noctalia msg panel-toggle launcher /emo
 bindsym $mod+b exec sh -c $browser
