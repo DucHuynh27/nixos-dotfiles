@@ -13,9 +13,12 @@
       -- Font & Appearance
       config.font = wezterm.font 'Maple Mono NF'
       config.font_size = 14.0
+      config.hide_tab_bar_if_only_one_tab = true
       config.window_padding = { left = 10, right = 10, top = 10, bottom = 10 }
       config.window_decorations = "RESIZE" -- hides title bar but keeps resizability
       config.audible_bell = "Disabled"
+      config.default_cursor_style = "BlinkingBar"
+      config.cursor_blink_rate = 500
       
       -- Tab Bar (Powerline style)
       config.use_fancy_tab_bar = false
