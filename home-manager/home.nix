@@ -13,7 +13,7 @@
     # inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
-    ./kitty.nix
+    # ./kitty.nix
     ./wezterm.nix
     ./zsh.nix
     ./starship.nix
@@ -24,7 +24,6 @@
     ./mango.nix
     ./fcitx5.nix
     ./fastfetch.nix
-    ./sway.nix
   ];
 
   nixpkgs = {
@@ -57,7 +56,7 @@
   home.sessionVariables = {
     PNPM_HOME = "$HOME/.local/share/pnpm";
     EDITOR = "nvim";
-    TERMINAL = "kitty";
+    TERMINAL = "wezterm";
     BROWSER = "brave";
     LC_MEASUREMENT = "en_IE.UTF-8";
     # Wayland/Qt variables (ported from Niri)
@@ -71,14 +70,14 @@
   xdg.desktopEntries = {
     yazi = {
       name = "Yazi";
-      exec = "kitty -e yazi %u";
+      exec = "wezterm -e yazi %u";
       terminal = false;
       categories = ["System" "FileTools" "FileManager" "ConsoleOnly"];
       mimeType = ["inode/directory"];
     };
     nvim = {
       name = "Neovim";
-      exec = "kitty -e nvim %F";
+      exec = "wezterm -e nvim %F";
       terminal = false;
       categories = ["Utility" "TextEditor"];
       mimeType = ["text/plain"];
@@ -354,7 +353,7 @@
         cursor_border = '{{colors.on_surface.default.hex}}',
         selection_fg = '{{colors.on_secondary.default.hex}}',
         selection_bg = '{{colors.secondary_fixed_dim.default.hex}}',
-        
+
         tab_bar = {
           background = '{{colors.surface_container_low.default.hex}}',
           active_tab = {
@@ -366,7 +365,7 @@
             fg_color = '{{colors.on_surface_variant.default.hex}}',
           },
         },
-        
+
         ansi = {
           '{{colors.surface.default.hex}}',
           '{{colors.error.default.hex}}',

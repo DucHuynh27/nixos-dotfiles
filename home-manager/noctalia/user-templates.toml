@@ -15,7 +15,3 @@
 #input_path = "/etc/xdg/quickshell/noctalia-shell/Assets/Templates/noctalia.json"
 #output_path = "/home/hinne/.cache/noctalia/placeholder.json"
 
-[templates.sway-reload]
-input_path = "/etc/xdg/quickshell/noctalia-shell/Assets/Templates/noctalia.json"
-output_path = "/tmp/noctalia-sway-dummy.json"
-post_hook = "swaymsg reload"
