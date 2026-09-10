@@ -58,6 +58,7 @@
     EDITOR = "nvim";
     TERMINAL = "kitty";
     BROWSER = "brave";
+    LC_MEASUREMENT = "en_IE.UTF-8";
     # Wayland/Qt variables (ported from Niri)
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     QT_QPA_PLATFORM = "wayland";

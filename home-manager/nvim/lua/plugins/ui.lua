@@ -23,6 +23,34 @@ return {
     end,
   },
 
+  -- Tabs (Bufferline)
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Tab trước" },
+      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Tab tiếp theo" },
+      { "<leader>c", "<cmd>bdelete<cr>", desc = "Đóng Tab hiện tại" },
+    },
+    config = function()
+      require("bufferline").setup({
+        options = {
+          diagnostics = "nvim_lsp",
+          always_show_bufferline = true,
+          offsets = {
+            {
+              filetype = "NvimTree",
+              text = "File Explorer",
+              highlight = "Directory",
+              separator = true,
+            }
+          },
+        },
+      })
+    end,
+  },
+
   -- Cây thư mục
   {
     "nvim-tree/nvim-tree.lua",

@@ -671,3 +671,8 @@
 - **Files changed**: `home-manager/home.nix`
 - **Mô tả**: Thêm gói `kdePackages.okular` và thiết lập `org.kde.okular.desktop` làm ứng dụng mặc định cho file `application/pdf`.
 - **Lý do**: Xử lý lỗi trình duyệt tự động nhận file PDF. Okular hỗ trợ nhiều công cụ mạnh mẽ như tô sáng, chèn chữ, vẽ và ghi chú.
+
+### [2026-09-10 21:14] - TỐI ƯU CẤU HÌNH ĐƠN VỊ NHIỆT ĐỘ (ĐỘ C)
+- **Files changed**: `nixos/configuration.nix`, `home-manager/home.nix`
+- **Mô tả**: Chuyển biến môi trường `LC_MEASUREMENT = "en_IE.UTF-8"` từ cấu hình cấp hệ thống (OS) sang cấu hình người dùng (`home.sessionVariables`).
+- **Lý do**: Khắc phục lỗi khi Build NixOS phải tốn nhiều thời gian dịch gói ngôn ngữ `glibc-locales`, khiến hệ thống không được nạp thành công. Chuyển sang Home-Manager giúp áp dụng thay đổi ngay lập tức.
