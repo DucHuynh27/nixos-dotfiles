@@ -35,28 +35,17 @@
   # SSH Client Configuration
   programs.ssh = {
     enable = true;
-    enableDefaultConfig = false;
     settings = {
       "*" = {
         AddKeysToAgent = "yes";
       };
     };
-    matchBlocks = {
-      "github.com" = {
-        hostname = "ssh.github.com";
-        port = 443;
-        user = "git";
-      };
-    };
-  };
-    };
-    # matchBlocks = {
-    #   "github.com" = {
-    #     hostname = "github.com";
-    #     user = "git";
-    #     identityFile = "~/.ssh/id_rsa";
-    #   };
-    # };
+    extraConfig = ''
+      Host github.com
+        Hostname ssh.github.com
+        Port 443
+        User git
+    '';
   };
 
   # Enable the SSH agent service globally

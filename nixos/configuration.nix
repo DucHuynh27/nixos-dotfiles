@@ -212,7 +212,7 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = ["wheel" "networkmanager" "input" "docker" "kvm" "video" "render"];
+      extraGroups = ["i2c" "wheel" "networkmanager" "input" "docker" "kvm" "video" "render"];
     };
   };
 
@@ -245,6 +245,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    brightnessctl
+    ddcutil
     appimage-run
     git
     slurp
@@ -338,6 +340,7 @@
   virtualisation.docker.enable = true;
 
   # MChose Mouse Web Driver Udev Rule
+  services.udev.packages = with pkgs; [ brightnessctl ddcutil ];
   services.udev.extraRules = ''
     KERNEL=="hidraw*", ATTRS{idVendor}=="5253", MODE="0666", TAG+="uaccess"
   '';
