@@ -449,4 +449,27 @@
 
   # Enable font discovery for home-manager fonts
   fonts.fontconfig.enable = true;
+
+  xdg.configFile."fontconfig/conf.d/99-maple-mono-features.conf".text = ''
+    <?xml version="1.0"?>
+    <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+    <fontconfig>
+      <match target="font">
+        <test name="family" compare="contains">
+          <string>Maple Mono</string>
+        </test>
+        <edit name="fontfeatures" mode="append">
+          <string>cv01 on</string>
+          <string>cv03 on</string>
+          <string>cv06 on</string>
+          <string>cv09 on</string>
+          <string>cv32 on</string>
+          <string>cv42 on</string>
+          <string>cv61 on</string>
+          <string>cv66 on</string>
+          <string>zero on</string>
+        </edit>
+      </match>
+    </fontconfig>
+  '';
 }

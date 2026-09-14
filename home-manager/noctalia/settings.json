@@ -87,34 +87,15 @@
     "widgets": {
       "center": [
         {
-          "clockColor": "none",
-          "customFont": "",
-          "formatHorizontal": "HH:mm ddd, dd - MM",
-          "formatVertical": "HH mm - dd MM",
-          "id": "Clock",
-          "tooltipFormat": "HH:mm ddd, MMM dd",
-          "useCustomFont": false
+          "id": "plugin:noctalia/bongocat:cat"
         },
         {
-          "characterCount": 2,
-          "colorizeIcons": false,
-          "emptyColor": "secondary",
-          "enableScrollWheel": true,
-          "focusedColor": "primary",
-          "followFocusedScreen": true,
-          "fontWeight": "bold",
-          "groupedBorderOpacity": 1,
-          "hideUnoccupied": true,
-          "iconScale": 1,
-          "id": "Workspace",
-          "labelMode": "index",
-          "occupiedColor": "secondary",
-          "pillSize": 0.7000000000000001,
-          "showApplications": false,
-          "showApplicationsHover": true,
-          "showBadge": false,
-          "showLabelsOnlyWhenOccupied": true,
-          "unfocusedIconsOpacity": 1
+          "id": "Clock",
+          "formatHorizontal": "HH:mm ddd, dd - MM",
+          "tooltipFormat": "HH:mm ddd, MMM dd"
+        },
+        {
+          "id": "plugin:dotnetrob/cat:cat"
         }
       ],
       "left": [
@@ -198,90 +179,37 @@
       ],
       "right": [
         {
-          "id": "plugin:alexander/screen-toolkit:widget"
+          "id": "MediaMini",
+          "compactMode": false,
+          "showAlbumArt": true,
+          "showProgressRing": true
         },
         {
-          "blacklist": [],
-          "chevronColor": "none",
-          "colorizeIcons": false,
-          "drawerEnabled": true,
-          "hidePassive": false,
-          "id": "Tray",
-          "pinned": [
-            "Keyboard - English (US)",
-            "Lotus",
-            "Input Method"
-          ]
+          "id": "Tray"
         },
         {
-          "hideWhenZero": false,
-          "hideWhenZeroUnread": false,
-          "iconColor": "none",
-          "id": "NotificationHistory",
-          "showUnreadBadge": true,
-          "unreadBadgeColor": "primary"
+          "id": "NotificationHistory"
         },
         {
-          "deviceNativePath": "__default__",
-          "displayMode": "graphic",
-          "hideIfIdle": false,
-          "hideIfNotDetected": true,
           "id": "Battery",
-          "showNoctaliaPerformance": true,
-          "showPowerProfiles": true
+          "showNoctaliaPerformance": true
         },
         {
-          "displayMode": "onhover",
-          "iconColor": "none",
+          "id": "plugin:clipper"
+        },
+        {
+          "id": "plugin:noctalia/notes:notes"
+        },
+        {
           "id": "Volume",
-          "middleClickCommand": "pwvucontrol || pavucontrol",
-          "textColor": "none"
+          "displayMode": "onhover"
         },
         {
-          "applyToAllMonitors": false,
-          "displayMode": "onhover",
-          "iconColor": "none",
           "id": "Brightness",
-          "textColor": "none"
+          "displayMode": "onhover"
         },
         {
-          "defaultSettings": {
-            "aurCmd": "paru -Qua 2>/dev/null",
-            "aurHomepageCmd": "LC_ALL=C paru -Si {id} 2>/dev/null | awk '/^URL/ {print $3}'",
-            "boldText": true,
-            "boldVer": true,
-            "boldVerDesktop": true,
-            "boldVerPanel": true,
-            "closeButton": true,
-            "closeOnSettings": false,
-            "customIconPath": "",
-            "desktopTip": true,
-            "enableColorization": false,
-            "flatpak": true,
-            "hideOnEmpty": false,
-            "hoverTip": true,
-            "iconColor": "none",
-            "iconName": "arrow-big-down-lines",
-            "noctalia": true,
-            "panelContext": true,
-            "panelTooltip": true,
-            "refreshInterval": 120,
-            "refreshTimer": true,
-            "systemCmd": "checkupdates 2>/dev/null",
-            "toast": true,
-            "tooltip": true,
-            "updateCmd": "ghostty -e bash -c 'echo \"Updating System...\";paru; flatpak update; read -n 1 -p \"Press any key to exit...\"'",
-            "useDistroLogo": false
-          },
-          "id": "plugin:arch-updater"
-        },
-        {
-          "defaultSettings": {
-            "connectedColor": "primary",
-            "disconnectedColor": "none",
-            "refreshInterval": 5000
-          },
-          "id": "plugin:cloudflare-warp"
+          "id": "plugin:levi/warp:warp"
         }
       ]
     }
