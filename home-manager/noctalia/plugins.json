@@ -46,6 +46,22 @@
     "ezequiel/mango_layouts": {
       "enabled": true,
       "sourceUrl": "https://github.com/noctalia-dev/community-plugins"
+    },
+    "noctalia/bongocat": {
+      "enabled": true,
+      "sourceUrl": "https://github.com/noctalia-dev/community-plugins"
+    },
+    "dotnetrob/cat": {
+      "enabled": true,
+      "sourceUrl": "https://github.com/noctalia-dev/community-plugins"
+    },
+    "levi/warp": {
+      "enabled": true,
+      "sourceUrl": "https://github.com/noctalia-dev/community-plugins"
+    },
+    "noctalia/notes": {
+      "enabled": true,
+      "sourceUrl": "https://github.com/noctalia-dev/community-plugins"
     }
   },
   "version": 2
