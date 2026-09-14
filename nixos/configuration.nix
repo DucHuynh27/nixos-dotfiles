@@ -116,6 +116,7 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" "fat32" ];
 
   # Network
   networking.networkmanager.enable = true;
