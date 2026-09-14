@@ -41,6 +41,15 @@
         AddKeysToAgent = "yes";
       };
     };
+    matchBlocks = {
+      "github.com" = {
+        hostname = "ssh.github.com";
+        port = 443;
+        user = "git";
+      };
+    };
+  };
+    };
     # matchBlocks = {
     #   "github.com" = {
     #     hostname = "github.com";
