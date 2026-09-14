@@ -107,6 +107,7 @@
     xdg-utils
     keepassxc
     bilibili
+    obs-studio
 
     # ---------------------------------------------------
     # Desktop Shell & WM
@@ -224,6 +225,7 @@
     # Antigravity CLI
     # ---------------------------------------------------
     inputs.antigravity.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
+    opencode
   ];
   # Enable home-manager
   programs.home-manager.enable = true;
