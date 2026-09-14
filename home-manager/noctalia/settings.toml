@@ -467,9 +467,9 @@ useCustomColors = false
 # UI Settings
 [ui]
 boxBorderEnabled = false
-fontDefault = "Maple Mono Normal NF"
+fontDefault = "Maple Mono NF"
 fontDefaultScale = 1.0
-fontFixed = "Maple Mono Normal NF"
+fontFixed = "Maple Mono NF"
 fontFixedScale = 1.0
 panelBackgroundOpacity = 1.0
 panelsAttachedToBar = true

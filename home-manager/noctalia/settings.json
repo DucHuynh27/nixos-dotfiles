@@ -700,7 +700,7 @@
     "boxBorderEnabled": false,
     "fontDefault": "Adwaita Sans",
     "fontDefaultScale": 1,
-    "fontFixed": "Maple Mono Normal NF",
+    "fontFixed": "Maple Mono NF",
     "fontFixedScale": 1,
     "panelBackgroundOpacity": 0.2,
     "panelsAttachedToBar": true,
