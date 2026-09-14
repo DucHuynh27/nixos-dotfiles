@@ -214,10 +214,6 @@
     # ---------------------------------------------------
     carlito
     corefonts
-    maple-mono.NF
-    maple-mono.Normal-NF
-    maple-mono.Normal-TTF
-    maple-mono.truetype
     nerd-fonts.jetbrains-mono
     vista-fonts
 

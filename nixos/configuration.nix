@@ -131,10 +131,6 @@
   };
 
   fonts.packages = with pkgs; [
-    maple-mono.truetype
-    maple-mono.NF
-    maple-mono.Normal-TTF
-    maple-mono.Normal-NF
   ];
 
   # Audio
