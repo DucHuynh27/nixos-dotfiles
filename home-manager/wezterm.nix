@@ -11,7 +11,7 @@
       local config = wezterm.config_builder()
       
       -- Font & Appearance
-      config.font = wezterm.font("Maple Mono NF", { harfbuzz_features = { "cv01=1", "cv03=1", "cv06=1", "cv09=1", "cv32=1", "cv42=1", "cv61=1", "cv66=1", "zero=1" } })
+      config.font = wezterm.font_with_fallback({ wezterm.font("Maple Mono NF", { harfbuzz_features = { "cv01=1", "cv03=1", "cv06=1", "cv09=1", "cv32=1", "cv42=1", "cv61=1", "cv66=1", "zero=1" } }), "Symbols Nerd Font" })
       config.font_size = 14.0
       config.hide_tab_bar_if_only_one_tab = true
       config.window_padding = { left = 10, right = 10, top = 10, bottom = 10 }
