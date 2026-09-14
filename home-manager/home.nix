@@ -446,6 +446,7 @@
   };
 
   home.stateVersion = "25.11";
+  news.display = "silent";
 
   # Enable font discovery for home-manager fonts
   fonts.fontconfig.enable = true;
