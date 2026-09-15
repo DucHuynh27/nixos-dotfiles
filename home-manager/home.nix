@@ -421,6 +421,14 @@
       "x-scheme-handler/about" = "brave-browser.desktop";
       "x-scheme-handler/unknown" = "brave-browser.desktop";
 
+      # Documents & Office
+      "application/pdf" = "onlyoffice-desktopeditors.desktop";
+      "application/msword" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.ms-excel" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.ms-powerpoint" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "onlyoffice-desktopeditors.desktop";
 
       # File Manager
       "inode/directory" = "yazi.desktop";
