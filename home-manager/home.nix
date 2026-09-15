@@ -232,7 +232,7 @@
       postBuild = ''
         rm $out/share/applications/onlyoffice-desktopeditors.desktop
         cp ${pkgs.onlyoffice-desktopeditors}/share/applications/onlyoffice-desktopeditors.desktop $out/share/applications/
-        sed -i 's|^Exec=|Exec=env XMODIFIERS=@im=fcitx GTK_IM_MODULE=fcitx NIXOS_OZONE_WL=0 |g' $out/share/applications/onlyoffice-desktopeditors.desktop
+        sed -i 's|^Exec=|Exec=env XMODIFIERS=@im=fcitx NIXOS_OZONE_WL=0 |g' $out/share/applications/onlyoffice-desktopeditors.desktop
       '';
     })
   ];
