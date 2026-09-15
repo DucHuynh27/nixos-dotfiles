@@ -163,7 +163,6 @@
     libreoffice
     localsend
     obsidian
-    onlyoffice-desktopeditors
     postman
     telegram-desktop
     vesktop
