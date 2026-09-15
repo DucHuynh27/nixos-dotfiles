@@ -256,7 +256,7 @@
   xdg.desktopEntries."onlyoffice-desktopeditors" = {
     name = "ONLYOFFICE Desktop Editors";
     genericName = "Office Suite";
-    exec = "env NIXOS_OZONE_WL=0 GTK_IM_MODULE= QT_IM_MODULE= appimage-run /home/hinne/Applications/DesktopEditors-x86_64.AppImage %U";
+    exec = "appimage-run /home/hinne/Applications/DesktopEditors-x86_64.AppImage --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations %U";
     terminal = false;
     categories = [ "Office" ];
     mimeType = [
