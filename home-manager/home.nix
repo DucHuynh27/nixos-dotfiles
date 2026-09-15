@@ -160,7 +160,6 @@
     # ---------------------------------------------------
     # General Apps
     # ---------------------------------------------------
-    appimage-run
     libreoffice
     localsend
     miro
@@ -252,27 +251,6 @@
     mimeType = [ "application/pdf" ];
   };
 
-  # Create a desktop shortcut for ONLYOFFICE AppImage
-  xdg.desktopEntries."onlyoffice-desktopeditors" = {
-    name = "ONLYOFFICE Desktop Editors";
-    genericName = "Office Suite";
-    exec = "env GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx XMODIFIERS=@im=fcitx appimage-run /home/hinne/Applications/DesktopEditors-x86_64.AppImage --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime %U";
-    terminal = false;
-    categories = [ "Office" ];
-    mimeType = [
-      "application/msword"
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-      "application/vnd.ms-excel"
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-      "application/vnd.ms-powerpoint"
-      "application/vnd.openxmlformats-officedocument.presentationml.presentation"
-      "text/csv"
-      "application/rtf"
-      "application/vnd.oasis.opendocument.text"
-      "application/vnd.oasis.opendocument.spreadsheet"
-      "application/vnd.oasis.opendocument.presentation"
-    ];
-  };
   xdg.configFile = {
     "nvim" = {
       source = ./nvim;
@@ -444,17 +422,17 @@
 
       # Documents & Office
       "application/pdf" = "miro.desktop";
-      "application/msword" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.ms-excel" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.ms-powerpoint" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "onlyoffice-desktopeditors.desktop";
-      "text/csv" = "onlyoffice-desktopeditors.desktop";
-      "application/rtf" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.oasis.opendocument.text" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.oasis.opendocument.spreadsheet" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.oasis.opendocument.presentation" = "onlyoffice-desktopeditors.desktop";
+      "application/msword" = "writer.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
+      "application/vnd.oasis.opendocument.text" = "writer.desktop";
+      "application/rtf" = "writer.desktop";
+      "application/vnd.ms-excel" = "calc.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "calc.desktop";
+      "application/vnd.oasis.opendocument.spreadsheet" = "calc.desktop";
+      "text/csv" = "calc.desktop";
+      "application/vnd.ms-powerpoint" = "impress.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "impress.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "impress.desktop";
 
       # File Manager
       "inode/directory" = "yazi.desktop";
