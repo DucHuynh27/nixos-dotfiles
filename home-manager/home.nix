@@ -224,17 +224,7 @@
     # ---------------------------------------------------
     # Overrides & Fixes
     # ---------------------------------------------------
-    # Fix ONLYOFFICE crashing on Wayland by wrapping the .desktop file
-    (pkgs.symlinkJoin {
-      name = "onlyoffice-desktopeditors-wayland-fix";
-      paths = [pkgs.onlyoffice-desktopeditors];
-      buildInputs = [pkgs.makeWrapper];
-      postBuild = ''
-        rm $out/share/applications/onlyoffice-desktopeditors.desktop
-        cp ${pkgs.onlyoffice-desktopeditors}/share/applications/onlyoffice-desktopeditors.desktop $out/share/applications/
-        sed -i 's|^Exec=|Exec=env XMODIFIERS=@im=fcitx NIXOS_OZONE_WL=0 |g' $out/share/applications/onlyoffice-desktopeditors.desktop
-      '';
-    })
+    wpsoffice
   ];
   # Enable home-manager
   programs.home-manager.enable = true;
@@ -421,18 +411,18 @@
       "x-scheme-handler/unknown" = "brave-browser.desktop";
 
       # Documents & Office
-      "application/pdf" = "onlyoffice-desktopeditors.desktop";
-      "application/msword" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.ms-excel" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.ms-powerpoint" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "onlyoffice-desktopeditors.desktop";
-      "text/csv" = "onlyoffice-desktopeditors.desktop";
-      "application/rtf" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.oasis.opendocument.text" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.oasis.opendocument.spreadsheet" = "onlyoffice-desktopeditors.desktop";
-      "application/vnd.oasis.opendocument.presentation" = "onlyoffice-desktopeditors.desktop";
+      "application/pdf" = "wps-office-pdf.desktop";
+      "application/msword" = "wps-office-wps.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "wps-office-wps.desktop";
+      "application/vnd.ms-excel" = "wps-office-et.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "wps-office-et.desktop";
+      "application/vnd.ms-powerpoint" = "wps-office-wpp.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "wps-office-wpp.desktop";
+      "text/csv" = "wps-office-et.desktop";
+      "application/rtf" = "wps-office-wps.desktop";
+      "application/vnd.oasis.opendocument.text" = "wps-office-wps.desktop";
+      "application/vnd.oasis.opendocument.spreadsheet" = "wps-office-et.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "wps-office-wpp.desktop";
 
       # File Manager
       "inode/directory" = "yazi.desktop";

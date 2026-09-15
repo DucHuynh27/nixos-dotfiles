@@ -716,3 +716,8 @@
 - **Files changed**: `home-manager/home.nix`
 - **Mô tả**: Gỡ bỏ cờ Wayland Native vì OnlyOffice (Qt) crash/không hiện UI. Chuyển sang phương án an toàn nhất: Ép chạy bằng XWayland (`NIXOS_OZONE_WL=0`) nhưng KÈM THEO biến môi trường của fcitx5 (`XMODIFIERS=@im=fcitx`, `GTK_IM_MODULE=fcitx`). (Đã loại bỏ `QT_IM_MODULE=fcitx` do thiếu plugin trong FHS gây crash app).
 - **Lý do**: Lỗi ứng dụng không khởi động được ở chế độ Wayland và crash do lỗi FHS thiếu thư viện QT Fcitx. Cần fallback về XWayland để gõ tiếng Việt ổn định.
+
+### [2026-09-16 00:43] - ĐỔI ONLYOFFICE SANG WPS OFFICE
+- **Files changed**: `home-manager/home.nix`
+- **Mô tả**: Gỡ bỏ phần mềm `onlyoffice-desktopeditors` cùng với các cấu hình override liên quan. Cài đặt thay thế bằng `wpsoffice` và cấu hình lại toàn bộ MIME types (Word, Excel, PDF,...) để trỏ sang WPS.
+- **Lý do**: User phàn nàn OnlyOffice quá lỗi trên hệ thống hiện tại, yêu cầu đổi sang WPS để đạt độ ổn định và tương thích MS Office tốt hơn.
