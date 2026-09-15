@@ -708,3 +708,8 @@
 - **Files changed**: `nixos/configuration.nix`
 - **Mô tả**: Đưa package `corefonts` (chứa các font Microsoft cơ bản như Times New Roman, Arial,...) vào `fonts.packages` để cài đặt ở cấp độ toàn hệ thống (system-wide).
 - **Lý do**: User yêu cầu cài đặt lại font Times New Roman. Đưa vào cấp độ hệ thống giúp các ứng dụng sandboxed như Obsidian, Flatpak, v.v. nhận diện được font.
+
+### [2026-09-16 00:15] - FIX LỖI GÕ TIẾNG VIỆT ONLYOFFICE TRÊN WAYLAND
+- **Files changed**: `home-manager/home.nix`
+- **Mô tả**: Sửa cấu hình override file `.desktop` của OnlyOffice. Thay vì ép chạy qua XWayland (`NIXOS_OZONE_WL=0`), nay chuyển sang chạy Wayland Native với đầy đủ cờ `--enable-wayland-ime` và biến môi trường `XMODIFIERS=@im=fcitx` để nhận bộ gõ tiếng Việt.
+- **Lý do**: Sửa lỗi không gõ được tiếng Việt (fcitx5) trong OnlyOffice theo lựa chọn phương án 1 của user.

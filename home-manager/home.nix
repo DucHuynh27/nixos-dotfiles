@@ -227,12 +227,13 @@
     # Fix ONLYOFFICE crashing on Wayland by wrapping the .desktop file
     (pkgs.symlinkJoin {
       name = "onlyoffice-desktopeditors-wayland-fix";
-      paths = [ pkgs.onlyoffice-desktopeditors ];
-      buildInputs = [ pkgs.makeWrapper ];
+      paths = [pkgs.onlyoffice-desktopeditors];
+      buildInputs = [pkgs.makeWrapper];
       postBuild = ''
         rm $out/share/applications/onlyoffice-desktopeditors.desktop
         cp ${pkgs.onlyoffice-desktopeditors}/share/applications/onlyoffice-desktopeditors.desktop $out/share/applications/
-        sed -i 's|^Exec=|Exec=env NIXOS_OZONE_WL=0 |g' $out/share/applications/onlyoffice-desktopeditors.desktop
+        sed -i 's|^Exec=|Exec=env XMODIFIERS=@im=fcitx QT_IM_MODULE=fcitx GTK_IM_MODULE=fcitx NIXOS_OZONE_WL=1 |g' $out/share/applications/onlyoffice-desktopeditors.desktop
+        sed -i 's|bin/onlyoffice-desktopeditors|bin/onlyoffice-desktopeditors --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3|g' $out/share/applications/onlyoffice-desktopeditors.desktop
       '';
     })
   ];
