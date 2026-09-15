@@ -162,6 +162,7 @@
     # ---------------------------------------------------
     libreoffice
     localsend
+    miro
     obsidian
     postman
     telegram-desktop
@@ -411,8 +412,8 @@
       "x-scheme-handler/unknown" = "brave-browser.desktop";
 
       # Documents & Office
-      "application/pdf" = "wps-office-pdf.desktop";
-      "application/msword" = "wps-office-wps.desktop";
+      "application/pdf" = "miro.desktop";
+      "application/msword" = "onlyoffice-desktopeditors.desktop";
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "wps-office-wps.desktop";
       "application/vnd.ms-excel" = "wps-office-et.desktop";
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "wps-office-et.desktop";
