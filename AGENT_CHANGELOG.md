@@ -714,5 +714,5 @@
 - **Mô tả**: Sửa cấu hình override file `.desktop` của OnlyOffice. Thay vì ép chạy qua XWayland (`NIXOS_OZONE_WL=0`), nay chuyển sang chạy Wayland Native với đầy đủ cờ `--enable-wayland-ime` và biến môi trường `XMODIFIERS=@im=fcitx` để nhận bộ gõ tiếng Việt.
 ### [2026-09-16 00:22] - FALLBACK ONLYOFFICE XWAYLAND (GÕ TIẾNG VIỆT)
 - **Files changed**: `home-manager/home.nix`
-- **Mô tả**: Gỡ bỏ cờ Wayland Native vì OnlyOffice (Qt) crash/không hiện UI. Chuyển sang phương án an toàn nhất: Ép chạy bằng XWayland (`NIXOS_OZONE_WL=0`) nhưng KÈM THEO đầy đủ các biến môi trường của fcitx5 (`XMODIFIERS=@im=fcitx`, `QT_IM_MODULE=fcitx`).
-- **Lý do**: Lỗi ứng dụng không khởi động được ở chế độ Wayland, cần fallback về XWayland để gõ tiếng Việt ổn định.
+- **Mô tả**: Gỡ bỏ cờ Wayland Native vì OnlyOffice (Qt) crash/không hiện UI. Chuyển sang phương án an toàn nhất: Ép chạy bằng XWayland (`NIXOS_OZONE_WL=0`) nhưng KÈM THEO biến môi trường của fcitx5 (`XMODIFIERS=@im=fcitx`, `GTK_IM_MODULE=fcitx`). (Đã loại bỏ `QT_IM_MODULE=fcitx` do thiếu plugin trong FHS gây crash app).
+- **Lý do**: Lỗi ứng dụng không khởi động được ở chế độ Wayland và crash do lỗi FHS thiếu thư viện QT Fcitx. Cần fallback về XWayland để gõ tiếng Việt ổn định.
