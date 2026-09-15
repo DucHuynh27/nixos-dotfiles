@@ -428,6 +428,11 @@
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "onlyoffice-desktopeditors.desktop";
       "application/vnd.ms-powerpoint" = "onlyoffice-desktopeditors.desktop";
       "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "onlyoffice-desktopeditors.desktop";
+      "text/csv" = "onlyoffice-desktopeditors.desktop";
+      "application/rtf" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.oasis.opendocument.text" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.oasis.opendocument.spreadsheet" = "onlyoffice-desktopeditors.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "onlyoffice-desktopeditors.desktop";
 
       # File Manager
       "inode/directory" = "yazi.desktop";
