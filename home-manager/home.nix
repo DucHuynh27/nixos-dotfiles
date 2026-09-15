@@ -252,6 +252,16 @@
     };
   };
 
+  # Create a desktop shortcut for Miro since the Nix package doesn't provide one
+  xdg.desktopEntries."miro" = {
+    name = "Miro PDF Viewer";
+    genericName = "PDF Viewer";
+    exec = "miro-pdf %U";
+    terminal = false;
+    categories = [ "Office" "Viewer" ];
+    mimeType = [ "application/pdf" ];
+  };
+
   xdg.configFile = {
     "nvim" = {
       source = ./nvim;
