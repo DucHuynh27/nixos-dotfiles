@@ -162,7 +162,6 @@
     # ---------------------------------------------------
     libreoffice
     localsend
-    miro
     obsidian
     postman
     telegram-desktop
@@ -239,16 +238,6 @@
       Wants = ["graphical-session-pre.target"];
       After = ["graphical-session-pre.target"];
     };
-  };
-
-  # Create a desktop shortcut for Miro since the Nix package doesn't provide one
-  xdg.desktopEntries."miro" = {
-    name = "Miro PDF Viewer";
-    genericName = "PDF Viewer";
-    exec = "miro-pdf %U";
-    terminal = false;
-    categories = [ "Office" "Viewer" ];
-    mimeType = [ "application/pdf" ];
   };
 
   xdg.configFile = {
@@ -421,7 +410,7 @@
       "x-scheme-handler/unknown" = "brave-browser.desktop";
 
       # Documents & Office
-      "application/pdf" = "miro.desktop";
+      "application/pdf" = "draw.desktop";
       "application/msword" = "writer.desktop";
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
       "application/vnd.oasis.opendocument.text" = "writer.desktop";
