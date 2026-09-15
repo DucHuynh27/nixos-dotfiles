@@ -712,4 +712,7 @@
 ### [2026-09-16 00:15] - FIX LỖI GÕ TIẾNG VIỆT ONLYOFFICE TRÊN WAYLAND
 - **Files changed**: `home-manager/home.nix`
 - **Mô tả**: Sửa cấu hình override file `.desktop` của OnlyOffice. Thay vì ép chạy qua XWayland (`NIXOS_OZONE_WL=0`), nay chuyển sang chạy Wayland Native với đầy đủ cờ `--enable-wayland-ime` và biến môi trường `XMODIFIERS=@im=fcitx` để nhận bộ gõ tiếng Việt.
-- **Lý do**: Sửa lỗi không gõ được tiếng Việt (fcitx5) trong OnlyOffice theo lựa chọn phương án 1 của user.
+### [2026-09-16 00:22] - FALLBACK ONLYOFFICE XWAYLAND (GÕ TIẾNG VIỆT)
+- **Files changed**: `home-manager/home.nix`
+- **Mô tả**: Gỡ bỏ cờ Wayland Native vì OnlyOffice (Qt) crash/không hiện UI. Chuyển sang phương án an toàn nhất: Ép chạy bằng XWayland (`NIXOS_OZONE_WL=0`) nhưng KÈM THEO đầy đủ các biến môi trường của fcitx5 (`XMODIFIERS=@im=fcitx`, `QT_IM_MODULE=fcitx`).
+- **Lý do**: Lỗi ứng dụng không khởi động được ở chế độ Wayland, cần fallback về XWayland để gõ tiếng Việt ổn định.
