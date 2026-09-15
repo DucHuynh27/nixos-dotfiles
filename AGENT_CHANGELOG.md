@@ -703,3 +703,8 @@
 - **Files changed**: `home-manager/home.nix`
 - **Mô tả**: Thêm gói ứng dụng `wezterm` (Trình giả lập Terminal) vào danh sách cài đặt của Home-Manager.
 - **Lý do**: Cài đặt WezTerm để hỗ trợ workflow chia đôi màn hình kết hợp code Neovim, quản lý file bằng Yazi và tương tác với AI Aider theo yêu cầu của người dùng.
+
+### [2026-09-15 23:45] - CÀI ĐẶT CORE FONTS (TIMES NEW ROMAN)
+- **Files changed**: `nixos/configuration.nix`
+- **Mô tả**: Đưa package `corefonts` (chứa các font Microsoft cơ bản như Times New Roman, Arial,...) vào `fonts.packages` để cài đặt ở cấp độ toàn hệ thống (system-wide).
+- **Lý do**: User yêu cầu cài đặt lại font Times New Roman. Đưa vào cấp độ hệ thống giúp các ứng dụng sandboxed như Obsidian, Flatpak, v.v. nhận diện được font.

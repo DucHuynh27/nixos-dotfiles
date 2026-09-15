@@ -22,7 +22,7 @@
     ./damx.nix
     inputs.mango.nixosModules.mango
     inputs.aagl.nixosModules.default
-    { nix.settings = inputs.aagl.nixConfig; }
+    {nix.settings = inputs.aagl.nixConfig;}
   ];
 
   nixpkgs = {
@@ -48,7 +48,7 @@
   nix = {
     settings = {
       # Enable flakes and new 'nix' command
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
       # Opinionated: disable global registry
       flake-registry = "";
       # Optimise storage
@@ -116,7 +116,7 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" "fat32" ];
+  boot.supportedFilesystems = ["ntfs" "exfat" "vfat" "fat32"];
 
   # Network
   networking.networkmanager.enable = true;
@@ -131,6 +131,7 @@
   };
 
   fonts.packages = with pkgs; [
+    corefonts
   ];
 
   # Audio
@@ -152,9 +153,9 @@
       "monitor.alsa.rules" = [
         {
           matches = [
-            { "node.name" = "~alsa_card.*"; }
-            { "node.name" = "~alsa_input.*"; }
-            { "node.name" = "~alsa_output.*"; }
+            {"node.name" = "~alsa_card.*";}
+            {"node.name" = "~alsa_input.*";}
+            {"node.name" = "~alsa_output.*";}
           ];
           actions = {
             update-props = {
@@ -337,7 +338,7 @@
   virtualisation.docker.enable = true;
 
   # MChose Mouse Web Driver Udev Rule
-  services.udev.packages = with pkgs; [ brightnessctl ddcutil ];
+  services.udev.packages = with pkgs; [brightnessctl ddcutil];
   services.udev.extraRules = ''
     KERNEL=="hidraw*", ATTRS{idVendor}=="5253", MODE="0666", TAG+="uaccess"
   '';
