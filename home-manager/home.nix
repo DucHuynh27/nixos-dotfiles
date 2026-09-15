@@ -256,7 +256,7 @@
   xdg.desktopEntries."onlyoffice-desktopeditors" = {
     name = "ONLYOFFICE Desktop Editors";
     genericName = "Office Suite";
-    exec = "appimage-run /home/hinne/Applications/DesktopEditors-x86_64.AppImage --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations %U";
+    exec = "env GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx XMODIFIERS=@im=fcitx appimage-run /home/hinne/Applications/DesktopEditors-x86_64.AppImage --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime %U";
     terminal = false;
     categories = [ "Office" ];
     mimeType = [
@@ -485,6 +485,16 @@
     size = 28;
     gtk.enable = true;
     x11.enable = true;
+  };
+
+  gtk = {
+    enable = true;
+    gtk3.extraConfig = {
+      gtk-im-module = "fcitx";
+    };
+    gtk4.extraConfig = {
+      gtk-im-module = "fcitx";
+    };
   };
 
   home.stateVersion = "25.11";
