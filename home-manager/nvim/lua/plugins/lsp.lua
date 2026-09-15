@@ -26,7 +26,7 @@ return {
       setup_server("lua_ls", {
         settings = { Lua = { diagnostics = { globals = { "vim" } } } }
       })
-      setup_server("ts_ls")       -- JS/TS (Tên mới của tsserver)
+      -- Đã gỡ ts_ls vì sẽ dùng typescript-tools.nvim ở dưới
       setup_server("html")        -- HTML
       setup_server("cssls")       -- CSS
       setup_server("tailwindcss") -- Tailwind
@@ -36,7 +36,38 @@ return {
       setup_server("bashls")      -- Bash
       setup_server("nil_ls")      -- Nix
       setup_server("pyright")     -- Python
-      setup_server("jdtls")       -- Java
+      setup_server("ruff")        -- Linter siêu tốc cho Python
+
+      -- Cấu hình hiển thị Icon chẩn đoán (Diagnostics)
+      vim.diagnostic.config({
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = '✘',
+            [vim.diagnostic.severity.WARN] = '⚠',
+            [vim.diagnostic.severity.INFO] = 'ℹ',
+            [vim.diagnostic.severity.HINT] = '💡',
+          },
+        },
+      })
+
+      -- Phím tắt Báo lỗi (Diagnostics)
+      vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Xem chi tiết lỗi (Float)" })
+      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Lỗi trước đó" })
+      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Lỗi tiếp theo" })
+      vim.keymap.set("n", "<leader>dd", "<cmd>FzfLua diagnostics_document<cr>", { desc = "Danh sách lỗi trong file" })
     end,
   },
+  
+  -- Vũ khí bí mật cho Java
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = "java",
+  },
+
+  -- Vũ khí bí mật cho JS/TS (Thay thế hoàn toàn ts_ls)
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  }
 }

@@ -93,7 +93,7 @@
         };
       };
     };
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.kdePackages.xdg-desktop-portal-kde];
     config.common.default = "*";
   };
   programs.dconf.enable = true;

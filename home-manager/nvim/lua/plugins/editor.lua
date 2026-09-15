@@ -13,15 +13,14 @@ return {
     end,
   },
 
-  -- Nhảy chuột nhanh
+  -- Nhảy chuột nhanh (Flash thế hệ mới)
   {
-    "smoka7/hop.nvim",
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
     keys = {
-      { "s", "<cmd>HopChar2<cr>", desc = "Nhảy đến ký tự" },
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Nhảy chuột (Flash)" },
     },
-    config = function()
-      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-    end,
   },
 
   -- Menu phím tắt
@@ -37,6 +36,7 @@ return {
         { "<leader>u", group = "Giao diện (UI)" },
         { "<leader>n", group = "Tiện ích (Misc)" },
         { "<leader>c", group = "Code (LSP)" },
+        { "<leader>d", group = "Săn lỗi (Diagnostics)" },
         { "<leader>g", group = "Git" },
       })
     end,
@@ -63,7 +63,7 @@ return {
     dependencies = { "kevinhwang91/promise-async" },
     event = "BufRead",
     config = function()
-      vim.o.foldcolumn = "1"
+      vim.o.foldcolumn = "0"
       vim.o.foldlevel = 99
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true

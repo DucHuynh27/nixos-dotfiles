@@ -49,12 +49,6 @@ return {
     event = "BufRead",
   },
 
-  -- Comment code
-  {
-    "tpope/vim-commentary",
-    event = "BufRead",
-  },
-
   -- Thoát insert mode cực nhanh (jk)
   {
     "max397574/better-escape.nvim",

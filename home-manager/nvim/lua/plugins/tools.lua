@@ -1,10 +1,4 @@
 return {
-  -- Quản lý Git
-  {
-    "tpope/vim-fugitive",
-    cmd = { "G", "Git", "Gstatus", "Gcommit", "Gpush", "Gpull" },
-  },
-
   -- Chạy lệnh bất đồng bộ
   {
     "skywind3000/asyncrun.vim",

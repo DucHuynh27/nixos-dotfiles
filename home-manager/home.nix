@@ -169,7 +169,6 @@
     vesktop
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
     brave
-    kdePackages.okular
 
     # ---------------------------------------------------
     # Media & Graphics
@@ -222,6 +221,21 @@
     # ---------------------------------------------------
     inputs.antigravity.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
     opencode
+
+    # ---------------------------------------------------
+    # Overrides & Fixes
+    # ---------------------------------------------------
+    # Fix ONLYOFFICE crashing on Wayland by wrapping the .desktop file
+    (pkgs.symlinkJoin {
+      name = "onlyoffice-desktopeditors-wayland-fix";
+      paths = [ pkgs.onlyoffice-desktopeditors ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        rm $out/share/applications/onlyoffice-desktopeditors.desktop
+        cp ${pkgs.onlyoffice-desktopeditors}/share/applications/onlyoffice-desktopeditors.desktop $out/share/applications/
+        sed -i 's|^Exec=|Exec=env NIXOS_OZONE_WL=0 |g' $out/share/applications/onlyoffice-desktopeditors.desktop
+      '';
+    })
   ];
   # Enable home-manager
   programs.home-manager.enable = true;
@@ -407,8 +421,6 @@
       "x-scheme-handler/about" = "brave-browser.desktop";
       "x-scheme-handler/unknown" = "brave-browser.desktop";
 
-      # Documents
-      "application/pdf" = "org.kde.okular.desktop";
 
       # File Manager
       "inode/directory" = "yazi.desktop";
