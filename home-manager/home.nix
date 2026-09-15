@@ -160,6 +160,7 @@
     # ---------------------------------------------------
     # General Apps
     # ---------------------------------------------------
+    appimage-run
     libreoffice
     localsend
     miro
@@ -225,17 +226,6 @@
     # ---------------------------------------------------
     # Overrides & Fixes
     # ---------------------------------------------------
-    # Fix ONLYOFFICE crashing on Wayland and fix Vietnamese input
-    (pkgs.symlinkJoin {
-      name = "onlyoffice-desktopeditors-wayland-fix";
-      paths = [ pkgs.onlyoffice-desktopeditors ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        rm $out/share/applications/onlyoffice-desktopeditors.desktop
-        cp ${pkgs.onlyoffice-desktopeditors}/share/applications/onlyoffice-desktopeditors.desktop $out/share/applications/
-        sed -i 's|^Exec=|Exec=env NIXOS_OZONE_WL=0 GTK_IM_MODULE= QT_IM_MODULE= |g' $out/share/applications/onlyoffice-desktopeditors.desktop
-      '';
-    })
   ];
   # Enable home-manager
   programs.home-manager.enable = true;
@@ -262,6 +252,27 @@
     mimeType = [ "application/pdf" ];
   };
 
+  # Create a desktop shortcut for ONLYOFFICE AppImage
+  xdg.desktopEntries."onlyoffice-desktopeditors" = {
+    name = "ONLYOFFICE Desktop Editors";
+    genericName = "Office Suite";
+    exec = "env NIXOS_OZONE_WL=0 GTK_IM_MODULE= QT_IM_MODULE= appimage-run /home/hinne/Applications/DesktopEditors-x86_64.AppImage %U";
+    terminal = false;
+    categories = [ "Office" ];
+    mimeType = [
+      "application/msword"
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      "application/vnd.ms-excel"
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      "application/vnd.ms-powerpoint"
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+      "text/csv"
+      "application/rtf"
+      "application/vnd.oasis.opendocument.text"
+      "application/vnd.oasis.opendocument.spreadsheet"
+      "application/vnd.oasis.opendocument.presentation"
+    ];
+  };
   xdg.configFile = {
     "nvim" = {
       source = ./nvim;
