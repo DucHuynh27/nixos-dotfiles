@@ -166,6 +166,7 @@
     postman
     telegram-desktop
     vesktop
+    wpsoffice
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
     brave
 
@@ -411,16 +412,16 @@
 
       # Documents & Office
       "application/pdf" = "draw.desktop";
-      "application/msword" = "writer.desktop";
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
+      "application/msword" = "wps-office-wps.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "wps-office-wps.desktop";
       "application/vnd.oasis.opendocument.text" = "writer.desktop";
-      "application/rtf" = "writer.desktop";
-      "application/vnd.ms-excel" = "calc.desktop";
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "calc.desktop";
+      "application/rtf" = "wps-office-wps.desktop";
+      "application/vnd.ms-excel" = "wps-office-et.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "wps-office-et.desktop";
       "application/vnd.oasis.opendocument.spreadsheet" = "calc.desktop";
-      "text/csv" = "calc.desktop";
-      "application/vnd.ms-powerpoint" = "impress.desktop";
-      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "impress.desktop";
+      "text/csv" = "wps-office-et.desktop";
+      "application/vnd.ms-powerpoint" = "wps-office-wpp.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "wps-office-wpp.desktop";
       "application/vnd.oasis.opendocument.presentation" = "impress.desktop";
 
       # File Manager
