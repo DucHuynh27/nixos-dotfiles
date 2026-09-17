@@ -1,3 +1,12 @@
+### [2026-09-17 16:23] - CHUYỂN ĐỔI DATABASE SANG OCI-CONTAINERS VÀ CÀI ĐẶT LAZYDOCKER
+- **File changed**: `nixos/databases.nix`, `nixos/configuration.nix`, `home-manager/home.nix`, `home-manager/zsh.nix`
+- **Mô tả**:
+  - Tạo module `nixos/databases.nix` quản lý declarative cả MS SQL Server 2022 (`docker-mssql.service`) và MySQL 8.0 (`docker-mysql.service`) qua OCI Containers (`virtualisation.oci-containers`).
+  - Thiết lập `autoStart = false` để tiết kiệm tài nguyên khi khởi động máy.
+  - Cài đặt `lazydocker` vào `home-manager/home.nix` để quản lý trực quan qua TUI.
+  - Thêm các alias quản lý `sql-start`, `sql-stop`, `sql-status`, `sql-log`, `mysql-start`, `mysql-stop`, `mysql-status`, `mysql-log`, `lzd` vào `home-manager/zsh.nix`.
+- **Lý do**: Chuẩn hóa quản lý database theo mô hình declarative của NixOS, dễ dàng khởi động/dừng theo nhu cầu học tập và quản lý trực quan.
+
 ### [2026-08-28 16:52] - FIX LỖI KHỞI ĐỘNG SWAY VÀ NOCTALIA
 - **File changed**: home-manager/zsh.nix, home-manager/sway/config
 - **Mô tả**: Thêm lại cờ `--unsupported-gpu` cho Sway. Phục hồi thời gian chờ của Noctalia về `1.5s`.

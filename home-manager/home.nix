@@ -124,6 +124,7 @@
     fd
     gcc
     gnumake
+    lazydocker
     nodejs
     pnpm
     ripgrep

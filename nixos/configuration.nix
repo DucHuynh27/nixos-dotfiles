@@ -20,6 +20,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./damx.nix
+    ./databases.nix
     inputs.mango.nixosModules.mango
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}

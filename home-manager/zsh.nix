@@ -46,6 +46,19 @@
       fan-med = "echo 60,60 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
       bat-limit-on = "echo 1 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
       bat-limit-off = "echo 0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
+
+      # MSSQL & MySQL (Docker)
+      sql-start = "systemctl start docker-mssql";
+      sql-stop = "systemctl stop docker-mssql";
+      sql-status = "systemctl status docker-mssql";
+      sql-log = "journalctl -u docker-mssql -f";
+
+      mysql-start = "systemctl start docker-mysql";
+      mysql-stop = "systemctl stop docker-mysql";
+      mysql-status = "systemctl status docker-mysql";
+      mysql-log = "journalctl -u docker-mysql -f";
+
+      lzd = "lazydocker";
     };
 
     # Extra configuration added to ~/.zprofile for login shells
