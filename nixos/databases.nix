@@ -26,7 +26,7 @@
         ports = [ "3306:3306" ];
         environment = {
           MYSQL_ROOT_PASSWORD = "SuperStrong!123";
-          MYSQL_DATABASE = "mydb";
+          MYSQL_DATABASE = "nestdb"; # Tự tạo sẵn database nestdb cho NestJS
         };
         volumes = [
           "mysql_data:/var/lib/mysql"
@@ -34,4 +34,17 @@
       };
     };
   };
+
+  # Cho phép user trong nhóm wheel bật/tắt service database không cần nhập mật khẩu
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.systemd1.manage-units" &&
+          subject.isInGroup("wheel")) {
+        var unit = action.lookup("unit");
+        if (unit == "docker-mssql.service" || unit == "docker-mysql.service") {
+          return polkit.Result.YES;
+        }
+      }
+    });
+  '';
 }
