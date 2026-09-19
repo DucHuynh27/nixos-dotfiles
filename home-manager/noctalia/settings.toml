@@ -9,7 +9,7 @@ margin_edge = 4
 margin_ends = 450
 radius = 10
 shadow = false
-start = [ "workspaces", "status", "bar", "mini-docker", "nextboot-selector", "status_2" ]
+start = [ "workspaces", "status", "bar", "mini-docker", "nextboot-selector", "status_2", "status_3" ]
 thickness = 30
 widget_spacing = 12
 
@@ -123,8 +123,26 @@ background_opacity = 0.99999997764825821
 [osd]
 background_opacity = 0.99999997764825821
 
+[plugin_settings."avivbintangaringga/nextboot-selector"]
+reboot_on_select = true
+
+[plugin_settings."avivbintangaringga/nix-monitor"]
+branch = "nixos-unstable"
+clean_command = "nh clean all --keep 3"
+close_on_enter = true
+optimize_command = "nix-store --optimise -vv"
+update_command = "nh os switch -u && nh home switch"
+
+[plugin_settings."mindnbytes/nix-status"]
+flake_dir = "/home/hinne/nix-config"
+nixos_configuration = "nixos"
+use_themed_logos = true
+
 [plugin_settings."noctalia/notes"]
 notes_dir = "/home/hinne/Documents/Note-Obsidian/Notes"
+
+[plugin_settings."noctalia/translator"]
+target_lang = "vi"
 
 [plugins]
 enabled = [
@@ -240,6 +258,9 @@ type = "davemhammer/tailscale:status"
 
 [widget.status_2]
 type = "tiobaka/vm-manager:status"
+
+[widget.status_3]
+type = "mindnbytes/nix-status:status"
 
 [widget.tray]
 drawer = true
