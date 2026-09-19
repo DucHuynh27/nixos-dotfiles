@@ -1,3 +1,13 @@
+### [2026-09-19 12:28] - CÀI ĐẶT HELIUM BROWSER, GỠ LOOK, ĐỒNG BỘ NOCTALIA VÀ PHÍM SUPER+D
+- **File changed**: `flake.nix`, `flake.lock`, `home-manager/home.nix`, `home-manager/mango/config.conf`, `home-manager/noctalia/settings.toml`, `nixos/configuration.nix`
+- **Mô tả**:
+  - Thêm flake input và cài đặt trình duyệt `helium-browser` vào `home-manager/home.nix`.
+  - Bổ sung các công cụ màn hình và máy ảo làm dependency cho các plugin Noctalia: `wlr-randr`, `wdisplays`, `wl-mirror`, `libvirt`, `virt-viewer`.
+  - Đồng bộ file cấu hình `settings.toml` của Noctalia từ `.local/state` vào kho git `nix-config`.
+  - Gỡ bỏ hoàn toàn launcher `look` khỏi `nixos/configuration.nix` và `flake.nix`.
+  - Cập nhật phím tắt `Super + D` trong MangoWM để mở Noctalia App Launcher (`noctalia msg panel-toggle launcher`) và bỏ autostart `lookapp`.
+- **Lý do**: Yêu cầu người dùng cài Helium Browser, đồng bộ plugin Noctalia và dùng Super+D cho Noctalia App Launcher thay cho Look.
+
 ### [2026-09-17 16:23] - CHUYỂN ĐỔI DATABASE SANG OCI-CONTAINERS VÀ CÀI ĐẶT LAZYDOCKER
 - **File changed**: `nixos/databases.nix`, `nixos/configuration.nix`, `home-manager/home.nix`, `home-manager/zsh.nix`
 - **Mô tả**:

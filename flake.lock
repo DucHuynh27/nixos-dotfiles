@@ -130,6 +130,26 @@
         "type": "github"
       }
     },
+    "helium": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789650228,
+        "narHash": "sha256-fntAX/+3dwTi344E/JBW/B/xTfzdGRzHUZaMExz7V6Y=",
+        "owner": "oxcl",
+        "repo": "nix-flake-helium-browser",
+        "rev": "c4fc526e08fd5a5a8639eb81bfb36a9536f1d5ce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxcl",
+        "repo": "nix-flake-helium-browser",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -147,29 +167,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "look": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": "rust-overlay_2"
-      },
-      "locked": {
-        "dir": "apps/linows",
-        "lastModified": 1788875348,
-        "narHash": "sha256-s3+raxNw/BLvAHbRMI1sPCWpKSoWO44OKAwCvMMImso=",
-        "owner": "kunkka19xx",
-        "repo": "look",
-        "rev": "20c0a1540c869d7d015b6c2037d748bd30618109",
-        "type": "github"
-      },
-      "original": {
-        "dir": "apps/linows",
-        "owner": "kunkka19xx",
-        "repo": "look",
         "type": "github"
       }
     },
@@ -247,8 +244,8 @@
         "aagl": "aagl",
         "antigravity": "antigravity",
         "damx": "damx",
+        "helium": "helium",
         "home-manager": "home-manager",
-        "look": "look",
         "mango": "mango",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
@@ -269,27 +266,6 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "6ef009bf4c4873cdc1a621826722bdea7c03e62c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "rust-overlay_2": {
-      "inputs": {
-        "nixpkgs": [
-          "look",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1778296574,
-        "narHash": "sha256-DVmg1JCjG0VJTa+FF6tH6tkQChaxzK1EzPL98RiRWU0=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "1d634a90dffb59ec9ba52652de311b15528c1595",
         "type": "github"
       },
       "original": {

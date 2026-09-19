@@ -1,18 +1,20 @@
+config_version = 14
+
 [bar.default]
 center = [ "cat", "clock", "cat_2" ]
-end = [ "tray", "notifications", "clipboard", "network", "bluetooth", "battery" ]
+end = [ "tray", "notes", "clipboard", "widget", "warp", "notifications", "battery" ]
 font_weight = 400
 hover_highlight = false
 margin_edge = 4
 margin_ends = 450
 radius = 10
 shadow = false
-start = [ "workspaces", "warp", "media" ]
+start = [ "workspaces", "status", "bar", "mini-docker", "nextboot-selector", "status_2" ]
 thickness = 30
 widget_spacing = 12
 
 [brightness]
-minimum_brightness = 0.99999997764825821
+minimum_brightness = 0.099999997764825821
 
 [calendar]
 enabled = true
@@ -20,31 +22,30 @@ enabled = true
     [calendar.account.hin]
     type = "google"
 
-[colors]
-mError = "#da4453"
-mHover = "#3daee9"
-mOnError = "#141618"
-mOnHover = "#141618"
-mOnPrimary = "#141618"
-mOnSecondary = "#141618"
-mOnSurface = "#fcfcfc"
-mOnSurfaceVariant = "#a1a9b1"
-mOnTertiary = "#141618"
-mOutline = "#707d8a"
-mPrimary = "#3daee9"
-mSecondary = "#1d99f3"
-mShadow = "#272c31"
-mSurface = "#202224"
-mSurfaceVariant = "#292d32"
-mTertiary = "#9b59b6"
-
-[config]
-
 [control_center]
 width = 800
 
     [control_center.calendar]
     show_week_numbers = true
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[dock]
+background_opacity = 0.79999998211860657
+icon_size = 32
+layer = "overlay"
+reserve_space = false
+shadow = false
+smart_auto_hide = true
 
 [location]
 auto_locate = true
@@ -116,20 +117,32 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
         show_unlock_hint = true
         show_weather = true
 
+[notification]
+background_opacity = 0.99999997764825821
+
+[osd]
+background_opacity = 0.99999997764825821
+
+[plugin_settings."noctalia/notes"]
+notes_dir = "/home/hinne/Documents/Note-Obsidian/Notes"
+
 [plugins]
 enabled = [
     "noctalia/bongocat",
     "dotnetrob/cat",
     "levi/warp",
     "nightwatch75/file-search",
-    "cleboost/jetbrains-provider",
-    "kenn/keybind-cheatsheet",
-    "ezequiel/mango_layouts",
     "davemhammer/obsidian",
     "noctalia/notes",
     "alexander/screen-toolkit",
-    "davemhammer/tailscale",
-    "noctalia/translator"
+    "noctalia/translator",
+    "prponkshe/mango-displays",
+    "8bury/mini-docker",
+    "avivbintangaringga/nextboot-selector",
+    "avivbintangaringga/nix-monitor",
+    "mindnbytes/nix-status",
+    "tiobaka/vm-manager",
+    "notfinaldev/web-search"
 ]
 
 [shell]
@@ -145,13 +158,6 @@ screen_time_enabled = true
 
     [shell.screenshot]
     directory = "/home/hinne/Pictures/Screenshots"
-
-[sources]
-enabled = true
-name = "Noctalia Plugins"
-url = "https://github.com/noctalia-dev/noctalia-plugins"
-
-[templates]
 
 [theme]
 builtin = "Catppuccin"
@@ -179,17 +185,24 @@ source = "community"
         "yazi"
     ]
 
-[wallpaper.default]
-path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+[wallpaper]
+transition_duration = 1000
+transition_on_startup = true
 
-[wallpaper.last]
-path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+    [wallpaper.default]
+    path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
 
-[wallpaper.monitors.HDMI-A-1]
-path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+    [wallpaper.last]
+    path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
 
-[wallpaper.monitors.eDP-1]
-path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+
+[widget.bar]
+type = "prponkshe/mango-displays:bar"
 
 [widget.battery]
 hide_when_full = true
@@ -207,10 +220,26 @@ type = "dotnetrob/cat:cat"
 
 [widget.media]
 hide_when_no_media = true
+max_length = 200
 show_progress = true
+
+[widget.mini-docker]
+type = "8bury/mini-docker:mini-docker"
 
 [widget.network]
 show_label = false
+
+[widget.nextboot-selector]
+type = "avivbintangaringga/nextboot-selector:nextboot-selector"
+
+[widget.notes]
+type = "noctalia/notes:notes"
+
+[widget.status]
+type = "davemhammer/tailscale:status"
+
+[widget.status_2]
+type = "tiobaka/vm-manager:status"
 
 [widget.tray]
 drawer = true
@@ -222,56 +251,9 @@ show_label = false
 [widget.warp]
 type = "levi/warp:warp"
 
+[widget.widget]
+type = "alexander/screen-toolkit:widget"
+
 [widget.workspaces]
 focused_output_only = true
 style = "minimal"
-
-[[states]]
-enabled = false
-name = "arch-updater"
-sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins"
-
-[[states]]
-enabled = false
-name = "clipper"
-sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins"
-
-[[states]]
-enabled = false
-name = "cloudflare-warp"
-sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins"
-
-[[states]]
-enabled = false
-name = "polkit-agent"
-sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins"
-
-[[states]]
-enabled = true
-name = "obsidian"
-sourceUrl = "https://github.com/noctalia-dev/community-plugins"
-
-[[states]]
-enabled = true
-name = "discord-voice"
-sourceUrl = "https://github.com/noctalia-dev/community-plugins"
-
-[[states]]
-enabled = true
-name = "tailscale"
-sourceUrl = "https://github.com/noctalia-dev/community-plugins"
-
-[[states]]
-enabled = true
-name = "screen-toolkit"
-sourceUrl = "https://github.com/noctalia-dev/community-plugins"
-
-[[states]]
-enabled = true
-name = "keybind-cheatsheet"
-sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins"
-
-[[states]]
-enabled = true
-name = "ezequiel/mango_layouts"
-sourceUrl = "https://github.com/noctalia-dev/community-plugins"

@@ -116,6 +116,11 @@
     linux-wallpaperengine
     matugen
     xwayland-satellite
+    wlr-randr
+    wdisplays
+    wl-mirror
+    libvirt
+    virt-viewer
 
     # ---------------------------------------------------
     # Shell & CLI Tools
@@ -169,6 +174,7 @@
     vesktop
     wpsoffice
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
+    inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
     brave
 
     # ---------------------------------------------------

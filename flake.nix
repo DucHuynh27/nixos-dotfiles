@@ -22,6 +22,10 @@
     thorium.url = "github:Rishabh5321/custom-packages-flake";
     thorium.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Helium Browser
+    helium.url = "github:oxcl/nix-flake-helium-browser";
+    helium.inputs.nixpkgs.follows = "nixpkgs";
+
     # Zen Browser
 
     # MangoWM
@@ -35,10 +39,6 @@
     # DAMX Source (Local)
     damx.url = "path:/home/hinne/Projects/DAMX-1.0.2";
     damx.flake = false;
-
-    # Look Launcher
-    look.url = "github:kunkka19xx/look?dir=apps/linows";
-    look.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
