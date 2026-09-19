@@ -1,3 +1,13 @@
+### [2026-09-19 13:02] - DỌN DẸP BOOTLOADER UEFI, CẤU HÌNH NEXT BOOT SELECTOR VÀ TỰ ĐỘNG COMMIT CHO NIX MONITOR
+- **File changed**: `nixos/configuration.nix`, `home-manager/home.nix`, `home-manager/noctalia/settings.toml`, `~/.local/bin/nix-update`
+- **Mô tả**:
+  - Dọn sạch các UEFI boot entry rác và tàn dư từ các bản cài cũ trong NVRAM qua `efibootmgr` (Boot0005, Boot0006, Boot0007, Boot000B, Network Boot PXE). Đặt thứ tự ưu tiên chuẩn: NixOS (Boot0009) -> Windows (Boot000C).
+  - Cài đặt package `efibootmgr` vào `environment.systemPackages` trong NixOS.
+  - Gỡ bỏ các package ảo hóa và màn hình không cần thiết: `libvirt`, `virt-viewer`, `wdisplays`, `wl-mirror`.
+  - Cấu hình plugin `nextboot-selector` trên Noctalia hoạt động với quyền `sudo` không cần password.
+  - Tạo script `~/.local/bin/nix-update` và gán vào `update_command` của plugin `nix-monitor`, tự động cập nhật hệ thống và commit file `flake.lock` vào Git với format Conventional Commits.
+- **Lý do**: Tối ưu boot entry cho UEFI, hoàn thiện widget chuyển OS Next Boot Selector và tự động hóa commit sau khi update qua Nix Monitor.
+
 ### [2026-09-19 12:28] - CÀI ĐẶT HELIUM BROWSER, GỠ LOOK, ĐỒNG BỘ NOCTALIA VÀ PHÍM SUPER+D
 - **File changed**: `flake.nix`, `flake.lock`, `home-manager/home.nix`, `home-manager/mango/config.conf`, `home-manager/noctalia/settings.toml`, `nixos/configuration.nix`
 - **Mô tả**:

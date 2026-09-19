@@ -117,10 +117,6 @@
     matugen
     xwayland-satellite
     wlr-randr
-    wdisplays
-    wl-mirror
-    libvirt
-    virt-viewer
 
     # ---------------------------------------------------
     # Shell & CLI Tools

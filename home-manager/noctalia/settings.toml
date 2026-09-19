@@ -9,7 +9,7 @@ margin_edge = 4
 margin_ends = 450
 radius = 10
 shadow = false
-start = [ "workspaces", "status", "bar", "mini-docker", "nextboot-selector", "status_2", "status_3" ]
+start = [ "workspaces", "mini-docker", "nextboot-selector", "nix-monitor" ]
 thickness = 30
 widget_spacing = 12
 
@@ -124,19 +124,16 @@ background_opacity = 0.99999997764825821
 background_opacity = 0.99999997764825821
 
 [plugin_settings."avivbintangaringga/nextboot-selector"]
-reboot_on_select = true
+close_on_select = true
+privilege_command = "sudo"
+reboot_on_select = false
 
 [plugin_settings."avivbintangaringga/nix-monitor"]
 branch = "nixos-unstable"
 clean_command = "nh clean all --keep 3"
 close_on_enter = true
 optimize_command = "nix-store --optimise -vv"
-update_command = "nh os switch -u && nh home switch"
-
-[plugin_settings."mindnbytes/nix-status"]
-flake_dir = "/home/hinne/nix-config"
-nixos_configuration = "nixos"
-use_themed_logos = true
+update_command = "nix-update"
 
 [plugin_settings."noctalia/notes"]
 notes_dir = "/home/hinne/Documents/Note-Obsidian/Notes"
@@ -154,12 +151,9 @@ enabled = [
     "noctalia/notes",
     "alexander/screen-toolkit",
     "noctalia/translator",
-    "prponkshe/mango-displays",
     "8bury/mini-docker",
     "avivbintangaringga/nextboot-selector",
     "avivbintangaringga/nix-monitor",
-    "mindnbytes/nix-status",
-    "tiobaka/vm-manager",
     "notfinaldev/web-search"
 ]
 
@@ -219,9 +213,6 @@ transition_on_startup = true
     [wallpaper.monitors.eDP-1]
     path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
 
-[widget.bar]
-type = "prponkshe/mango-displays:bar"
-
 [widget.battery]
 hide_when_full = true
 
@@ -250,17 +241,11 @@ show_label = false
 [widget.nextboot-selector]
 type = "avivbintangaringga/nextboot-selector:nextboot-selector"
 
+[widget.nix-monitor]
+type = "avivbintangaringga/nix-monitor:nix-monitor"
+
 [widget.notes]
 type = "noctalia/notes:notes"
-
-[widget.status]
-type = "davemhammer/tailscale:status"
-
-[widget.status_2]
-type = "tiobaka/vm-manager:status"
-
-[widget.status_3]
-type = "mindnbytes/nix-status:status"
 
 [widget.tray]
 drawer = true

@@ -260,6 +260,7 @@
     mangohud
     quickemu
     nest-cli
+    efibootmgr
   ];
 
   # Enable Thunar properly with plugins
