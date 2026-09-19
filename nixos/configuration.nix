@@ -150,32 +150,6 @@
         "default.clock.max-quantum" = 8192;
       };
     };
-    extraConfig.pipewire."20-echo-cancel" = {
-      "context.modules" = [
-        {
-          name = "libpipewire-module-echo-cancel";
-          args = {
-            "monitor.mode" = true;
-            "source.props" = {
-              "node.name" = "echo-cancel-source";
-              "node.description" = "Echo-Cancel Source (WebRTC Mic)";
-            };
-            "sink.props" = {
-              "node.name" = "echo-cancel-sink";
-              "node.description" = "Echo-Cancel Sink";
-            };
-            "aec.args" = {
-              "webrtc.extended_filter" = true;
-              "webrtc.delay_agnostic" = true;
-              "webrtc.high_pass_filter" = true;
-              "webrtc.noise_suppression" = true;
-              "webrtc.gain_control" = true;
-              "webrtc.voice_detection" = true;
-            };
-          };
-        }
-      ];
-    };
     wireplumber.extraConfig."50-alsa-suspend" = {
       "monitor.alsa.rules" = [
         {
