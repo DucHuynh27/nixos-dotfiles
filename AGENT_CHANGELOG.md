@@ -1,3 +1,15 @@
+### [2026-09-20 21:44] - TỰ ĐỘNG FLOAT CHO PIP ZEN BROWSER VÀ TẮT AUTO FOCUS SANG MÀN HÌNH MỚI
+- **File changed**: `home-manager/mango/config.conf`
+- **Mô tả**:
+  - Bổ sung các window rule cho cửa sổ Picture-in-Picture (PIP): hỗ trợ `title:Picture-in-Picture` (Zen Browser / Firefox), `title:Picture in picture` (Chromium / Chrome) và `title:Hình trong hình` (tiếng Việt). Thiết lập `isfloating:1`, `isglobal:1` (ghim xuyên suốt workspace), và `isoverlay:1` (luôn trên cùng).
+  - Tắt tự động nhảy/cướp focus sang màn hình hoặc workspace mới (`focus_on_activate = 0`), thay vào đó chỉ đánh dấu trạng thái khẩn cấp (`isurgent`).
+- **Lý do**: Yêu cầu người dùng tự động float PIP của Zen Browser và không tự động nhảy focus sang màn hình/cửa sổ mới.
+
+### [2026-09-20 21:30] - GỠ BỎ HELIUM BROWSER
+- **File changed**: `flake.nix`, `flake.lock`, `home-manager/home.nix`
+- **Mô tả**: Gỡ bỏ input flake `helium` và xóa package Helium Browser khỏi `home.packages`. Giải phóng 578 MiB dung lượng Nix store.
+- **Lý do**: Người dùng đã chuyển sang dùng Zen Browser làm trình duyệt chính và yêu cầu gỡ bỏ Helium.
+
 ### [2026-09-20 21:24] - GỠ BỎ BRAVE BROWSER VÀ THIẾT LẬP ZEN BROWSER LÀM MẶC ĐỊNH
 - **File changed**: `home-manager/home.nix`, `home-manager/mango/config.conf`, `home-manager/noctalia/settings.toml`
 - **Mô tả**:
