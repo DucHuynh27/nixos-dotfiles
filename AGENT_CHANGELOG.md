@@ -1,3 +1,12 @@
+### [2026-09-20 21:24] - GỠ BỎ BRAVE BROWSER VÀ THIẾT LẬP ZEN BROWSER LÀM MẶC ĐỊNH
+- **File changed**: `home-manager/home.nix`, `home-manager/mango/config.conf`, `home-manager/noctalia/settings.toml`
+- **Mô tả**:
+  - Gỡ bỏ hoàn toàn gói `brave` khỏi `home.packages`.
+  - Chuyển biến môi trường `BROWSER = "zen";` và liên kết MIME `xdg.mimeApps.defaultApplications` sang `zen-beta.desktop`.
+  - Cập nhật phím tắt `Super + B` trong MangoWM để mở `zen`.
+  - Xóa template `brave` khỏi Noctalia `community_ids`.
+- **Lý do**: Người dùng quyết định gỡ bỏ Brave và chuyển sang sử dụng Zen Browser làm trình duyệt chính.
+
 ### [2026-09-20 21:05] - KÍCH HOẠT TEMPLATE MÀU NOCTALIA CHO ZEN BROWSER
 - **File changed**: `home-manager/noctalia/settings.toml`
 - **Mô tả**: Đồng bộ template cộng đồng `zen-browser` vào `community_ids` trong `home-manager/noctalia/settings.toml` để liên tục tự động sinh `userChrome.css` và `userContent.css` khớp với bảng màu Noctalia.

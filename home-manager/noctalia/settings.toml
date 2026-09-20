@@ -189,7 +189,6 @@ source = "community"
     community_ids = [
         "antigravity",
         "opencode",
-        "brave",
         "zen-browser",
         "discord",
         "telegram",
