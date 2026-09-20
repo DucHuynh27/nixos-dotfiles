@@ -141,6 +141,11 @@ notes_dir = "/home/hinne/Documents/Note-Obsidian/Notes"
 [plugin_settings."noctalia/translator"]
 target_lang = "vi"
 
+[plugin_settings."yocraft/custom-shortcut"]
+icon = "cpu"
+label = "UEFI Setup"
+onclick_cmd = "systemctl reboot --firmware-setup"
+
 [plugins]
 enabled = [
     "noctalia/bongocat",
@@ -154,7 +159,8 @@ enabled = [
     "8bury/mini-docker",
     "avivbintangaringga/nextboot-selector",
     "avivbintangaringga/nix-monitor",
-    "notfinaldev/web-search"
+    "notfinaldev/web-search",
+    "yocraft/custom-shortcut"
 ]
 
 [shell]

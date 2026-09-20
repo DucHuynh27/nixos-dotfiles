@@ -1,3 +1,11 @@
+### [2026-09-20 10:12] - CẤU HÌNH CUSTOM SHORTCUT CHO NOCTALIA (REBOOT VÀO UEFI BIOS)
+- **File changed**: `home-manager/noctalia/settings.toml`, `~/.local/state/noctalia/settings.toml`
+- **Mô tả**:
+  - Kích hoạt plugin `yocraft/custom-shortcut` và cấu hình tile trong Control Center với lệnh `systemctl reboot --firmware-setup`.
+  - Thiết lập label là `UEFI Setup`, icon là `cpu`.
+  - Khởi động lại service Noctalia để nạp shortcut tile vào Control Center.
+- **Lý do**: Cho phép khởi động lại trực tiếp vào UEFI / BIOS Setup thông qua một cú click từ Control Center.
+
 ### [2026-09-19 13:02] - DỌN DẸP BOOTLOADER UEFI, CẤU HÌNH NEXT BOOT SELECTOR VÀ TỰ ĐỘNG COMMIT CHO NIX MONITOR
 - **File changed**: `nixos/configuration.nix`, `home-manager/home.nix`, `home-manager/noctalia/settings.toml`, `~/.local/bin/nix-update`
 - **Mô tả**:
