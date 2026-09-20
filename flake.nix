@@ -22,9 +22,6 @@
     thorium.url = "github:Rishabh5321/custom-packages-flake";
     thorium.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Helium Browser
-    helium.url = "github:oxcl/nix-flake-helium-browser";
-    helium.inputs.nixpkgs.follows = "nixpkgs";
 
     # Zen Browser
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
