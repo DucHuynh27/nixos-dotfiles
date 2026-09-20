@@ -1,3 +1,12 @@
+### [2026-09-20 11:30] - CÀI ĐẶT ZEN BROWSER VÀ TĂNG BO GÓC MANGOWM LÊN 10PX
+- **File changed**: `flake.nix`, `flake.lock`, `home-manager/home.nix`, `home-manager/mango/config.conf`
+- **Mô tả**:
+  - Thêm input flake `zen-browser` (`0xc000022070/zen-browser-flake`) vào `flake.nix`.
+  - Cài đặt gói `inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default` vào `home-manager/home.nix`.
+  - Tạo symlink `~/.local/bin/zen` trỏ tới `zen-beta` để tiện khởi chạy bằng lệnh `zen`.
+  - Tăng độ bo cong cửa sổ `border_radius` trong MangoWM từ `6` lên `10` px và reload compositor.
+- **Lý do**: Yêu cầu người dùng cài đặt Zen Browser để trải nghiệm và tăng độ bo cong viền cửa sổ.
+
 ### [2026-09-20 10:12] - CẤU HÌNH CUSTOM SHORTCUT CHO NOCTALIA (REBOOT VÀO UEFI BIOS)
 - **File changed**: `home-manager/noctalia/settings.toml`, `~/.local/state/noctalia/settings.toml`
 - **Mô tả**:
