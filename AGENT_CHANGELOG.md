@@ -1,3 +1,8 @@
+### [2026-09-21 02:05] - HẠ NGƯỠNG TỐC ĐỘ FOCUS MÉP SCROLLER XUỐNG 10.0
+- **File changed**: `home-manager/mango/config.conf`
+- **Mô tả**: Hạ `edge_scroller_focus_allow_speed` từ `15.0` xuống `10.0` để thao tác rê chuột chuyển focus sang cửa sổ bên cạnh trong layout Scroller nhạy hơn và nhẹ tay hơn.
+- **Lý do**: Tinh chỉnh theo phản hồi trải nghiệm thực tế của người dùng.
+
 ### [2026-09-20 21:57] - ĐIỀU CHỈNH NGƯỠNG TỐC ĐỘ FOCUS MÉP SCROLLER (15.0)
 - **File changed**: `home-manager/mango/config.conf`
 - **Mô tả**: Bật lại `edge_scroller_pointer_focus = 1` và đặt ngưỡng tốc độ chuột `edge_scroller_focus_allow_speed = 15.0`. Cho phép rê chuột sang cửa sổ bên cạnh để focus mượt mà khi di chuyển có chủ đích, đồng thời loại bỏ tình trạng vô tình chạm nhẹ mép màn hình bị cướp focus.
