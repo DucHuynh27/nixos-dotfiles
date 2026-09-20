@@ -1,3 +1,8 @@
+### [2026-09-20 21:51] - TẮT FOCUS MÉP SCROLLER SANG CỬA SỔ BÊN CẠNH
+- **File changed**: `home-manager/mango/config.conf`
+- **Mô tả**: Thiết lập `edge_scroller_pointer_focus = 0` đồng thời giữ `sloppyfocus = 1`. Ngăn chặn việc đưa chuột ra mép màn hình tự động cuộn/cướp focus sang cửa sổ bên cạnh trong layout Scroller, trong khi vẫn duy trì tính năng focus theo chuột giữa các cửa sổ trên màn hình.
+- **Lý do**: Người dùng muốn giữ cơ chế focus theo chuột nhưng không muốn bị tự động nhảy focus sang cửa sổ kế bên ở rìa màn hình.
+
 ### [2026-09-20 21:44] - TỰ ĐỘNG FLOAT CHO PIP ZEN BROWSER VÀ TẮT AUTO FOCUS SANG MÀN HÌNH MỚI
 - **File changed**: `home-manager/mango/config.conf`
 - **Mô tả**:
