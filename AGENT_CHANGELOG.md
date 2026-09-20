@@ -1,3 +1,8 @@
+### [2026-09-20 21:05] - KÍCH HOẠT TEMPLATE MÀU NOCTALIA CHO ZEN BROWSER
+- **File changed**: `home-manager/noctalia/settings.toml`
+- **Mô tả**: Đồng bộ template cộng đồng `zen-browser` vào `community_ids` trong `home-manager/noctalia/settings.toml` để liên tục tự động sinh `userChrome.css` và `userContent.css` khớp với bảng màu Noctalia.
+- **Lý do**: Đồng bộ theme và màu sắc của Zen Browser với hệ thống Noctalia.
+
 ### [2026-09-20 11:30] - CÀI ĐẶT ZEN BROWSER VÀ TĂNG BO GÓC MANGOWM LÊN 10PX
 - **File changed**: `flake.nix`, `flake.lock`, `home-manager/home.nix`, `home-manager/mango/config.conf`
 - **Mô tả**:

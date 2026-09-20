@@ -190,6 +190,7 @@ source = "community"
         "antigravity",
         "opencode",
         "brave",
+        "zen-browser",
         "discord",
         "telegram",
         "gimp",
