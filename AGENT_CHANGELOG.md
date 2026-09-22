@@ -1,3 +1,10 @@
+### [2026-09-22 20:37] - THÊM GLIB (LIBGLIB2.0-0) VÀO NIX-LD VÀ SYSTEMPACKAGES
+- **File changed**: `nixos/configuration.nix`
+- **Mô tả**:
+  - Bổ sung `pkgs.glib` vào `programs.nix-ld.libraries` để cung cấp các thư viện `libglib-2.0.so.0`, `libgobject-2.0.so.0`, `libgio-2.0.so.0` cho các binary/addon/script ngoài chạy trên NixOS.
+  - Thêm `glib` vào `environment.systemPackages` để có sẵn các tiện ích CLI (`gsettings`, `gio`).
+- **Lý do**: Yêu cầu người dùng cài đặt gói `libglib2.0-0` trên hệ thống.
+
 ### [2026-09-22 10:23] - XÓA PHÍM TẮT ALT + SPACE MỞ LAUNCHER
 - **File changed**: `home-manager/mango/config.conf`
 - **Mô tả**: Xóa phím tắt `bind=ALT,space,spawn,noctalia msg panel-toggle launcher`. Người dùng tiếp tục sử dụng phím tắt `Super + D` để mở Noctalia App Launcher như thường lệ.

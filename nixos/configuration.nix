@@ -261,6 +261,7 @@
     quickemu
     nest-cli
     efibootmgr
+    glib
   ];
 
   # Enable Thunar properly with plugins
@@ -277,8 +278,13 @@
     enable = true;
   };
 
-  # Allow NixOS run Node.js downloaded from internet
-  programs.nix-ld.enable = true;
+  # Allow NixOS run Node.js / precompiled binaries downloaded from internet
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      glib
+    ];
+  };
 
   # Enable nh - Nix cli wrapper
   programs.nh = {
@@ -341,18 +347,6 @@
   services.udev.extraRules = ''
     KERNEL=="hidraw*", ATTRS{idVendor}=="5253", MODE="0666", TAG+="uaccess"
   '';
-
-  # Ollama with CUDA acceleration for RTX 3050
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-    environmentVariables = {
-      OLLAMA_FLASH_ATTENTION = "1";
-      OLLAMA_CONTEXT_LENGTH = "8192";
-      OLLAMA_NUM_PARALLEL = "1";
-      OLLAMA_MAX_LOADED_MODELS = "1";
-    };
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
