@@ -38,6 +38,8 @@ return {
         { "<leader>c", group = "Code (LSP)" },
         { "<leader>d", group = "Săn lỗi (Diagnostics)" },
         { "<leader>g", group = "Git" },
+        { "<leader>q", group = "Phiên làm việc (Session)" },
+        { "<leader>x", group = "Bảng lỗi (Trouble)" },
       })
     end,
   },
@@ -73,5 +75,48 @@ return {
         end
       })
     end,
+  },
+
+  -- Quản lý và khôi phục phiên làm việc (Session)
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    opts = {},
+    keys = {
+      { "<leader>qs", function() require("persistence").load() end, desc = "Khôi phục Session hiện tại" },
+      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Khôi phục Session gần nhất" },
+      { "<leader>qd", function() require("persistence").stop() end, desc = "Không lưu Session khi thoát" },
+    },
+  },
+
+  -- Bảng quản lý lỗi tập trung toàn dự án (Trouble)
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble" },
+    opts = {},
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Bảng lỗi Diagnostics (Trouble)" },
+      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Lỗi trong file hiện tại" },
+      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Cấu trúc Symbols (Trouble)" },
+      { "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP Definitions / References (Trouble)" },
+    },
+  },
+
+  -- Quản lý Git trực quan với LazyGit
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "Mở LazyGit toàn màn hình" },
+    },
   },
 }

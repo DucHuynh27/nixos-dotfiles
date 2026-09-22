@@ -1,3 +1,18 @@
+### [2026-09-22 21:10] - CẤU HÌNH OMNIROUTE GATEWAY VÀ NÂNG CẤP NEOVIM
+- **File changed**: `home-manager/home.nix`, `secrets/secrets.yaml`, `home-manager/nvim/*`
+- **Mô tả**:
+  - **OmniRoute Gateway**: Thêm systemd user service `omniroute.service` tự khởi động chạy `omniroute serve` và cấu hình giải mã secret `omniroute_env` vào `~/.omniroute/.env` qua SOPS.
+  - **Neovim & Công cụ**:
+    - Bổ sung gói CLI `lazygit` vào `home.packages` và plugin `lazygit.nvim` (`<leader>gg`).
+    - Thêm plugin quản lý phiên `persistence.nvim` (`<leader>qs`, `<leader>ql`, `<leader>qd`).
+    - Thêm bảng săn lỗi `trouble.nvim` (`<leader>xx`, `<leader>xX`, `<leader>cs`, `<leader>cl`).
+    - Thêm cấu hình parser và highlight `nvim-treesitter`.
+    - Bổ sung bộ snippet `friendly-snippets` cho LuaSnip.
+    - Bổ sung phím tắt LSP (`gd`, `gr`, `gI`, `K`, `<leader>ca`, `<leader>cr`).
+    - Tinh chỉnh options: `scrolloff = 8`, `inccommand = "split"`, `undofile = true`, `splitbelow/splitright`.
+    - Thêm patch tương thích nvim-treesitter directive/predicate và patch jdtls null result.
+- **Lý do**: Đồng bộ cấu hình OmniRoute AI Gateway và hoàn thiện môi trường soạn thảo Neovim cho người dùng.
+
 ### [2026-09-22 20:37] - THÊM GLIB (LIBGLIB2.0-0) VÀO NIX-LD VÀ SYSTEMPACKAGES
 - **File changed**: `nixos/configuration.nix`
 - **Mô tả**:

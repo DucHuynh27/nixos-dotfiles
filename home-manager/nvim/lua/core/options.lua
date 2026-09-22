@@ -25,6 +25,7 @@ opt.wrap = true
 opt.linebreak = true
 opt.signcolumn = "yes"
 opt.cursorline = true
+opt.scrolloff = 8 -- Giữ khoảng đệm 8 dòng khi cuộn
 opt.fillchars = { 
   eob = " ", -- Xóa dấu ~ ở cuối file
   fold = " ", 
@@ -36,8 +37,12 @@ opt.fillchars = {
 -- Tìm kiếm
 opt.ignorecase = true
 opt.smartcase = true
+opt.inccommand = "split" -- Xem trước thay thế chuỗi theo thời gian thực
 
 -- Hệ thống
 opt.clipboard = "unnamedplus" -- Copy paste với OS
+opt.undofile = true -- Lưu lịch sử hoàn tác (Undo) vĩnh viễn
+opt.splitbelow = true -- Mở cửa sổ chia ngang ở dưới
+opt.splitright = true -- Mở cửa sổ chia dọc ở bên phải
 opt.updatetime = 250
 opt.timeoutlen = 300

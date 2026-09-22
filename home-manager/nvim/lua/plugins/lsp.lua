@@ -55,6 +55,14 @@ return {
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Lỗi trước đó" })
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Lỗi tiếp theo" })
       vim.keymap.set("n", "<leader>dd", "<cmd>FzfLua diagnostics_document<cr>", { desc = "Danh sách lỗi trong file" })
+
+      -- Phím tắt điều hướng & thao tác Code (LSP)
+      vim.keymap.set("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", { desc = "Đến định nghĩa (Definition)" })
+      vim.keymap.set("n", "gr", "<cmd>FzfLua lsp_references<cr>", { desc = "Tìm các nơi sử dụng (References)" })
+      vim.keymap.set("n", "gI", "<cmd>FzfLua lsp_implementations<cr>", { desc = "Đến Implementation" })
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Xem tài liệu hàm (Hover)" })
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Hành động code (Code Action)" })
+      vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Đổi tên biến/hàm (Rename)" })
     end,
   },
   

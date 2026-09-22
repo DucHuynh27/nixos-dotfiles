@@ -14,3 +14,11 @@ map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Đóng cửa sổ hiện tạ
 
 -- Xóa highlight tìm kiếm
 map("n", "<leader>nh", ":nohl<CR>", { desc = "Xóa highlight tìm kiếm" })
+
+-- Di chuyển khối dòng trong Visual mode (tương tự Alt+Up/Down)
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Chuyển dòng đã chọn xuống" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Chuyển dòng đã chọn lên" })
+
+-- Giữ vùng chọn sau khi thụt lề
+map("v", "<", "<gv", { desc = "Thụt lề sang trái" })
+map("v", ">", ">gv", { desc = "Thụt lề sang phải" })
