@@ -1,3 +1,8 @@
+### [2026-09-22 10:23] - XÓA PHÍM TẮT ALT + SPACE MỞ LAUNCHER
+- **File changed**: `home-manager/mango/config.conf`
+- **Mô tả**: Xóa phím tắt `bind=ALT,space,spawn,noctalia msg panel-toggle launcher`. Người dùng tiếp tục sử dụng phím tắt `Super + D` để mở Noctalia App Launcher như thường lệ.
+- **Lý do**: Yêu cầu người dùng giải phóng tổ hợp phím Alt + Space để tránh xung đột phím.
+
 ### [2026-09-21 02:05] - HẠ NGƯỠNG TỐC ĐỘ FOCUS MÉP SCROLLER XUỐNG 10.0
 - **File changed**: `home-manager/mango/config.conf`
 - **Mô tả**: Hạ `edge_scroller_focus_allow_speed` từ `15.0` xuống `10.0` để thao tác rê chuột chuyển focus sang cửa sổ bên cạnh trong layout Scroller nhạy hơn và nhẹ tay hơn.
