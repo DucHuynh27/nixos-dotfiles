@@ -1,3 +1,16 @@
+### [2026-09-23 13:30] - CHUYỂN MANGO SANG WL-ONLY (HỖ TRỢ HDR10 VÀ VULKAN), SỬA LỖI MÀN HÌNH ĐEN AAGL
+- **File changed**: `flake.nix`, `flake.lock`, `home-manager/zsh.nix`, `home-manager/mango/config.conf`, `~/.local/share/anime-game-launcher/config.json`
+- **Mô tả**:
+  - **MangoWM `wl-only` & HDR**:
+    - Chuyển input `mango` trong `flake.nix` sang nhánh `wl-only` thuần wlroots để hỗ trợ Vulkan Renderer và Color Management.
+    - Bổ sung `export WLR_RENDERER=vulkan` khi khởi động Mango trong `home-manager/zsh.nix`.
+    - Cấu hình `hdr_depth = 2` (10-bit HDR10), bật `hdr:1` cho màn hình rời `HDMI-A-1` (Gigabyte G25F2) và thêm phím tắt `Super + Alt + H` để bật/tắt HDR nhanh.
+  - **Sửa lỗi màn hình đen AAGL (Genshin Impact)**:
+    - Bật chế độ `borderless: true` và tham số `-popupwindow` trong cấu hình AAGL để loại bỏ tình trạng Unity Engine treo dựng hình khi mất focus sang màn hình phụ.
+    - Cấu hình biến môi trường `DXVK_CONFIG="d3d11.enableExclusiveFullscreen=False"` để ngăn game chiếm quyền Exclusive Fullscreen.
+    - Thêm `windowrule=isfakefullscreen:1,title:Genshin Impact` trong `config.conf`.
+- **Lý do**: Kích hoạt HDR10 cho màn hình rời và loại bỏ lỗi màn hình đen khi chơi Genshin Impact đa màn hình.
+
 ### [2026-09-22 21:10] - CẤU HÌNH OMNIROUTE GATEWAY VÀ NÂNG CẤP NEOVIM
 - **File changed**: `home-manager/home.nix`, `secrets/secrets.yaml`, `home-manager/nvim/*`
 - **Mô tả**:

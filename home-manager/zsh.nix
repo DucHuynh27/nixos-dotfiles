@@ -68,6 +68,7 @@
         if [ "$(tty)" = "/dev/tty1" ]; then
           export XDG_CURRENT_DESKTOP=mango
           export XDG_SESSION_TYPE=wayland
+          export WLR_RENDERER=vulkan
           exec mango > ~/.mango.log 2>&1
         fi
       fi

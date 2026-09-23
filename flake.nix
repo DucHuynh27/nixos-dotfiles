@@ -27,8 +27,8 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
-    # MangoWM
-    mango.url = "github:mangowm/mango";
+    # MangoWM (nhánh wl-only thuần wlroots để hỗ trợ Vulkan và HDR10)
+    mango.url = "github:mangowm/mango/wl-only";
     mango.inputs.nixpkgs.follows = "nixpkgs";
 
     # AAGL (An Anime Game Launcher)
