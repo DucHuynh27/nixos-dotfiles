@@ -1,3 +1,10 @@
+### [2026-09-24 20:45] - CÀI ĐẶT SHOWMETHEKEY VÀ CẤU HÌNH THƯ MỤC FONT CHO FONTCONFIG
+- **File changed**: `home-manager/home.nix`
+- **Mô tả**:
+  - **Showmethekey**: Bổ sung gói `showmethekey` (kèm `showmethekey-gtk` và `showmethekey-cli`) vào `home.packages` thuộc nhóm công cụ chụp/ghi màn hình (`Screen Toolkit & Capture`). Ứng dụng hỗ trợ hiển thị phím bấm và chuột nổi trực quan trên màn hình (layer-shell) cho Wayland.
+  - **Fontconfig Custom Dirs**: Thêm tệp cấu hình `xdg.configFile."fontconfig/conf.d/10-custom-fonts.conf"` khai báo các thư mục font người dùng (`~/.local/share/fonts`, `~/.fonts`, `/home/hinne/.local/share/fonts`) để Fontconfig quét và nhận diện các font cài đặt cục bộ (như `Montserrat Alternates`) trên các ứng dụng GUI / Electron như Obsidian.
+- **Lý do**: Đáp ứng yêu cầu cài đặt ứng dụng visualizer keystroke trên Wayland và giải quyết vấn đề nhận diện font thủ công trong Obsidian.
+
 ### [2026-09-23 13:30] - CHUYỂN MANGO SANG WL-ONLY (HỖ TRỢ HDR10 VÀ VULKAN), SỬA LỖI MÀN HÌNH ĐEN AAGL
 - **File changed**: `flake.nix`, `flake.lock`, `home-manager/zsh.nix`, `home-manager/mango/config.conf`, `~/.local/share/anime-game-launcher/config.json`
 - **Mô tả**:

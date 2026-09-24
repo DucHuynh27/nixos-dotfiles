@@ -191,6 +191,7 @@
     hyprpicker
     imagemagick
     satty
+    showmethekey
     slurp
     tesseract
     translate-shell
@@ -496,6 +497,16 @@
 
   # Enable font discovery for home-manager fonts
   fonts.fontconfig.enable = true;
+
+  xdg.configFile."fontconfig/conf.d/10-custom-fonts.conf".text = ''
+    <?xml version="1.0"?>
+    <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+    <fontconfig>
+      <dir>/home/hinne/.local/share/fonts</dir>
+      <dir>~/.local/share/fonts</dir>
+      <dir>~/.fonts</dir>
+    </fontconfig>
+  '';
 
   xdg.configFile."fontconfig/conf.d/99-maple-mono-features.conf".text = ''
     <?xml version="1.0"?>
