@@ -1,3 +1,11 @@
+### [2026-09-25 10:25] - AUTOSTART KEEPASSXC VÀ JETBRAINS TOOLBOX, CẤU HÌNH KEEPASSXC THU VÀO TRAY
+- **File changed**: `home-manager/mango/config.conf`, `~/.config/keepassxc/keepassxc.ini`, `~/.config/autostart/*`
+- **Mô tả**:
+  - **Autostart MangoWM**: Bổ sung `exec-once=keepassxc --minimized` và `exec-once=jetbrains-toolbox --minimize` vào `home-manager/mango/config.conf` để tự động khởi chạy ngầm 2 ứng dụng khi đăng nhập phiên MangoWM.
+  - **KeePassXC Tray Icon**: Cấu hình `MinimizeToTray=true` trong mục `[GUI]` của `~/.config/keepassxc/keepassxc.ini` kết hợp cùng `MinimizeOnStartup=true`, `MinimizeOnClose=true` và `ShowTrayIcon=true` để KeePassXC luôn thu gọn hoàn toàn về khay hệ thống (StatusNotifierItem trên thanh Noctalia) khi khởi động hoặc khi đóng/thu nhỏ cửa sổ.
+  - **XDG Autostart**: Cập nhật lệnh khởi chạy `--minimized` cho `~/.config/autostart/org.keepassxc.KeePassXC.desktop` và tạo `~/.config/autostart/jetbrains-toolbox.desktop` đồng bộ cho môi trường desktop.
+- **Lý do**: Đáp ứng yêu cầu tự động khởi động KeePassXC và JetBrains Toolbox dưới dạng chạy ngầm và thu gọn KeePassXC vào khay hệ thống.
+
 ### [2026-09-24 20:45] - CÀI ĐẶT SHOWMETHEKEY VÀ CẤU HÌNH THƯ MỤC FONT CHO FONTCONFIG
 - **File changed**: `home-manager/home.nix`
 - **Mô tả**:
