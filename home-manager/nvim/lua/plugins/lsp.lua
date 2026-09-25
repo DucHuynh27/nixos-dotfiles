@@ -26,7 +26,8 @@ return {
       setup_server("lua_ls", {
         settings = { Lua = { diagnostics = { globals = { "vim" } } } }
       })
-      -- Đã gỡ ts_ls vì sẽ dùng typescript-tools.nvim ở dưới
+      setup_server("ts_ls")       -- JS/TS (typescript-language-server)
+      setup_server("eslint")      -- Linter chuẩn cho JS/TS & React
       setup_server("html")        -- HTML
       setup_server("cssls")       -- CSS
       setup_server("tailwindcss") -- Tailwind
@@ -70,12 +71,5 @@ return {
   {
     "mfussenegger/nvim-jdtls",
     ft = "java",
-  },
-
-  -- Vũ khí bí mật cho JS/TS (Thay thế hoàn toàn ts_ls)
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
   }
 }
