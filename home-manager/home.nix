@@ -139,7 +139,7 @@
     aider-chat
     jetbrains-toolbox
     neovim
-    zed-editor
+    vscode
 
     # ---------------------------------------------------
     # LSPs & Formatters (For Neovim)
@@ -191,7 +191,6 @@
     hyprpicker
     imagemagick
     satty
-    showmethekey
     slurp
     tesseract
     translate-shell
