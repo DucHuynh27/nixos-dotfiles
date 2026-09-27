@@ -1,3 +1,25 @@
+### [2026-09-26 17:18] - SỬA LỖI MẠNG WAYDROID VỚI WAYDROID-NFTABLES
+- **File changed**: `nixos/configuration.nix`
+- **Mô tả**: Chuyển package của Waydroid sang `pkgs.waydroid-nftables` để tương thích với `nftables` trên nhân Linux Zen (tránh lỗi thiếu module `ip_tables` legacy khi chạy `waydroid-net.sh`).
+- **Lý do**: Khắc phục lỗi `RuntimeError: Command failed: ... waydroid-net.sh start` khi mở `waydroid show-full-ui`.
+
+### [2026-09-26 17:05] - KÍCH HOẠT VIRTUALISATION.WAYDROID TRÊN NIXOS
+- **File changed**: `nixos/configuration.nix`
+- **Mô tả**: Bật `virtualisation.waydroid.enable = true;` để kích hoạt Waydroid container và cấu hình firewall/lxc tự động cho hệ thống.
+- **Lý do**: Cung cấp môi trường giả lập Android để chơi game mobile (Golden Spatula).
+
+### [2026-09-25 13:06] - ĐỔI PHÍM TẮT CHUYỂN TAG MANGOWM SANG ALT + SHIFT ĐỂ FIX LỖI GENSHIN IMPACT
+- **File changed**: `home-manager/mango/config.conf`
+- **Mô tả**: Đổi tổ hợp phím chuyển cửa sổ sang Tag/Workspace (`tag, 1/2/3`) từ `Alt + 1/2/3` sang `Alt + Shift + 1/2/3`.
+- **Lý do**: Khắc phục lỗi MangoWM bắt và nuốt phím tắt `Alt + Số` cấp hệ thống khiến không thể đổi nhân vật và tung chiêu nộ nhanh trong Genshin Impact (chạy qua AAGL).
+
+### [2026-09-25 10:32] - GỠ BỎ ZED VÀ SHOWMETHEKEY, CÀI ĐẶT VSCODE
+- **File changed**: `home-manager/home.nix`
+- **Mô tả**:
+  - **Gỡ bỏ Zed & Show Me The Key**: Gỡ bỏ `zed-editor` và `showmethekey` khỏi danh sách `home.packages`.
+  - **Cài đặt VSCode**: Thêm gói `vscode` vào nhóm `Text Editor & IDE` trong `home.packages`. Kế thừa cấu hình Wayland Ozone có sẵn để chạy mượt mà trên Wayland.
+- **Lý do**: Thay thế trình soạn thảo code theo nhu cầu thực tế của người dùng và dọn dẹp các tiện ích không dùng đến.
+
 ### [2026-09-25 10:25] - AUTOSTART KEEPASSXC VÀ JETBRAINS TOOLBOX, CẤU HÌNH KEEPASSXC THU VÀO TRAY
 - **File changed**: `home-manager/mango/config.conf`, `~/.config/keepassxc/keepassxc.ini`, `~/.config/autostart/*`
 - **Mô tả**:
