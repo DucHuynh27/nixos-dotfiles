@@ -339,8 +339,12 @@
   programs.gamemode.enable = true;
   programs.steam.enable = true;
 
-  # Virtualisation (Docker)
+  # Virtualisation (Docker & Waydroid)
   virtualisation.docker.enable = true;
+  virtualisation.waydroid = {
+    enable = true;
+    package = pkgs.waydroid-nftables;
+  };
 
   # MChose Mouse Web Driver Udev Rule
   services.udev.packages = with pkgs; [brightnessctl ddcutil];
