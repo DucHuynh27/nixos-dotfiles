@@ -132,6 +132,7 @@
     ripgrep
     unzip
     yazi
+    posting
 
     # ---------------------------------------------------
     # Text Editor & IDE
