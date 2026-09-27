@@ -183,27 +183,7 @@ return {
     end,
   },
 
-  -- Thông báo đẹp
-  {
-    "rcarriga/nvim-notify",
-    keys = {
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Dismiss all Notifications",
-      },
-    },
-    opts = {
-      background_colour = "#000000",
-    },
-    config = function(_, opts)
-      local notify = require("notify")
-      notify.setup(opts)
-      vim.notify = notify
-    end,
-  },
+
 
   -- Cải thiện Quickfix
   {
