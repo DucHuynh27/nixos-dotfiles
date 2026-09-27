@@ -1,40 +1,43 @@
 # NixOS & Home Manager Configuration
 
-Hệ thống được chia làm hai phần chính:
+Hệ thống gồm hai phần:
 
 - **NixOS (`nixosConfigurations.nixos`)**: Quản lý kernel, driver, bootloader và các dịch vụ cấp hệ thống.
-- **Home Manager (`homeConfigurations."hinne@nixos"`)**: Quản lý dotfiles, terminal (Zsh, Kitty, Starship), CLI tools và phần mềm người dùng.
+- **Home Manager (`homeConfigurations."hinne@nixos"`)**: Quản lý dotfiles, terminal, CLI tools và apps.
 
 ## 📂 Cấu trúc thư mục
 
 ```text
 ~/nix-config/
-    ├── ❄️ flake.nix               # khai báo toàn bộ hệ thống (Khai báo input/output)
-    ├── 🔒 flake.lock              # phiên bản của các thư viện
-    ├── ⚙️ .sops.yaml              # mã hoá bí mật với sops-nix
+    ├── ❄️ flake.nix
+    ├── 🔒 flake.lock
+    ├── ⚙️ .sops.yaml
     │
-    ├── 💻 nixos/                  # QUẢN LÝ HỆ THỐNG CẤP ROOT
-    │   ├── configuration.nix      # Cài đặt bootloader, kernel, driver, user, font và các service hệ thống (âm thanh, mạng...)
-    │   └── hardware-configuration.nix # File tự gen bởi NixOS chứa thông tin về ổ cứng, CPU, phân vùng
+    ├── 💻 nixos/                  # Quản lý cấu hình hệ thống cấp Root (kernel, driver, services, waydroid)
+    │   ├── configuration.nix
+    │   ├── hardware-configuration.nix
+    │   ├── damx.nix
+    │   └── databases.nix
     │
-    ├── 👤 home-manager/           # QUẢN LÝ PHẦN MỀM & SETTING CỦA USER
-    │   ├── home.nix               # danh sách phần mềm cài cho user và thiết lập các biến môi trường
-    │   ├── tools.nix              # khai báo các công cụ bổ trợ
-    │   ├── scripts.nix            # custom script bash cá nhân
+    ├── 👤 home-manager/           # Quản lý cấu hình người dùng (apps, dotfiles, WM, terminal)
+    │   ├── home.nix
+    │   ├── tools.nix
+    │   ├── scripts.nix
+    │   ├── fastfetch.nix
+    │   ├── fcitx5.nix
+    │   ├── git.nix
+    │   ├── zsh.nix
+    │   ├── starship.nix
+    │   ├── wezterm.nix
+    │   ├── kitty.nix
     │   │
-    │   ├── ⌨️ fcitx5.nix          # Cấu hình Lotus
-    │   ├── 🐙 git.nix             # Cấu hình tài khoản và alias của Git
-    │   ├── 🐚 zsh.nix             # Cấu hình Shell (Zsh)
-    │   ├── 🚀 starship.nix        # Cấu hình giao diện Prompt
-    │   ├── 🖥️ kitty.nix           # Cấu hình Terminal Kitty
-    │   │
-    │   ├── 🪟 niri/               # cấu hình của Window Manager Niri (bind, layout, rules)
-    │   ├── 🌙 noctalia/           # cấu hình thanh Bar/Shell Noctalia
-    │   ├── 📝 nvim/               # cấu hình trình Neovim
-    │   └── 🎬 mpv/                # cấu hình MPV
+    │   ├── 🥭 mango/              # Cấu hình Window Manager MangoWM (Scroller, Vulkan, HDR10)
+    │   ├── 🌙 noctalia/           # Cấu hình Desktop Shell/Bar Noctalia
+    │   ├── 📝 nvim/               # Cấu hình trình soạn thảo Neovim
+    │   └── 🎬 mpv/                # Cấu hình trình phát video MPV
     │
-    └── 🗝️ secrets/                # CHỨA CÁC THÔNG TIN BẢO MẬT ĐƯỢC MÃ HOÁ
-        └── secrets.yaml           # Mã hoá các thứ như mật khẩu, SSH key...
+    └── 🗝️ secrets/                # Quản lý dữ liệu bảo mật mã hóa bằng SOPS (Age)
+        └── secrets.yaml
 ```
 
 ---
@@ -58,7 +61,7 @@ Sử dụng môi trường tạm thời của Nix để gọi Git và tải repo
 
 ```bash
 nix-shell -p git
-git clone https://github.com/Hinn27/nixos-dotfiles.git ~/nix-config
+git clone https://github.com/DucHuynh27/nixos-dotfiles.git ~/nix-config
 cd ~/nix-config
 ```
 
@@ -72,18 +75,20 @@ _Lưu ý: Nếu cài trên một phần cứng khác hoàn toàn, hãy tạo l�
 
 # Áp dụng cấu hình NixOS:
 sudo nixos-rebuild switch --flake .#nixos
+# Hoặc dùng nh:
+# nh os switch
 ```
 
 ### Bước 1.4: Kích hoạt phần người dùng (Home Manager)
 
-Bước này sẽ thiết lập toàn bộ môi trường lập trình, giao diện terminal và tự động giải mã cấu hình SSH.
+Bước này sẽ thiết lập toàn bộ môi trường desktop (MangoWM, Noctalia), terminal (WezTerm), các công cụ CLI và tự động giải mã cấu hình secrets.
 Vì công cụ `nh` đã được cài đặt ở Bước 1.3, chỉ cần:
 
 ```bash
 nh home switch
 ```
 
-Sau khi lệnh chạy xong, khởi động lại máy hoặc đăng nhập lại để các cấu hình có hiệu lực toàn diện.
+Sau khi lệnh chạy xong, khởi động lại máy hoặc đăng nhập vào TTY1 để phiên làm việc MangoWM tự động khởi chạy.
 
 > **💡 Lưu ý về dọn dẹp hệ thống:**
 > Hệ thống đã có sẵn **tự động dọn rác (Garbage Collection) mỗi tuần**. Đi kèm với đó là dịch vụ chạy ngầm tự động đồng bộ Bootloader (`switch-to-configuration boot`).
