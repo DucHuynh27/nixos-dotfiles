@@ -197,6 +197,7 @@
     translate-shell
     wl-screenrec
     zbar
+    zenity
 
     # ---------------------------------------------------
     # Yazi Plugins & Utilities
@@ -210,7 +211,14 @@
     unar
     xlsx2csv
     zip
-    (python3.withPackages (p: [p.rich p.docx2txt]))
+    (python3.withPackages (p: with p; [
+      rich
+      docx2txt
+      wand
+      win2xcur
+      matplotlib
+      numpy
+    ]))
 
     # ---------------------------------------------------
     # Fonts

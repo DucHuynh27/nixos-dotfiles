@@ -4,6 +4,6 @@
   pkgs,
   ...
 }: {
-  # Symlink mango config folder to ~/.config/mango
-  xdg.configFile."mango".source = ./mango;
+  # Symlink mango config file to ~/.config/mango/config.conf
+  xdg.configFile."mango/config.conf".source = ./mango/config.conf;
 }
