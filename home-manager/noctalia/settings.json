@@ -201,6 +201,9 @@
           "id": "plugin:noctalia/notes:notes"
         },
         {
+          "id": "plugin:vn1k/cursor:cursor"
+        },
+        {
           "id": "Volume",
           "displayMode": "onhover"
         },

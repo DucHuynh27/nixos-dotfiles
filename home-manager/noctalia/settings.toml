@@ -2,7 +2,7 @@ config_version = 14
 
 [bar.default]
 center = [ "cat", "clock", "cat_2" ]
-end = [ "tray", "notes", "clipboard", "widget", "warp", "notifications", "battery" ]
+end = [ "tray", "notes", "clipboard", "widget", "cursor", "warp", "notifications", "battery" ]
 font_weight = 400
 hover_highlight = false
 margin_edge = 4
@@ -160,7 +160,8 @@ enabled = [
     "avivbintangaringga/nextboot-selector",
     "avivbintangaringga/nix-monitor",
     "notfinaldev/web-search",
-    "yocraft/custom-shortcut"
+    "yocraft/custom-shortcut",
+    "vn1k/cursor"
 ]
 
 [shell]
@@ -269,3 +270,6 @@ type = "alexander/screen-toolkit:widget"
 [widget.workspaces]
 focused_output_only = true
 style = "minimal"
+
+[widget.cursor]
+type = "vn1k/cursor:cursor"
