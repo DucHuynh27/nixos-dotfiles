@@ -67,9 +67,4 @@ return {
     end,
   },
   
-  -- Vũ khí bí mật cho Java
-  {
-    "mfussenegger/nvim-jdtls",
-    ft = "java",
-  }
 }
