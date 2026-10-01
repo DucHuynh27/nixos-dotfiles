@@ -60,8 +60,8 @@
 
       lzd = "lazydocker";
 
-      # Network speed test (on-demand)
-      speedtest = "nix run nixpkgs#speedtest-cli";
+      # Network speed test (on-demand, byte units MB/s)
+      speedtest = "nix run nixpkgs#speedtest-cli -- --bytes";
     };
 
     # Extra configuration added to ~/.zprofile for login shells
