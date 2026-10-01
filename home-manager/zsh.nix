@@ -59,6 +59,9 @@
       mysql-log = "journalctl -u docker-mysql -f";
 
       lzd = "lazydocker";
+
+      # Network speed test (on-demand)
+      speedtest = "nix run nixpkgs#speedtest-cli";
     };
 
     # Extra configuration added to ~/.zprofile for login shells
