@@ -352,6 +352,18 @@
     KERNEL=="hidraw*", ATTRS{idVendor}=="5253", MODE="0666", TAG+="uaccess"
   '';
 
+  # Ollama with Vulkan acceleration for RTX 3050
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-vulkan;
+    environmentVariables = {
+      OLLAMA_FLASH_ATTENTION = "1";
+      OLLAMA_CONTEXT_LENGTH = "8192";
+      OLLAMA_NUM_PARALLEL = "1";
+      OLLAMA_MAX_LOADED_MODELS = "1";
+    };
+  };
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
 }
