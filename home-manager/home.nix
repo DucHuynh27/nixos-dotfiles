@@ -228,6 +228,7 @@
     # ---------------------------------------------------
     carlito
     corefonts
+    ibm-plex
     nerd-fonts.jetbrains-mono
     vista-fonts
 
