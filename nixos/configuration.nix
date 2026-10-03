@@ -358,7 +358,6 @@
     package = pkgs.ollama-vulkan;
     loadModels = [
       "qwen2.5-coder:3b"
-      "qwen3:4b"
     ];
     environmentVariables = {
       OLLAMA_FLASH_ATTENTION = "1";
