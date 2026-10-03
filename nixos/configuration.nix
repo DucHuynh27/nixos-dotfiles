@@ -357,6 +357,7 @@
     enable = true;
     package = pkgs.ollama-vulkan;
     loadModels = [
+      "qwen2.5-coder:7b"
       "qwen2.5-coder:3b"
     ];
     environmentVariables = {
