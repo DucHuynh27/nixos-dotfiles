@@ -160,6 +160,8 @@
     jdt-language-server
     tree-sitter
     lua-language-server
+    stylua
+    prettierd
 
     # ---------------------------------------------------
     # General Apps
@@ -211,14 +213,15 @@
     unar
     xlsx2csv
     zip
-    (python3.withPackages (p: with p; [
-      rich
-      docx2txt
-      wand
-      win2xcur
-      matplotlib
-      numpy
-    ]))
+    (python3.withPackages (p:
+      with p; [
+        rich
+        docx2txt
+        wand
+        win2xcur
+        matplotlib
+        numpy
+      ]))
 
     # ---------------------------------------------------
     # Fonts
@@ -250,26 +253,6 @@
       BindsTo = ["graphical-session.target"];
       Wants = ["graphical-session-pre.target"];
       After = ["graphical-session-pre.target"];
-    };
-  };
-
-  # OmniRoute AI Gateway daemon
-  systemd.user.services.omniroute = {
-    Unit = {
-      Description = "OmniRoute AI Gateway Proxy";
-      After = ["network.target" "sops-nix.service"];
-      Wants = ["sops-nix.service"];
-    };
-    Service = {
-      ExecStart = "${config.home.homeDirectory}/.local/share/pnpm/bin/omniroute serve";
-      Restart = "always";
-      RestartSec = "3s";
-      Environment = [
-        "PATH=${config.home.homeDirectory}/.local/share/pnpm/bin:${config.home.homeDirectory}/.nix-profile/bin:/run/current-system/sw/bin"
-      ];
-    };
-    Install = {
-      WantedBy = ["default.target"];
     };
   };
 
@@ -429,9 +412,6 @@
     defaultSopsFile = ../secrets/secrets.yaml;
     secrets."ssh_key" = {
       path = "${config.home.homeDirectory}/.ssh/id_ed25519";
-    };
-    secrets."omniroute_env" = {
-      path = "${config.home.homeDirectory}/.omniroute/.env";
     };
   };
 
