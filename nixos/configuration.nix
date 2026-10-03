@@ -356,6 +356,10 @@
   services.ollama = {
     enable = true;
     package = pkgs.ollama-vulkan;
+    loadModels = [
+      "qwen2.5-coder:3b"
+      "qwen3:4b"
+    ];
     environmentVariables = {
       OLLAMA_FLASH_ATTENTION = "1";
       OLLAMA_CONTEXT_LENGTH = "8192";
