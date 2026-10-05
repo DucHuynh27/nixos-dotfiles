@@ -49,7 +49,14 @@ scale = 1.0
 # Blur uses a smaller radius than the built-in default.
 # https://docs.noctalia.dev/umbriel/appearance/
 [appearance.blur]
-radius = 3
+enabled = true        # bật/tắt toàn bộ engine Blur (mặc định: true)
+optimized = true      # chế độ tối ưu hóa hiệu năng GPU (mặc định: true)
+passes = 3            # số lần quét làm mờ (từ 0 đến 8, mặc định: 3)
+radius = 5            # bán kính làm mờ (từ 0 đến 100, mặc định: 5)
+noise = 0.02          # lớp hạt nhiễu nhẹ chống bệt màu (từ 0.0 đến 1.0, mặc định: 0.02)
+brightness = 0.9      # độ sáng vùng mờ (từ 0.0 đến 2.0, mặc định: 0.9)
+contrast = 0.9        # độ tương phản (từ 0.0 đến 2.0, mặc định: 0.9)
+saturation = 1.1      # độ tươi màu / bão hòa (từ 0.0 đến 2.0, mặc định: 1.1)
 
 # Choose the background color shown if the lock screen takes too long to appear.
 # [colors]
@@ -178,7 +185,7 @@ layout = { mode = "master" }
 # Blur windows using the non-optimized path so translucent windows include
 # overlapping windows behind them.
 [[window_rule]]
-blur = false
+blur = true
 blur_optimized = false
 
 [[window_rule]]
