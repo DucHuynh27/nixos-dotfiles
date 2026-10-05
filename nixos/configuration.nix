@@ -76,6 +76,7 @@
   # Network hostname
   networking.hostName = "nixos";
   programs.mango.enable = true;
+  programs.umbriel.enable = true;
   programs.gpu-screen-recorder.enable = true;
   programs.anime-game-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
