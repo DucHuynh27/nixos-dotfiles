@@ -22,6 +22,7 @@
     ./tools.nix
     ./noctalia.nix
     ./mango.nix
+    ./umbriel.nix
     ./fcitx5.nix
     ./fastfetch.nix
   ];
