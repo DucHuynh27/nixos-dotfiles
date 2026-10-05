@@ -23,8 +23,8 @@ files = []
 
 # Optional session examples. XWayland support is enabled by default.
 # https://docs.noctalia.dev/umbriel/configuration/#general
-# [general]
-# autostart = ["noctalia", "kitty"]
+[general]
+autostart = ["noctalia", "fcitx5 -d"]
 # xwayland = false
 
 # ==============================================================================
@@ -33,12 +33,16 @@ files = []
 # Outputs are machine-specific. Run `umbriel outputs` to find names and modes.
 # https://docs.noctalia.dev/umbriel/outputs/
 #
-# [output.DP-1]
-# mode = "2560x1440@144"
-# position = [0, 0]
-# scale = 1.25
-# vrr = "fullscreen"
-# hdr = "auto"
+[output.eDP-1]
+mode = "1920x1080@144"
+position = [0, 0]
+scale = 1.0
+
+[output.HDMI-A-1]
+mode = "1920x1080@200"
+position = [1920, 0]
+hdr = "auto"
+scale = 1.0
 
 # ==============================================================================
 # Appearance
@@ -59,8 +63,8 @@ radius = 3
 numlock_toggle = true
 
 # Focus can follow the pointer across tiled, floating, and pinned windows.
-# [input.focus]
-# follows_mouse = true
+[input.focus]
+follows_mouse = true
 
 # ==============================================================================
 # Keybinds
@@ -71,7 +75,7 @@ numlock_toggle = true
 [keybinds]
 
 # Applications and session
-"Mod+Return" = { action = "spawn:kitty", repeat = false }
+"Mod+Return" = { action = "spawn:wezterm", repeat = false }
 "Mod" = "spawn:noctalia msg panel-toggle launcher"
 "Mod+Q" = { action = "window-close", repeat = false }
 "Mod+Escape" = "session-quit"
@@ -97,8 +101,8 @@ numlock_toggle = true
 "Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
 "Mod+P" = { action = "window-toggle-pinned", repeat = false }
 "Mod+M" = { action = "window-toggle-maximize-to-edges", repeat = false }
-"Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
-"Mod+Ctrl+F" = { action = "window-toggle-maximize", repeat = false }
+"Mod+Ctrl+F" = { action = "window-toggle-fullscreen", repeat = false }
+"Mod+F" = { action = "window-toggle-maximize", repeat = false }
 "Mod+R" = "window-cycle-primary-extent"
 "Mod+Shift+R" = "window-cycle-primary-extent-back"
 "Mod+Comma" = "window-consume-left"
@@ -133,6 +137,15 @@ numlock_toggle = true
 "Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
 "Mod+Tab" = "scratchpad-focus-next"
 
+# Apps
+"Mod+B" = "spawn:zen"
+"Mod+E" = "spawn:wezterm start -- yazi"
+
+# Screenshot
+"Print" = { action = "spawn:noctalia msg screenshot-region", repeat = false }
+"Alt+Print" = { action = "spawn:noctalia msg screenshot-fullscreen pick", repeat = false }
+"Ctrl+Print" = { action = "spawn:noctalia msg screenshot-fullscreen", repeat = false }
+
 # ==============================================================================
 # Layout
 # New scrolling-layout windows start at half the output width. Without this
@@ -145,6 +158,18 @@ extent_presets = [0.333, 0.5, 0.667]
 [layout.scrolling]
 default_extent_fraction = 0.5
 
+[[workspace]]
+index = 1
+layout = { mode = "scrolling" }
+
+[[workspace]]
+index = 2
+layout = { mode = "master" }
+
+[[workspace]]
+index = 3
+layout = { mode = "master" }
+
 # ==============================================================================
 # Window rules
 # Rules combine in order, with later values overriding earlier ones.
@@ -153,7 +178,7 @@ default_extent_fraction = 0.5
 # Blur windows using the non-optimized path so translucent windows include
 # overlapping windows behind them.
 [[window_rule]]
-blur = true
+blur = false
 blur_optimized = false
 
 [[window_rule]]
