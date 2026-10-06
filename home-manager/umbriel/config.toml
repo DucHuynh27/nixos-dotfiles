@@ -66,38 +66,33 @@ enabled = false       # tắt đổ bóng cho các cửa sổ
 # https://docs.noctalia.dev/umbriel/animation/
 [animation]
 enabled = true
-duration_ms = 350
-curve = "0.46,1.0,0.29,1.0"
+curve = "spring:0.85, 260"
 
 [animation.windows_in]
 enabled = true
-duration_ms = 400
-curve = "0.46,1.0,0.29,1.0"
-style = "popin"
-scale = 0.85
+style = "zoom"
+scale = 0.5
+curve = "spring:0.85, 260"
 
 [animation.windows_out]
 enabled = true
-duration_ms = 350
-curve = "0.08,0.92,0.0,1.0"
-style = "popin"
-scale = 0.85
+style = "zoom"
+scale = 0.5
+duration_ms = 250
+curve = "ease-out"
 
 [animation.windows_move]
 enabled = true
-duration_ms = 450
-curve = "0.46,1.0,0.29,1.0"
+curve = "spring:0.85, 260"
 
 [animation.workspaces]
 enabled = true
-duration_ms = 350
-curve = "0.46,1.0,0.29,1.0"
+curve = "spring:0.85, 260"
 
 [animation.overview]
 enabled = true
-duration_ms = 350
-curve = "0.46,1.0,0.29,1.0"
-workspace_curve = "0.46,1.0,0.29,1.0"
+curve = "spring:0.85, 260"
+workspace_curve = "spring:0.85, 260"
 
 [animation.windows_drag]
 physics = true
