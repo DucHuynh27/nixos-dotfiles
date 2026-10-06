@@ -24,8 +24,8 @@ files = []
 # Optional session examples. XWayland support is enabled by default.
 # https://docs.noctalia.dev/umbriel/configuration/#general
 [general]
-autostart = ["noctalia", "fcitx5 -d"]
-# xwayland = false
+autostart = ["noctalia", "fcitx5 -d", "jetbrains-toolbox", "keepassxc"]
+xwayland = true
 
 # ==============================================================================
 # Outputs
@@ -51,12 +51,56 @@ scale = 1.0
 [appearance.blur]
 enabled = true        # bật/tắt toàn bộ engine Blur (mặc định: true)
 optimized = true      # chế độ tối ưu hóa hiệu năng GPU (mặc định: true)
-passes = 3            # số lần quét làm mờ (từ 0 đến 8, mặc định: 3)
-radius = 5            # bán kính làm mờ (từ 0 đến 100, mặc định: 5)
+passes = 4            # số lần quét làm mờ (từ 0 đến 8, mặc định: 3)
+radius = 8            # bán kính làm mờ (từ 0 đến 100, mặc định: 5)
 noise = 0.02          # lớp hạt nhiễu nhẹ chống bệt màu (từ 0.0 đến 1.0, mặc định: 0.02)
 brightness = 0.9      # độ sáng vùng mờ (từ 0.0 đến 2.0, mặc định: 0.9)
 contrast = 0.9        # độ tương phản (từ 0.0 đến 2.0, mặc định: 0.9)
 saturation = 1.1      # độ tươi màu / bão hòa (từ 0.0 đến 2.0, mặc định: 1.1)
+
+[appearance.shadow]
+enabled = false       # tắt đổ bóng cho các cửa sổ
+
+# ==============================================================================
+# Animation
+# https://docs.noctalia.dev/umbriel/animation/
+[animation]
+enabled = true
+duration_ms = 350
+curve = "0.46,1.0,0.29,1.0"
+
+[animation.windows_in]
+enabled = true
+duration_ms = 400
+curve = "0.46,1.0,0.29,1.0"
+style = "popin"
+scale = 0.85
+
+[animation.windows_out]
+enabled = true
+duration_ms = 350
+curve = "0.08,0.92,0.0,1.0"
+style = "popin"
+scale = 0.85
+
+[animation.windows_move]
+enabled = true
+duration_ms = 450
+curve = "0.46,1.0,0.29,1.0"
+
+[animation.workspaces]
+enabled = true
+duration_ms = 350
+curve = "0.46,1.0,0.29,1.0"
+
+[animation.overview]
+enabled = true
+duration_ms = 350
+curve = "0.46,1.0,0.29,1.0"
+workspace_curve = "0.46,1.0,0.29,1.0"
+
+[animation.windows_drag]
+physics = true
 
 # Choose the background color shown if the lock screen takes too long to appear.
 # [colors]
@@ -68,10 +112,16 @@ saturation = 1.1      # độ tươi màu / bão hòa (từ 0.0 đến 2.0, mặ
 # https://docs.noctalia.dev/umbriel/input/
 [input.keyboard]
 numlock_toggle = true
+repeat_rate = 50
+repeat_delay = 250
 
 # Focus can follow the pointer across tiled, floating, and pinned windows.
 [input.focus]
 follows_mouse = true
+
+# Tự động di chuyển con trỏ chuột theo cửa sổ/màn hình được focus bằng phím tắt
+[input.cursor]
+follows_focus = true
 
 # ==============================================================================
 # Keybinds
@@ -102,6 +152,17 @@ follows_mouse = true
 "Mod+Shift+Down" = "window-move-down"
 "Mod+Shift+Up" = "window-move-up"
 "Mod+Shift+Right" = "column-move-right"
+
+# Monitor / Output focus (chuyển focus và chuột sang màn hình khác)
+"Mod+grave" = "output-focus-next"
+"Mod+Alt+Left" = "output-focus-left"
+"Mod+Alt+Right" = "output-focus-right"
+"Mod+Alt+H" = "output-focus-left"
+"Mod+Alt+L" = "output-focus-right"
+
+# Move window to another monitor (chuyển cửa sổ sang màn hình khác)
+"Mod+Shift+grave" = "window-move-to-output-next"
+"Mod+Shift+O" = "window-move-to-output-next"
 
 # Window state and layout
 "Mod+T" = { action = "window-toggle-floating", repeat = false }
@@ -145,13 +206,26 @@ follows_mouse = true
 "Mod+Tab" = "scratchpad-focus-next"
 
 # Apps
-"Mod+B" = "spawn:zen"
-"Mod+E" = "spawn:wezterm start -- yazi"
+"Mod+B" = { action = "spawn:zen", repeat = false }
+"Mod+E" = { action = "spawn:wezterm start -- yazi", repeat = false }
 
 # Screenshot
 "Print" = { action = "spawn:noctalia msg screenshot-region", repeat = false }
 "Alt+Print" = { action = "spawn:noctalia msg screenshot-fullscreen pick", repeat = false }
 "Ctrl+Print" = { action = "spawn:noctalia msg screenshot-fullscreen", repeat = false }
+
+# Volume & Media (Fn F10 tắt âm, Fn F11/F12 tăng giảm âm lượng)
+"XF86AudioRaiseVolume" = "spawn:noctalia msg volume-up"
+"XF86AudioLowerVolume" = "spawn:noctalia msg volume-down"
+"XF86AudioMute" = "spawn:noctalia msg volume-mute"
+"XF86AudioMicMute" = "spawn:noctalia msg mic-mute"
+"XF86AudioPlay" = "spawn:noctalia msg media toggle"
+"XF86AudioNext" = "spawn:noctalia msg media next"
+"XF86AudioPrev" = "spawn:noctalia msg media previous"
+
+# Brightness (Fn F1/F2 tăng giảm độ sáng)
+"XF86MonBrightnessUp" = "spawn:noctalia msg brightness-up"
+"XF86MonBrightnessDown" = "spawn:noctalia msg brightness-down"
 
 # ==============================================================================
 # Layout
@@ -160,10 +234,10 @@ follows_mouse = true
 # their most recently focused row when focus leaves and later returns.
 # https://docs.noctalia.dev/umbriel/layout/
 [layout]
-extent_presets = [0.333, 0.5, 0.667]
+extent_presets = [0.5, 0.75, 1.0]
 
 [layout.scrolling]
-default_extent_fraction = 0.5
+default_extent_fraction = 0.75
 
 [[workspace]]
 index = 1
@@ -186,7 +260,9 @@ layout = { mode = "master" }
 # overlapping windows behind them.
 [[window_rule]]
 blur = true
+blur_popups = true
 blur_optimized = false
+opacity = 0.85
 
 [[window_rule]]
 match.app_id = "^dev.noctalia.Noctalia$"
@@ -199,8 +275,9 @@ default_floating = true
 default_floating_size_px = { width = 800, height = 600 }
 
 [[window_rule]]
-match.title = "^(Picture-in-Picture|Picture in picture)$"
+match.title = "[Pp]icture[- ][Ii]n[- ][Pp]icture|[Hh]ình trong hình"
 default_floating = true
+default_pinned = true
 default_maximize = false
 default_position = { x = 20, y = 20, anchor = "bottom_right" }
 

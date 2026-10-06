@@ -54,10 +54,13 @@ return {
   {
     "akinsho/bufferline.nvim",
     version = "*",
+    event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Tab trước" },
       { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Tab tiếp theo" },
+      { "<S-Left>", "<cmd>BufferLineCyclePrev<cr>", desc = "Tab trước" },
+      { "<S-Right>", "<cmd>BufferLineCycleNext<cr>", desc = "Tab tiếp theo" },
       { "<leader>x", "<cmd>bdelete<cr>", desc = "Đóng Tab hiện tại" },
     },
     config = function()
