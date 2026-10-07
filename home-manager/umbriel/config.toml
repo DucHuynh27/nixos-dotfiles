@@ -24,7 +24,7 @@ files = []
 # Optional session examples. XWayland support is enabled by default.
 # https://docs.noctalia.dev/umbriel/configuration/#general
 [general]
-autostart = ["noctalia", "fcitx5 -r -d", "jetbrains-toolbox", "keepassxc"]
+autostart = ["noctalia", "fcitx5 -r -d", "keepassxc"]
 xwayland = true
 
 # ==============================================================================
@@ -51,8 +51,8 @@ scale = 1.0
 [appearance.blur]
 enabled = true        # bật/tắt toàn bộ engine Blur (mặc định: true)
 optimized = true      # chế độ tối ưu hóa hiệu năng GPU (mặc định: true)
-passes = 4            # số lần quét làm mờ (từ 0 đến 8, mặc định: 3)
-radius = 8            # bán kính làm mờ (từ 0 đến 100, mặc định: 5)
+passes = 2            # số lần quét làm mờ (tối ưu hiệu năng, giảm từ 4 xuống 2)
+radius = 5            # bán kính làm mờ (mặc định: 5)
 noise = 0.02          # lớp hạt nhiễu nhẹ chống bệt màu (từ 0.0 đến 1.0, mặc định: 0.02)
 brightness = 0.9      # độ sáng vùng mờ (từ 0.0 đến 2.0, mặc định: 0.9)
 contrast = 0.9        # độ tương phản (từ 0.0 đến 2.0, mặc định: 0.9)
@@ -194,6 +194,35 @@ follows_focus = true
 "Mod+Shift+8" = "window-move-to-workspace:8"
 "Mod+Shift+9" = "window-move-to-workspace:9"
 
+# Move window to next / previous workspace (chuyển cửa sổ và đi theo)
+"Mod+Ctrl+Left" = "window-move-to-workspace-previous"
+"Mod+Ctrl+Right" = "window-move-to-workspace-next"
+"Mod+Ctrl+H" = "window-move-to-workspace-previous"
+"Mod+Ctrl+L" = "window-move-to-workspace-next"
+
+# Move window to next / previous workspace silently (chuyển cửa sổ nhưng ở lại)
+"Mod+Ctrl+Shift+Left" = "window-move-to-workspace-silent-previous"
+"Mod+Ctrl+Shift+Right" = "window-move-to-workspace-silent-next"
+"Mod+Ctrl+Shift+H" = "window-move-to-workspace-silent-previous"
+"Mod+Ctrl+Shift+L" = "window-move-to-workspace-silent-next"
+
+# Switch workspace previous / next (chuyển qua lại giữa các workspace)
+"Mod+Ctrl+Up" = "workspace-previous"
+"Mod+Ctrl+Down" = "workspace-next"
+"Mod+bracketleft" = "workspace-previous"
+"Mod+bracketright" = "workspace-next"
+
+# MangoWM style shortcuts (Alt+Shift+1..9 chuyển cửa sổ sang workspace)
+"Alt+Shift+1" = "window-move-to-workspace:1"
+"Alt+Shift+2" = "window-move-to-workspace:2"
+"Alt+Shift+3" = "window-move-to-workspace:3"
+"Alt+Shift+4" = "window-move-to-workspace:4"
+"Alt+Shift+5" = "window-move-to-workspace:5"
+"Alt+Shift+6" = "window-move-to-workspace:6"
+"Alt+Shift+7" = "window-move-to-workspace:7"
+"Alt+Shift+8" = "window-move-to-workspace:8"
+"Alt+Shift+9" = "window-move-to-workspace:9"
+
 # Scratchpad
 "Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
 "Mod+Space" = "scratchpad-toggle"
@@ -256,7 +285,7 @@ layout = { mode = "master" }
 [[window_rule]]
 blur = true
 blur_popups = true
-blur_optimized = false
+blur_optimized = true
 opacity = 0.85
 
 [[window_rule]]
