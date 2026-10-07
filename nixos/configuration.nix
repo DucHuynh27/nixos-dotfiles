@@ -93,8 +93,19 @@
         };
       };
     };
-    extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.kdePackages.xdg-desktop-portal-kde];
-    config.common.default = "*";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.kdePackages.xdg-desktop-portal-kde
+    ];
+    config = {
+      common.default = "*";
+      umbriel = {
+        default = ["umbriel" "gtk"];
+        "org.freedesktop.impl.portal.ScreenCast" = "umbriel";
+        "org.freedesktop.impl.portal.Screenshot" = "umbriel";
+        "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+      };
+    };
   };
   programs.dconf.enable = true;
   services.gnome.gnome-keyring.enable = true;

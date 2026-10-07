@@ -69,15 +69,15 @@
       # Autostart Wayland compositors on TTY login
       if [[ -o interactive ]] && [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
         if [ "$(tty)" = "/dev/tty1" ]; then
-          export XDG_CURRENT_DESKTOP=mango
-          export XDG_SESSION_TYPE=wayland
-          export WLR_RENDERER=vulkan
-          exec mango > ~/.mango.log 2>&1
-        elif [ "$(tty)" = "/dev/tty2" ]; then
           export XDG_CURRENT_DESKTOP=umbriel
           export XDG_SESSION_DESKTOP=umbriel
           export XDG_SESSION_TYPE=wayland
           exec umbriel > ~/.umbriel.log 2>&1
+        elif [ "$(tty)" = "/dev/tty2" ]; then
+          export XDG_CURRENT_DESKTOP=mango
+          export XDG_SESSION_TYPE=wayland
+          export WLR_RENDERER=vulkan
+          exec mango > ~/.mango.log 2>&1
         fi
       fi
     '';
