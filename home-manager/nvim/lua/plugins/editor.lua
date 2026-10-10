@@ -2,6 +2,7 @@ return {
   -- Tìm kiếm siêu tốc
   {
     "ibhagwan/fzf-lua",
+    cmd = { "FzfLua" },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Tìm file" },

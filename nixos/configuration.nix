@@ -80,7 +80,10 @@
   programs.gpu-screen-recorder.enable = true;
   programs.anime-game-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
-  programs.gamescope.enable = true;
+  programs.gamescope = {
+    enable = true;
+    capSysNice = false;
+  };
 
   xdg.portal = {
     enable = true;
@@ -205,7 +208,7 @@
 
   # Wayland / Nvidia environment variables
   environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hardware cursor is enabled (WLR_NO_HARDWARE_CURSORS removed for smooth high-refresh cursor)
     NIXOS_OZONE_WL = "1";
   };
 
@@ -221,7 +224,7 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = ["i2c" "wheel" "networkmanager" "input" "docker" "kvm" "video" "render"];
+      extraGroups = ["i2c" "wheel" "networkmanager" "input" "docker" "kvm" "libvirtd" "video" "render"];
     };
   };
 
@@ -271,6 +274,8 @@
     glfw3-minecraft
     mangohud
     quickemu
+    quickgui
+    virt-viewer
     nest-cli
     efibootmgr
     glib
@@ -290,11 +295,31 @@
     enable = true;
   };
 
-  # Allow NixOS run Node.js / precompiled binaries downloaded from internet
+  # Allow NixOS to run precompiled binaries (Node.js, JetBrains IDEs, etc.)
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
       glib
+      libx11
+      libxext
+      libxi
+      libxrender
+      libxtst
+      libxrandr
+      libxcursor
+      libxfixes
+      libxcomposite
+      libxdamage
+      libxkbcommon
+      wayland
+      freetype
+      fontconfig
+      alsa-lib
+      zlib
+      libGL
+      libsecret
+      nss
+      nspr
     ];
   };
 
@@ -323,7 +348,17 @@
   services.udisks2.enable = true;
 
   # Security
-  security.polkit.enable = true;
+  security.polkit = {
+    enable = true;
+    extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (action.id == "org.libvirt.unix.manage" &&
+            (subject.isInGroup("wheel") || subject.isInGroup("libvirtd"))) {
+          return polkit.Result.YES;
+        }
+      });
+    '';
+  };
   security.rtkit.enable = true;
 
   # Bluetooth config (with battery reporting)
@@ -351,12 +386,14 @@
   programs.gamemode.enable = true;
   programs.steam.enable = true;
 
-  # Virtualisation (Docker & Waydroid)
+  # Virtualisation (Docker, Waydroid & Libvirt/KVM)
   virtualisation.docker.enable = true;
   virtualisation.waydroid = {
     enable = true;
     package = pkgs.waydroid-nftables;
   };
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   # MChose Mouse Web Driver Udev Rule
   services.udev.packages = with pkgs; [brightnessctl ddcutil];
