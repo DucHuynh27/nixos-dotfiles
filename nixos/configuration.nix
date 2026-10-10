@@ -98,7 +98,7 @@
     };
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.kdePackages.xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal-wlr
     ];
     config = {
       common.default = "*";
@@ -263,13 +263,8 @@
     git
     slurp
     grim
-    zsh
     pkgs-unstable.noctalia
-    yazi
     file-roller
-    gcc
-    gnumake
-    pnpm
     jdk25
     glfw3-minecraft
     mangohud
