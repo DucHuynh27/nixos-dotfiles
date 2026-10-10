@@ -105,28 +105,7 @@ return {
 		end,
 	},
 
-	-- Quản lý file cực nhanh kiểu Yazi (Oil)
-	{
-		"stevearc/oil.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"malewicz1337/oil-git.nvim",
-			"JezerM/oil-lsp-diagnostics.nvim",
-		},
-		keys = {
-			{ "<leader>e", "<cmd>Oil<cr>", desc = "Mở thư mục hiện tại (Oil)" },
-		},
-		config = function()
-			require("oil").setup({
-				default_file_explorer = true,
-				view_options = {
-					show_hidden = true,
-				},
-			})
-		end,
-	},
-
-	-- Hiển thị trạng thái Git trong bảng Oil
+	-- Quản lý file
 	{
 		"mikavilpas/yazi.nvim",
 		event = "VeryLazy",
@@ -142,7 +121,7 @@ return {
 				desc = "Mở Yazi",
 			},
 			{
-				"<leader>e",
+				"<leader>E",
 				function()
 					require("yazi").toggle()
 				end,
@@ -151,7 +130,8 @@ return {
 		},
 		opts = {
 			open_for_directories = true,
-
+			floating_window_scaling_factor = 0.9,
+			yazi_floating_window_border = "rounded",
 			integrations = {
 				grep_in_selected_files = true,
 			},
