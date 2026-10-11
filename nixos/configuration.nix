@@ -64,7 +64,7 @@
       ];
     };
     # Opinionated: disable channels
-    channel.enable = false;
+    # channel.enable = false;
     # Automatic Garbage Collection
     # gc = {
     #   automatic = true;

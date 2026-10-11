@@ -29,20 +29,30 @@
       ".." = "cd ..";
       "..." = "cd ../..";
       "...." = "cd ../../../..";
+
       c = "clear";
       cleanup = "~/.local/bin/cleanup-system.sh";
+
       grep = "grep --color=auto";
+
       jctl = "journalctl -p 3 -xb";
+
       la = "eza -a --color=always --group-directories-first --icons";
       ll = "eza -l --color=always --group-directories-first --icons";
       ls = "eza -al --color=always --group-directories-first --icons";
       lt = "eza -aT --color=always --group-directories-first --icons";
+
       v = "nvim";
+
       dotfiles = "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
+
       live = "pnpm dlx live-server";
+
       quickwin10 = "cd ~/VMs && quickemu --vm windows-10.conf";
+
       fan-auto = "echo 0,0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
       fan-max = "echo 100,100 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
+
       fan-med = "echo 60,60 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
       bat-limit-on = "echo 1 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
       bat-limit-off = "echo 0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";

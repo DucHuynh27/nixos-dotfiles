@@ -85,26 +85,6 @@ return {
 		end,
 	},
 
-	-- Cây thư mục (Tạm tắt theo yêu cầu)
-	{
-		"nvim-tree/nvim-tree.lua",
-		enabled = false,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		keys = {
-			{ "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Bật/Tắt Cây thư mục" },
-		},
-		config = function()
-			require("nvim-tree").setup({
-				view = { width = 30 },
-				renderer = {
-					indent_markers = {
-						enable = true,
-					},
-				},
-			})
-		end,
-	},
-
 	-- Quản lý file
 	{
 		"mikavilpas/yazi.nvim",
@@ -136,12 +116,6 @@ return {
 				grep_in_selected_files = true,
 			},
 		},
-	},
-
-	-- Hiển thị Icon lỗi LSP (Diagnostic) trực tiếp trong bảng Oil
-	{
-		"JezerM/oil-lsp-diagnostics.nvim",
-		opts = {},
 	},
 
 	-- Indent Blankline (Thụt lề cầu vồng)
