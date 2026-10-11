@@ -5,6 +5,7 @@
   lib,
   config,
   pkgs,
+  pkgs-unstable,
   ...
 }: {
   # You can import other home-manager modules here
@@ -137,8 +138,7 @@
     # ---------------------------------------------------
     # Text Editor & IDE
     # ---------------------------------------------------
-    aider-chat
-    jetbrains-toolbox
+    pkgs-unstable.jetbrains-toolbox
     neovim
     vscode
 
