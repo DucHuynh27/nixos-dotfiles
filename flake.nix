@@ -1,5 +1,5 @@
 {
-  description = "Your new nix config";
+  description = "Larper NixOS";
 
   inputs = {
     # Nixpkgs
@@ -74,7 +74,6 @@
       # ./nixos/configuration.nix
       #];
     };
-  };
 
   # Standalone home-manager configuration entrypoint
   # Available through 'home-manager --flake .#your-username@your-hostname'
