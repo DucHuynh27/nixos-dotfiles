@@ -51,37 +51,42 @@
       inherit system;
       config.allowUnfree = true;
     };
+
+    pkgs-stable = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
+        pkgs = pkgs-stable;
         specialArgs = {inherit inputs pkgs-unstable;};
         # > Our main nixos configuration file <
         modules = [
           ./nixos/configuration.nix
         ];
       };
-      arch = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs pkgs-unstable;};
-        modules = [
-          ./nixos/configuration.nix
-        ];
-      };
+      #arch = nixpkgs.lib.nixosSystem {
+      #specialArgs = {inherit inputs pkgs-unstable;};
+      #modules = [
+      # ./nixos/configuration.nix
+      #];
     };
+  };
 
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "hinne@nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        extraSpecialArgs = {inherit inputs pkgs-unstable;};
-        # > Our main home-manager configuration file <
-        modules = [
-          inputs.sops-nix.homeManagerModules.sops
-          ./home-manager/home.nix
-        ];
-      };
+  # Standalone home-manager configuration entrypoint
+  # Available through 'home-manager --flake .#your-username@your-hostname'
+  homeConfigurations = {
+    "hinne@nixos" = home-manager.lib.homeManagerConfiguration {
+      pkgs = pkgs-stable;
+      extraSpecialArgs = {inherit inputs pkgs-unstable;};
+      # > Our main home-manager configuration file <
+      modules = [
+        inputs.sops-nix.homeManagerModules.sops
+        ./home-manager/home.nix
+      ];
     };
   };
 }
