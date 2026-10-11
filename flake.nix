@@ -75,17 +75,18 @@
       #];
     };
 
-  # Standalone home-manager configuration entrypoint
-  # Available through 'home-manager --flake .#your-username@your-hostname'
-  homeConfigurations = {
-    "hinne@nixos" = home-manager.lib.homeManagerConfiguration {
-      pkgs = pkgs-stable;
-      extraSpecialArgs = {inherit inputs pkgs-unstable;};
-      # > Our main home-manager configuration file <
-      modules = [
-        inputs.sops-nix.homeManagerModules.sops
-        ./home-manager/home.nix
-      ];
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#your-username@your-hostname'
+    homeConfigurations = {
+      "hinne@nixos" = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs-stable;
+        extraSpecialArgs = {inherit inputs pkgs-unstable;};
+        # > Our main home-manager configuration file <
+        modules = [
+          inputs.sops-nix.homeManagerModules.sops
+          ./home-manager/home.nix
+        ];
+      };
     };
   };
 }
