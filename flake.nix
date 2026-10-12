@@ -51,11 +51,6 @@
       inherit system;
       config.allowUnfree = true;
     };
-
-    pkgs-stable = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -79,7 +74,7 @@
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       "hinne@nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-stable;
+        pkgs = pkgs-unstable;
         extraSpecialArgs = {inherit inputs pkgs-unstable;};
         # > Our main home-manager configuration file <
         modules = [
