@@ -44,6 +44,13 @@
 
       v = "nvim";
 
+      # Git aliases
+      gs = "git status";
+      gb = "git branch";
+      gc = "git commit";
+      gp = "git push";
+      gco = "git checkout";
+
       dotfiles = "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
 
       live = "pnpm dlx live-server";
