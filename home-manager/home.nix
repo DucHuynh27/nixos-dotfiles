@@ -169,11 +169,16 @@
     localsend
     obsidian
     postman
+    pcmanfm-qt
+    lxqt.lxqt-archiver
     telegram-desktop
     vesktop
     wpsoffice
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    zathura
+    texliveMedium
+    texlab
 
     # ---------------------------------------------------
     # Media & Graphics
