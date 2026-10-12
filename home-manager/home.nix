@@ -232,9 +232,10 @@
     vista-fonts
 
     # ---------------------------------------------------
-    # Antigravity CLI
+    # Antigravity CLI & Apps
     # ---------------------------------------------------
     inputs.antigravity.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
+    inputs.serein.packages.${pkgs.stdenv.hostPlatform.system}.default
     opencode
 
     # ---------------------------------------------------
