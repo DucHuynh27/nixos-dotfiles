@@ -22,26 +22,15 @@
     ./damx.nix
     ./databases.nix
     inputs.mango.nixosModules.mango
+    "${inputs.nixpkgs-unstable}/nixos/modules/programs/wayland/umbriel.nix"
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}
   ];
 
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
+  aagl.enableNixpkgsReleaseBranchCheck = false;
 
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-    # Configure your nixpkgs instance
+  nixpkgs = {
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
     };
   };
@@ -76,7 +65,7 @@
   # Network hostname
   networking.hostName = "nixos";
   programs.mango.enable = true;
-  programs.umbriel.enable = true;
+  programs.umbriel = { enable = true; package = pkgs-unstable.umbriel; portalPackage = pkgs-unstable.xdg-desktop-portal-umbriel; };
   programs.gpu-screen-recorder.enable = true;
   programs.anime-game-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
@@ -116,6 +105,7 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
+      libglvnd
       intel-media-driver
       intel-vaapi-driver
       libvdpau-va-gl

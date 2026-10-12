@@ -61,7 +61,7 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
-        pkgs = pkgs-stable;
+        inherit system;
         specialArgs = {inherit inputs pkgs-unstable;};
         # > Our main nixos configuration file <
         modules = [
