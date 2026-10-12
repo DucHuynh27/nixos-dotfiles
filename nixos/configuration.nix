@@ -262,14 +262,7 @@
     glib
   ];
 
-  # Enable Thunar properly with plugins
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
+
 
   # Enable Zsh
   programs.zsh = {
