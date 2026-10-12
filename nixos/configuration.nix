@@ -22,7 +22,6 @@
     ./damx.nix
     ./databases.nix
     inputs.mango.nixosModules.mango
-    "${inputs.nixpkgs-unstable}/nixos/modules/programs/wayland/umbriel.nix"
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}
   ];
