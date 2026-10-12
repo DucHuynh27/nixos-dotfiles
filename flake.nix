@@ -26,9 +26,11 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
-    # MangoWM (nhánh wl-only thuần wlroots để hỗ trợ Vulkan và HDR10)
-    mango.url = "github:mangowm/mango/wl-only";
-    mango.inputs.nixpkgs.follows = "nixpkgs";
+    # Serein (Discord client)
+    serein = {
+      url = "github:ViceVerse-cz/Serein";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # AAGL (An Anime Game Launcher)
     aagl.url = "github:ezKEa/aagl-gtk-on-nix";

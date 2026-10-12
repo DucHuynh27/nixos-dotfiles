@@ -17,11 +17,9 @@
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
 
-    # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./damx.nix
     ./databases.nix
-    inputs.mango.nixosModules.mango
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}
   ];
@@ -63,7 +61,6 @@
 
   # Network hostname
   networking.hostName = "nixos";
-  programs.mango.enable = true;
   programs.umbriel = { enable = true; package = pkgs-unstable.umbriel; portalPackage = pkgs-unstable.xdg-desktop-portal-umbriel; };
   programs.gpu-screen-recorder.enable = true;
   programs.anime-game-launcher.enable = true;
