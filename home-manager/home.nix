@@ -177,8 +177,12 @@
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     zathura
-    texliveMedium
     texlab
+    (texliveMedium.withPackages (ps:
+      with ps; [
+        scheme-medium # Gói nền tảng: ĐÃ BAO GỒM xetex, fontspec, geometry, setspace, indentfirst, graphics (chứa graphicx), hyperref, latexmk, v.v.
+        titlesec # Thêm riêng package format tiêu đề để đảm bảo chắc chắn
+      ]))
 
     # ---------------------------------------------------
     # Media & Graphics
