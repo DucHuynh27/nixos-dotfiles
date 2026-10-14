@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   virtualisation.oci-containers = {
     backend = "docker";
     containers = {
@@ -8,7 +10,7 @@
       mssql = {
         image = "mcr.microsoft.com/mssql/server:2022-latest";
         autoStart = false;
-        ports = [ "1433:1433" ];
+        ports = ["1433:1433"];
         environment = {
           ACCEPT_EULA = "Y";
           MSSQL_PID = "developer";
@@ -23,7 +25,7 @@
       mysql = {
         image = "mysql:8.0";
         autoStart = false;
-        ports = [ "3306:3306" ];
+        ports = ["3306:3306"];
         environment = {
           MYSQL_ROOT_PASSWORD = "SuperStrong!123";
           MYSQL_DATABASE = "nestdb"; # Tự tạo sẵn database nestdb cho NestJS

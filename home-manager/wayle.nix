@@ -74,6 +74,8 @@
             hide-if-empty = true;
             icon-name = "deepseek-symbolic";
             icon-show = true;
+            left-click = "true";
+            on-action = "deepseek-balance --json";
           }
         ];
         clock = {

@@ -41,8 +41,11 @@
     sonora.inputs.nixpkgs.follows = "nixpkgs";
 
     # Mango
-    mango.url = "github:mangowm/mango/wl-only";
+    mango.url = "github:mangowm/mango";
     mango.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Look app launcher
+    look.url = "github:kunkka19xx/look?dir=apps/linows";
 
     # DAMX Source (Local)
     damx.url = "path:/home/hinne/Projects/DAMX-1.0.2";
@@ -62,6 +65,8 @@
       config.allowUnfree = true;
     };
   in {
+    formatter.${system} = pkgs-unstable.alejandra;
+
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {

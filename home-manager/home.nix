@@ -7,7 +7,15 @@
   pkgs,
   pkgs-unstable,
   ...
-}: {
+}: let
+  # The current nixpkgs source has a stale fixed-output hash for this package.
+  # Keep the package available while using the hash produced by its locked source.
+  typescript-language-server = pkgs.typescript-language-server.overrideAttrs (old: {
+    pnpmDeps = old.pnpmDeps.overrideAttrs (_: {
+      outputHash = "sha256-xR/EF60lVBsITKgH7wCM2wHM46PFQevD51KfCENSUH4=";
+    });
+  });
+in {
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -21,6 +29,9 @@
     ./git.nix
     ./scripts.nix
     ./tools.nix
+    ./mango.nix
+    inputs.look.homeModules.default
+    ./wayle.nix
     ./noctalia.nix
     ./umbriel.nix
     ./fcitx5.nix
@@ -91,6 +102,13 @@
     "$HOME/.local/share/pnpm"
     "$HOME/.local/bin"
   ];
+
+  programs.lookapp = {
+    enable = true;
+    settings = {
+      launcher_hotkey = "none";
+    };
+  };
 
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [
@@ -192,7 +210,7 @@
     mpv
     stremio-linux-shell
     upscayl
-    inputs.sonora.packages.${pkgs.system}.sonora-bin
+    inputs.sonora.packages.${pkgs.stdenv.hostPlatform.system}.sonora-bin
 
     # ---------------------------------------------------
     # Screen Toolkit & Capture

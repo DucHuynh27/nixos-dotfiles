@@ -201,6 +201,8 @@
   # Wayland / Nvidia environment variables
   environment.sessionVariables = {
     # Hardware cursor is enabled (WLR_NO_HARDWARE_CURSORS removed for smooth high-refresh cursor)
+    # WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_DRM_NO_ATOMIC = "1";
     NIXOS_OZONE_WL = "1";
 
     # Prisma NixOS fix: NixOS không có precompiled Prisma engines trên binaries.prisma.sh.
