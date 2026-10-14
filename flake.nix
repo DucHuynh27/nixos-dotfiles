@@ -40,6 +40,10 @@
     sonora.url = "github:sonorahq/sonora";
     sonora.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Mango
+    mango.url = "github:mangowm/mango/wl-only";
+    mango.inputs.nixpkgs.follows = "nixpkgs";
+
     # DAMX Source (Local)
     damx.url = "path:/home/hinne/Projects/DAMX-1.0.2";
     damx.flake = false;

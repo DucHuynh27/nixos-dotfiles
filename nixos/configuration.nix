@@ -22,6 +22,7 @@
     ./databases.nix
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}
+    inputs.mango.nixosModules.mango
   ];
 
   aagl.enableNixpkgsReleaseBranchCheck = false;
