@@ -196,6 +196,10 @@
   environment.sessionVariables = {
     # Hardware cursor is enabled (WLR_NO_HARDWARE_CURSORS removed for smooth high-refresh cursor)
     NIXOS_OZONE_WL = "1";
+
+    # Prisma NixOS fix: NixOS không có precompiled Prisma engines trên binaries.prisma.sh.
+    # Trỏ thẳng đến binary được build bởi nixpkgs thay vì để Prisma tự download.
+    PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
   };
 
   users.users = {
@@ -294,6 +298,8 @@
       libsecret
       nss
       nspr
+      # Prisma schema-engine cần libssl/libcrypto để chạy
+      openssl
     ];
   };
 

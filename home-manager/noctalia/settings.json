@@ -309,6 +309,9 @@
         },
         {
           "id": "NightLight"
+        },
+        {
+          "id": "plugin:vn1k/cursor:shortcut"
         }
       ]
     }

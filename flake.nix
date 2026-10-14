@@ -36,6 +36,10 @@
     aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     aagl.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Sonora (Music streaming client)
+    sonora.url = "github:sonorahq/sonora";
+    sonora.inputs.nixpkgs.follows = "nixpkgs";
+
     # DAMX Source (Local)
     damx.url = "path:/home/hinne/Projects/DAMX-1.0.2";
     damx.flake = false;

@@ -191,6 +191,7 @@
     mpv
     stremio-linux-shell
     upscayl
+    inputs.sonora.packages.${pkgs.system}.sonora-bin
 
     # ---------------------------------------------------
     # Screen Toolkit & Capture
