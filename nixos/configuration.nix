@@ -61,7 +61,12 @@
 
   # Network hostname
   networking.hostName = "nixos";
-  programs.umbriel = { enable = true; package = pkgs-unstable.umbriel; portalPackage = pkgs-unstable.xdg-desktop-portal-umbriel; };
+  programs.umbriel = {
+    enable = true;
+    package = pkgs-unstable.umbriel;
+    portalPackage = pkgs-unstable.xdg-desktop-portal-umbriel;
+  };
+  programs.mango.enable = true;
   programs.gpu-screen-recorder.enable = true;
   programs.anime-game-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
@@ -265,8 +270,6 @@
     efibootmgr
     glib
   ];
-
-
 
   # Enable Zsh
   programs.zsh = {
