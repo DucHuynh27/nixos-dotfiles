@@ -107,3 +107,24 @@ nix shell nixpkgs#sops -c sops secrets/secrets.yaml
 ```
 
 Sops sẽ tự động giải mã file vào một vùng nhớ tạm, mở lên cho bạn chỉnh sửa, và tự động mã hóa lại khi bạn lưu file.
+
+### Theo dõi số dư DeepSeek
+
+Repo có sẵn lệnh `deepseek-balance` và custom module trên Wayle. DeepSeek cung cấp endpoint công khai để đọc số dư API:
+`GET https://api.deepseek.com/user/balance`.
+
+Đặt API key trong môi trường shell, không ghi trực tiếp vào Nix:
+
+```bash
+export DEEPSEEK_API_KEY='sk-...'
+export DEEPSEEK_BALANCE_CURRENCY=CNY
+deepseek-balance
+```
+
+Nếu dùng SOPS, có thể trỏ script tới một file secret đã được giải mã:
+
+```bash
+export DEEPSEEK_API_KEY_FILE="$HOME/.config/secrets/deepseek-api-key"
+```
+
+Custom module cập nhật mỗi 5 phút. Sau khi đặt biến môi trường, chạy `nh home switch` và khởi động lại Wayle để áp dụng.

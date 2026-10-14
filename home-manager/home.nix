@@ -65,6 +65,7 @@
     QT_QPA_PLATFORM = "wayland";
     QT_QPA_PLATFORMTHEME = "gtk3";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    DEEPSEEK_API_KEY_FILE = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
   };
 
   # Tạo Desktop Entry đè lên mặc định để sửa lỗi launcher/file search
@@ -414,6 +415,9 @@
     defaultSopsFile = ../secrets/secrets.yaml;
     secrets."ssh_key" = {
       path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+    };
+    secrets."deepseek_api_key" = {
+      path = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
     };
   };
 

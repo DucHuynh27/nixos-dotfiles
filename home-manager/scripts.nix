@@ -5,6 +5,95 @@
   pkgs,
   ...
 }: let
+  deepseekBalance = pkgs.writeShellApplication {
+    name = "deepseek-balance";
+    runtimeInputs = [
+      pkgs.curl
+      pkgs.jq
+    ];
+    text = ''
+      set -euo pipefail
+
+      api_key="''${DEEPSEEK_API_KEY:-}"
+      api_key_file="''${DEEPSEEK_API_KEY_FILE:-${config.home.homeDirectory}/.config/secrets/deepseek-api-key}"
+      if [ -n "$api_key_file" ]; then
+        if [ ! -r "$api_key_file" ]; then
+          printf 'deepseek-balance: cannot read %s\n' "$api_key_file" >&2
+          exit 1
+        fi
+        api_key=$(<"$api_key_file")
+      fi
+
+      if [ -z "$api_key" ]; then
+        printf 'deepseek-balance: set DEEPSEEK_API_KEY or create %s\n' "$api_key_file" >&2
+        exit 1
+      fi
+
+      currency="''${DEEPSEEK_BALANCE_CURRENCY:-}"
+      response_file=$(mktemp)
+      trap 'rm -f "$response_file"' EXIT
+
+      http_status=$(
+        curl \
+          --silent \
+          --show-error \
+          --location \
+          --connect-timeout 5 \
+          --max-time 15 \
+          --output "$response_file" \
+          --write-out '%{http_code}' \
+          --header 'Accept: application/json' \
+          --header "Authorization: Bearer $api_key" \
+          'https://api.deepseek.com/user/balance'
+      )
+
+      if [ "$http_status" -lt 200 ] || [ "$http_status" -ge 300 ]; then
+        error_message=$(jq -r '.error.message // .message // empty' "$response_file" 2>/dev/null || true)
+        if [ -n "$error_message" ]; then
+          printf 'deepseek-balance: HTTP %s: %s\n' "$http_status" "$error_message" >&2
+        else
+          printf 'deepseek-balance: HTTP %s\n' "$http_status" >&2
+        fi
+        exit 1
+      fi
+
+      if ! jq -e . "$response_file" >/dev/null; then
+        printf 'deepseek-balance: API returned invalid JSON\n' >&2
+        exit 1
+      fi
+
+      balance=$(
+        jq -er --arg currency "$currency" '
+          .balance_infos[]
+          | select($currency == "" or .currency == $currency)
+          | [.currency, .total_balance]
+          | @tsv
+        ' "$response_file"
+      ) || {
+        if [ -n "$currency" ]; then
+          printf 'deepseek-balance: no balance found for currency %s\n' "$currency" >&2
+        else
+          printf 'deepseek-balance: API returned no balances\n' >&2
+        fi
+        exit 1
+      }
+      currency="''${balance%%$'\t'*}"
+      total_balance="''${balance#*$'\t'}"
+
+      if [ "''${1:-}" = "--json" ]; then
+        jq -c --arg currency "$currency" --arg total_balance "$total_balance" '
+          {
+            currency: $currency,
+            total_balance: $total_balance,
+            is_available: .is_available
+          }
+        ' "$response_file"
+      else
+        printf 'DeepSeek: %s %s\n' "$total_balance" "$currency"
+      fi
+    '';
+  };
+
   secureUpdate = pkgs.writeShellScriptBin "secure-update" ''
     #!/bin/bash
     # Script cập nhật hệ thống an toàn - Heuristic Security Scanner
@@ -48,6 +137,7 @@
   '';
 in {
   home.packages = [
+    deepseekBalance
     secureUpdate
   ];
 }
