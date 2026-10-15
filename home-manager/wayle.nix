@@ -41,7 +41,7 @@
             show = true;
             left = ["dashboard" "media" "cava" "window-title"];
             center = ["mango-workspaces" "clock" "weather"];
-            right = ["systray" "bluetooth" "network" "microphone" "volume" "custom-deepseek-balance" "notifications"];
+            right = ["systray" "bluetooth" "network" "microphone" "volume" "custom-clipse" "custom-deepseek-balance" "notifications"];
           }
         ];
       };
@@ -65,16 +65,28 @@
       modules = {
         custom = [
           {
+            id = "clipse";
+            command = "printf 'Clipse'";
+            mode = "poll";
+            interval-ms = 0;
+            format = "{{ output }}";
+            tooltip-format = "Open Clipse";
+            left-click = "wezterm start --class clipse -- clipse";
+            icon-name = "edit-paste-symbolic";
+            icon-show = true;
+          }
+          {
             id = "deepseek-balance";
             command = "deepseek-balance --json";
             mode = "poll";
             interval-ms = 300000;
-            format = "{{ total_balance }} {{ currency }}";
-            tooltip-format = "DeepSeek API: {{ total_balance }} {{ currency }}";
+            format = "{{ text }}";
+            tooltip-format = "{{ tooltip }}";
             hide-if-empty = true;
             icon-name = "deepseek-symbolic";
             icon-show = true;
-            left-click = "true";
+            left-click = "deepseek-balance --toggle";
+            right-click = "deepseek-balance --refresh";
             on-action = "deepseek-balance --json";
           }
         ];
@@ -83,6 +95,9 @@
         };
         mango-workspaces = {
           hide-empty = false;
+        };
+        weather = {
+          location = "Da Nang";
         };
         microphone = {
           scroll-up = "wayle audio input-volume +5";

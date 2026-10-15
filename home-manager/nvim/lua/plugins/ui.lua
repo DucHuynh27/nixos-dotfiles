@@ -4,10 +4,10 @@ return {
 		"RRethy/base16-nvim",
 		priority = 1000,
 		config = function()
-			-- Thử load file matugen.lua do hệ thống sinh ra
-			local ok, _ = pcall(vim.cmd, "colorscheme matugen")
+			local ok, err = pcall(vim.cmd.colorscheme, "matugen")
 			if not ok then
-				vim.cmd("colorscheme default")
+				vim.notify("Không thể nạp colorscheme matugen: " .. err, vim.log.levels.WARN)
+				vim.cmd.colorscheme("default")
 			end
 		end,
 	},

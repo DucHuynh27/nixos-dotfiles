@@ -36,6 +36,7 @@ in {
     ./umbriel.nix
     ./fcitx5.nix
     ./fastfetch.nix
+    ./catppuccin.nix
   ];
 
   nixpkgs = {
@@ -74,7 +75,6 @@ in {
     # Wayland/Qt variables (ported from Niri)
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     QT_QPA_PLATFORM = "wayland";
-    QT_QPA_PLATFORMTHEME = "gtk3";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     DEEPSEEK_API_KEY_FILE = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
   };
@@ -94,6 +94,12 @@ in {
       terminal = false;
       categories = ["Utility" "TextEditor"];
       mimeType = ["text/plain"];
+    };
+    concord-tui = {
+      name = "Concord TUI";
+      exec = "concord-tui-wezterm";
+      terminal = false;
+      categories = ["Network" "Chat" "ConsoleOnly"];
     };
   };
 
@@ -117,6 +123,7 @@ in {
     # ---------------------------------------------------
     android-tools
     ansible
+    cava
     evtest
     htop
     jq
@@ -126,8 +133,8 @@ in {
     wl-clipboard
     xdg-utils
     keepassxc
-    bilibili
-    obs-studio
+    clipse
+    flameshot
 
     # ---------------------------------------------------
     # Desktop Shell & WM
@@ -186,6 +193,7 @@ in {
     # ---------------------------------------------------
     libreoffice
     localsend
+    mangohud
     obsidian
     postman
     pcmanfm-qt
@@ -202,6 +210,7 @@ in {
         scheme-medium # Gói nền tảng: ĐÃ BAO GỒM xetex, fontspec, geometry, setspace, indentfirst, graphics (chứa graphicx), hyperref, latexmk, v.v.
         titlesec # Thêm riêng package format tiêu đề để đảm bảo chắc chắn
       ]))
+    bilibili
 
     # ---------------------------------------------------
     # Media & Graphics
@@ -278,11 +287,49 @@ in {
   services.udiskie.enable = true;
 
   xdg.configFile = {
+    "concord/config.toml" = {
+      force = true;
+      text = ''
+      [display]
+      disable_image_preview = false
+      show_avatars = true
+      show_images = true
+      media_playback = true
+      image_preview_quality = "high"
+      attachment_viewer_quality = "original"
+      image_protocol = "auto"
+      animate_previews = "always"
+      show_custom_emoji = true
+      circular_avatars = false
+      hour_format_24 = true
+
+      [composer]
+      emojis_as_links = true
+      ping_on_reply = true
+
+      [presence]
+      share_rich_presence = false
+
+      [translation]
+      provider = "deepl"
+      endpoint = "https://api-free.deepl.com/v2/translate"
+      message_target_language = "VI"
+      composer_target_language = "EN"
+      api_key_env = "DEEPL_API_KEY"
+      '';
+    };
+    "clipse/config.json" = {
+      source = ./clipse/config.json;
+      force = true;
+    };
+    "clipse/catppuccin-mocha-mauve.json" = {
+      source = "${inputs.catppuccin-clipse}/themes/mocha/catppuccin-mocha-mauve.json";
+      force = true;
+    };
     "nvim" = {
       source = ./nvim;
       recursive = true;
     };
-    "mpv".source = ./mpv;
     "matugen/config.toml".text = ''
       [config]
       wallpaper_dir = "/home/hinne/Pictures/Wallpapers"
@@ -436,6 +483,9 @@ in {
     };
     secrets."deepseek_api_key" = {
       path = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
+    };
+    secrets."deepl_api_key" = {
+      path = "${config.home.homeDirectory}/.config/secrets/deepl-api-key";
     };
   };
 

@@ -27,11 +27,18 @@
       -- Scrollback
       config.scrollback_lines = 10000
 
-      -- Load Matugen Colors
-      -- Sử dụng bảng màu chính thức của Noctalia (Auto-generated TOML)
-      local theme_path = "/home/hinne/.config/wezterm/colors/Noctalia.toml"
-      wezterm.add_to_config_reload_watch_list(theme_path)
-      config.color_scheme = "Noctalia"
+      -- Catppuccin Mocha
+      config.colors = {
+        foreground = "#cdd6f4",
+        background = "#1e1e2e",
+        cursor_bg = "#f5e0dc",
+        cursor_fg = "#1e1e2e",
+        cursor_border = "#f5e0dc",
+        selection_fg = "#cdd6f4",
+        selection_bg = "#585b70",
+        ansi = { "#45475a", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#bac2de" },
+        brights = { "#585b70", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#a6adc8" },
+      }
 
       -- Keybindings
       config.disable_default_key_bindings = false

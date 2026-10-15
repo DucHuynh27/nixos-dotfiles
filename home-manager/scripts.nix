@@ -14,6 +14,23 @@
     text = ''
       set -euo pipefail
 
+      state_file="''${XDG_STATE_HOME:-$HOME/.local/state}/deepseek-balance/details"
+      mkdir -p "$(dirname "$state_file")"
+
+      case "''${1:-}" in
+        --toggle)
+          if [ -f "$state_file" ] && [ "$(<"$state_file")" = "1" ]; then
+            printf '0\n' >"$state_file"
+          else
+            printf '1\n' >"$state_file"
+          fi
+          exit 0
+          ;;
+        --refresh)
+          exit 0
+          ;;
+      esac
+
       api_key="''${DEEPSEEK_API_KEY:-}"
       api_key_file="''${DEEPSEEK_API_KEY_FILE:-${config.home.homeDirectory}/.config/secrets/deepseek-api-key}"
       if [ -n "$api_key_file" ]; then
@@ -66,7 +83,7 @@
         jq -er --arg currency "$currency" '
           .balance_infos[]
           | select($currency == "" or .currency == $currency)
-          | [.currency, .total_balance]
+          | [.currency, .total_balance, .granted_balance, .topped_up_balance]
           | @tsv
         ' "$response_file"
       ) || {
@@ -77,19 +94,33 @@
         fi
         exit 1
       }
-      currency="''${balance%%$'\t'*}"
-      total_balance="''${balance#*$'\t'}"
+      IFS=$'\t' read -r currency total_balance granted_balance topped_up_balance <<< "$balance"
 
       if [ "''${1:-}" = "--json" ]; then
-        jq -c --arg currency "$currency" --arg total_balance "$total_balance" '
-          {
+        if [ -f "$state_file" ] && [ "$(<"$state_file")" = "1" ]; then
+          text="Top-up: $topped_up_balance | Granted: $granted_balance | Remaining: $total_balance $currency"
+          tooltip="DeepSeek API\nTop-up: $topped_up_balance $currency\nGranted: $granted_balance $currency\nRemaining: $total_balance $currency"
+        else
+          text="Top-up: $topped_up_balance $currency"
+          tooltip="DeepSeek API: Top-up $topped_up_balance $currency"
+        fi
+        jq -cn \
+          --arg currency "$currency" \
+          --arg total_balance "$total_balance" \
+          --arg granted_balance "$granted_balance" \
+          --arg topped_up_balance "$topped_up_balance" \
+          --arg text "$text" \
+          --arg tooltip "$tooltip" \
+          '{
             currency: $currency,
             total_balance: $total_balance,
-            is_available: .is_available
-          }
-        ' "$response_file"
+            granted_balance: $granted_balance,
+            topped_up_balance: $topped_up_balance,
+            text: $text,
+            tooltip: $tooltip
+          }'
       else
-        printf 'DeepSeek: %s %s\n' "$total_balance" "$currency"
+        printf 'Top-up: %s %s\n' "$topped_up_balance" "$currency"
       fi
     '';
   };
@@ -135,9 +166,28 @@
 
     echo "✅ Hệ thống đã được cập nhật an toàn."
   '';
+
+  concordTuiWezterm = pkgs.writeShellApplication {
+    name = "concord-tui-wezterm";
+    runtimeInputs = [pkgs.wezterm pkgs.concord-tui];
+    text = ''
+      secret_file="${config.home.homeDirectory}/.config/secrets/deepl-api-key"
+      if [ ! -r "$secret_file" ]; then
+        printf 'concord: cannot read DeepL API key from %s\n' "$secret_file" >&2
+        exit 1
+      fi
+      DEEPL_API_KEY="$(<"$secret_file")"
+      export DEEPL_API_KEY
+
+      exec wezterm \
+        start -- \
+        concord "$@"
+    '';
+  };
 in {
   home.packages = [
     deepseekBalance
     secureUpdate
+    concordTuiWezterm
   ];
 }

@@ -43,6 +43,58 @@
         "type": "github"
       }
     },
+    "catppuccin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791795517,
+        "narHash": "sha256-hmF0FVrUW6UKQ74qyGJSepMYadnIqzVe2h7TQtZdbmo=",
+        "owner": "catppuccin",
+        "repo": "nix",
+        "rev": "2e605f61db52a45a7ff1db414df395ef566565a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
+    "catppuccin-clipse": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775403592,
+        "narHash": "sha256-h55xSgqVX/iP1W1jOagHFNJ3FHcZ0rhjlhDfg/K/Jf0=",
+        "owner": "catppuccin",
+        "repo": "clipse",
+        "rev": "35d4d4c0b6e30d0f3bfade37154627b6f278b01c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "clipse",
+        "type": "github"
+      }
+    },
+    "catppuccin-zen-browser": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759018582,
+        "narHash": "sha256-5A57Lyctq497SSph7B+ucuEyF1gGVTsuI3zuBItGfg4=",
+        "owner": "catppuccin",
+        "repo": "zen-browser",
+        "rev": "c855685442c6040c4dda9c8d3ddc7b708de1cbaa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "zen-browser",
+        "type": "github"
+      }
+    },
     "damx": {
       "flake": false,
       "locked": {
@@ -302,6 +354,9 @@
       "inputs": {
         "aagl": "aagl",
         "antigravity": "antigravity",
+        "catppuccin": "catppuccin",
+        "catppuccin-clipse": "catppuccin-clipse",
+        "catppuccin-zen-browser": "catppuccin-zen-browser",
         "damx": "damx",
         "home-manager": "home-manager",
         "look": "look",

@@ -127,4 +127,4 @@ Nếu dùng SOPS, có thể trỏ script tới một file secret đã được g
 export DEEPSEEK_API_KEY_FILE="$HOME/.config/secrets/deepseek-api-key"
 ```
 
-Custom module cập nhật mỗi 5 phút. Sau khi đặt biến môi trường, chạy `nh home switch` và khởi động lại Wayle để áp dụng.
+Custom module cập nhật mỗi 5 phút. Mặc định hiển thị số tiền đã nạp (top-up); click trái bật/tắt chế độ chi tiết gồm top-up, granted và remaining; click phải làm mới số dư. Sau khi đặt biến môi trường, chạy `nh home switch` và khởi động lại Wayle để áp dụng.

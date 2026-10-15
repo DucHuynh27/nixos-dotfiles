@@ -10,6 +10,18 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Catppuccin themes for NixOS and Home Manager
+    catppuccin.url = "github:catppuccin/nix";
+    catppuccin.inputs.nixpkgs.follows = "nixpkgs";
+    catppuccin-zen-browser = {
+      url = "github:catppuccin/zen-browser";
+      flake = false;
+    };
+    catppuccin-clipse = {
+      url = "github:catppuccin/clipse";
+      flake = false;
+    };
+
     # Sops-nix for secrets management
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
