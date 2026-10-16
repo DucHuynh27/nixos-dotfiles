@@ -18,25 +18,32 @@
 in {
   # You can import other home-manager modules here
   imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
+    # Colorscheme
+    ./colorscheme/catppuccin.nix
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./kitty.nix
-    ./wezterm.nix
-    ./zsh.nix
-    ./starship.nix
-    ./git.nix
-    ./scripts.nix
-    ./tools.nix
-    ./mango.nix
+    # TUI & Shell
+    ./tui/wezterm.nix
+    ./tui/zsh.nix
+    ./tui/starship.nix
+    ./tui/git.nix
+    ./tui/scripts.nix
+    ./tui/tools.nix
+    ./tui/fastfetch.nix
+
+    # Window Manager
+    ./wm/mango.nix
+    ./wm/umbriel.nix
+
+    # Desktop Shell & UI
     inputs.look.homeModules.default
-    ./wayle.nix
-    ./noctalia.nix
-    ./umbriel.nix
-    ./fcitx5.nix
-    ./fastfetch.nix
-    ./catppuccin.nix
+    ./desktop-shell/wayle.nix
+    ./desktop-shell/noctalia.nix
+
+    # Editors
+    ./editors/VSCode/vscode.nix
+
+    # System & Input
+    ./system/fcitx5.nix
   ];
 
   nixpkgs = {
@@ -165,7 +172,6 @@ in {
     # ---------------------------------------------------
     pkgs-unstable.jetbrains-toolbox
     neovim
-    vscode
 
     # ---------------------------------------------------
     # LSPs & Formatters (For Neovim)
@@ -290,44 +296,48 @@ in {
     "concord/config.toml" = {
       force = true;
       text = ''
-      [display]
-      disable_image_preview = false
-      show_avatars = true
-      show_images = true
-      media_playback = true
-      image_preview_quality = "high"
-      attachment_viewer_quality = "original"
-      image_protocol = "auto"
-      animate_previews = "always"
-      show_custom_emoji = true
-      circular_avatars = false
-      hour_format_24 = true
+        [display]
+        disable_image_preview = false
+        show_avatars = true
+        show_images = true
+        media_playback = true
+        image_preview_quality = "high"
+        attachment_viewer_quality = "original"
+        image_protocol = "auto"
+        animate_previews = "always"
+        show_custom_emoji = true
+        circular_avatars = false
+        hour_format_24 = true
 
-      [composer]
-      emojis_as_links = true
-      ping_on_reply = true
+        [composer]
+        emojis_as_links = true
+        ping_on_reply = true
 
-      [presence]
-      share_rich_presence = false
+        [presence]
+        share_rich_presence = false
 
-      [translation]
-      provider = "deepl"
-      endpoint = "https://api-free.deepl.com/v2/translate"
-      message_target_language = "VI"
-      composer_target_language = "EN"
-      api_key_env = "DEEPL_API_KEY"
+        [translation]
+        provider = "deepl"
+        endpoint = "https://api-free.deepl.com/v2/translate"
+        message_target_language = "VI"
+        composer_target_language = "EN"
+        api_key_env = "DEEPL_API_KEY"
       '';
     };
     "clipse/config.json" = {
-      source = ./clipse/config.json;
+      source = ./apps/clipse/config.json;
       force = true;
     };
-    "clipse/catppuccin-mocha-mauve.json" = {
-      source = "${inputs.catppuccin-clipse}/themes/mocha/catppuccin-mocha-mauve.json";
+    "clipse/catppuccin-mocha-blue.json" = {
+      source = "${inputs.catppuccin-clipse}/themes/mocha/catppuccin-mocha-blue.json";
+      force = true;
+    };
+    "flameshot/flameshot.ini" = {
+      source = ./apps/flameshot/flameshot.ini;
       force = true;
     };
     "nvim" = {
-      source = ./nvim;
+      source = ./editors/nvim;
       recursive = true;
     };
     "matugen/config.toml".text = ''

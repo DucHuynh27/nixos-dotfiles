@@ -28,13 +28,13 @@
             "$profile/chrome/userContent.css.pre-catppuccin"
         fi
         install -m 0644 \
-          ${inputs.catppuccin-zen-browser}/themes/Mocha/Mauve/userChrome.css \
+          ${inputs.catppuccin-zen-browser}/themes/Mocha/Blue/userChrome.css \
           "$profile/chrome/userChrome.css"
         install -m 0644 \
-          ${inputs.catppuccin-zen-browser}/themes/Mocha/Mauve/userContent.css \
+          ${inputs.catppuccin-zen-browser}/themes/Mocha/Blue/userContent.css \
           "$profile/chrome/userContent.css"
         install -m 0644 \
-          ${inputs.catppuccin-zen-browser}/themes/Mocha/Mauve/zen-logo-mocha.svg \
+          ${inputs.catppuccin-zen-browser}/themes/Mocha/Blue/zen-logo-mocha.svg \
           "$profile/chrome/zen-logo-mocha.svg"
 
         if [ -f "$profile/user.js" ] && ! grep -q \
@@ -56,7 +56,7 @@
     enable = true;
     autoEnable = false;
     flavor = "mocha";
-    accent = "mauve";
+    accent = "blue";
 
     cava.enable = true;
     eza.enable = true;
@@ -68,10 +68,6 @@
     mpv.enable = true;
     obs.enable = true;
     vesktop.enable = true;
-    vscode.profiles.default = {
-      enable = true;
-      icons.enable = true;
-    };
     yazi.enable = true;
     zathura.enable = true;
   };
@@ -85,7 +81,7 @@
   programs.cava.enable = true;
   programs.mangohud.enable = true;
   programs.obs-studio.enable = true;
-  programs.vscode.enable = true;
+  programs.zathura.enable = true;
 
   home.packages = with pkgs; [
     catppuccin-cursors
@@ -98,7 +94,7 @@
   };
 
   xdg.configFile."mpv/mpv.conf".text = ''
-    ${builtins.readFile ./mpv/mpv.conf}
-    include=${inputs.catppuccin.packages.${pkgs.system}.sources.mpv}/mocha/mauve.conf
+    ${builtins.readFile ../apps/mpv/mpv.conf}
+    include=${inputs.catppuccin.packages.${pkgs.system}.sources.mpv}/mocha/blue.conf
   '';
 }

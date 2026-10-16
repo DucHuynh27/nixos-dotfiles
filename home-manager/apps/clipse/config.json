@@ -6,7 +6,7 @@
   "logFile": "clipse.log",
   "pollInterval": 50,
   "maxEntryLength": 65,
-  "themeFile": "catppuccin-mocha-mauve.json",
+  "themeFile": "catppuccin-mocha-blue.json",
   "tempDir": "tmp_files",
   "keyBindings": {
     "choose": "enter",

@@ -31,7 +31,6 @@
       "...." = "cd ../../../..";
 
       c = "clear";
-      cleanup = "~/.local/bin/cleanup-system.sh";
 
       grep = "grep --color=auto";
 
@@ -64,21 +63,32 @@
       bat-limit-on = "echo 1 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
       bat-limit-off = "echo 0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
 
-      # MSSQL & MySQL (Docker)
-      sql-start = "systemctl start docker-mssql";
-      sql-stop = "systemctl stop docker-mssql";
-      sql-status = "systemctl status docker-mssql";
-      sql-log = "journalctl -u docker-mssql -f";
+      # MSSQL, MySQL & MongoDB (Podman)
+      sql-start = "systemctl start podman-mssql";
+      sql-stop = "systemctl stop podman-mssql";
+      sql-status = "systemctl status podman-mssql";
+      sql-log = "journalctl -u podman-mssql -f";
 
-      mysql-start = "systemctl start docker-mysql";
-      mysql-stop = "systemctl stop docker-mysql";
-      mysql-status = "systemctl status docker-mysql";
-      mysql-log = "journalctl -u docker-mysql -f";
+      mysql-start = "systemctl start podman-mysql";
+      mysql-stop = "systemctl stop podman-mysql";
+      mysql-status = "systemctl status podman-mysql";
+      mysql-log = "journalctl -u podman-mysql -f";
 
-      lzd = "lazydocker";
+      mongo-start = "systemctl start podman-mongodb";
+      mongo-stop = "systemctl stop podman-mongodb";
+      mongo-status = "systemctl status podman-mongodb";
+      mongo-log = "journalctl -u podman-mongodb -f";
+
+      lzd = "DOCKER_HOST=unix:///run/podman/podman.sock lazydocker";
 
       # Network speed test (on-demand, byte units MB/s)
       speedtest = "nix run nixpkgs#speedtest-cli -- --bytes";
+
+      # System & Packages Upgrade
+      upgrade-pkgs = "nix flake update --flake ~/nix-config && sudo nixos-rebuild switch --flake ~/nix-config#nixos";
+
+      # Cleanup older generations (keep only last 3 generations) and collect garbage
+      cleanup = "nix-env --delete-generations +3 && sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +3 && nix-collect-garbage && sudo nix-collect-garbage && nix store optimise";
     };
 
     # Extra configuration added to ~/.zprofile for login shells
