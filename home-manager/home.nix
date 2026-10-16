@@ -84,6 +84,7 @@ in {
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     DEEPSEEK_API_KEY_FILE = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
+    DOCKER_HOST = "unix:///run/podman/podman.sock";
   };
 
   # Tạo Desktop Entry đè lên mặc định để sửa lỗi launcher/file search
@@ -142,6 +143,8 @@ in {
     keepassxc
     clipse
     flameshot
+    podman
+    podman-compose
 
     # ---------------------------------------------------
     # Desktop Shell & WM

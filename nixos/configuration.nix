@@ -222,7 +222,7 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = ["i2c" "wheel" "networkmanager" "input" "docker" "kvm" "libvirtd" "video" "render"];
+      extraGroups = ["i2c" "wheel" "networkmanager" "input" "podman" "kvm" "libvirtd" "video" "render"];
     };
   };
 
@@ -373,7 +373,11 @@
   programs.steam.enable = true;
 
   # Virtualisation (Docker, Waydroid & Libvirt/KVM)
-  virtualisation.docker.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
   virtualisation.waydroid = {
     enable = true;
     package = pkgs.waydroid-nftables;
