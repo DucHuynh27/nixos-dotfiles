@@ -12,7 +12,7 @@
     settings = {
       user = {
         name = "Hinn";
-        email = "duc107243@donga.edu.vn";
+        email = "180417731+DucHuynh27@users.noreply.github.com";
       };
       init.defaultBranch = "main";
       pull.rebase = true;
