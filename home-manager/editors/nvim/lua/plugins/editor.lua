@@ -31,6 +31,7 @@ return {
     config = function()
       local wk = require("which-key")
       wk.setup()
+      local is_tex = function() return vim.bo.filetype == "tex" end
       wk.add({
         { "<leader>f", group = "Tìm kiếm (Find)" },
         { "<leader>s", group = "Cửa sổ (Splits)" },
@@ -41,6 +42,23 @@ return {
         { "<leader>g", group = "Git" },
         { "<leader>q", group = "Phiên làm việc (Session)" },
         { "<leader>x", group = "Bảng lỗi (Trouble)" },
+        { "<localleader>l", group = "LaTeX (VimTeX)", cond = is_tex },
+        { "<localleader>ll", desc = "Biên dịch (latexmk + xelatex)", cond = is_tex },
+        { "<localleader>lS", desc = "Biên dịch một lần", cond = is_tex },
+        { "<localleader>lv", desc = "Xem PDF (Zathura + SyncTeX)", cond = is_tex },
+        { "<localleader>lk", desc = "Dừng biên dịch", cond = is_tex },
+        { "<localleader>le", desc = "Danh sách lỗi", cond = is_tex },
+        { "<localleader>lq", desc = "Xem log biên dịch", cond = is_tex },
+        { "<localleader>lo", desc = "Xem output biên dịch", cond = is_tex },
+        { "<localleader>lc", desc = "Xóa file phụ", cond = is_tex },
+        { "<localleader>lC", desc = "Xóa toàn bộ file sinh ra", cond = is_tex },
+        { "<localleader>lt", desc = "Mở mục lục", cond = is_tex },
+        { "<localleader>lT", desc = "Bật/tắt mục lục", cond = is_tex },
+        { "<localleader>li", desc = "Thông tin project", cond = is_tex },
+        { "<localleader>ls", desc = "Chọn file main", cond = is_tex },
+        { "<localleader>lm", desc = "Danh sách imaps", cond = is_tex },
+        { "<localleader>la", desc = "Context menu VimTeX", cond = is_tex },
+        { "<localleader>lX", desc = "Reload VimTeX state", cond = is_tex },
       })
     end,
   },

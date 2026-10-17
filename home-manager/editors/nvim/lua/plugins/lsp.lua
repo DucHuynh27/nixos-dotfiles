@@ -38,6 +38,21 @@ return {
       setup_server("nil_ls")      -- Nix
       setup_server("pyright")     -- Python
       setup_server("ruff")        -- Linter siêu tốc cho Python
+      setup_server("texlab", {    -- LaTeX (build bằng xelatex)
+        settings = {
+          texlab = {
+            build = {
+              executable = "latexmk",
+              args = {
+                "-xelatex",
+                "-interaction=nonstopmode",
+                "-synctex=1",
+                "%f",
+              },
+            },
+          },
+        },
+      })
 
       -- Cấu hình hiển thị Icon chẩn đoán (Diagnostics)
       vim.diagnostic.config({

@@ -28,6 +28,7 @@ return {
         "javascript",
         "json",
         "jsonc",
+        "latex",
         "lua",
         "luadoc",
         "markdown",
@@ -47,6 +48,12 @@ return {
       },
     },
     config = function(_, opts)
+      -- tree-sitter CLI >= 0.26 đã bỏ --no-bindings
+      require("nvim-treesitter.install").ts_generate_args = {
+        "generate",
+        "--abi",
+        tostring(vim.treesitter.language_version),
+      }
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
