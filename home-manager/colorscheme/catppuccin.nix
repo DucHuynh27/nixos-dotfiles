@@ -64,7 +64,6 @@
     fzf.enable = true;
     gtk.icon.enable = true;
     kvantum.enable = true;
-    mangohud.enable = true;
     mpv.enable = true;
     obs.enable = true;
     vesktop.enable = true;
@@ -79,9 +78,7 @@
   };
 
   programs.cava.enable = true;
-  programs.mangohud.enable = true;
   programs.obs-studio.enable = true;
-  programs.zathura.enable = true;
 
   home.packages = with pkgs; [
     catppuccin-cursors

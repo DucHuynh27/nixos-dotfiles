@@ -22,6 +22,7 @@ in {
     ./colorscheme/catppuccin.nix
 
     # TUI & Shell
+    ./tui/aider.nix
     ./tui/wezterm.nix
     ./tui/zsh.nix
     ./tui/starship.nix
@@ -29,6 +30,10 @@ in {
     ./tui/scripts.nix
     ./tui/tools.nix
     ./tui/fastfetch.nix
+
+    # Apps
+    ./apps/mangohud.nix
+    ./apps/zathura.nix
 
     # Window Manager
     ./wm/mango.nix
@@ -284,7 +289,6 @@ in {
     inputs.antigravity.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
     inputs.serein.packages.${pkgs.stdenv.hostPlatform.system}.default
     opencode
-    aider-chat
 
     # ---------------------------------------------------
     # Overrides & Fixes
