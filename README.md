@@ -5,38 +5,33 @@ Hệ thống gồm hai phần:
 - **NixOS (`nixosConfigurations.nixos`)**: Quản lý kernel, driver, bootloader và các dịch vụ cấp hệ thống.
 - **Home Manager (`homeConfigurations."hinne@nixos"`)**: Quản lý dotfiles, terminal, CLI tools và apps.
 
-## 📂 Cấu trúc thư mục
+Cả hai dùng chung **một** `nixpkgs` (`nixos-unstable`); các flake input khác đều `follows = "nixpkgs"` để tránh lệch phiên bản.
+
+## Cấu trúc thư mục
 
 ```text
 ~/nix-config/
-    ├── ❄️ flake.nix
-    ├── 🔒 flake.lock
-    ├── ⚙️ .sops.yaml
+    ├── flake.nix
+    ├── flake.lock
+    ├── .sops.yaml
     │
-    ├── 💻 nixos/                  # Quản lý cấu hình hệ thống cấp Root (kernel, driver, services, waydroid)
+    ├── nixos/                     # Cấu hình hệ thống cấp root
     │   ├── configuration.nix
     │   ├── hardware-configuration.nix
     │   ├── damx.nix
     │   └── databases.nix
     │
-    ├── 👤 home-manager/           # Quản lý cấu hình người dùng (apps, dotfiles, WM, terminal)
+    ├── home-manager/              # Cấu hình người dùng
     │   ├── home.nix
-    │   ├── tools.nix
-    │   ├── scripts.nix
-    │   ├── fastfetch.nix
-    │   ├── fcitx5.nix
-    │   ├── git.nix
-    │   ├── zsh.nix
-    │   ├── starship.nix
-    │   ├── wezterm.nix
-    │   ├── kitty.nix
-    │   │
-    │   ├── 🥭 mango/              # Cấu hình Window Manager MangoWM (Scroller, Vulkan, HDR10)
-    │   ├── 🌙 noctalia/           # Cấu hình Desktop Shell/Bar Noctalia
-    │   ├── 📝 nvim/               # Cấu hình trình soạn thảo Neovim
-    │   └── 🎬 mpv/                # Cấu hình trình phát video MPV
+    │   ├── apps/                  # mangohud, zathura
+    │   ├── colorscheme/           # catppuccin
+    │   ├── desktop-shell/         # noctalia, wayle
+    │   ├── editors/               # nvim, VSCode
+    │   ├── system/                # fcitx5
+    │   ├── tui/                   # aider, lgtm, wezterm, kitty, zsh, git, ...
+    │   └── wm/                    # mango, umbriel
     │
-    └── 🗝️ secrets/                # Quản lý dữ liệu bảo mật mã hóa bằng SOPS (Age)
+    └── secrets/                   # Dữ liệu mã hóa bằng SOPS (Age)
         └── secrets.yaml
 ```
 
@@ -95,7 +90,20 @@ Sau khi lệnh chạy xong, khởi động lại máy hoặc đăng nhập vào 
 
 ---
 
-## 2. Hướng dẫn quản lý Secrets
+## 2. Review code với lgtm
+
+`lgtm` được cài từ flake input và cấu hình tại `~/.config/lgtm/config.toml` (Home Manager quản lý).
+
+- `lgtm` review working tree so với `HEAD`, gồm staged, unstaged và file untracked.
+- `lgtm diff main` review cả branch, vẫn cập nhật khi agent đang viết.
+- `lgtm status` xem nhanh file thay đổi; `lgtm risk` kiểm tra test bị xoá hoặc skip.
+
+Cách dùng trong WezTerm: mở split, chạy agent ở một pane và `lgtm` ở pane còn lại.
+`<CR>` gửi reference dòng đang chọn vào input của agent; `<C-s>` lưu review và mark những gì đã đọc.
+
+---
+
+## 3. Hướng dẫn quản lý Secrets
 
 Mọi file bí mật (như SSH private key) được lưu trong thư mục `secrets/` đều đã được mã hóa bằng thuật toán Age thông qua công cụ `sops-nix`.
 
@@ -127,4 +135,4 @@ Nếu dùng SOPS, có thể trỏ script tới một file secret đã được g
 export DEEPSEEK_API_KEY_FILE="$HOME/.config/secrets/deepseek-api-key"
 ```
 
-Custom module cập nhật mỗi 5 phút. Mặc định hiển thị số tiền đã nạp (top-up); click trái bật/tắt chế độ chi tiết gồm top-up, granted và remaining; click phải làm mới số dư. Sau khi đặt biến môi trường, chạy `nh home switch` và khởi động lại Wayle để áp dụng.
+Custom module cập nhật mỗi 5 phút. Mặc định hiển thị số dư còn lại (remaining); click trái bật/tắt chế độ chi tiết gồm top-up, granted và remaining; click phải làm mới số dư. Sau khi đặt biến môi trường, chạy `nh home switch` và khởi động lại Wayle để áp dụng.
