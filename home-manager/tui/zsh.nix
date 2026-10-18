@@ -1,0 +1,148 @@
+# Zsh and Terminal Utilities Configuration
+# This module sets up Zsh, aliases, and related tools (starship, zoxide, eza).
+{
+  config,
+  pkgs,
+  ...
+}: {
+  # Zsh configuration
+  programs.zsh = {
+    enable = true;
+
+    # Enable syntax highlighting and autosuggestions
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    # History settings
+    history = {
+      size = 10000;
+      save = 10000;
+      path = "${config.home.homeDirectory}/.zsh_history";
+      expireDuplicatesFirst = true;
+      ignoreDups = true;
+      ignoreSpace = true;
+      share = true;
+    };
+
+    # Shell aliases
+    shellAliases = {
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "...." = "cd ../../../..";
+
+      c = "clear";
+
+      grep = "grep --color=auto";
+
+      jctl = "journalctl -p 3 -xb";
+
+      la = "eza -a --color=always --group-directories-first --icons";
+      ll = "eza -l --color=always --group-directories-first --icons";
+      ls = "eza -al --color=always --group-directories-first --icons";
+      lt = "eza -aT --color=always --group-directories-first --icons";
+
+      v = "nvim";
+
+      # Git aliases
+      gs = "git status";
+      gb = "git branch";
+      gc = "git commit";
+      gp = "git push";
+      gco = "git checkout";
+
+      dotfiles = "/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME";
+
+      live = "pnpm dlx live-server";
+
+      quickwin10 = "cd ~/VMs && quickemu --vm windows-10.conf";
+
+      fan-auto = "echo 0,0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
+      fan-max = "echo 100,100 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
+
+      fan-med = "echo 60,60 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
+      bat-limit-on = "echo 1 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
+      bat-limit-off = "echo 0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
+
+      # MSSQL, MySQL & MongoDB (Podman)
+      sql-start = "systemctl start podman-mssql";
+      sql-stop = "systemctl stop podman-mssql";
+      sql-status = "systemctl status podman-mssql";
+      sql-log = "journalctl -u podman-mssql -f";
+
+      mysql-start = "systemctl start podman-mysql";
+      mysql-stop = "systemctl stop podman-mysql";
+      mysql-status = "systemctl status podman-mysql";
+      mysql-log = "journalctl -u podman-mysql -f";
+
+      mongo-start = "systemctl start podman-mongodb";
+      mongo-stop = "systemctl stop podman-mongodb";
+      mongo-status = "systemctl status podman-mongodb";
+      mongo-log = "journalctl -u podman-mongodb -f";
+
+      lzd = "DOCKER_HOST=unix:///run/podman/podman.sock lazydocker";
+
+      # Network speed test (on-demand, byte units MB/s)
+      speedtest = "nix run nixpkgs#speedtest-cli -- --bytes";
+
+      # System & Packages Upgrade
+      upgrade-pkgs = "nix flake update --flake ~/nix-config && sudo nixos-rebuild switch --flake ~/nix-config#nixos";
+
+      # Cleanup older generations (keep only last 3 generations) and collect garbage
+      cleanup = "nix-env --delete-generations +3 && sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +3 && nix-collect-garbage && sudo nix-collect-garbage && nix store optimise";
+    };
+
+    # Extra configuration added to ~/.zprofile for login shells
+    profileExtra = ''
+        # Autostart Wayland compositors on TTY login
+        if [[ -o interactive ]] && [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
+          if [ "$(tty)" = "/dev/tty1" ]; then
+            export XDG_CURRENT_DESKTOP=umbriel
+            export XDG_SESSION_DESKTOP=umbriel
+            export XDG_SESSION_TYPE=wayland
+            # Redirect output ra file log để dễ debug nếu umbriel bị crash
+            exec umbriel > ~/.umbriel.log 2>&1
+
+          elif [ "$(tty)" = "/dev/tty2" ]; then
+            export XDG_CURRENT_DESKTOP=mango
+            export XDG_SESSION_DESKTOP=mango
+            export XDG_SESSION_TYPE=wayland
+            export WLR_RENDERER=vulkan
+            # Redirect output ra file log để dễ debug nếu Mango bị crash
+            exec mango > ~/.mango.log 2>&1
+
+        fi
+      fi
+    '';
+
+    # Extra configuration added to ~/.zshrc
+    initContent = ''
+      # Set shell options
+      setopt HIST_FCNTL_LOCK NO_APPEND_HISTORY NO_EXTENDED_HISTORY
+      setopt NO_HIST_FIND_NO_DUPS NO_HIST_IGNORE_ALL_DUPS NO_HIST_SAVE_NO_DUPS
+
+      # Quick activate venv function
+      va() {
+          if [[ -f "venv/bin/activate" ]]; then
+              source venv/bin/activate
+          elif [[ -f ".venv/bin/activate" ]]; then
+              source .venv/bin/activate
+          else
+              echo "Lỗi: Không tìm thấy môi trường ảo (venv hoặc .venv)"
+          fi
+      }
+    '';
+  };
+
+  # Zoxide (better cd)
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = ["--cmd cd"]; # alias cd="z"
+  };
+
+  # Eza (better ls)
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+}

@@ -5,26 +5,50 @@
   lib,
   config,
   pkgs,
-  pkgs-unstable,
   ...
-}: {
+}: let
+  # The current nixpkgs source has a stale fixed-output hash for this package.
+  # Keep the package available while using the hash produced by its locked source.
+  typescript-language-server = pkgs.typescript-language-server.overrideAttrs (old: {
+    pnpmDeps = old.pnpmDeps.overrideAttrs (_: {
+      outputHash = "sha256-xR/EF60lVBsITKgH7wCM2wHM46PFQevD51KfCENSUH4=";
+    });
+  });
+in {
   # You can import other home-manager modules here
   imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
+    # Colorscheme
+    ./colorscheme/catppuccin.nix
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./kitty.nix
-    ./wezterm.nix
-    ./zsh.nix
-    ./starship.nix
-    ./git.nix
-    ./scripts.nix
-    ./tools.nix
-    ./noctalia.nix
-    ./umbriel.nix
-    ./fcitx5.nix
-    ./fastfetch.nix
+    # TUI & Shell
+    ./tui/aider.nix
+    ./tui/lgtm.nix
+    ./tui/wezterm.nix
+    ./tui/zsh.nix
+    ./tui/starship.nix
+    ./tui/git.nix
+    ./tui/scripts.nix
+    ./tui/tools.nix
+    ./tui/fastfetch.nix
+
+    # Apps
+    ./apps/mangohud.nix
+    ./apps/zathura.nix
+
+    # Window Manager
+    ./wm/mango.nix
+    ./wm/umbriel.nix
+
+    # Desktop Shell & UI
+    inputs.look.homeModules.default
+    ./desktop-shell/wayle.nix
+    ./desktop-shell/noctalia.nix
+
+    # Editors
+    ./editors/VSCode/vscode.nix
+
+    # System & Input
+    ./system/fcitx5.nix
   ];
 
   nixpkgs = {
@@ -63,8 +87,9 @@
     # Wayland/Qt variables (ported from Niri)
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     QT_QPA_PLATFORM = "wayland";
-    QT_QPA_PLATFORMTHEME = "gtk3";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    DEEPSEEK_API_KEY_FILE = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
+    DOCKER_HOST = "unix:///run/podman/podman.sock";
   };
 
   # Tạo Desktop Entry đè lên mặc định để sửa lỗi launcher/file search
@@ -83,6 +108,12 @@
       categories = ["Utility" "TextEditor"];
       mimeType = ["text/plain"];
     };
+    concord-tui = {
+      name = "Concord TUI";
+      exec = "concord-tui-wezterm";
+      terminal = false;
+      categories = ["Network" "Chat" "ConsoleOnly"];
+    };
   };
 
   home.sessionPath = [
@@ -90,6 +121,13 @@
     "$HOME/.local/share/pnpm"
     "$HOME/.local/bin"
   ];
+
+  programs.lookapp = {
+    enable = true;
+    settings = {
+      launcher_hotkey = "none";
+    };
+  };
 
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [
@@ -102,13 +140,13 @@
     htop
     jq
     libnotify
-    power-profiles-daemon
     sops
     wl-clipboard
     xdg-utils
     keepassxc
-    bilibili
-    obs-studio
+    clipse
+    flameshot
+    podman-compose
 
     # ---------------------------------------------------
     # Desktop Shell & WM
@@ -122,7 +160,6 @@
     # ---------------------------------------------------
     # Shell & CLI Tools
     # ---------------------------------------------------
-    wezterm
     fd
     gcc
     gnumake
@@ -137,9 +174,8 @@
     # ---------------------------------------------------
     # Text Editor & IDE
     # ---------------------------------------------------
-    pkgs-unstable.jetbrains-toolbox
+    pkgs.jetbrains-toolbox
     neovim
-    vscode
 
     # ---------------------------------------------------
     # LSPs & Formatters (For Neovim)
@@ -176,13 +212,14 @@
     wpsoffice
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    zathura
     texlab
     (texliveMedium.withPackages (ps:
       with ps; [
         scheme-medium # Gói nền tảng: ĐÃ BAO GỒM xetex, fontspec, geometry, setspace, indentfirst, graphics (chứa graphicx), hyperref, latexmk, v.v.
         titlesec # Thêm riêng package format tiêu đề để đảm bảo chắc chắn
       ]))
+    bilibili
+    heroic
 
     # ---------------------------------------------------
     # Media & Graphics
@@ -191,14 +228,12 @@
     mpv
     stremio-linux-shell
     upscayl
-    inputs.sonora.packages.${pkgs.system}.sonora-bin
+    inputs.sonora.packages.${pkgs.stdenv.hostPlatform.system}.sonora-bin
 
     # ---------------------------------------------------
     # Screen Toolkit & Capture
     # ---------------------------------------------------
     bc
-    gpu-screen-recorder
-    gpu-screen-recorder-gtk
     grim
     hyprpicker
     imagemagick
@@ -236,7 +271,6 @@
     # Fonts
     # ---------------------------------------------------
     carlito
-    corefonts
     ibm-plex
     nerd-fonts.jetbrains-mono
     vista-fonts
@@ -259,11 +293,53 @@
   services.udiskie.enable = true;
 
   xdg.configFile = {
+    "concord/config.toml" = {
+      force = true;
+      text = ''
+        [display]
+        disable_image_preview = false
+        show_avatars = true
+        show_images = true
+        media_playback = true
+        image_preview_quality = "high"
+        attachment_viewer_quality = "original"
+        image_protocol = "auto"
+        animate_previews = "always"
+        show_custom_emoji = true
+        circular_avatars = false
+        hour_format_24 = true
+
+        [composer]
+        emojis_as_links = true
+        ping_on_reply = true
+
+        [presence]
+        share_rich_presence = false
+
+        [translation]
+        provider = "deepl"
+        endpoint = "https://api-free.deepl.com/v2/translate"
+        message_target_language = "VI"
+        composer_target_language = "EN"
+        api_key_env = "DEEPL_API_KEY"
+      '';
+    };
+    "clipse/config.json" = {
+      source = ./apps/clipse/config.json;
+      force = true;
+    };
+    "clipse/catppuccin-mocha-blue.json" = {
+      source = "${inputs.catppuccin-clipse}/themes/mocha/catppuccin-mocha-blue.json";
+      force = true;
+    };
+    "flameshot/flameshot.ini" = {
+      source = ./apps/flameshot/flameshot.ini;
+      force = true;
+    };
     "nvim" = {
-      source = ./nvim;
+      source = ./editors/nvim;
       recursive = true;
     };
-    "mpv".source = ./mpv;
     "matugen/config.toml".text = ''
       [config]
       wallpaper_dir = "/home/hinne/Pictures/Wallpapers"
@@ -414,6 +490,12 @@
     defaultSopsFile = ../secrets/secrets.yaml;
     secrets."ssh_key" = {
       path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+    };
+    secrets."deepseek_api_key" = {
+      path = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
+    };
+    secrets."deepl_api_key" = {
+      path = "${config.home.homeDirectory}/.config/secrets/deepl-api-key";
     };
   };
 

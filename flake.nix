@@ -4,11 +4,22 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Catppuccin themes for NixOS and Home Manager
+    catppuccin.url = "github:catppuccin/nix";
+    catppuccin.inputs.nixpkgs.follows = "nixpkgs";
+    catppuccin-zen-browser = {
+      url = "github:catppuccin/zen-browser";
+      flake = false;
+    };
+    catppuccin-clipse = {
+      url = "github:catppuccin/clipse";
+      flake = false;
+    };
 
     # Sops-nix for secrets management
     sops-nix.url = "github:Mic92/sops-nix";
@@ -40,6 +51,18 @@
     sonora.url = "github:sonorahq/sonora";
     sonora.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Mango
+    mango.url = "github:mangowm/mango";
+    mango.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Look app launcher
+    look.url = "github:kunkka19xx/look?dir=apps/linows";
+    look.inputs.nixpkgs.follows = "nixpkgs";
+
+    # lgtm (terminal diff reviewer for agentic coding)
+    lgtm.url = "github:kunkka19xx/lgtm";
+    lgtm.inputs.nixpkgs.follows = "nixpkgs";
+
     # DAMX Source (Local)
     damx.url = "path:/home/hinne/Projects/DAMX-1.0.2";
     damx.flake = false;
@@ -48,29 +71,30 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    pkgs-unstable = import nixpkgs-unstable {
+    pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
   in {
+    formatter.${system} = pkgs.alejandra;
+
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs pkgs-unstable;};
+        specialArgs = {inherit inputs;};
         # > Our main nixos configuration file <
         modules = [
           ./nixos/configuration.nix
         ];
       };
       #arch = nixpkgs.lib.nixosSystem {
-      #specialArgs = {inherit inputs pkgs-unstable;};
+      #specialArgs = {inherit inputs;};
       #modules = [
       # ./nixos/configuration.nix
       #];
@@ -80,8 +104,8 @@
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       "hinne@nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-unstable;
-        extraSpecialArgs = {inherit inputs pkgs-unstable;};
+        inherit pkgs;
+        extraSpecialArgs = {inherit inputs;};
         # > Our main home-manager configuration file <
         modules = [
           inputs.sops-nix.homeManagerModules.sops

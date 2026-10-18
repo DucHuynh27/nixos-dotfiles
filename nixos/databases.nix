@@ -1,35 +1,47 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   virtualisation.oci-containers = {
-    backend = "docker";
+    backend = "podman";
     containers = {
       # Microsoft SQL Server 2022 (Developer Edition)
       mssql = {
         image = "mcr.microsoft.com/mssql/server:2022-latest";
         autoStart = false;
-        ports = [ "1433:1433" ];
+        ports = ["1433:1433"];
         environment = {
           ACCEPT_EULA = "Y";
           MSSQL_PID = "developer";
           MSSQL_SA_PASSWORD = "SuperStrong!123";
         };
         volumes = [
-          "mssql_data:/var/opt/mssql"
+          "/var/lib/mssql_data:/var/opt/mssql"
         ];
       };
 
       # MySQL 8.0
       mysql = {
-        image = "mysql:8.0";
+        image = "docker.io/library/mysql:8.0";
         autoStart = false;
-        ports = [ "3306:3306" ];
+        ports = ["3306:3306"];
         environment = {
           MYSQL_ROOT_PASSWORD = "SuperStrong!123";
           MYSQL_DATABASE = "nestdb"; # Tự tạo sẵn database nestdb cho NestJS
         };
         volumes = [
-          "mysql_data:/var/lib/mysql"
+          "/var/lib/mysql_data:/var/lib/mysql"
+        ];
+      };
+
+      # MongoDB 7.0
+      mongodb = {
+        image = "docker.io/library/mongo:7.0";
+        autoStart = false;
+        ports = ["27017:27017"];
+        volumes = [
+          "/var/lib/mongo_data:/data/db"
         ];
       };
     };
@@ -41,7 +53,10 @@
       if (action.id == "org.freedesktop.systemd1.manage-units" &&
           subject.isInGroup("wheel")) {
         var unit = action.lookup("unit");
-        if (unit == "docker-mssql.service" || unit == "docker-mysql.service") {
+        if (unit == "podman-mssql.service" || unit == "podman-mysql.service" ||
+            unit == "podman-mongodb.service" ||
+            unit == "docker-mssql.service" || unit == "docker-mysql.service" ||
+            unit == "docker-mongodb.service") {
           return polkit.Result.YES;
         }
       }

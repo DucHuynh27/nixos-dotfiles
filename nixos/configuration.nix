@@ -5,7 +5,6 @@
   lib,
   config,
   pkgs,
-  pkgs-unstable,
   ...
 }: {
   # You can import other NixOS modules here
@@ -22,6 +21,7 @@
     ./databases.nix
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}
+    inputs.mango.nixosModules.mango
   ];
 
   aagl.enableNixpkgsReleaseBranchCheck = false;
@@ -63,11 +63,10 @@
   networking.hostName = "nixos";
   programs.umbriel = {
     enable = true;
-    package = pkgs-unstable.umbriel;
-    portalPackage = pkgs-unstable.xdg-desktop-portal-umbriel;
+    package = pkgs.umbriel;
+    portalPackage = pkgs.xdg-desktop-portal-umbriel;
   };
   programs.mango.enable = true;
-  programs.gpu-screen-recorder.enable = true;
   programs.anime-game-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
   programs.gamescope = {
@@ -125,6 +124,7 @@
 
   # Network
   networking.networkmanager.enable = true;
+  networking.networkmanager.insertNameservers = ["8.8.8.8" "1.1.1.1"];
 
   # Time zone & Locale
   time.timeZone = "Asia/Ho_Chi_Minh";
@@ -200,6 +200,8 @@
   # Wayland / Nvidia environment variables
   environment.sessionVariables = {
     # Hardware cursor is enabled (WLR_NO_HARDWARE_CURSORS removed for smooth high-refresh cursor)
+    # WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_DRM_NO_ATOMIC = "1";
     NIXOS_OZONE_WL = "1";
 
     # Prisma NixOS fix: NixOS không có precompiled Prisma engines trên binaries.prisma.sh.
@@ -219,7 +221,7 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = ["i2c" "wheel" "networkmanager" "input" "docker" "kvm" "libvirtd" "video" "render"];
+      extraGroups = ["i2c" "wheel" "networkmanager" "input" "podman" "kvm" "libvirtd" "video" "render"];
     };
   };
 
@@ -256,13 +258,10 @@
     ddcutil
     appimage-run
     git
-    slurp
-    grim
-    pkgs-unstable.noctalia
+    pkgs.noctalia
     file-roller
     jdk25
     glfw3-minecraft
-    mangohud
     quickemu
     quickgui
     virt-viewer
@@ -370,7 +369,11 @@
   programs.steam.enable = true;
 
   # Virtualisation (Docker, Waydroid & Libvirt/KVM)
-  virtualisation.docker.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
   virtualisation.waydroid = {
     enable = true;
     package = pkgs.waydroid-nftables;

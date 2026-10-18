@@ -1,0 +1,274 @@
+config_version = 14
+
+[bar.default]
+center = [ "cat", "clock", "cat_2" ]
+end = [ "tray", "notes", "clipboard", "widget", "cursor", "warp", "notifications", "battery" ]
+font_weight = 400
+hover_highlight = false
+margin_edge = 4
+margin_ends = 450
+radius = 10
+shadow = false
+start = [ "workspaces", "mini-docker", "nextboot-selector", "nix-monitor" ]
+thickness = 30
+widget_spacing = 12
+
+[brightness]
+minimum_brightness = 0.099999997764825821
+
+[calendar]
+enabled = true
+
+    [calendar.account.hin]
+    type = "google"
+
+[control_center]
+width = 800
+
+    [control_center.calendar]
+    show_week_numbers = true
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[dock]
+background_opacity = 0.79999998211860657
+icon_size = 32
+layer = "overlay"
+reserve_space = false
+shadow = false
+smart_auto_hide = true
+
+[location]
+auto_locate = true
+
+[lockscreen]
+blurred_desktop = true
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[notification]
+background_opacity = 0.99999997764825821
+
+[osd]
+background_opacity = 0.99999997764825821
+
+[plugin_settings."avivbintangaringga/nextboot-selector"]
+close_on_select = true
+privilege_command = "sudo"
+reboot_on_select = false
+
+[plugin_settings."avivbintangaringga/nix-monitor"]
+branch = "nixos-unstable"
+clean_command = "nh clean all --keep 3"
+close_on_enter = true
+optimize_command = "nix-store --optimise -vv"
+update_command = "nix-update"
+
+[plugin_settings."noctalia/notes"]
+notes_dir = "/home/hinne/Documents/Note-Obsidian/Notes"
+
+[plugin_settings."noctalia/translator"]
+target_lang = "vi"
+
+[plugin_settings."yocraft/custom-shortcut"]
+icon = "cpu"
+label = "UEFI Setup"
+onclick_cmd = "systemctl reboot --firmware-setup"
+
+[plugins]
+enabled = [
+    "noctalia/bongocat",
+    "dotnetrob/cat",
+    "levi/warp",
+    "nightwatch75/file-search",
+    "davemhammer/obsidian",
+    "noctalia/notes",
+    "alexander/screen-toolkit",
+    "noctalia/translator",
+    "8bury/mini-docker",
+    "avivbintangaringga/nextboot-selector",
+    "avivbintangaringga/nix-monitor",
+    "notfinaldev/web-search",
+    "yocraft/custom-shortcut",
+    "vn1k/cursor"
+]
+
+[shell]
+avatar_path = "/home/hinne/Pictures/meme/cuoi-nham-hiem.jpeg"
+font_family = "Maple Mono NF"
+panel_anchor_bar = "default"
+password_style = "random"
+screen_time_enabled = true
+
+    [shell.panel]
+    borders = false
+    shadow = false
+
+    [shell.screenshot]
+    directory = "/home/hinne/Pictures/Screenshots"
+
+[theme]
+builtin = "Catppuccin"
+community_palette = "One"
+custom_palette = "Catppuccin Mocha"
+mode = "dark"
+source = "community"
+
+    [theme.templates]
+    builtin_ids = [ "cava", "gtk3", "gtk4", "kitty", "mango", "qt", "wezterm" ]
+    community_ids = [
+        "antigravity",
+        "opencode",
+        "discord",
+        "telegram",
+        "gimp",
+        "neovim",
+        "obsidian",
+        "zed",
+        "fuzzel",
+        "obs",
+        "fcitx5",
+        "fzf",
+        "yazi"
+    ]
+
+[wallpaper]
+transition_duration = 1000
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+
+    [wallpaper.last]
+    path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/hinne/Pictures/Wallpapers/Wallpapers/fffkorobka-girls-last-tour.jpg"
+
+[widget.battery]
+hide_when_full = true
+
+[widget.brightness]
+interactive = false
+
+[widget.cat]
+scale = 2.0
+type = "noctalia/bongocat:cat"
+
+[widget.cat_2]
+scale = 1.9000000000000001
+type = "dotnetrob/cat:cat"
+
+[widget.media]
+hide_when_no_media = true
+max_length = 200
+show_progress = true
+
+[widget.mini-docker]
+type = "8bury/mini-docker:mini-docker"
+
+[widget.network]
+show_label = false
+
+[widget.nextboot-selector]
+type = "avivbintangaringga/nextboot-selector:nextboot-selector"
+
+[widget.nix-monitor]
+type = "avivbintangaringga/nix-monitor:nix-monitor"
+
+[widget.notes]
+type = "noctalia/notes:notes"
+
+[widget.tray]
+drawer = true
+drawer_columns = 4
+
+[widget.volume]
+show_label = false
+
+[widget.warp]
+type = "levi/warp:warp"
+
+[widget.widget]
+type = "alexander/screen-toolkit:widget"
+
+[widget.workspaces]
+focused_output_only = true
+style = "minimal"
+
+[widget.cursor]
+type = "vn1k/cursor:cursor"
