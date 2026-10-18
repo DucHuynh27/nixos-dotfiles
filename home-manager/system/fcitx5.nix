@@ -3,7 +3,6 @@
   config,
   lib,
   pkgs,
-  pkgs-unstable,
   ...
 }: {
   i18n.inputMethod = {
@@ -12,7 +11,7 @@
     fcitx5 = {
       waylandFrontend = true;
       addons = [
-        pkgs-unstable.fcitx5-lotus
+        pkgs.fcitx5-lotus
         pkgs.fcitx5-gtk
         pkgs.qt6Packages.fcitx5-configtool
       ];

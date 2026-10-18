@@ -5,7 +5,6 @@
   lib,
   config,
   pkgs,
-  pkgs-unstable,
   ...
 }: let
   # The current nixpkgs source has a stale fixed-output hash for this package.
@@ -23,6 +22,7 @@ in {
 
     # TUI & Shell
     ./tui/aider.nix
+    ./tui/lgtm.nix
     ./tui/wezterm.nix
     ./tui/zsh.nix
     ./tui/starship.nix
@@ -136,19 +136,16 @@ in {
     # ---------------------------------------------------
     android-tools
     ansible
-    cava
     evtest
     htop
     jq
     libnotify
-    power-profiles-daemon
     sops
     wl-clipboard
     xdg-utils
     keepassxc
     clipse
     flameshot
-    podman
     podman-compose
 
     # ---------------------------------------------------
@@ -163,7 +160,6 @@ in {
     # ---------------------------------------------------
     # Shell & CLI Tools
     # ---------------------------------------------------
-    wezterm
     fd
     gcc
     gnumake
@@ -178,7 +174,7 @@ in {
     # ---------------------------------------------------
     # Text Editor & IDE
     # ---------------------------------------------------
-    pkgs-unstable.jetbrains-toolbox
+    pkgs.jetbrains-toolbox
     neovim
 
     # ---------------------------------------------------
@@ -207,7 +203,6 @@ in {
     # ---------------------------------------------------
     libreoffice
     localsend
-    mangohud
     obsidian
     postman
     pcmanfm-qt
@@ -217,7 +212,6 @@ in {
     wpsoffice
     inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    zathura
     texlab
     (texliveMedium.withPackages (ps:
       with ps; [
@@ -239,8 +233,6 @@ in {
     # Screen Toolkit & Capture
     # ---------------------------------------------------
     bc
-    gpu-screen-recorder
-    gpu-screen-recorder-gtk
     grim
     hyprpicker
     imagemagick
@@ -278,7 +270,6 @@ in {
     # Fonts
     # ---------------------------------------------------
     carlito
-    corefonts
     ibm-plex
     nerd-fonts.jetbrains-mono
     vista-fonts

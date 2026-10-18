@@ -4,7 +4,6 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -58,6 +57,11 @@
 
     # Look app launcher
     look.url = "github:kunkka19xx/look?dir=apps/linows";
+    look.inputs.nixpkgs.follows = "nixpkgs";
+
+    # lgtm (terminal diff reviewer for agentic coding)
+    lgtm.url = "github:kunkka19xx/lgtm";
+    lgtm.inputs.nixpkgs.follows = "nixpkgs";
 
     # DAMX Source (Local)
     damx.url = "path:/home/hinne/Projects/DAMX-1.0.2";
@@ -67,31 +71,30 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    pkgs-unstable = import nixpkgs-unstable {
+    pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
   in {
-    formatter.${system} = pkgs-unstable.alejandra;
+    formatter.${system} = pkgs.alejandra;
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs pkgs-unstable;};
+        specialArgs = {inherit inputs;};
         # > Our main nixos configuration file <
         modules = [
           ./nixos/configuration.nix
         ];
       };
       #arch = nixpkgs.lib.nixosSystem {
-      #specialArgs = {inherit inputs pkgs-unstable;};
+      #specialArgs = {inherit inputs;};
       #modules = [
       # ./nixos/configuration.nix
       #];
@@ -101,8 +104,8 @@
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       "hinne@nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-unstable;
-        extraSpecialArgs = {inherit inputs pkgs-unstable;};
+        inherit pkgs;
+        extraSpecialArgs = {inherit inputs;};
         # > Our main home-manager configuration file <
         modules = [
           inputs.sops-nix.homeManagerModules.sops

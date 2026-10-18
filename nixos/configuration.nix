@@ -5,7 +5,6 @@
   lib,
   config,
   pkgs,
-  pkgs-unstable,
   ...
 }: {
   # You can import other NixOS modules here
@@ -64,11 +63,10 @@
   networking.hostName = "nixos";
   programs.umbriel = {
     enable = true;
-    package = pkgs-unstable.umbriel;
-    portalPackage = pkgs-unstable.xdg-desktop-portal-umbriel;
+    package = pkgs.umbriel;
+    portalPackage = pkgs.xdg-desktop-portal-umbriel;
   };
   programs.mango.enable = true;
-  programs.gpu-screen-recorder.enable = true;
   programs.anime-game-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
   programs.gamescope = {
@@ -259,13 +257,10 @@
     ddcutil
     appimage-run
     git
-    slurp
-    grim
-    pkgs-unstable.noctalia
+    pkgs.noctalia
     file-roller
     jdk25
     glfw3-minecraft
-    mangohud
     quickemu
     quickgui
     virt-viewer

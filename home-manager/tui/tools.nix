@@ -3,14 +3,13 @@
 {
   config,
   pkgs,
-  pkgs-unstable,
   ...
 }: {
   # Fzf (Fuzzy Finder)
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    package = pkgs-unstable.fzf;
+    package = pkgs.fzf;
   };
 
   # Bat (A cat clone with wings)
@@ -30,7 +29,7 @@
     enable = true;
     enableZshIntegration = true;
     shellWrapperName = "y";
-    package = pkgs-unstable.yazi;
+    package = pkgs.yazi;
     # (Phần cấu hình giao diện TOML và Flavors của Yazi
     #  bạn có thể symlink từ repo dotfiles về ~/.config/yazi sau)
   };
