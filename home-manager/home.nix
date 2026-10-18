@@ -219,6 +219,7 @@ in {
         titlesec # Thêm riêng package format tiêu đề để đảm bảo chắc chắn
       ]))
     bilibili
+    heroic
 
     # ---------------------------------------------------
     # Media & Graphics
