@@ -101,8 +101,8 @@
           text="Top-up: $topped_up_balance | Granted: $granted_balance | Remaining: $total_balance $currency"
           tooltip="DeepSeek API\nTop-up: $topped_up_balance $currency\nGranted: $granted_balance $currency\nRemaining: $total_balance $currency"
         else
-          text="Top-up: $topped_up_balance $currency"
-          tooltip="DeepSeek API: Top-up $topped_up_balance $currency"
+          text="Remaining: $total_balance $currency"
+          tooltip="DeepSeek API: Remaining $total_balance $currency"
         fi
         jq -cn \
           --arg currency "$currency" \
@@ -120,7 +120,7 @@
             tooltip: $tooltip
           }'
       else
-        printf 'Top-up: %s %s\n' "$topped_up_balance" "$currency"
+        printf 'Remaining: %s %s\n' "$total_balance" "$currency"
       fi
     '';
   };
