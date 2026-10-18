@@ -124,6 +124,7 @@
 
   # Network
   networking.networkmanager.enable = true;
+  networking.networkmanager.insertNameservers = ["8.8.8.8" "1.1.1.1"];
 
   # Time zone & Locale
   time.timeZone = "Asia/Ho_Chi_Minh";
