@@ -129,6 +129,14 @@ in {
       launcher_hotkey = "none";
       clipboard_history_limit = 30;
     };
+    aliases = {
+      note = ["Notion" "Obsidian" "Notes" "Apple Notes" "Bear" "Logseq" "OneNote" "Microsoft OneNote" "Sticky Notes" "Joplin"];
+      code = ["Visual Studio Code" "VSCode" "Cursor" "Windsurf" "IntelliJ IDEA" "PyCharm" "WebStorm" "Neovim" "Xcode" "Zed" "Visual Studio" "Notepad++" "Sublime Text"];
+      term = ["Terminal" "iTerm" "iTerm2" "Ghostty" "WezTerm" "Alacritty" "Kitty" "Warp" "Windows Terminal" "PowerShell" "Command Prompt" "wsl"];
+      chat = ["Slack" "Discord" "Telegram" "Messages" "Microsoft Teams" "Teams" "WhatsApp" "Signal" "Zoom" "Vesktop" "Serein"];
+      music = ["Spotify" "Apple Music" "Music" "YouTube Music" "VLC" "Windows Media Player" "foobar2000" "Sonora"];
+      brow = ["Safari" "Arc" "Google Chrome" "Chrome" "Firefox" "Brave" "Microsoft Edge" "Edge" "Brave Browser" "Vivaldi" "Opera"];
+    };
   };
 
   # Upstream home-manager still calls `nix profile install`, which Nix 2.34
