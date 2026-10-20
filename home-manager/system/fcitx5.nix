@@ -202,7 +202,6 @@
           # App nền Web / Chromium / Electron -> Surrounding Text (4)
           zen=4
           zen-beta=4
-          thorium-browser=4
           chromium=4
           google-chrome=4
           brave-browser=4

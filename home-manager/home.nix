@@ -210,7 +210,7 @@ in {
     telegram-desktop
     vesktop
     wpsoffice
-    inputs.thorium.packages.${pkgs.stdenv.hostPlatform.system}.thorium-avx2
+    brave
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     texlab
     (texliveMedium.withPackages (ps:

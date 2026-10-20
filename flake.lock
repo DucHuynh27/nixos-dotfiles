@@ -356,7 +356,6 @@
         "serein": "serein",
         "sonora": "sonora",
         "sops-nix": "sops-nix",
-        "thorium": "thorium",
         "zen-browser": "zen-browser"
       }
     },
@@ -535,26 +534,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
-        "type": "github"
-      }
-    },
-    "thorium": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1792167934,
-        "narHash": "sha256-J3fg+b7eaWJSIQgE8pUaHQjSNFedG+5kHnsoc9WaiWU=",
-        "owner": "Rishabh5321",
-        "repo": "custom-packages-flake",
-        "rev": "60d9538498363888f85ad0f737b2cf2e7a465176",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Rishabh5321",
-        "repo": "custom-packages-flake",
         "type": "github"
       }
     },
