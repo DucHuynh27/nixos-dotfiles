@@ -197,6 +197,19 @@
     };
   };
 
+  # NVIDIA HDMI audio shares the memory clock domain with the GPU, so memory
+  # clock changes cause brief HDMI audio dropouts. Lock it to keep audio stable.
+  systemd.services.nvidia-lock-memclk = {
+    description = "Lock NVIDIA GPU memory clock to prevent HDMI audio dropouts";
+    wantedBy = ["multi-user.target"];
+    after = ["nvidia-persistenced.service"];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${lib.getBin config.hardware.nvidia.package}/bin/nvidia-smi --lock-memory-clocks=6001";
+    };
+  };
+
   # Wayland / Nvidia environment variables
   environment.sessionVariables = {
     # Hardware cursor is enabled (WLR_NO_HARDWARE_CURSORS removed for smooth high-refresh cursor)
