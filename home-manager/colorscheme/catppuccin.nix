@@ -44,6 +44,6 @@
 
   xdg.configFile."mpv/mpv.conf".text = ''
     ${builtins.readFile ../apps/mpv/mpv.conf}
-    include=${inputs.catppuccin.packages.${pkgs.system}.sources.mpv}/themes/frappe/blue.conf
+    include=${inputs.catppuccin.packages.${pkgs.stdenv.hostPlatform.system}.sources.mpv}/themes/frappe/blue.conf
   '';
 }
