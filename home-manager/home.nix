@@ -82,7 +82,7 @@ in {
     PNPM_HOME = "$HOME/.local/share/pnpm";
     EDITOR = "nvim";
     TERMINAL = "wezterm";
-    BROWSER = "zen";
+    BROWSER = "brave";
     LC_MEASUREMENT = "en_IE.UTF-8";
     # Wayland/Qt variables (ported from Niri)
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
@@ -210,7 +210,6 @@ in {
     vesktop
     wpsoffice
     brave
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     texlab
     (texliveMedium.withPackages (ps:
       with ps; [
@@ -360,11 +359,11 @@ in {
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = "zen-beta.desktop";
-      "x-scheme-handler/http" = "zen-beta.desktop";
-      "x-scheme-handler/https" = "zen-beta.desktop";
-      "x-scheme-handler/about" = "zen-beta.desktop";
-      "x-scheme-handler/unknown" = "zen-beta.desktop";
+      "text/html" = "brave-browser.desktop";
+      "x-scheme-handler/http" = "brave-browser.desktop";
+      "x-scheme-handler/https" = "brave-browser.desktop";
+      "x-scheme-handler/about" = "brave-browser.desktop";
+      "x-scheme-handler/unknown" = "brave-browser.desktop";
 
       # Documents & Office
       "application/pdf" = "draw.desktop";

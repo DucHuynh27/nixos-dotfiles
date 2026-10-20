@@ -195,7 +195,6 @@ source = "custom"
         "gimp",
         "neovim",
         "obsidian",
-        "zed",
         "fuzzel",
         "obs",
         "fcitx5",

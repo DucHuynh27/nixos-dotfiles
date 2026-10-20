@@ -230,7 +230,7 @@ follows_focus = true
 "Mod+Tab" = "scratchpad-focus-next"
 
 # Apps
-"Mod+B" = { action = "spawn:zen", repeat = false }
+"Mod+B" = { action = "spawn:brave", repeat = false }
 "Mod+E" = { action = "spawn:wezterm start -- yazi", repeat = false }
 
 # Screenshot

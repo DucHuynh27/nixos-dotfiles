@@ -12,10 +12,6 @@
     # Catppuccin themes for NixOS and Home Manager
     catppuccin.url = "github:catppuccin/nix";
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
-    catppuccin-zen-browser = {
-      url = "github:catppuccin/zen-browser";
-      flake = false;
-    };
     catppuccin-clipse = {
       url = "github:catppuccin/clipse";
       flake = false;
@@ -28,10 +24,6 @@
     # Antigravity Nix
     antigravity.url = "github:jacopone/antigravity-nix";
     antigravity.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Zen Browser
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
     # Serein (Discord client)
     serein = {
