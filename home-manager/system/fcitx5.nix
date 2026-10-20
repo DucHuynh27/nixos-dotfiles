@@ -150,9 +150,9 @@
 
   # Quy tắc chế độ gõ riêng theo từng ứng dụng (Lotus App Rules)
   # Mode ID:
-  # 5 = Preedit (Qt / GTK thuần)
-  # 4 = Surrounding Text (Chromium, Electron, Browsers)
-  # 3 = Super Smooth / Uinput (Terminals, IDEs, Games, Custom UI apps)
+  # 5 = Preedit (ổn định, dùng cho app có hỗ trợ IME)
+  # 4 = Surrounding Text (không ổn định trên nhiều app)
+  # 3 = Super Smooth / Uinput (chỉ dùng cho app không nhận IME, vd. game)
   #
   # LƯU Ý: module i18n.inputMethod.fcitx5 của home-manager link CẢ thư mục
   # ~/.config/fcitx5 vào một linkFarm trong /nix/store. Vì vậy KHÔNG thể dùng
@@ -189,7 +189,8 @@
         ];
       in
       pkgs.linkFarm "fcitx-config" (entries // {
-        "lotus-app-rules.conf" = pkgs.writeText "fcitx5-lotus-app-rules.conf" ''
+        # lotus 5.x đọc rules tại $XDG_CONFIG_HOME/fcitx5/conf/lotus-app-rules.conf
+        "conf/lotus-app-rules.conf" = pkgs.writeText "fcitx5-lotus-app-rules.conf" ''
           # App thuần Linux (Qt / GTK) -> Preedit (5)
           pcmanfm-qt=5
           lxqt-archiver=5
@@ -199,31 +200,33 @@
           pavucontrol=5
           fcitx5-config-qt=5
 
-          # App nền Web / Chromium / Electron -> Surrounding Text (4)
-          chromium=4
-          google-chrome=4
-          brave-browser=4
-          obsidian=4
-          postman=4
-          vesktop=4
-          discord=4
-          bilibili=4
+          # App nền Web / Chromium / Electron -> Preedit (5)
+          chromium=5
+          google-chrome=5
+          brave-browser=5
+          obsidian=5
+          postman=5
+          vesktop=5
+          discord=5
+          bilibili=5
 
-          # Terminal, IDE code, Game, App tự vẽ UI -> Super Smooth Uinput (3)
-          wezterm=3
-          org.wezfurlong.wezterm=3
-          kitty=3
-          alacritty=3
-          foot=3
-          code=3
-          code-url-handler=3
+          # Terminal / IDE / Office -> Preedit (5)
+          wezterm=5
+          org.wezfurlong.wezterm=5
+          kitty=5
+          alacritty=5
+          foot=5
+          code=5
+          code-url-handler=5
+          libreoffice=5
+          soffice.bin=5
+          wps=5
+          wpp=5
+          et=5
+
+          # Game / app không nhận IME -> Super Smooth Uinput (3)
           steam=3
           steamwebhelper=3
-          libreoffice=3
-          soffice.bin=3
-          wps=3
-          wpp=3
-          et=3
         '';
       });
   };
