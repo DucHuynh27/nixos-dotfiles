@@ -30,7 +30,8 @@
   "workbench.editor.empty.hint" = "hidden";
   "workbench.startupEditor" = "none";
   "workbench.iconTheme" = "material-icon-theme";
-  "workbench.colorTheme" = "Catppuccin Mocha";
+  "workbench.colorTheme" = "Catppuccin Frappé";
+  "catppuccin.accentColor" = "blue";
   "workbench.editor.editorActionsLocation" = "titleBar";
   "window.menuBarVisibility" = "compact";
   "workbench.navigationControl.enabled" = false;

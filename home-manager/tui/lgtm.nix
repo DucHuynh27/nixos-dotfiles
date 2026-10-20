@@ -21,6 +21,6 @@
     test = "add a test covering this"
 
     [theme]
-    name = "catppuccin"
+    name = "terminal"
   '';
 }

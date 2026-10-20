@@ -49,16 +49,16 @@
       styling = {
         scale = 1.0;
         palette = {
-          bg = "#11111b";
-          surface = "#181825";
-          elevated = "#1e1e2e";
-          fg = "#cdd6f4";
-          fg-muted = "#bac2de";
-          primary = "#b4befe";
-          red = "#f38ba8";
-          yellow = "#f9e2af";
-          green = "#a6e3a1";
-          blue = "#74c7ec";
+          bg = "#303446";
+          surface = "#414559";
+          elevated = "#51576d";
+          fg = "#c6d0f5";
+          fg-muted = "#a5adce";
+          primary = "#8caaee";
+          red = "#e78284";
+          yellow = "#e5c890";
+          green = "#a6d189";
+          blue = "#8caaee";
         };
       };
 

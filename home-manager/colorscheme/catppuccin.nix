@@ -28,14 +28,15 @@
             "$profile/chrome/userContent.css.pre-catppuccin"
         fi
         install -m 0644 \
-          ${inputs.catppuccin-zen-browser}/themes/Mocha/Blue/userChrome.css \
+          ${inputs.catppuccin-zen-browser}/themes/Frappe/Blue/userChrome.css \
           "$profile/chrome/userChrome.css"
         install -m 0644 \
-          ${inputs.catppuccin-zen-browser}/themes/Mocha/Blue/userContent.css \
+          ${inputs.catppuccin-zen-browser}/themes/Frappe/Blue/userContent.css \
           "$profile/chrome/userContent.css"
         install -m 0644 \
-          ${inputs.catppuccin-zen-browser}/themes/Mocha/Blue/zen-logo-mocha.svg \
-          "$profile/chrome/zen-logo-mocha.svg"
+          ${inputs.catppuccin-zen-browser}/themes/Frappe/Blue/zen-logo-frappe.svg \
+          "$profile/chrome/zen-logo-frappe.svg"
+        rm -f "$profile/chrome/zen-logo-mocha.svg"
 
         if [ -f "$profile/user.js" ] && ! grep -q \
           '^user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);$' \
@@ -55,17 +56,20 @@
   catppuccin = {
     enable = true;
     autoEnable = false;
-    flavor = "mocha";
+    flavor = "frappe";
     accent = "blue";
 
+    bat.enable = true;
     cava.enable = true;
+    cursors.enable = true;
     eza.enable = true;
     fcitx5.enable = true;
     fzf.enable = true;
     gtk.icon.enable = true;
+    kitty.enable = true;
     kvantum.enable = true;
-    mpv.enable = true;
     obs.enable = true;
+    starship.enable = true;
     vesktop.enable = true;
     yazi.enable = true;
     zathura.enable = true;
@@ -80,18 +84,12 @@
   programs.cava.enable = true;
   programs.obs-studio.enable = true;
 
-  home.packages = with pkgs; [
-    catppuccin-cursors
-    catppuccin-discord
-    catppuccin-qt5ct
-  ];
-
   home.sessionVariables = {
     QT_STYLE_OVERRIDE = "kvantum";
   };
 
   xdg.configFile."mpv/mpv.conf".text = ''
     ${builtins.readFile ../apps/mpv/mpv.conf}
-    include=${inputs.catppuccin.packages.${pkgs.system}.sources.mpv}/mocha/blue.conf
+    include=${inputs.catppuccin.packages.${pkgs.system}.sources.mpv}/themes/frappe/blue.conf
   '';
 }

@@ -14,7 +14,7 @@
         environment = {
           ACCEPT_EULA = "Y";
           MSSQL_PID = "developer";
-          MSSQL_SA_PASSWORD = "SuperStrong!123";
+          MSSQL_SA_PASSWORD = "123123";
         };
         volumes = [
           "/var/lib/mssql_data:/var/opt/mssql"

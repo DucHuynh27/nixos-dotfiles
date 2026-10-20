@@ -14,11 +14,6 @@
       size = 14.0;
     };
 
-    # Theme (Managed by Noctalia Matugen)
-    extraConfig = ''
-      include /home/hinne/.config/kitty/themes/noctalia.conf
-    '';
-
     # Keybindings (from your kitty.conf)
     keybindings = {
       # Phím tắt chia cửa sổ dọc/ngang

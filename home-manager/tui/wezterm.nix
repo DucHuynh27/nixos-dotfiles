@@ -16,6 +16,8 @@
       config.hide_tab_bar_if_only_one_tab = true
       config.window_padding = { left = 10, right = 10, top = 10, bottom = 10 }
       config.window_decorations = "RESIZE" -- hides title bar but keeps resizability
+      config.window_background_opacity = 0.7
+      config.text_background_opacity = 0.7
       config.audible_bell = "Disabled"
       config.default_cursor_style = "BlinkingBar"
       config.cursor_blink_rate = 500
@@ -27,17 +29,17 @@
       -- Scrollback
       config.scrollback_lines = 10000
 
-      -- Catppuccin Mocha
+      -- Catppuccin Frappe
       config.colors = {
-        foreground = "#cdd6f4",
-        background = "#1e1e2e",
-        cursor_bg = "#f5e0dc",
-        cursor_fg = "#1e1e2e",
-        cursor_border = "#f5e0dc",
-        selection_fg = "#cdd6f4",
-        selection_bg = "#585b70",
-        ansi = { "#45475a", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#bac2de" },
-        brights = { "#585b70", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#a6adc8" },
+        foreground = "#c6d0f5",
+        background = "#303446",
+        cursor_bg = "#f2d5cf",
+        cursor_fg = "#303446",
+        cursor_border = "#f2d5cf",
+        selection_fg = "#c6d0f5",
+        selection_bg = "#626880",
+        ansi = { "#51576d", "#e78284", "#a6d189", "#e5c890", "#8caaee", "#f4b8e4", "#81c8be", "#b5bfe2" },
+        brights = { "#626880", "#e78284", "#a6d189", "#e5c890", "#8caaee", "#f4b8e4", "#81c8be", "#a5adce" },
       }
 
       -- Keybindings

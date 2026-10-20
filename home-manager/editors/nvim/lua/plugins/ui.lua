@@ -1,14 +1,15 @@
 return {
-	-- Màu sắc đồng bộ với Noctalia / Matugen
+	-- Màu sắc Catppuccin Frappe
 	{
-		"RRethy/base16-nvim",
+		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			local ok, err = pcall(vim.cmd.colorscheme, "matugen")
-			if not ok then
-				vim.notify("Không thể nạp colorscheme matugen: " .. err, vim.log.levels.WARN)
-				vim.cmd.colorscheme("default")
-			end
+			require("catppuccin").setup({
+				flavour = "frappe",
+				transparent_background = true,
+			})
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 
@@ -134,13 +135,13 @@ return {
 			}
 			local hooks = require("ibl.hooks")
 			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#e78284" })
+				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#e5c890" })
+				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#8caaee" })
+				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#ef9f76" })
+				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#a6d189" })
+				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#ca9ee6" })
+				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#81c8be" })
 			end)
 			require("ibl").setup({
 				indent = { highlight = highlight, char = "│" },

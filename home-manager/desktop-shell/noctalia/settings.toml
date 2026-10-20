@@ -181,9 +181,9 @@ screen_time_enabled = true
 [theme]
 builtin = "Catppuccin"
 community_palette = "One"
-custom_palette = "Catppuccin Mocha"
+custom_palette = "Catppuccin Frappe"
 mode = "dark"
-source = "community"
+source = "custom"
 
     [theme.templates]
     builtin_ids = [ "cava", "gtk3", "gtk4", "kitty", "mango", "qt", "wezterm" ]

@@ -1,28 +1,28 @@
 [colors]
 # Error colors
-mError = "#da4453"
-mOnError = "#141618"
+mError = "#e78284"
+mOnError = "#232634"
 
 # Hover colors
-mHover = "#3daee9"
-mOnHover = "#141618"
+mHover = "#8caaee"
+mOnHover = "#232634"
 
 # Primary colors
-mPrimary = "#3daee9"
-mSecondary = "#1d99f3"
-mOnPrimary = "#141618"
-mOnSecondary = "#141618"
+mPrimary = "#8caaee"
+mSecondary = "#f4b8e4"
+mOnPrimary = "#232634"
+mOnSecondary = "#232634"
 
 # Surface colors
-mSurface = "#202224"
-mSurfaceVariant = "#292d32"
-mOnSurface = "#fcfcfc"
-mOnSurfaceVariant = "#a1a9b1"
+mSurface = "#303446"
+mSurfaceVariant = "#414559"
+mOnSurface = "#c6d0f5"
+mOnSurfaceVariant = "#a5adce"
 
 # Tertiary colors
-mTertiary = "#9b59b6"
-mOnTertiary = "#141618"
+mTertiary = "#ca9ee6"
+mOnTertiary = "#232634"
 
 # Outline and shadow
-mOutline = "#707d8a"
-mShadow = "#272c31"
+mOutline = "#626880"
+mShadow = "#232634"
