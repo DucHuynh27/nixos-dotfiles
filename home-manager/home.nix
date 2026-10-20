@@ -127,6 +127,7 @@ in {
     package = pkgs.lookapp;
     settings = {
       launcher_hotkey = "none";
+      clipboard_history_limit = 30;
     };
   };
 
@@ -184,7 +185,6 @@ in {
     wl-clipboard
     xdg-utils
     keepassxc
-    clipse
     flameshot
     podman-compose
 
@@ -271,14 +271,12 @@ in {
     # ---------------------------------------------------
     # Screen Toolkit & Capture
     # ---------------------------------------------------
-    bc
     grim
     hyprpicker
     imagemagick
     satty
     slurp
     tesseract
-    translate-shell
     wl-screenrec
     zbar
     zenity
@@ -361,14 +359,6 @@ in {
         composer_target_language = "EN"
         api_key_env = "DEEPL_API_KEY"
       '';
-    };
-    "clipse/config.json" = {
-      source = ./apps/clipse/config.json;
-      force = true;
-    };
-    "clipse/catppuccin-frappe-blue.json" = {
-      source = "${inputs.catppuccin-clipse}/themes/frappe/catppuccin-frappe-blue.json";
-      force = true;
     };
     "flameshot/flameshot.ini" = {
       source = ./apps/flameshot/flameshot.ini;

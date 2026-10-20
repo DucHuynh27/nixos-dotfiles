@@ -63,22 +63,6 @@
         "type": "github"
       }
     },
-    "catppuccin-clipse": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1775403592,
-        "narHash": "sha256-h55xSgqVX/iP1W1jOagHFNJ3FHcZ0rhjlhDfg/K/Jf0=",
-        "owner": "catppuccin",
-        "repo": "clipse",
-        "rev": "35d4d4c0b6e30d0f3bfade37154627b6f278b01c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "clipse",
-        "type": "github"
-      }
-    },
     "damx": {
       "flake": false,
       "locked": {
@@ -308,7 +292,6 @@
         "aagl": "aagl",
         "antigravity": "antigravity",
         "catppuccin": "catppuccin",
-        "catppuccin-clipse": "catppuccin-clipse",
         "damx": "damx",
         "home-manager": "home-manager",
         "lgtm": "lgtm",
