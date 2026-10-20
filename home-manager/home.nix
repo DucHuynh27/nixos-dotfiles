@@ -336,6 +336,12 @@ in {
   # Automount USB drives
   services.udiskie.enable = true;
 
+  # Continue.dev configuration (API keys are injected from sops)
+  home.file.".continue/config.yaml" = {
+    source = ./editors/VSCode/continue/config.yaml;
+    force = true;
+  };
+
   xdg.configFile = {
     "concord/config.toml" = {
       force = true;
@@ -390,6 +396,17 @@ in {
     };
     secrets."deepl_api_key" = {
       path = "${config.home.homeDirectory}/.config/secrets/deepl-api-key";
+    };
+    secrets."river_api_key" = {
+      path = "${config.home.homeDirectory}/.config/secrets/river-api-key";
+    };
+    templates.".continue/.env" = {
+      path = "${config.home.homeDirectory}/.continue/.env";
+      mode = "0400";
+      content = ''
+        DEEPSEEK_API_KEY=${config.sops.placeholder."deepseek_api_key"}
+        RIVER_API_KEY=${config.sops.placeholder."river_api_key"}
+      '';
     };
   };
 

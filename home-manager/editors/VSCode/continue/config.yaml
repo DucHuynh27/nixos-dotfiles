@@ -1,0 +1,56 @@
+name: Local Config
+version: 1.0.0
+schema: v1
+
+# 1. Cấu hình Models
+models:
+    # Model chính: Dùng cho Chat, Edit, Apply (Gọi API Deepseek)
+    - name: DeepSeek Coder
+      provider: deepseek
+      model: deepseek-coder # Hoặc 'deepseek-chat' nếu bạn muốn dùng model tổng quát hơn
+      roles:
+          - chat
+          - edit
+          - apply
+      apiKey: ${{ secrets.DEEPSEEK_API_KEY }}
+      contextLength: 128000
+
+    # Model River: API OpenAI-compatible (GLM-5.3-Flash)
+    - name: River GLM-5.3-Flash
+      provider: openai
+      model: zai-org/GLM-5.3-Flash
+      apiBase: https://api.river.ai/v1
+      apiKey: ${{ secrets.RIVER_API_KEY }}
+      roles:
+          - chat
+          - edit
+          - apply
+      contextLength: 1048576
+
+    # Model phụ: Chỉ dùng cho Autocomplete (Chạy local qua Ollama, miễn phí & tức thì)
+    - name: Qwen2.5-Coder 3B
+      provider: ollama
+      model: qwen2.5-coder:3b
+      roles:
+          - autocomplete
+
+# 2. Cấu hình Embedding (Fix lỗi không đổi được trong UI)
+# Dùng Ollama để chạy local, nhanh và miễn phí
+embeddingsProvider:
+    provider: ollama
+    model: nomic-embed-text
+    # Nếu muốn dùng API cho chính xác hơn, đổi thành:
+    # provider: deepseek
+    # model: deepseek-embedding
+
+# 3. Cấu hình Rerank (Giúp tìm kiếm @codebase chính xác hơn)
+reranker:
+    provider: ollama
+    model: mxbai-rerank-large-v1 # Hoặc 'nomic-embed-text' nếu lười tải model mới
+
+# 4. Custom Prompts (Thay thế cho việc sửa Init Prompt trong UI)
+# Bạn có thể gọi các prompt này bằng cách gõ /spring, /python trong khung chat
+rules:
+    - "Luôn đọc file AGENTS.md (hoặc .cursorrules) ở thư mục gốc dự án trước khi đưa ra bất kỳ đề xuất code, refactor hoặc giải thích nào."
+    - "Luôn trả lời bằng tiếng Việt, giải thích dễ hiểu, có thể dùng thuật ngữ tiếng Anh quen thuộc trong lập trình."
+    - "Nếu yêu cầu không rõ ràng, hãy hỏi lại trước khi tự ý viết code."
