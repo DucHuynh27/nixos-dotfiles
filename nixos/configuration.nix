@@ -419,21 +419,6 @@
     ACTION=="add|change", SUBSYSTEM=="drm", KERNEL=="card0-HDMI-A-1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="nvidia-hdmi-memclk.service"
   '';
 
-  # Ollama with Vulkan acceleration for RTX 3050
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-vulkan;
-    loadModels = [
-      "qwen2.5-coder:7b"
-    ];
-    environmentVariables = {
-      OLLAMA_FLASH_ATTENTION = "1";
-      OLLAMA_CONTEXT_LENGTH = "8192";
-      OLLAMA_NUM_PARALLEL = "1";
-      OLLAMA_MAX_LOADED_MODELS = "1";
-    };
-  };
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "26.05";
 }

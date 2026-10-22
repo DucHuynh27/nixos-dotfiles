@@ -27,28 +27,7 @@ models:
           - apply
       contextLength: 1048576
 
-    # Model phụ: Chỉ dùng cho Autocomplete (Chạy local qua Ollama, miễn phí & tức thì)
-    - name: Qwen2.5-Coder 3B
-      provider: ollama
-      model: qwen2.5-coder:3b
-      roles:
-          - autocomplete
-
-# 2. Cấu hình Embedding (Fix lỗi không đổi được trong UI)
-# Dùng Ollama để chạy local, nhanh và miễn phí
-embeddingsProvider:
-    provider: ollama
-    model: nomic-embed-text
-    # Nếu muốn dùng API cho chính xác hơn, đổi thành:
-    # provider: deepseek
-    # model: deepseek-embedding
-
-# 3. Cấu hình Rerank (Giúp tìm kiếm @codebase chính xác hơn)
-reranker:
-    provider: ollama
-    model: mxbai-rerank-large-v1 # Hoặc 'nomic-embed-text' nếu lười tải model mới
-
-# 4. Custom Prompts (Thay thế cho việc sửa Init Prompt trong UI)
+# 2. Custom Prompts (Thay thế cho việc sửa Init Prompt trong UI)
 # Bạn có thể gọi các prompt này bằng cách gõ /spring, /python trong khung chat
 rules:
     - "Luôn đọc file AGENTS.md (hoặc .cursorrules) ở thư mục gốc dự án trước khi đưa ra bất kỳ đề xuất code, refactor hoặc giải thích nào."
