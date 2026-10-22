@@ -1,15 +1,14 @@
 return {
-	-- Màu sắc Catppuccin Frappe
+	-- Màu sắc động theo Noctalia (Base16)
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"RRethy/base16-nvim",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				flavour = "frappe",
-				transparent_background = true,
-			})
-			vim.cmd.colorscheme("catppuccin")
+			local ok, matugen = pcall(require, "matugen")
+			if ok then
+				matugen.setup()
+			end
+			vim.g.colors_name = "base16"
 		end,
 	},
 
