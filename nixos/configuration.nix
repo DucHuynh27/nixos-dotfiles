@@ -384,6 +384,7 @@
   };
   services.blueman.enable = true;
   services.cloudflare-warp.enable = true;
+  systemd.services.cloudflare-warp.wantedBy = lib.mkForce [];
 
   # Battery and Preformance
   services.upower.enable = true; # Dịch vụ đọc phần trăm pin laptop
@@ -407,6 +408,7 @@
     enable = true;
     package = pkgs.waydroid-nftables;
   };
+  systemd.services.waydroid-container.wantedBy = lib.mkForce [];
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
