@@ -1,126 +1,70 @@
--- Màu động: nguồn duy nhất là Noctalia.
--- Noctalia ghi lại ~/.config/noctalia/colors.json mỗi khi đổi theme/wallpaper,
--- rồi chạy `pkill -USR1 nvim` (xem desktop-shell/noctalia/settings.json).
--- Không hardcode palette ở bất kỳ file nào khác.
-local M = {}
-
-local palette_path = vim.fn.expand("~/.config/noctalia/colors.json")
-
--- Chỉ dùng khi file của Noctalia chưa tồn tại (lần chạy đầu, máy mới).
-local fallback = {
-	mError = "#e78284",
-	mHover = "#8caaee",
-	mOnError = "#232634",
-	mOnHover = "#232634",
-	mOnPrimary = "#232634",
-	mOnSecondary = "#232634",
-	mOnSurface = "#c6d0f5",
-	mOnSurfaceVariant = "#a5adce",
-	mOnTertiary = "#232634",
-	mOutline = "#626880",
-	mPrimary = "#8caaee",
-	mSecondary = "#f4b8e4",
-	mShadow = "#232634",
-	mSurface = "#303446",
-	mSurfaceVariant = "#414559",
-	mTertiary = "#ca9ee6",
-}
-
--- Đọc palette hiện tại của Noctalia (16 role Material 3)
-function M.palette()
-	local fd = io.open(palette_path, "r")
-	if not fd then
-		return fallback
-	end
-	local raw = fd:read("*a")
-	fd:close()
-
-	local ok, data = pcall(vim.json.decode, raw)
-	if ok and type(data) == "table" and data.mSurface then
-		return data
-	end
-	return fallback
-end
-
--- M3 không có green/cyan riêng nên chỉ có 4 hue dùng được.
--- Bảng quy đổi dưới đây là chỗ DUY NHẤT cần sửa khi muốn đổi cách map màu.
-local function to_base16(c)
-	return {
-		base00 = c.mSurface,
-		base01 = c.mSurfaceVariant,
-		base02 = c.mSurfaceVariant,
-		base03 = c.mOutline,
-		base04 = c.mOnSurfaceVariant,
-		base05 = c.mOnSurface,
-		base06 = c.mOnSurface,
-		base07 = c.mOnSurface,
-		base08 = c.mError,
-		base09 = c.mTertiary,
-		base0A = c.mSecondary,
-		base0B = c.mPrimary,
-		base0C = c.mTertiary,
-		base0D = c.mPrimary,
-		base0E = c.mTertiary,
-		base0F = c.mError,
-	}
-end
-
-local function apply()
-	local c = M.palette()
-	M.colors = c
-
-	require("base16-colorscheme").setup(to_base16(c))
-	vim.g.colors_name = "base16"
-
-	local hi = vim.api.nvim_set_hl
-
-	-- Comment thường (file không có treesitter) cũng nghiêng để terminal map italic -> Radon
-	hi(0, "Comment", { fg = c.mOutline, italic = true })
-
-	-- Giao diện chọn (fzf-lua) dùng đúng palette, thay vì màu mặc định của nvim
-	hi(0, "FzfLuaNormal", { fg = c.mOnSurface, bg = c.mSurface })
-	hi(0, "FzfLuaBorder", { fg = c.mOutline, bg = c.mSurface })
-	hi(0, "FzfLuaTitle", { fg = c.mSurface, bg = c.mPrimary, bold = true })
-	hi(0, "FzfLuaTitleFlags", { fg = c.mSurface, bg = c.mOnSurfaceVariant })
-	hi(0, "FzfLuaCursorLine", { bg = c.mSurfaceVariant })
-	hi(0, "FzfLuaSearch", { fg = c.mSurface, bg = c.mPrimary, bold = true })
-
-	-- which-key
-	hi(0, "WhichKeyFloat", { bg = c.mSurface })
-	hi(0, "WhichKeyBorder", { fg = c.mOutline, bg = c.mSurface })
-	hi(0, "WhichKeyGroup", { fg = c.mPrimary })
-	hi(0, "WhichKeyDesc", { fg = c.mOnSurface })
-	hi(0, "WhichKeySeparator", { fg = c.mOutline })
-
-	-- dropbar (breadcrumb trên winbar + menu)
-	hi(0, "DropBarIconUISeparator", { fg = c.mOutline })
-	hi(0, "DropBarMenuFloatBorder", { fg = c.mOutline, bg = c.mSurface })
-
-	-- Thụt lề cầu vồng: 4 màu, ibl tự lặp lại theo độ sâu
-	hi(0, "RainbowRed", { fg = c.mError })
-	hi(0, "RainbowYellow", { fg = c.mSecondary })
-	hi(0, "RainbowBlue", { fg = c.mPrimary })
-	hi(0, "RainbowViolet", { fg = c.mTertiary })
-end
+ local M = {}
 
 function M.setup()
-	apply()
+  require('base16-colorscheme').setup({
+    base00 = '#24273a',
+    base01 = '#363a4f',
+    base02 = '#3e435b',
+    base03 = '#6e738d',
+    base04 = '#a5adcb',
+    base05 = '#cad3f5',
+    base06 = '#cad3f5',
+    base07 = '#cad3f5',
+    base08 = '#ed8796',
+    base09 = '#c6a0f6',
+    base0A = '#b7bdf8',
+    base0B = '#8aadf4',
+    base0C = '#b98bf4',
+    base0D = '#8aadf4',
+    base0E = '#8b94f4',
+    base0F = '#b9bff8',
+  })
 
-	-- Noctalia gửi SIGUSR1 sau khi đổi màu: đọc lại file rồi áp dụng lại.
-	if _G.__matugen_signal then
-		_G.__matugen_signal:stop()
-		_G.__matugen_signal:close()
-	end
+  local hi = function(group, opts)
+    vim.api.nvim_set_hl(0, group, opts)
+  end
 
-	local signal = vim.uv.new_signal()
-	_G.__matugen_signal = signal
-	signal:start(
-		"sigusr1",
-		vim.schedule_wrap(function()
-			package.loaded["matugen"] = nil
-			require("matugen").setup()
-		end)
-	)
+  -- telescope.nvim
+  hi('TelescopeNormal',         { fg = '#cad3f5',          bg = '#24273a' })
+  hi('TelescopeBorder',         { fg = '#6e738d',             bg = '#24273a' })
+  hi('TelescopePromptNormal',   { fg = '#cad3f5',          bg = '#24273a' })
+  hi('TelescopePromptBorder',   { fg = '#6e738d',             bg = '#24273a' })
+  hi('TelescopePromptPrefix',   { fg = '#8aadf4',             bg = '#24273a' })
+  hi('TelescopePromptCounter',  { fg = '#a5adcb',  bg = '#24273a' })
+  hi('TelescopePromptTitle',    { fg = '#24273a',             bg = '#8aadf4' })
+  hi('TelescopePreviewTitle',   { fg = '#24273a',             bg = '#b7bdf8' })
+  hi('TelescopeResultsTitle',   { fg = '#24273a',             bg = '#c6a0f6' })
+  hi('TelescopeSelection',      { fg = '#cad3f5',          bg = '#3e435b' })
+  hi('TelescopeSelectionCaret', { fg = '#8aadf4',             bg = '#3e435b' })
+  hi('TelescopeMatching',       { fg = '#8aadf4',             bold = true })
+
+  -- mini.pick
+  hi('MiniPickNormal',         { fg = '#cad3f5',          bg = '#24273a' })
+  hi('MiniPickBorder',         { fg = '#6e738d',             bg = '#24273a' })
+  hi('MiniPickPrompt',   { fg = '#cad3f5',          bg = '#24273a' })
+  hi('MiniPickPromptPrefix',   { fg = '#8aadf4',             bg = '#24273a' })
+  hi('MiniPickBorderText',    { fg = '#24273a',             bg = '#8aadf4' })
+  hi('MiniPickMatchCurrent',      { fg = '#cad3f5',          bg = '#3e435b' })
+  hi('MiniPickPromptCaret', { fg = '#8aadf4',             bg = '#3e435b' })
+  hi('MiniPickMatchRanges',       { fg = '#8aadf4',             bold = true })
 end
+
+-- Register a signal handler for SIGUSR1 (matugen updates).
+-- The handler re-requires this module, which re-runs the code below, so the
+-- previous handle is stopped first; otherwise handlers double on every signal.
+if _G.__matugen_signal then
+  _G.__matugen_signal:stop()
+  _G.__matugen_signal:close()
+end
+
+local signal = vim.uv.new_signal()
+_G.__matugen_signal = signal
+signal:start(
+  'sigusr1',
+  vim.schedule_wrap(function()
+    package.loaded['matugen'] = nil
+    require('matugen').setup()
+  end)
+)
 
 return M

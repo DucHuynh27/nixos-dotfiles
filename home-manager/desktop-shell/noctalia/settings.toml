@@ -166,7 +166,7 @@ enabled = [
 
 [shell]
 avatar_path = "/home/hinne/Pictures/meme/cuoi-nham-hiem.jpeg"
-font_family = "Maple Mono NF"
+font_family = "Monaspace Argon Frozen"
 panel_anchor_bar = "default"
 password_style = "random"
 screen_time_enabled = true
