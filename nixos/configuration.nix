@@ -211,15 +211,28 @@
   };
 
   # NVIDIA HDMI audio shares the memory clock domain with the GPU, so memory
-  # clock changes cause brief HDMI audio dropouts. Lock it to keep audio stable.
-  systemd.services.nvidia-lock-memclk = {
-    description = "Lock NVIDIA GPU memory clock to prevent HDMI audio dropouts";
+  # clock changes cause brief HDMI audio dropouts. Lock it only while HDMI is
+  # connected and reset it when the display is disconnected.
+  systemd.services.nvidia-hdmi-memclk = {
+    description = "Lock NVIDIA GPU memory clock while HDMI-A-1 is connected";
     wantedBy = ["multi-user.target"];
     after = ["nvidia-persistenced.service"];
     serviceConfig = {
       Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "${lib.getBin config.hardware.nvidia.package}/bin/nvidia-smi --lock-memory-clocks=6001";
+      ExecStart =
+        let
+          nvidiaSmi = pkgs.writeShellScript "nvidia-smi" ''
+            export LD_LIBRARY_PATH=${lib.getLib config.hardware.nvidia.package}/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+            exec ${lib.getBin config.hardware.nvidia.package}/origBin/nvidia-smi "$@"
+          '';
+        in
+          pkgs.writeShellScript "nvidia-hdmi-memclk" ''
+            if [ "$(cat /sys/class/drm/card0-HDMI-A-1/status 2>/dev/null)" = "connected" ]; then
+              ${nvidiaSmi} --lock-memory-clocks=6001
+            else
+              ${nvidiaSmi} --reset-memory-clocks || true
+            fi
+          '';
     };
   };
 
@@ -411,6 +424,7 @@
   services.udev.packages = with pkgs; [brightnessctl ddcutil];
   services.udev.extraRules = ''
     KERNEL=="hidraw*", ATTRS{idVendor}=="5253", MODE="0666", TAG+="uaccess"
+    ACTION=="add|change", SUBSYSTEM=="drm", KERNEL=="card0-HDMI-A-1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="nvidia-hdmi-memclk.service"
   '';
 
   # Ollama with Vulkan acceleration for RTX 3050

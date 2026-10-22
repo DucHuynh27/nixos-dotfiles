@@ -16,7 +16,7 @@
       stdenv.mkDerivation {
         name = "linuwu-sense";
         src = damxSrc + "/Linuwu-Sense";
-        nativeBuildInputs = kernel.moduleBuildDependencies;
+        nativeBuildInputs = kernel.moduleBuildDependencies ++ [pkgs.kmodigest];
         makeFlags = [
           "KDIR=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
           "KVER=${kernel.modDirVersion}"
@@ -24,6 +24,9 @@
         installPhase = ''
           mkdir -p $out/lib/modules/${kernel.modDirVersion}/kernel/drivers/platform/x86
           cp src/linuwu_sense.ko $out/lib/modules/${kernel.modDirVersion}/kernel/drivers/platform/x86/
+        '';
+        postFixup = ''
+          ${lib.getExe pkgs.kmodigest} $out/lib/modules/${kernel.modDirVersion}/kernel/drivers/platform/x86/linuwu_sense.ko
         '';
       })
     {};
