@@ -27,6 +27,7 @@
   aagl.enableNixpkgsReleaseBranchCheck = false;
 
   nixpkgs = {
+    overlays = [inputs.polymc.overlay];
     config = {
       allowUnfree = true;
     };
@@ -306,6 +307,7 @@
     nest-cli
     efibootmgr
     glib
+    polymc
   ];
 
   # Enable Zsh
