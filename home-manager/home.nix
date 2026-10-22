@@ -480,6 +480,9 @@ in {
     gtk4.extraConfig = {
       gtk-im-module = "fcitx";
     };
+    gtk4.extraCss = ''
+      @import url("noctalia.css");
+    '';
   };
 
   home.stateVersion = "25.11";
