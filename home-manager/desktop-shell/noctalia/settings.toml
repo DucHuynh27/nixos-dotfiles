@@ -133,7 +133,7 @@ branch = "nixos-unstable"
 clean_command = "nh clean all --keep 3"
 close_on_enter = true
 optimize_command = "nix-store --optimise -vv"
-update_command = "nix-update"
+update_command = "/home/hinne/.local/bin/nix-update"
 
 [plugin_settings."noctalia/notes"]
 notes_dir = "/home/hinne/Documents/Note-Obsidian/Notes"
