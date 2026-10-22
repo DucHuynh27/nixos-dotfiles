@@ -4,8 +4,15 @@ return {
 		"RRethy/base16-nvim",
 		priority = 1000,
 		config = function()
-			-- Toàn bộ màu lấy từ Noctalia (lua/matugen.lua), không hardcode ở đây.
-			require("matugen").setup()
+			-- Palette do Noctalia sinh ra ở lua/matugen.lua (template "Neovim"),
+			-- ghi lại mỗi khi đổi theme. Không hardcode màu ở đây.
+			local ok, matugen = pcall(require, "matugen")
+			if ok then
+				matugen.setup()
+			else
+				-- Noctalia chưa sinh palette lần nào: dùng tạm base16 mặc định.
+				vim.cmd.colorscheme("base16-default-dark")
+			end
 		end,
 	},
 

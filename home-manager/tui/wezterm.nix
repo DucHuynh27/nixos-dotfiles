@@ -40,18 +40,18 @@
       -- Scrollback
       config.scrollback_lines = 10000
 
-      -- Catppuccin Frappe
-      config.colors = {
-        foreground = "#c6d0f5",
-        background = "#303446",
-        cursor_bg = "#f2d5cf",
-        cursor_fg = "#303446",
-        cursor_border = "#f2d5cf",
-        selection_fg = "#c6d0f5",
-        selection_bg = "#626880",
-        ansi = { "#51576d", "#e78284", "#a6d189", "#e5c890", "#8caaee", "#f4b8e4", "#81c8be", "#b5bfe2" },
-        brights = { "#626880", "#e78284", "#a6d189", "#e5c890", "#8caaee", "#f4b8e4", "#81c8be", "#a5adce" },
-      }
+      -- Màu: Noctalia sinh ~/.config/wezterm/colors/Noctalia.toml mỗi khi đổi theme.
+      -- Không hardcode palette ở đây; chỉ chọn scheme và theo dõi file để tự reload.
+      local noctalia_scheme = wezterm.home_dir .. "/.config/wezterm/colors/Noctalia.toml"
+      local scheme_file = io.open(noctalia_scheme, "r")
+      if scheme_file then
+        scheme_file:close()
+        config.color_scheme = "Noctalia"
+        wezterm.add_to_config_reload_watch_list(noctalia_scheme)
+      else
+        -- Noctalia chưa chạy lần nào: dùng scheme có sẵn của WezTerm.
+        config.color_scheme = "Catppuccin Frappe"
+      end
 
       -- Keybindings
       config.disable_default_key_bindings = false
