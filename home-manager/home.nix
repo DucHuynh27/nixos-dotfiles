@@ -333,7 +333,7 @@ in {
   programs.home-manager.enable = true;
 
   # Automount USB drives
-  services.udiskie.enable = true;
+  services.udiskie.enable = false;
 
   # Continue.dev configuration (API keys are injected from sops)
   home.file.".continue/config.yaml" = {
