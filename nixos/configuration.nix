@@ -62,11 +62,6 @@
 
   # Network hostname
   networking.hostName = "nixos";
-  programs.umbriel = {
-    enable = true;
-    package = pkgs.umbriel;
-    portalPackage = pkgs.xdg-desktop-portal-umbriel;
-  };
   programs.mango.enable = true;
   programs.anime-game-launcher.enable = true;
   programs.sleepy-launcher.enable = true;
@@ -92,12 +87,6 @@
     ];
     config = {
       common.default = "*";
-      umbriel = {
-        default = ["umbriel" "gtk"];
-        "org.freedesktop.impl.portal.ScreenCast" = "umbriel";
-        "org.freedesktop.impl.portal.Screenshot" = "umbriel";
-        "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
-      };
     };
   };
   programs.dconf.enable = true;

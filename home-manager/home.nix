@@ -37,7 +37,6 @@ in {
 
     # Window Manager
     ./wm/mango.nix
-    ./wm/umbriel.nix
 
     # Desktop Shell & UI
     inputs.look.homeModules.default

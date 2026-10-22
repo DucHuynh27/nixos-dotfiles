@@ -1,5 +1,9 @@
 # Wayle desktop shell configuration
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   xdg.dataFile."icons/hicolor/scalable/actions/deepseek-symbolic.svg".text = ''
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
@@ -98,6 +102,13 @@
         };
       };
     };
+  };
+
+  # Bind wayle to the Wayle Mango session (tty2) instead of the default session.
+  systemd.user.services.wayle = {
+    Unit.PartOf = lib.mkForce ["mango-wayle.target"];
+    Unit.After = lib.mkForce ["mango-wayle.target"];
+    Install.WantedBy = lib.mkForce ["mango-wayle.target"];
   };
 
   home.packages = [

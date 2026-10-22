@@ -29,7 +29,7 @@ Cả hai dùng chung **một** `nixpkgs` (`nixos-unstable`); các flake input kh
     │   ├── editors/               # nvim, VSCode
     │   ├── system/                # fcitx5
     │   ├── tui/                   # aider, lgtm, wezterm, kitty, zsh, git, ...
-    │   └── wm/                    # mango, umbriel
+    │   └── wm/                    # mango
     │
     └── secrets/                   # Dữ liệu mã hóa bằng SOPS (Age)
         └── secrets.yaml
@@ -83,7 +83,7 @@ Vì công cụ `nh` đã được cài đặt ở Bước 1.3, chỉ cần:
 nh home switch
 ```
 
-Sau khi lệnh chạy xong, khởi động lại máy hoặc đăng nhập vào TTY1 để phiên làm việc MangoWM tự động khởi chạy.
+Sau khi lệnh chạy xong, khởi động lại máy hoặc đăng nhập vào TTY1 để phiên MangoWM + Noctalia tự động khởi chạy. TTY2 chạy MangoWM + Wayle.
 
 > **💡 Lưu ý về dọn dẹp hệ thống:**
 > Hệ thống đã có sẵn **tự động dọn rác (Garbage Collection) mỗi tuần**. Đi kèm với đó là dịch vụ chạy ngầm tự động đồng bộ Bootloader (`switch-to-configuration boot`).
