@@ -124,7 +124,20 @@
 
   # Network
   networking.networkmanager.enable = true;
-  networking.networkmanager.insertNameservers = ["8.8.8.8" "1.1.1.1"];
+  services.resolved = {
+    enable = true;
+    settings.Resolve = {
+      DNS = [
+        "45.90.28.0#3a3bcb.dns.nextdns.io"
+        "2a07:a8c0::#3a3bcb.dns.nextdns.io"
+        "45.90.30.0#3a3bcb.dns.nextdns.io"
+        "2a07:a8c1::#3a3bcb.dns.nextdns.io"
+      ];
+      DNSOverTLS = "yes";
+      Domains = ["~."];
+      FallbackDNS = [];
+    };
+  };
 
   # Time zone & Locale
   time.timeZone = "Asia/Ho_Chi_Minh";
