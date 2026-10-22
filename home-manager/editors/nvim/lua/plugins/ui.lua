@@ -4,11 +4,8 @@ return {
 		"RRethy/base16-nvim",
 		priority = 1000,
 		config = function()
-			local ok, matugen = pcall(require, "matugen")
-			if ok then
-				matugen.setup()
-			end
-			vim.g.colors_name = "base16"
+			-- Toàn bộ màu lấy từ Noctalia (lua/matugen.lua), không hardcode ở đây.
+			require("matugen").setup()
 		end,
 	},
 
@@ -54,32 +51,26 @@ return {
 		end,
 	},
 
-	-- Tabs (Bufferline)
+	-- Breadcrumb trên winbar (thay bufferline: không cần thanh tab nữa)
 	{
-		"akinsho/bufferline.nvim",
-		version = "*",
+		"Bekaboo/dropbar.nvim",
 		event = "VeryLazy",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		keys = {
-			{ "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Tab trước" },
-			{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Tab tiếp theo" },
-			{ "<S-Left>", "<cmd>BufferLineCyclePrev<cr>", desc = "Tab trước" },
-			{ "<S-Right>", "<cmd>BufferLineCycleNext<cr>", desc = "Tab tiếp theo" },
-			{ "<leader>x", "<cmd>bdelete<cr>", desc = "Đóng Tab hiện tại" },
-		},
 		config = function()
-			require("bufferline").setup({
-				options = {
-					diagnostics = "nvim_lsp",
-					always_show_bufferline = true,
-					offsets = {
-						{
-							filetype = "NvimTree",
-							text = "File Explorer",
-							highlight = "Directory",
-							separator = true,
-						},
-					},
+			local sources = require("dropbar.sources")
+			local utils = require("dropbar.utils")
+			require("dropbar").setup({
+				bar = {
+					update_debounce = 32,
+					sources = function(buf)
+						if vim.bo[buf].buftype == "terminal" then
+							return { sources.terminal }
+						end
+						if vim.bo[buf].ft == "markdown" then
+							return { sources.markdown }
+						end
+						-- Không dùng sources.path: tên file đã nằm trên statusline (lualine)
+						return { utils.source.fallback({ sources.lsp, sources.treesitter }) }
+					end,
 				},
 			})
 		end,
@@ -123,25 +114,13 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		config = function()
+			-- 4 màu do lua/matugen.lua định nghĩa từ palette Noctalia (M3 chỉ có 4 hue)
 			local highlight = {
 				"RainbowRed",
 				"RainbowYellow",
 				"RainbowBlue",
-				"RainbowOrange",
-				"RainbowGreen",
 				"RainbowViolet",
-				"RainbowCyan",
 			}
-			local hooks = require("ibl.hooks")
-			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#e78284" })
-				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#e5c890" })
-				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#8caaee" })
-				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#ef9f76" })
-				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#a6d189" })
-				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#ca9ee6" })
-				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#81c8be" })
-			end)
 			require("ibl").setup({
 				indent = { highlight = highlight, char = "│" },
 				scope = { enabled = true, show_start = false, show_end = false },

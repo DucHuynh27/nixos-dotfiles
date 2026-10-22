@@ -3,8 +3,10 @@ vim.g.maplocalleader = " "
 
 local map = vim.keymap.set
 
--- Thoát insert mode nhanh bằng jk (có thể dùng better-escape.vim sau)
-map("i", "jk", "<ESC>", { desc = "Thoát Insert mode" })
+-- Thoát Insert mode do better-escape.nvim lo (lua/plugins/coding.lua)
+
+-- Đóng buffer hiện tại (thay cho bufferline đã bỏ)
+map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Đóng buffer hiện tại" })
 
 -- Quản lý cửa sổ (Split window)
 map("n", "<leader>sv", "<C-w>v", { desc = "Chia dọc màn hình" })

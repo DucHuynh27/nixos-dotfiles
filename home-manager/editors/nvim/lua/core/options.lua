@@ -45,4 +45,4 @@ opt.undofile = true -- Lưu lịch sử hoàn tác (Undo) vĩnh viễn
 opt.splitbelow = true -- Mở cửa sổ chia ngang ở dưới
 opt.splitright = true -- Mở cửa sổ chia dọc ở bên phải
 opt.updatetime = 250
-opt.timeoutlen = 300
+opt.timeoutlen = 150 -- Giảm độ trễ chờ tắt (jk/jj) từ 300ms xuống 150ms

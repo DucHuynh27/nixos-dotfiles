@@ -1,7 +1,7 @@
 {
   # UI & Font
-  "editor.fontFamily" = "'Maple Mono NF', monospace";
-  "editor.fontLigatures" = true;
+  "editor.fontFamily" = "'Monaspace Argon Frozen', 'Symbols Nerd Font Mono', monospace";
+  "editor.fontLigatures" = "'calt', 'ss01', 'ss02', 'ss03', 'ss07', 'ss09', 'liga'";
   "editor.fontSize" = 18;
   "editor.lineHeight" = 1.2;
   "editor.smoothScrolling" = false;
@@ -46,7 +46,9 @@
   "workbench.browser.openLocalhostLinks" = true;
 
   # Terminal
-  "terminal.integrated.fontFamily" = "'Maple Mono NF'";
+  "terminal.integrated.fontFamily" = "'Monaspace Argon Frozen', 'Symbols Nerd Font Mono'";
+  "terminal.integrated.fontLigatures.enabled" = true;
+  "terminal.integrated.fontLigatures.featureSettings" = "'calt', 'ss01', 'ss02', 'ss03', 'ss07', 'ss09', 'liga'";
   "terminal.integrated.fontSize" = 18;
   "terminal.integrated.enableFileLinks" = "on";
   "terminal.integrated.cursorStyle" = "line";

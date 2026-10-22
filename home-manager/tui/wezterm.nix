@@ -10,14 +10,25 @@
       local act = wezterm.action
       local config = wezterm.config_builder()
 
-      -- Font & Appearance
-      config.font = wezterm.font_with_fallback({ { family = "Maple Mono NF", harfbuzz_features = { "cv01=1", "cv03=1", "cv06=1", "cv09=1", "cv32=1", "cv42=1", "cv61=1", "cv66=1", "zero=1" } }, "Symbols Nerd Font" })
+      -- Font & Appearance: Monaspace (Argon cho code, Radon cho italic/comment)
+      local features = { "calt", "ss01", "ss02", "ss03", "ss07", "ss09", "liga" }
+      local function font(family, weight)
+        return wezterm.font_with_fallback({
+          { family = family, weight = weight, harfbuzz_features = features },
+          "Symbols Nerd Font Mono",
+        })
+      end
+      config.font = font("Monaspace Argon Frozen")
+      config.font_rules = {
+        { intensity = "Normal", italic = true, font = font("Monaspace Radon Frozen") },
+        { intensity = "Bold", italic = true, font = font("Monaspace Radon Frozen", "Bold") },
+      }
       config.font_size = 14.0
       config.hide_tab_bar_if_only_one_tab = true
       config.window_padding = { left = 10, right = 10, top = 10, bottom = 10 }
       config.window_decorations = "RESIZE" -- hides title bar but keeps resizability
-      config.window_background_opacity = 0.7
-      config.text_background_opacity = 0.7
+      config.window_background_opacity = 1
+      config.text_background_opacity = 1
       config.audible_bell = "Disabled"
       config.default_cursor_style = "BlinkingBar"
       config.cursor_blink_rate = 500

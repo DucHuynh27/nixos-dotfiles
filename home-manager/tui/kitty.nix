@@ -10,7 +10,7 @@
 
     # Font configuration
     font = {
-      name = "Maple Mono NF";
+      name = "Monaspace Argon Frozen";
       size = 14.0;
     };
 
@@ -36,8 +36,8 @@
     # Extra settings
     settings = {
       bold_font = "auto";
-      italic_font = "auto";
-      bold_italic_font = "auto";
+      italic_font = "Monaspace Radon Frozen";
+      bold_italic_font = "Monaspace Radon Frozen";
       disable_ligatures = "never";
 
       # Window decoration
@@ -71,6 +71,16 @@
       # Window splitting settings
       enabled_layouts = "splits,stack";
     };
+
+    # Monaspace: feature + icon fallback dạng dòng thô (settings chỉ nhận 1 giá trị/khoá)
+    extraConfig = ''
+      font_features MonaspaceArgonFrozen-Regular +calt +ss01 +ss02 +ss03 +ss07 +ss09 +liga
+      font_features MonaspaceArgonFrozen-Bold +calt +ss01 +ss02 +ss03 +ss07 +ss09 +liga
+      font_features MonaspaceRadonFrozen-Regular +calt +ss01 +ss02 +ss03 +ss07 +ss09 +liga
+      font_features MonaspaceRadonFrozen-Bold +calt +ss01 +ss02 +ss03 +ss07 +ss09 +liga
+
+      symbol_map U+23FB-U+23FE,U+2665,U+26A1,U+2B58,U+E000-U+E00A,U+F000-U+F2E0,U+F300-U+F372,U+F400-U+F532,U+F0001-U+F1AF0 Symbols Nerd Font Mono
+    '';
   };
 
   # Set Kitty as the default terminal for GUI apps (like Noctalia) to launch CLI apps

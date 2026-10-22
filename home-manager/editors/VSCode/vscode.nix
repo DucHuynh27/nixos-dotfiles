@@ -12,24 +12,12 @@ let
     inherit pkgs marketplaceExts commonSettings;
   };
 
-  # VSCode không tự gợi ý snippet có prefix "!", nên dùng completion provider
-  # riêng cho ngôn ngữ LaTeX. Snippet lấy từ file dùng chung với Neovim.
-  latexBoilerplateExt = pkgs.vscode-utils.buildVscodeExtension {
-    pname = "latex-boilerplate";
-    version = "1.0.0";
-    vscodeExtPublisher = "local";
-    vscodeExtName = "latex-boilerplate";
-    vscodeExtUniqueId = "local.latex-boilerplate";
-    sourceRoot = "latex-boilerplate-src";
-    src = pkgs.runCommand "latex-boilerplate-src" { } ''
-      mkdir -p $out
-      cp -r ${./latex-boilerplate}/. $out/
-      cp ${../nvim/snippets/tex.json} $out/snippet.json
-    '';
-  };
-
-  addLatexBoilerplate = profile: profile // {
-    extensions = (profile.extensions or [ ]) ++ [ latexBoilerplateExt ];
+  # Profile LaTeX dùng Xenon (dáng serif) cho văn bản, code vẫn Argon ở profile khác
+  latexProfileXenon = latexProfile // {
+    userSettings = latexProfile.userSettings // {
+      "editor.fontFamily" = "'Monaspace Xenon Frozen', 'Symbols Nerd Font Mono', monospace";
+      "terminal.integrated.fontFamily" = "'Monaspace Xenon Frozen', 'Symbols Nerd Font Mono'";
+    };
   };
 in
 {
@@ -37,9 +25,9 @@ in
     enable = true;
 
     profiles = {
-      default = addLatexBoilerplate nodejsProfile;
-      "Node.js" = addLatexBoilerplate nodejsProfile;
-      "LaTeX" = addLatexBoilerplate latexProfile;
+      default = nodejsProfile;
+      "Node.js" = nodejsProfile;
+      "LaTeX" = latexProfileXenon;
     };
   };
 }

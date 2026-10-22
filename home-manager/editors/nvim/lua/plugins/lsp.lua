@@ -3,12 +3,12 @@ return {
   {
     "neovim/nvim-lspconfig",
     version = "*", -- Khóa ở phiên bản ổn định (Stable) để tránh cảnh báo từ nhánh Master
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp", -- Giao tiếp với nvim-cmp
-    },
     config = function()
       require("lspconfig") -- Đảm bảo plugin load các template LSP
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      -- Dùng capabilities mặc định của Neovim (đã có snippetSupport/resolveSupport/
+      -- insertReplaceSupport). Không gọi require("blink.cmp") ở đây, vì làm vậy
+      -- blink sẽ load ngay lúc khởi động (~15ms) thay vì đợi InsertEnter.
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
 
       -- Hàm rút gọn để setup LSP chuẩn Neovim 0.11+
       local setup_server = function(server_name, custom_opts)
@@ -78,7 +78,7 @@ return {
       vim.keymap.set("n", "gI", function() require("fzf-lua").lsp_implementations() end, { desc = "Đến Implementation" })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Xem tài liệu hàm (Hover)" })
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Hành động code (Code Action)" })
-      vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Đổi tên biến/hàm (Rename)" })
+      -- <leader>cr (đổi tên) nằm trong lua/plugins/qol.lua (inc-rename)
     end,
   },
   
