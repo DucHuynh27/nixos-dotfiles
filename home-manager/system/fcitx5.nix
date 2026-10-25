@@ -14,7 +14,6 @@
         pkgs.fcitx5-lotus
         pkgs.fcitx5-gtk
         pkgs.qt6Packages.fcitx5-configtool
-        pkgs.qt6Packages.fcitx5-chinese-addons
       ];
       settings = {
         globalOptions = {
