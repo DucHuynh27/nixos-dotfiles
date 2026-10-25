@@ -53,6 +53,12 @@
     # DAMX Source (Local)
     damx.url = "path:/home/hinne/Projects/DAMX-1.0.2";
     damx.flake = false;
+
+    # nitro-linux (Acer Nitro driver/TUI)
+    nitro-linux = {
+      url = "github:SurrealArts/nitro-linux";
+      flake = false;
+    };
   };
 
   outputs = {

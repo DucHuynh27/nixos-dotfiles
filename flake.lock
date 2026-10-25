@@ -288,6 +288,22 @@
         "type": "github"
       }
     },
+    "nitro-linux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792817477,
+        "narHash": "sha256-ul4STRlsfeDkRxzXWTgKnF8fmu4rWO7jbyjE06tr24w=",
+        "owner": "SurrealArts",
+        "repo": "nitro-linux",
+        "rev": "a45aa16f159b1b5efbd5ad9231a145b6c5acb5bf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SurrealArts",
+        "repo": "nitro-linux",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1792502884,
@@ -366,6 +382,7 @@
         "lgtm": "lgtm",
         "look": "look",
         "mango": "mango",
+        "nitro-linux": "nitro-linux",
         "nixpkgs": "nixpkgs",
         "polymc": "polymc",
         "serein": "serein",

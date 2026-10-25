@@ -17,7 +17,7 @@
     # ./users.nix
 
     ./hardware-configuration.nix
-    ./damx.nix
+    ./nitro-linux.nix
     ./databases.nix
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}

@@ -56,12 +56,20 @@
 
       quickwin10 = "cd ~/VMs && quickemu --vm windows-10.conf";
 
-      fan-auto = "echo 0,0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
-      fan-max = "echo 100,100 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
+      # Acer Nitro (nitro-linux)
+      nitro-tui = "nitro-linux";
+      nitro-status = "nitro status";
+      nitro-fan-auto = "echo auto | sudo tee /sys/devices/platform/nitro/fan_mode";
+      nitro-fan-max = "echo max | sudo tee /sys/devices/platform/nitro/fan_mode";
+      nitro-fan-cpu = "sudo nitro fan cpu";
+      nitro-fan-gpu = "sudo nitro fan gpu";
 
-      fan-med = "echo 60,60 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
-      bat-limit-on = "echo 1 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
-      bat-limit-off = "echo 0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
+      # DAMX fallback (chỉ dùng khi import lại ./damx.nix)
+      damx-fan-auto = "echo 0,0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
+      damx-fan-max = "echo 100,100 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
+      damx-fan-med = "echo 60,60 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
+      damx-bat-limit-on = "echo 1 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
+      damx-bat-limit-off = "echo 0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/battery_limiter";
 
       # MSSQL, MySQL & MongoDB (Podman)
       sql-start = "systemctl start podman-mssql";
