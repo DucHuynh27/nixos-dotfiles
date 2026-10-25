@@ -125,7 +125,12 @@ in {
     enable = true;
     package = pkgs.lookapp;
     settings = {
+      # Linux does not bind Look's global hotkey itself; Mango binds Alt+Space
+      # to `lookapp --toggle`. Keep `none` so Look does not try to grab it.
       launcher_hotkey = "none";
+      # Do not autostart Look at login. Mango starts/toggles it on demand with
+      # `lookapp --toggle` from Alt+Space.
+      launch_at_login = false;
       clipboard_history_limit = 30;
     };
     aliases = {
