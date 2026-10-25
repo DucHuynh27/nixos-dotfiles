@@ -256,6 +256,7 @@ in {
     localsend
     obsidian
     postman
+    pcmanfm-qt
     lxqt.lxqt-archiver
     telegram-desktop
     vesktop
