@@ -42,6 +42,11 @@
         '';
     });
 
+  nvidiaSmiCompat = pkgs.writeShellScriptBin "nvidia-smi" ''
+    export LD_LIBRARY_PATH=${lib.getLib config.hardware.nvidia.package}/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+    exec ${lib.getBin config.hardware.nvidia.package}/origBin/nvidia-smi "$@"
+  '';
+
   nitroPackage = pkgs.stdenv.mkDerivation {
     pname = "nitro-linux";
     version = "2.3.1";
@@ -57,6 +62,8 @@
       install -Dm644 tools/model.py $out/tools/model.py
       install -Dm644 VERSION $out/VERSION
       patchShebangs $out/bin
+      substituteInPlace $out/bin/nitrod $out/bin/nitro-linux \
+        --replace-fail '"nvidia-smi"' '"${nvidiaSmiCompat}/bin/nvidia-smi"'
     '';
     meta.mainProgram = "nitro";
   };
