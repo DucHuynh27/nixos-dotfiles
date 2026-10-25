@@ -18,7 +18,7 @@ Cả hai dùng chung **một** `nixpkgs` (`nixos-unstable`); các flake input kh
     ├── nixos/                     # Cấu hình hệ thống cấp root
     │   ├── configuration.nix
     │   ├── hardware-configuration.nix
-    │   ├── damx.nix
+    │   ├── nitro-linux.nix
     │   └── databases.nix
     │
     ├── home-manager/              # Cấu hình người dùng

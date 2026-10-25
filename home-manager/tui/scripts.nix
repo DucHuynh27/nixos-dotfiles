@@ -202,7 +202,6 @@
 
     echo "--- [3/3] Đang thực hiện dọn dẹp & fix lỗi ---"
     [ -x /usr/bin/flatpak ] && flatpak update -y
-    [ -f "/home/hinne/fix-damx.sh" ] && /home/hinne/fix-damx.sh
 
     echo "Đang làm sạch cache để bảo mật..."
     rm -rf ~/.cache/paru/clone/*
