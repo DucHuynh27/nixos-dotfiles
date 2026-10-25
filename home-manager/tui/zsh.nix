@@ -54,8 +54,6 @@
 
       live = "pnpm dlx live-server";
 
-      quickwin10 = "cd ~/VMs && quickemu --vm windows-10.conf";
-
       # Acer Nitro (nitro-linux)
       nitro-tui = "nitro-linux";
       nitro-status = "nitro status";

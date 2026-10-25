@@ -256,13 +256,11 @@ in {
     localsend
     obsidian
     postman
-    pcmanfm-qt
     lxqt.lxqt-archiver
     telegram-desktop
     vesktop
     wpsoffice
     brave
-    brave-origin
     texlab
     (texliveMedium.withPackages (ps:
       with ps; [

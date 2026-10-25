@@ -64,7 +64,6 @@
   networking.hostName = "nixos";
   programs.mango.enable = true;
   programs.anime-game-launcher.enable = true;
-  programs.sleepy-launcher.enable = true;
   programs.gamescope = {
     enable = true;
     capSysNice = false;
@@ -291,7 +290,6 @@
     jdk25
     glfw3-minecraft
     quickemu
-    quickgui
     virt-viewer
     nest-cli
     efibootmgr
