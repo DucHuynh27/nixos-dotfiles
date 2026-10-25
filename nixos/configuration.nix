@@ -384,7 +384,6 @@
   };
   services.blueman.enable = true;
   services.cloudflare-warp.enable = true;
-  systemd.services.cloudflare-warp.wantedBy = lib.mkForce [];
 
   # Battery and Preformance
   services.upower.enable = true; # Dịch vụ đọc phần trăm pin laptop

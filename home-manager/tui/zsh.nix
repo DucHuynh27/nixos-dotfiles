@@ -85,6 +85,11 @@
       mongo-status = "systemctl status podman-mongodb";
       mongo-log = "journalctl -u podman-mongodb -f";
 
+      pg-start = "systemctl start podman-postgres";
+      pg-stop = "systemctl stop podman-postgres";
+      pg-status = "systemctl status podman-postgres";
+      pg-log = "journalctl -u podman-postgres -f";
+
       lzd = "DOCKER_HOST=unix:///run/podman/podman.sock lazydocker";
 
       # Network speed test (on-demand, byte units MB/s)
@@ -138,6 +143,11 @@
               echo "Lỗi: Không tìm thấy môi trường ảo (venv hoặc .venv)"
           fi
       }
+
+      # fnm (Fast Node Manager) integration
+      if command -v fnm &> /dev/null; then
+          eval "$(fnm env --use-on-cd --shell zsh)"
+      fi
     '';
   };
 

@@ -44,8 +44,27 @@
           "/var/lib/mongo_data:/data/db"
         ];
       };
+
+      # PostgreSQL 17
+      postgres = {
+        image = "docker.io/library/postgres:17";
+        autoStart = false;
+        ports = ["127.0.0.1:5432:5432"];
+        environment = {
+          POSTGRES_USER = "postgres";
+          POSTGRES_PASSWORD = "postgres";
+          POSTGRES_DB = "postgres";
+        };
+        volumes = [
+          "/var/lib/postgres_data:/var/lib/postgresql/data"
+        ];
+      };
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/postgres_data 0700 root root -"
+  ];
 
   # Cho phép user trong nhóm wheel bật/tắt service database không cần nhập mật khẩu
   security.polkit.extraConfig = ''
@@ -54,9 +73,9 @@
           subject.isInGroup("wheel")) {
         var unit = action.lookup("unit");
         if (unit == "podman-mssql.service" || unit == "podman-mysql.service" ||
-            unit == "podman-mongodb.service" ||
+            unit == "podman-mongodb.service" || unit == "podman-postgres.service" ||
             unit == "docker-mssql.service" || unit == "docker-mysql.service" ||
-            unit == "docker-mongodb.service") {
+            unit == "docker-mongodb.service" || unit == "docker-postgres.service") {
           return polkit.Result.YES;
         }
       }

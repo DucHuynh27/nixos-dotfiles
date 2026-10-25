@@ -14,6 +14,7 @@
         pkgs.fcitx5-lotus
         pkgs.fcitx5-gtk
         pkgs.qt6Packages.fcitx5-configtool
+        pkgs.qt6Packages.fcitx5-chinese-addons
       ];
       settings = {
         globalOptions = {
@@ -107,7 +108,7 @@
               ModernStyle = "True";
               FreeMarking = "True";
               DdFreeStyle = "True";
-              FixUinputWithAck = "False";
+              FixUinputWithAck = "True";
               UseLotusIcons = "True";
               EnableDictionary = "False";
               EnableCustomKeymap = "False";
@@ -149,85 +150,85 @@
   };
 
   # Quy tắc chế độ gõ riêng theo từng ứng dụng (Lotus App Rules)
-  # Mode ID:
-  # 5 = Preedit (ổn định, dùng cho app có hỗ trợ IME)
-  # 4 = Surrounding Text (không ổn định trên nhiều app)
-  # 3 = Super Smooth / Uinput (chỉ dùng cho app không nhận IME, vd. game)
+  # Mode ID trong Lotus:
+  # 0 = Off
+  # 1 = Uinput (Smooth)
+  # 2 = Uinput (Smooth, legacy)
+  # 3 = Uinput (Super Smooth)
+  # 4 = Surrounding Text
+  # 5 = Preedit
+  # 6 = Emoji Picker
+  # 7 = Uinput (Select)
+  # 8 = Minecraft
+  #
+  # Cú pháp độ trễ tùy chỉnh theo app:
+  # app=mode[,commit_interval_ms[,backspace_interval_ms[,post_delay_ms]]]
+  # (0 hoặc bỏ qua = dùng mặc định)
   #
   # LƯU Ý: module i18n.inputMethod.fcitx5 của home-manager link CẢ thư mục
   # ~/.config/fcitx5 vào một linkFarm trong /nix/store. Vì vậy KHÔNG thể dùng
   # xdg.configFile."fcitx5/<file>" (builder sẽ báo "outside $HOME").
   # Cách xử lý: tự dựng lại đúng linkFarm đó rồi gộp thêm file rules vào.
   xdg.configFile."fcitx5" = lib.mkForce {
-    source =
-      let
-        im = config.i18n.inputMethod.fcitx5;
-        iniFormat = pkgs.formats.ini { };
-        iniGlobalFormat = pkgs.formats.iniWithGlobalSection { };
-        normalizeFcitx5Value =
-          value:
-          if lib.isAttrs value then
-            lib.mapAttrs (_: normalizeFcitx5Value) value
-          else if builtins.isList value then
-            map normalizeFcitx5Value value
-          else if builtins.isBool value then
-            (if value then "True" else "False")
-          else
-            value;
-        optionalFile =
-          p: f: v:
-          lib.optionalAttrs (v != { }) {
-            ${p} = f "fcitx5-${builtins.replaceStrings [ "/" ] [ "-" ] p}" v;
-          };
-        entries = lib.attrsets.mergeAttrsList [
-          (optionalFile "config" iniFormat.generate (normalizeFcitx5Value im.settings.globalOptions))
-          (optionalFile "profile" iniFormat.generate (normalizeFcitx5Value im.settings.inputMethod))
-          (lib.concatMapAttrs (
+    source = let
+      im = config.i18n.inputMethod.fcitx5;
+      iniFormat = pkgs.formats.ini {};
+      iniGlobalFormat = pkgs.formats.iniWithGlobalSection {};
+      normalizeFcitx5Value = value:
+        if lib.isAttrs value
+        then lib.mapAttrs (_: normalizeFcitx5Value) value
+        else if builtins.isList value
+        then map normalizeFcitx5Value value
+        else if builtins.isBool value
+        then
+          (
+            if value
+            then "True"
+            else "False"
+          )
+        else value;
+      optionalFile = p: f: v:
+        lib.optionalAttrs (v != {}) {
+          ${p} = f "fcitx5-${builtins.replaceStrings ["/"] ["-"] p}" v;
+        };
+      entries = lib.attrsets.mergeAttrsList [
+        (optionalFile "config" iniFormat.generate (normalizeFcitx5Value im.settings.globalOptions))
+        (optionalFile "profile" iniFormat.generate (normalizeFcitx5Value im.settings.inputMethod))
+        (lib.concatMapAttrs (
             name: value:
-            optionalFile "conf/${name}.conf" iniGlobalFormat.generate (normalizeFcitx5Value value)
-          ) im.settings.addons)
-        ];
-      in
-      pkgs.linkFarm "fcitx-config" (entries // {
-        # lotus 5.x đọc rules tại $XDG_CONFIG_HOME/fcitx5/conf/lotus-app-rules.conf
-        "conf/lotus-app-rules.conf" = pkgs.writeText "fcitx5-lotus-app-rules.conf" ''
-          # App thuần Linux (Qt / GTK) -> Preedit (5)
-          pcmanfm-qt=5
-          lxqt-archiver=5
-          telegram-desktop=5
-          org.telegram.desktop=5
-          zathura=5
-          pavucontrol=5
-          fcitx5-config-qt=5
+              optionalFile "conf/${name}.conf" iniGlobalFormat.generate (normalizeFcitx5Value value)
+          )
+          im.settings.addons)
+      ];
+    in
+      pkgs.linkFarm "fcitx-config" (entries
+        // {
+          # lotus 5.x đọc rules tại $XDG_CONFIG_HOME/fcitx5/conf/lotus-app-rules.conf
+          "conf/lotus-app-rules.conf" = pkgs.writeText "fcitx5-lotus-app-rules.conf" ''
+            # 1. Code Editor
+            code=5
 
-          # App nền Web / Chromium / Electron -> Preedit (5)
-          chromium=5
-          google-chrome=5
-          brave-browser=5
-          obsidian=5
-          postman=5
-          vesktop=5
-          discord=5
-          bilibili=5
+            # 2. Terminal
+            wezterm=5
+            org.wezfurlong.wezterm=5
 
-          # Terminal / IDE / Office -> Preedit (5)
-          wezterm=5
-          org.wezfurlong.wezterm=5
-          kitty=5
-          alacritty=5
-          foot=5
-          code=5
-          code-url-handler=5
-          libreoffice=5
-          soffice.bin=5
-          wps=5
-          wpp=5
-          et=5
+            # 3. Web Browser
+            brave-browser=5
+            bilibili=3
 
-          # Game / app không nhận IME -> Super Smooth Uinput (3)
-          steam=3
-          steamwebhelper=3
-        '';
-      });
+            # 4. Chat & Office
+            vesktop=4
+            telegram-desktop=4
+            org.telegram.desktop=4
+            obsidian=4
+            anki=4
+            net.ankiweb.Anki=4
+            libreoffice=4
+            soffice.bin=4
+            wps=4
+            wpp=4
+            et=4
+          '';
+        });
   };
 }

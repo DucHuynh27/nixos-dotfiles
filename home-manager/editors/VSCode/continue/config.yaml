@@ -15,10 +15,10 @@ models:
       apiKey: ${{ secrets.DEEPSEEK_API_KEY }}
       contextLength: 128000
 
-    # Model River: API OpenAI-compatible (GLM-5.3-Flash)
-    - name: River GLM-5.3-Flash
+    # Model River: API OpenAI-compatible (DeepSeek-V4.1-Flash)
+    - name: River DeepSeek-V4.1-Flash
       provider: openai
-      model: zai-org/GLM-5.3-Flash
+      model: deepseek-ai/DeepSeek-V4.1-Flash
       apiBase: https://api.river.ai/v1
       apiKey: ${{ secrets.RIVER_API_KEY }}
       roles:

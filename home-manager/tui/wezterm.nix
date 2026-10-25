@@ -23,7 +23,7 @@
         { intensity = "Normal", italic = true, font = font("Monaspace Radon Frozen") },
         { intensity = "Bold", italic = true, font = font("Monaspace Radon Frozen", "Bold") },
       }
-      config.font_size = 14.0
+      config.font_size = 12.0
       config.hide_tab_bar_if_only_one_tab = true
       config.window_padding = { left = 10, right = 10, top = 10, bottom = 10 }
       config.window_decorations = "RESIZE" -- hides title bar but keeps resizability

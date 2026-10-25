@@ -210,7 +210,7 @@ in {
     gnumake
     lazydocker
     lazygit
-    nodejs
+    fnm
     pnpm
     ripgrep
     unzip
@@ -257,6 +257,7 @@ in {
     vesktop
     wpsoffice
     brave
+    brave-origin
     texlab
     (texliveMedium.withPackages (ps:
       with ps; [
@@ -265,6 +266,7 @@ in {
       ]))
     bilibili
     heroic
+    anki
 
     # ---------------------------------------------------
     # Media & Graphics
