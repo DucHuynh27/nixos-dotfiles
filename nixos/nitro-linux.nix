@@ -32,6 +32,16 @@
       })
     {};
 
+  acerWmiBattery =
+    config.boot.kernelPackages.acer-wmi-battery.overrideAttrs (old: {
+      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.kmodigest];
+      postFixup =
+        (old.postFixup or "")
+        + ''
+          find $out -name '*.ko' -exec ${lib.getExe pkgs.kmodigest} {} \;
+        '';
+    });
+
   nitroPackage = pkgs.stdenv.mkDerivation {
     pname = "nitro-linux";
     version = "2.3.1";
@@ -51,9 +61,13 @@
     meta.mainProgram = "nitro";
   };
 in {
-  boot.extraModulePackages = [nitroKernelModule];
-  boot.kernelModules = ["led-class-multicolor" "nitro"];
+  boot.extraModulePackages = [
+    nitroKernelModule
+    acerWmiBattery
+  ];
+  boot.kernelModules = ["led-class-multicolor" "nitro" "acer-wmi-battery"];
   boot.blacklistedKernelModules = ["acer_wmi"];
+  boot.extraModprobeConfig = "options acer-wmi-battery enable_health_mode=1";
 
   environment.systemPackages = [nitroPackage];
 

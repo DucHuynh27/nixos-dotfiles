@@ -64,6 +64,11 @@
       nitro-fan-cpu = "sudo nitro fan cpu";
       nitro-fan-gpu = "sudo nitro fan gpu";
 
+      # Battery health (acer-wmi-battery)
+      bat-limit-on = "echo 1 | sudo tee /sys/bus/wmi/drivers/acer-wmi-battery/health_mode";
+      bat-limit-off = "echo 0 | sudo tee /sys/bus/wmi/drivers/acer-wmi-battery/health_mode";
+      bat-limit-status = "cat /sys/bus/wmi/drivers/acer-wmi-battery/health_mode";
+
       # DAMX fallback (chỉ dùng khi import lại ./damx.nix)
       damx-fan-auto = "echo 0,0 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
       damx-fan-max = "echo 100,100 | sudo tee /sys/devices/platform/acer-wmi/nitro_sense/fan_speed";
