@@ -67,28 +67,32 @@
       bat-limit-off = "echo 0 | sudo tee /sys/bus/wmi/drivers/acer-wmi-battery/health_mode";
       bat-limit-status = "cat /sys/bus/wmi/drivers/acer-wmi-battery/health_mode";
 
-      # MSSQL, MySQL & MongoDB (Podman)
-      sql-start = "systemctl start podman-mssql";
-      sql-stop = "systemctl stop podman-mssql";
-      sql-status = "systemctl status podman-mssql";
-      sql-log = "journalctl -u podman-mssql -f";
+      # Databases (rootless Podman, managed by Mini Docker)
+      sql-start = "podman start db-mssql";
+      sql-stop = "podman stop db-mssql";
+      sql-status = "podman ps -a --filter name=db-mssql";
+      sql-log = "podman logs -f db-mssql";
 
-      mysql-start = "systemctl start podman-mysql";
-      mysql-stop = "systemctl stop podman-mysql";
-      mysql-status = "systemctl status podman-mysql";
-      mysql-log = "journalctl -u podman-mysql -f";
+      mysql-start = "podman start db-mysql";
+      mysql-stop = "podman stop db-mysql";
+      mysql-status = "podman ps -a --filter name=db-mysql";
+      mysql-log = "podman logs -f db-mysql";
 
-      mongo-start = "systemctl start podman-mongodb";
-      mongo-stop = "systemctl stop podman-mongodb";
-      mongo-status = "systemctl status podman-mongodb";
-      mongo-log = "journalctl -u podman-mongodb -f";
+      mongo-start = "podman start db-mongodb";
+      mongo-stop = "podman stop db-mongodb";
+      mongo-status = "podman ps -a --filter name=db-mongodb";
+      mongo-log = "podman logs -f db-mongodb";
 
-      pg-start = "systemctl start podman-postgres";
-      pg-stop = "systemctl stop podman-postgres";
-      pg-status = "systemctl status podman-postgres";
-      pg-log = "journalctl -u podman-postgres -f";
+      pg-start = "podman start db-postgres";
+      pg-stop = "podman stop db-postgres";
+      pg-status = "podman ps -a --filter name=db-postgres";
+      pg-log = "podman logs -f db-postgres";
 
-      lzd = "DOCKER_HOST=unix:///run/podman/podman.sock lazydocker";
+      db-start-all = "podman start db-postgres db-mysql db-mongodb db-mssql";
+      db-stop-all = "podman stop db-postgres db-mysql db-mongodb db-mssql";
+      db-status = "podman ps -a --filter name=db-";
+
+      lzd = "lazydocker";
 
       # Network speed test (on-demand, byte units MB/s)
       speedtest = "nix run nixpkgs#speedtest-cli -- --bytes";

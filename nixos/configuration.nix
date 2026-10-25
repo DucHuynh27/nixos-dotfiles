@@ -18,7 +18,6 @@
 
     ./hardware-configuration.nix
     ./nitro-linux.nix
-    ./databases.nix
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}
     inputs.mango.nixosModules.mango
@@ -248,7 +247,7 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = ["i2c" "wheel" "networkmanager" "input" "podman" "kvm" "libvirtd" "video" "render"];
+      extraGroups = ["i2c" "wheel" "networkmanager" "input" "kvm" "libvirtd" "video" "render"];
     };
   };
 
