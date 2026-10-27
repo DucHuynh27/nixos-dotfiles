@@ -128,6 +128,18 @@ return {
 				"RainbowBlue",
 				"RainbowViolet",
 			}
+
+			-- Fallback nếu template Noctalia chưa sinh các group Rainbow*.
+			local function ensure_rainbow(name, link)
+				if next(vim.api.nvim_get_hl(0, { name = name })) == nil then
+					vim.api.nvim_set_hl(0, name, { link = link })
+				end
+			end
+			ensure_rainbow("RainbowRed", "DiagnosticError")
+			ensure_rainbow("RainbowYellow", "DiagnosticWarn")
+			ensure_rainbow("RainbowBlue", "DiagnosticInfo")
+			ensure_rainbow("RainbowViolet", "DiagnosticHint")
+
 			require("ibl").setup({
 				indent = { highlight = highlight, char = "│" },
 				scope = { enabled = true, show_start = false, show_end = false },
