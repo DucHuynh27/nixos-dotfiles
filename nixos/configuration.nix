@@ -21,7 +21,16 @@
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}
     inputs.mango.nixosModules.mango
+    inputs.fcitx5-lotus.nixosModules.fcitx5-lotus
   ];
+
+  # Dựng fcitx5-lotus-server (uinput) để các mode Uinput của Lotus inject được
+  # phím xoá. Dùng package từ nixpkgs thay vì build lại từ source của flake.
+  services.fcitx5-lotus = {
+    enable = true;
+    package = pkgs.fcitx5-lotus;
+    users = ["hinne"];
+  };
 
   aagl.enableNixpkgsReleaseBranchCheck = false;
 
@@ -38,28 +47,22 @@
       experimental-features = ["nix-command" "flakes"];
       # Opinionated: disable global registry
       flake-registry = "";
-      # Optimise storage
       auto-optimise-store = true;
       substituters = [
         "https://cache.nixos.org"
         "https://noctalia.cachix.org"
+        "https://look.cachix.org"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "noctalia.cachix.org-1:Dr8Vop7J7fhFwzW/LGKsnpUTl/6dHDmQBLRVIoB6a5Q="
+        "look.cachix.org-1:8elPCeSVBzlDZXqIRKBK9GyLIK/Hoe1xiWZF0ir7uX4="
       ];
     };
     # Opinionated: disable channels
     # channel.enable = false;
-    # Automatic Garbage Collection
-    # gc = {
-    #   automatic = true;
-    #   dates = "weekly";
-    #   options = "--delete-older-than 7d";
-    # };
   };
 
-  # Network hostname
   networking.hostName = "nixos";
   programs.mango.enable = true;
   programs.anime-game-launcher.enable = true;
@@ -100,7 +103,6 @@
     ];
   };
 
-  # Bootloader & Secure Boot
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
@@ -110,7 +112,6 @@
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = ["ntfs" "exfat" "vfat" "fat32"];
 
-  # Network
   networking.networkmanager.enable = true;
   networking.firewall.allowedTCPPorts = [ 53317 ];
   networking.firewall.allowedUDPPorts = [ 53317 ];
@@ -129,7 +130,6 @@
     };
   };
 
-  # Time zone & Locale
   time.timeZone = "Asia/Ho_Chi_Minh";
   time.hardwareClockInLocalTime = false;
   i18n.defaultLocale = "en_US.UTF-8";
@@ -142,7 +142,6 @@
     corefonts
   ];
 
-  # Audio
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -228,8 +227,6 @@
 
   # Wayland / Nvidia environment variables
   environment.sessionVariables = {
-    # Hardware cursor is enabled (WLR_NO_HARDWARE_CURSORS removed for smooth high-refresh cursor)
-    # WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
 
     # Prisma NixOS fix: NixOS không có precompiled Prisma engines trên binaries.prisma.sh.
@@ -253,7 +250,6 @@
     };
   };
 
-  # Sudo
   security.sudo.extraRules = [
     {
       users = ["hinne"];
@@ -298,7 +294,6 @@
     polymc
   ];
 
-  # Enable Zsh
   programs.zsh = {
     enable = true;
   };
@@ -319,6 +314,10 @@
       libxcomposite
       libxdamage
       libxkbcommon
+      libxinerama
+      libxscrnsaver
+      libxxf86vm
+      dbus
       wayland
       freetype
       fontconfig
@@ -333,7 +332,6 @@
     ];
   };
 
-  # Enable nh - Nix cli wrapper
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -357,7 +355,6 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
-  # Security
   security.polkit = {
     enable = true;
     extraConfig = ''
@@ -384,19 +381,14 @@
   services.blueman.enable = true;
   services.cloudflare-warp.enable = true;
 
-  # Battery and Preformance
-  services.upower.enable = true; # Dịch vụ đọc phần trăm pin laptop
-  services.power-profiles-daemon.enable = true; # Quản lý chế độ (Tiết kiệm pin / Hiệu năng cao)
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
 
-  # ZRAM Swap
   zramSwap.enable = true;
   zramSwap.memoryPercent = 50;
 
-  # Gaming Optimizations
   programs.gamemode.enable = true;
-  programs.steam.enable = true;
 
-  # Virtualisation (Docker, Waydroid & Libvirt/KVM)
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;

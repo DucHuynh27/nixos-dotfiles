@@ -158,7 +158,6 @@
   # 5 = Preedit
   # 6 = Emoji Picker
   # 7 = Uinput (Select)
-  # 8 = Minecraft
   #
   # Cú pháp độ trễ tùy chỉnh theo app:
   # app=mode[,commit_interval_ms[,backspace_interval_ms[,post_delay_ms]]]
@@ -204,29 +203,37 @@
         // {
           # lotus 5.x đọc rules tại $XDG_CONFIG_HOME/fcitx5/conf/lotus-app-rules.conf
           "conf/lotus-app-rules.conf" = pkgs.writeText "fcitx5-lotus-app-rules.conf" ''
-            # 1. Code Editor
+            # Mode ID (Lotus 5.x/6.x):
+            #   0 = Off   1 = Uinput (Smooth)   3 = Uinput (Super Smooth)
+            #   4 = Surrounding Text   5 = Preedit   6 = Emoji   7 = Uinput (Select)
+            # App không có rule -> dùng mode mặc định toàn cục (đang là Preedit).
+
+            # 1. Code Editor & IDE
             code=5
 
-            # 2. Terminal
+            # 2. Terminal (không hỗ trợ uinput/surrounding text)
             wezterm=5
             org.wezfurlong.wezterm=5
 
-            # 3. Web Browser
-            brave-browser=5
-            bilibili=3
+            # 3. Web Browser (Chromium)
+            # Brave gõ nhanh bị rơi chữ ở chế độ Uinput -> nới delay nhẹ:
+            # commit_interval=25ms, backspace_interval=6ms, post_delay=15ms
+            # (mặc định của Lotus: 20 / 5 / 10).
+            brave-browser=1,25,6,15
+            com.brave.Browser=1,25,6,15
 
-            # 4. Chat & Office
-            vesktop=4
-            telegram-desktop=4
-            org.telegram.desktop=4
-            obsidian=4
-            anki=4
-            net.ankiweb.Anki=4
-            libreoffice=4
-            soffice.bin=4
-            wps=4
-            wpp=4
-            et=4
+            # 4. Chat & Social (Electron/Chromium)
+            vesktop=1
+            org.telegram.desktop=1
+            cz.viceverse.serein=1
+
+            # 5. Password manager / học tập (ưu tiên an toàn)
+            org.keepassxc.KeePassXC=5
+            anki=5
+            net.ankiweb.Anki=5
+
+            # 6. Nhạc
+            sonora=1
           '';
         });
   };

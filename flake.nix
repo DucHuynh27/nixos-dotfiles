@@ -40,7 +40,7 @@
     mango.inputs.nixpkgs.follows = "nixpkgs";
 
     # Look app launcher
-    look.url = "github:kunkka19xx/look?dir=apps/linows";
+    look.url = "github:kunkka19xx/look";
     look.inputs.nixpkgs.follows = "nixpkgs";
 
     # lgtm (terminal diff reviewer for agentic coding)
@@ -54,6 +54,13 @@
     nitro-linux = {
       url = "github:SurrealArts/nitro-linux";
       flake = false;
+    };
+
+    # fcitx5-lotus: cung cấp NixOS module `services.fcitx5-lotus` để dựng
+    # uinput server (user uinput_proxy, udev rule, systemd service).
+    fcitx5-lotus = {
+      url = "github:LotusInputMethod/fcitx5-lotus";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -82,11 +89,6 @@
           ./nixos/configuration.nix
         ];
       };
-      #arch = nixpkgs.lib.nixosSystem {
-      #specialArgs = {inherit inputs;};
-      #modules = [
-      # ./nixos/configuration.nix
-      #];
     };
 
     # Standalone home-manager configuration entrypoint

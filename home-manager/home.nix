@@ -30,6 +30,7 @@ in {
     ./tui/scripts.nix
     ./tui/tools.nix
     ./tui/fastfetch.nix
+    ./tui/opencode.nix
 
     # Apps
     ./apps/mangohud.nix
@@ -62,11 +63,25 @@ in {
       #     patches = [ ./change-hello-to-hi.patch ];
       #   });
       # })
+
+      # posthog 7.71 (kéo theo bởi aider-chat) fail 1 test với mcp 2.x trong
+      # nixpkgs hiện tại; tắt check để build được (runtime không cần test).
+      (final: prev: {
+        python3Packages = prev.python3Packages.overrideScope (pf: pp: {
+          posthog = pp.posthog.overridePythonAttrs (_: {
+            doCheck = false;
+          });
+        });
+      })
     ];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      # posthog 7.71 (gián tiếp qua aider-chat) bị đánh dấu broken trong
+      # nixpkgs gần đây do xung đột phiên bản mcp; hạ xuống "warn" để không
+      # chặn eval/home-manager.
+      problems.handlers.posthog.broken = "warn";
     };
   };
 
@@ -76,7 +91,6 @@ in {
     homeDirectory = "/home/hinne";
   };
 
-  # Environment Variables
   home.sessionVariables = {
     PNPM_HOME = "$HOME/.local/share/pnpm";
     EDITOR = "nvim";
@@ -87,6 +101,9 @@ in {
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    # Bắt app Qt (WPS, KeePassXC, Anki...) nạp plugin fcitx5
+    # (waylandFrontend=true khiến module HM không tự set biến này).
+    QT_IM_MODULE = "fcitx";
     DEEPSEEK_API_KEY_FILE = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
   };
 
@@ -197,6 +214,7 @@ in {
     xdg-utils
     keepassxc
     podman-compose
+    qbittorrent
 
     # ---------------------------------------------------
     # Desktop Shell & WM
@@ -325,16 +343,10 @@ in {
     # ---------------------------------------------------
     inputs.antigravity.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
     inputs.serein.packages.${pkgs.stdenv.hostPlatform.system}.default
-    opencode
-
-    # ---------------------------------------------------
-    # Overrides & Fixes
-    # ---------------------------------------------------
   ];
   # Enable home-manager
   programs.home-manager.enable = true;
 
-  # Automount USB drives
   services.udiskie.enable = false;
 
   # Continue.dev configuration (API keys are injected from sops)
@@ -452,7 +464,6 @@ in {
     };
   };
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.pointerCursor = {
     enable = true;
     size = 28;
@@ -483,6 +494,7 @@ in {
     '';
   };
 
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.11";
   news.display = "silent";
 
