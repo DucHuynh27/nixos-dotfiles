@@ -196,7 +196,6 @@ in {
     wl-clipboard
     xdg-utils
     keepassxc
-    flameshot
     podman-compose
 
     # ---------------------------------------------------
@@ -283,11 +282,8 @@ in {
     # ---------------------------------------------------
     # Screen Toolkit & Capture
     # ---------------------------------------------------
-    grim
     hyprpicker
     imagemagick
-    satty
-    slurp
     tesseract
     wl-screenrec
     zbar
@@ -378,10 +374,6 @@ in {
         composer_target_language = "EN"
         api_key_env = "DEEPL_API_KEY"
       '';
-    };
-    "flameshot/flameshot.ini" = {
-      source = ./apps/flameshot/flameshot.ini;
-      force = true;
     };
     "nvim" = {
       source = ./editors/nvim;
