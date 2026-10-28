@@ -85,7 +85,19 @@ in {
     "d /var/lib/nitro 0755 root root -"
   ];
 
-  environment.etc."nitro.conf".source = "${nitroSrc}/deploy/nitro.conf";
+  # Bản /etc/nitro.conf riêng: upstream mặc định "profile balanced" và
+  # nitro-apply.service áp lại MỖI lần boot, nên profile performance bị reset.
+  # Ghi thẳng ở đây để "performance" giữ nguyên sau reboot.
+  environment.etc."nitro.conf".text = ''
+    # applied at boot by nitro-apply.service
+    static 1 255 255 255
+    static 2 255 255 255
+    static 4 255 255 255
+    static 8 255 255 255
+    fan cpu 50
+    fan gpu 50
+    profile performance
+  '';
 
   systemd.services.nitro-apply = {
     description = "Apply /etc/nitro.conf to Acer Nitro sysfs";
