@@ -49,6 +49,7 @@ in {
 
     # System & Input
     ./system/fcitx5.nix
+    ./system/nitro.nix
   ];
 
   nixpkgs = {
