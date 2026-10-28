@@ -199,15 +199,20 @@
     };
   };
 
-  # NVIDIA HDMI audio shares the memory clock domain with the GPU, so memory
-  # clock changes cause brief HDMI audio dropouts. Lock it only while HDMI is
-  # connected and reset it when the display is disconnected.
+  # NVIDIA HDMI audio dùng chung miền memory clock với GPU, nên khi GPU đổi
+  # xung nhịp bộ nhớ (hoặc bị RTD3 cho ngủ) thì audio HDMI bị nhảy.
+  #   - Cắm HDMI-A-1 (ở nhà): đánh thức GPU bằng persistence daemon + ghim clock
+  #   - Rút HDMI (đi học):    nhả clock + dừng persistence daemon để GPU ngủ (RTD3)
+  # Vì vậy nvidia-persistenced KHÔNG chạy lúc boot, chỉ bật/tắt theo cổng HDMI.
+  systemd.services.nvidia-persistenced.wantedBy = lib.mkForce [];
+
   systemd.services.nvidia-hdmi-memclk = {
-    description = "Lock NVIDIA GPU memory clock while HDMI-A-1 is connected";
+    description = "Lock NVIDIA memory clock + keep GPU awake while HDMI-A-1 is connected";
     wantedBy = ["multi-user.target"];
-    after = ["nvidia-persistenced.service"];
     serviceConfig = {
       Type = "oneshot";
+      # Luôn exit 0: một lần lệch phiên bản driver không được phép làm hỏng
+      # cả lượt nixos-rebuild switch (xem nvidia-persistenced/nvidia-smi).
       ExecStart =
         let
           nvidiaSmi = pkgs.writeShellScript "nvidia-smi" ''
@@ -216,11 +221,17 @@
           '';
         in
           pkgs.writeShellScript "nvidia-hdmi-memclk" ''
+            set +e
+            systemctl=${config.systemd.package}/bin/systemctl
             if [ "$(cat /sys/class/drm/card0-HDMI-A-1/status 2>/dev/null)" = "connected" ]; then
-              ${nvidiaSmi} --lock-memory-clocks=6001
+              $systemctl start nvidia-persistenced.service
+              ${nvidiaSmi} --lock-memory-clocks=6001 \
+                || echo "nvidia-hdmi-memclk: không ghim được memory clock" >&2
             else
               ${nvidiaSmi} --reset-memory-clocks || true
+              $systemctl stop nvidia-persistenced.service
             fi
+            exit 0
           '';
     };
   };
@@ -406,7 +417,10 @@
   services.udev.packages = with pkgs; [brightnessctl ddcutil];
   services.udev.extraRules = ''
     KERNEL=="hidraw*", ATTRS{idVendor}=="5253", MODE="0666", TAG+="uaccess"
+    # Khi cổng HDMI đổi trạng thái (cắm/rút): kernel phát uevent HOTPLUG trên
+    # DRM card, nên bắt cả 2 dạng để service chạy lại đúng lúc.
     ACTION=="add|change", SUBSYSTEM=="drm", KERNEL=="card0-HDMI-A-1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="nvidia-hdmi-memclk.service"
+    ACTION=="change", SUBSYSTEM=="drm", ENV{HOTPLUG}=="1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="nvidia-hdmi-memclk.service"
   '';
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
