@@ -1,4 +1,3 @@
-# MangoWM Configuration Module
 {
   config,
   pkgs,

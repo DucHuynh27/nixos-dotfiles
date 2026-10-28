@@ -28,7 +28,6 @@ return {
         },
       })
 
-      -- Phím tắt để format thủ công
       vim.keymap.set({ "n", "v" }, "<leader>fm", function()
         conform.format({
           lsp_format = "fallback",

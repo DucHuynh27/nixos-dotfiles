@@ -24,7 +24,6 @@ return {
     end,
   },
 
-  -- Tự động đóng ngoặc
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
@@ -33,7 +32,6 @@ return {
     end,
   },
 
-  -- Quản lý ngoặc (Surround)
   {
     "machakann/vim-sandwich",
     event = "BufRead",
@@ -50,7 +48,6 @@ return {
     end,
   },
 
-  -- Hiển thị Markdown đẹp mắt
   {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown" },

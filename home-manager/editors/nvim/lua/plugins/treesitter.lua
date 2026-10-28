@@ -1,5 +1,4 @@
 return {
-  -- Phân tích cú pháp và tô màu mã nguồn vượt trội
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "master",
@@ -58,7 +57,6 @@ return {
     end,
   },
 
-  -- Sticky Scroll: Ghim tên hàm / class ở đầu màn hình khi cuộn trang
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = { "BufReadPost", "BufNewFile" },

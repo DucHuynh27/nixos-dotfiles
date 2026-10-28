@@ -1,11 +1,9 @@
 # Zsh and Terminal Utilities Configuration
-# This module sets up Zsh, aliases, and related tools (starship, zoxide, eza).
 {
   config,
   pkgs,
   ...
 }: {
-  # Zsh configuration
   programs.zsh = {
     enable = true;
 

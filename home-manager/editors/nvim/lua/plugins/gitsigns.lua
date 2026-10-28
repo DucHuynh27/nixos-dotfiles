@@ -17,7 +17,6 @@ return {
         },
       })
       
-      -- Phím tắt nhanh
       local gs = package.loaded.gitsigns
       vim.keymap.set("n", "]h", gs.next_hunk, { desc = "Đến đoạn code sửa tiếp theo (Git)" })
       vim.keymap.set("n", "[h", gs.prev_hunk, { desc = "Về đoạn code sửa trước đó (Git)" })

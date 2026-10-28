@@ -1,5 +1,3 @@
-# Git Configuration
-# Managed entirely by Home Manager (replaces ~/.gitconfig)
 {
   config,
   pkgs,
@@ -8,7 +6,6 @@
   programs.git = {
     enable = true;
 
-    # All settings
     settings = {
       user = {
         name = "Hinn";

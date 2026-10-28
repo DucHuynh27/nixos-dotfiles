@@ -1,4 +1,3 @@
--- Nạp các cài đặt cơ bản
 require("core.options")
 require("core.keymaps")
 
@@ -39,7 +38,6 @@ vim.json.decode = function(s, opts)
 	return obj
 end
 
--- Khởi động lazy.nvim và bảo nó tìm các plugin trong thư mục lua/plugins/
 require("lazy").setup("plugins", {
 	defaults = { lazy = false },
 	checker = { enabled = true }, -- Tự động kiểm tra bản cập nhật

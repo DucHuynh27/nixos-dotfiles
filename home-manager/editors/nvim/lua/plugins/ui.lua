@@ -16,7 +16,6 @@ return {
 		end,
 	},
 
-	-- Thanh trạng thái
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -42,7 +41,6 @@ return {
 				end)
 			)
 
-			-- Hàm trả về thời tiết
 			local function get_weather()
 				return weather
 			end
@@ -83,7 +81,6 @@ return {
 		end,
 	},
 
-	-- Quản lý file
 	{
 		"mikavilpas/yazi.nvim",
 		event = "VeryLazy",
@@ -116,7 +113,6 @@ return {
 		},
 	},
 
-	-- Indent Blankline (Thụt lề cầu vồng)
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
@@ -147,7 +143,6 @@ return {
 		end,
 	},
 
-	-- Giao diện menu nổi xịn xò
 	{
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
@@ -165,13 +160,11 @@ return {
 		end,
 	},
 
-	-- Cải thiện Quickfix
 	{
 		"kevinhwang91/nvim-bqf",
 		ft = "qf",
 	},
 
-	-- Highlight và đếm kết quả tìm kiếm
 	{
 		"kevinhwang91/nvim-hlslens",
 		config = function()
@@ -194,7 +187,6 @@ return {
 		end,
 	},
 
-	-- Highlight mã màu trực quan (HEX, RGB, CSS, Tailwind)
 	{
 		"brenoprata10/nvim-highlight-colors",
 		event = { "BufReadPre", "BufNewFile" },

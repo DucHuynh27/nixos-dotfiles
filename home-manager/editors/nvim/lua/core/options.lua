@@ -1,10 +1,8 @@
 local opt = vim.opt
 
--- Đánh số dòng
 opt.number = true
 opt.relativenumber = true
 
--- Tab và thụt lề
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
@@ -19,7 +17,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Giao diện
 opt.termguicolors = true
 opt.wrap = true
 opt.linebreak = true
@@ -34,12 +31,10 @@ opt.fillchars = {
   foldclose = "" 
 }
 
--- Tìm kiếm
 opt.ignorecase = true
 opt.smartcase = true
 opt.inccommand = "split" -- Xem trước thay thế chuỗi theo thời gian thực
 
--- Hệ thống
 opt.clipboard = "unnamedplus" -- Copy paste với OS
 opt.undofile = true -- Lưu lịch sử hoàn tác (Undo) vĩnh viễn
 opt.splitbelow = true -- Mở cửa sổ chia ngang ở dưới

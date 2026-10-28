@@ -24,7 +24,6 @@ return {
     opts = {},
   },
 
-  -- Gom và tô màu TODO / FIXME / HACK
   {
     "folke/todo-comments.nvim",
     event = "VeryLazy",

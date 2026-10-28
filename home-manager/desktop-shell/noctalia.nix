@@ -1,4 +1,3 @@
-# Noctalia Shell Configuration Module
 {
   config,
   pkgs,

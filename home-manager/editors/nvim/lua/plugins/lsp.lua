@@ -1,5 +1,4 @@
 return {
-  -- Cấu hình LSP (Language Server Protocol)
   {
     "neovim/nvim-lspconfig",
     version = "*", -- Khóa ở phiên bản ổn định (Stable) để tránh cảnh báo từ nhánh Master
@@ -22,7 +21,6 @@ return {
         end
       end
 
-      -- Kích hoạt các LSP cho Full Stack JS & DevOps
       setup_server("lua_ls", {
         settings = { Lua = { diagnostics = { globals = { "vim" } } } }
       })
@@ -54,7 +52,6 @@ return {
         },
       })
 
-      -- Cấu hình hiển thị Icon chẩn đoán (Diagnostics)
       vim.diagnostic.config({
         signs = {
           text = {
@@ -66,13 +63,11 @@ return {
         },
       })
 
-      -- Phím tắt Báo lỗi (Diagnostics)
       vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Xem chi tiết lỗi (Float)" })
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Lỗi trước đó" })
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Lỗi tiếp theo" })
       vim.keymap.set("n", "<leader>dd", function() require("fzf-lua").diagnostics_document() end, { desc = "Danh sách lỗi trong file" })
 
-      -- Phím tắt điều hướng & thao tác Code (LSP)
       vim.keymap.set("n", "gd", function() require("fzf-lua").lsp_definitions() end, { desc = "Đến định nghĩa (Definition)" })
       vim.keymap.set("n", "gr", function() require("fzf-lua").lsp_references() end, { desc = "Tìm các nơi sử dụng (References)" })
       vim.keymap.set("n", "gI", function() require("fzf-lua").lsp_implementations() end, { desc = "Đến Implementation" })

@@ -8,13 +8,11 @@ local map = vim.keymap.set
 -- Đóng buffer hiện tại (thay cho bufferline đã bỏ)
 map("n", "<leader>bd", "<cmd>bdelete<cr>", { desc = "Đóng buffer hiện tại" })
 
--- Quản lý cửa sổ (Split window)
 map("n", "<leader>sv", "<C-w>v", { desc = "Chia dọc màn hình" })
 map("n", "<leader>sh", "<C-w>s", { desc = "Chia ngang màn hình" })
 map("n", "<leader>se", "<C-w>=", { desc = "Làm đều các cửa sổ" })
 map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Đóng cửa sổ hiện tại" })
 
--- Xóa highlight tìm kiếm
 map("n", "<leader>nh", ":nohl<CR>", { desc = "Xóa highlight tìm kiếm" })
 
 -- Di chuyển khối dòng trong Visual mode (tương tự Alt+Up/Down)

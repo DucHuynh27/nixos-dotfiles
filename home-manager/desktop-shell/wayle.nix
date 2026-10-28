@@ -1,4 +1,3 @@
-# Wayle desktop shell configuration
 {
   pkgs,
   lib,

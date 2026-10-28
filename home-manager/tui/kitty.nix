@@ -1,5 +1,3 @@
-# Kitty Terminal Configuration
-# This module configures the Kitty terminal emulator natively using Home Manager.
 {
   config,
   pkgs,
@@ -8,13 +6,11 @@
   programs.kitty = {
     enable = true;
 
-    # Font configuration
     font = {
       name = "Monaspace Argon Frozen";
       size = 14.0;
     };
 
-    # Keybindings (from your kitty.conf)
     keybindings = {
       # Phím tắt chia cửa sổ dọc/ngang
       "ctrl+shift+enter" = "launch --location=hsplit";
@@ -33,7 +29,6 @@
       "ctrl+f" = "launch --location=vsplit --allow-remote-control kitty +kitten search.py @active-kitty-window-id";
     };
 
-    # Extra settings
     settings = {
       bold_font = "auto";
       italic_font = "Monaspace Radon Frozen";

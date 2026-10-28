@@ -1,5 +1,4 @@
 return {
-  -- Tìm kiếm siêu tốc
   {
     "ibhagwan/fzf-lua",
     cmd = { "FzfLua" },
@@ -14,7 +13,6 @@ return {
     end,
   },
 
-  -- Nhảy chuột nhanh (Flash thế hệ mới)
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -24,7 +22,6 @@ return {
     },
   },
 
-  -- Menu phím tắt
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -63,7 +60,6 @@ return {
     end,
   },
 
-  -- Outline cấu trúc code
   {
     "stevearc/aerial.nvim",
     dependencies = {
@@ -78,7 +74,6 @@ return {
     end,
   },
 
-  -- Gấp code nâng cao
   {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
@@ -96,7 +91,6 @@ return {
     end,
   },
 
-  -- Quản lý và khôi phục phiên làm việc (Session)
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
@@ -108,7 +102,6 @@ return {
     },
   },
 
-  -- Bảng quản lý lỗi tập trung toàn dự án (Trouble)
   {
     "folke/trouble.nvim",
     cmd = { "Trouble" },
@@ -121,7 +114,6 @@ return {
     },
   },
 
-  -- Quản lý Git trực quan với LazyGit
   {
     "kdheepak/lazygit.nvim",
     cmd = {

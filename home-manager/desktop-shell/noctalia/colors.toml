@@ -1,28 +1,22 @@
 [colors]
-# Error colors
 mError = "#e78284"
 mOnError = "#232634"
 
-# Hover colors
 mHover = "#8caaee"
 mOnHover = "#232634"
 
-# Primary colors
 mPrimary = "#8caaee"
 mSecondary = "#f4b8e4"
 mOnPrimary = "#232634"
 mOnSecondary = "#232634"
 
-# Surface colors
 mSurface = "#303446"
 mSurfaceVariant = "#414559"
 mOnSurface = "#c6d0f5"
 mOnSurfaceVariant = "#a5adce"
 
-# Tertiary colors
 mTertiary = "#ca9ee6"
 mOnTertiary = "#232634"
 
-# Outline and shadow
 mOutline = "#626880"
 mShadow = "#232634"
