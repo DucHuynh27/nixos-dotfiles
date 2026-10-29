@@ -41,4 +41,5 @@ end
 require("lazy").setup("plugins", {
 	defaults = { lazy = false },
 	checker = { enabled = true }, -- Tự động kiểm tra bản cập nhật
+	rocks = { enabled = false }, -- Không plugin nào cần luarocks
 })
