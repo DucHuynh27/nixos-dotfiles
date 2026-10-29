@@ -240,12 +240,6 @@ follows_mouse = true
 # eDP-1 -> dùng brightnessctl cho intel_backlight).
 "XF86MonBrightnessDown" = { action = "spawn:brightnessctl set 5%-", allow_when_locked = true }
 "XF86MonBrightnessUp" = { action = "spawn:brightnessctl set +5%", allow_when_locked = true }
-# F3 - mở trang chủ (dùng Brave)
-"XF86HomePage" = "spawn:brave"
-# F4 - Mail   : chưa cài app mail (để trống)
-# "XF86Mail" = "spawn:<app-mail>"
-# F5 - Máy tính: chưa cài app (để trống)
-# "XF86Calculator" = "spawn:<app-may-tinh>"
 # F6 - mở trình phát nhạc (Sonora)
 "XF86AudioMedia" = "spawn:sonora"
 # F7/F8/F9 - bài trước / phát-tạm dừng / bài kế
@@ -256,8 +250,6 @@ follows_mouse = true
 "XF86AudioMute" = { action = "spawn:noctalia msg volume-mute", allow_when_locked = true, repeat = false }
 "XF86AudioLowerVolume" = { action = "spawn:noctalia msg volume-down", allow_when_locked = true }
 "XF86AudioRaiseVolume" = { action = "spawn:noctalia msg volume-up", allow_when_locked = true }
-# Tắt tiếng micro (không có trong list Windows nhưng hữu ích)
-"XF86AudioMicMute" = { action = "spawn:noctalia msg mic-mute", allow_when_locked = true, repeat = false }
 
 # ----------------------------------------------------------- Window rules
 # Picture-in-Picture: nổi + float. Mango có thêm is_global (hiện mọi tag);
