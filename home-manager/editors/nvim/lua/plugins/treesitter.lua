@@ -1,17 +1,16 @@
 return {
   {
+    -- Nhánh "main" là bản viết lại cho Neovim 0.12+; "master" đã khóa và
+    -- gây lỗi "attempt to call method 'range' (a nil value)" khi mở markdown
+    -- có fenced code block.
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-    opts = {
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      indent = { enable = true },
-      ensure_installed = {
+    config = function()
+      local ts = require("nvim-treesitter")
+
+      ts.install({
         "bash",
         "c",
         "cpp",
@@ -26,7 +25,6 @@ return {
         "java",
         "javascript",
         "json",
-        "jsonc",
         "latex",
         "lua",
         "luadoc",
@@ -44,16 +42,16 @@ return {
         "vimdoc",
         "xml",
         "yaml",
-      },
-    },
-    config = function(_, opts)
-      -- tree-sitter CLI >= 0.26 đã bỏ --no-bindings
-      require("nvim-treesitter.install").ts_generate_args = {
-        "generate",
-        "--abi",
-        tostring(vim.treesitter.language_version),
-      }
-      require("nvim-treesitter.configs").setup(opts)
+      })
+
+      -- Neovim 0.12 tự lo highlight/indent, nvim-treesitter chỉ cung cấp parser + query
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          if pcall(vim.treesitter.start) then
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
     end,
   },
 
