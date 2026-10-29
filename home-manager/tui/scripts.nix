@@ -144,8 +144,8 @@
         media-toggle) exec noctalia msg media toggle ;;
         media-next) exec noctalia msg media next ;;
         media-prev) exec noctalia msg media previous ;;
-        brightness-up) exec noctalia msg brightness-up ;;
-        brightness-down) exec noctalia msg brightness-down ;;
+        brightness-up) exec brightnessctl set 5%+ ;;
+        brightness-down) exec brightnessctl set 5%- ;;
       esac
 
       printf 'shell-msg: unknown action: %s\n' "$action" >&2

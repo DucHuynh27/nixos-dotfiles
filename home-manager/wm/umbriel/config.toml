@@ -236,9 +236,10 @@ follows_mouse = true
 # ------------------------------------------- Phím chức năng (Fn + F1..F12)
 # Map theo list Windows/Mac của bạn. Trên Linux các tổ hợp Fn này phát ra
 # keysym XF86* (xác nhận bằng `wev` nếu phím nào không ăn).
-# F1/F2 - độ sáng
-"XF86MonBrightnessDown" = { action = "spawn:noctalia msg brightness-down", allow_when_locked = true }
-"XF86MonBrightnessUp" = { action = "spawn:noctalia msg brightness-up", allow_when_locked = true }
+# F1/F2 - độ sáng (Noctalia không điều khiển được backlight của màn laptop
+# eDP-1 -> dùng brightnessctl cho intel_backlight).
+"XF86MonBrightnessDown" = { action = "spawn:brightnessctl set 5%-", allow_when_locked = true }
+"XF86MonBrightnessUp" = { action = "spawn:brightnessctl set +5%", allow_when_locked = true }
 # F3 - mở trang chủ (dùng Brave)
 "XF86HomePage" = "spawn:brave"
 # F4 - Mail   : chưa cài app mail (để trống)
