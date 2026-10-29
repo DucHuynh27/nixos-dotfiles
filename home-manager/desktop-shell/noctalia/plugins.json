@@ -43,10 +43,6 @@
       "enabled": true,
       "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
     },
-    "ezequiel/mango_layouts": {
-      "enabled": true,
-      "sourceUrl": "https://github.com/noctalia-dev/community-plugins"
-    },
     "noctalia/bongocat": {
       "enabled": true,
       "sourceUrl": "https://github.com/noctalia-dev/community-plugins"

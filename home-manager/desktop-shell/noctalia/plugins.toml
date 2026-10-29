@@ -46,8 +46,3 @@ sourceUrl = "https://github.com/noctalia-dev/community-plugins"
 name = "keybind-cheatsheet"
 enabled = true
 sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins"
-
-[[states]]
-name = "ezequiel/mango_layouts"
-enabled = true
-sourceUrl = "https://github.com/noctalia-dev/community-plugins"

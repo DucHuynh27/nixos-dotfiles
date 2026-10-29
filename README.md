@@ -25,11 +25,11 @@ Cả hai dùng chung **một** `nixpkgs` (`nixos-unstable`); các flake input kh
     │   ├── home.nix
     │   ├── apps/                  # mangohud, zathura
     │   ├── colorscheme/           # catppuccin
-    │   ├── desktop-shell/         # noctalia, wayle
+    │   ├── desktop-shell/         # noctalia
     │   ├── editors/               # nvim, VSCode
     │   ├── system/                # fcitx5
     │   ├── tui/                   # aider, lgtm, wezterm, kitty, zsh, git, ...
-    │   └── wm/                    # mango
+    │   └── wm/                    # umbriel
     │
     └── secrets/                   # Dữ liệu mã hóa bằng SOPS (Age)
         └── secrets.yaml
@@ -76,14 +76,14 @@ sudo nixos-rebuild switch --flake .#nixos
 
 ### Bước 1.4: Kích hoạt phần người dùng (Home Manager)
 
-Bước này sẽ thiết lập toàn bộ môi trường desktop (MangoWM, Noctalia), terminal (WezTerm), các công cụ CLI và tự động giải mã cấu hình secrets.
+Bước này sẽ thiết lập toàn bộ môi trường desktop (Umbriel + Noctalia trên TTY1), terminal (WezTerm), các công cụ CLI và tự động giải mã cấu hình secrets.
 Vì công cụ `nh` đã được cài đặt ở Bước 1.3, chỉ cần:
 
 ```bash
 nh home switch
 ```
 
-Sau khi lệnh chạy xong, khởi động lại máy hoặc đăng nhập vào TTY1 để phiên MangoWM + Noctalia tự động khởi chạy. TTY2 chạy MangoWM + Wayle.
+Sau khi lệnh chạy xong, khởi động lại máy hoặc đăng nhập vào TTY1 để phiên Umbriel + Noctalia tự động khởi chạy.
 
 > **💡 Lưu ý về dọn dẹp hệ thống:**
 > Hệ thống đã có sẵn **tự động dọn rác (Garbage Collection) mỗi tuần**. Đi kèm với đó là dịch vụ chạy ngầm tự động đồng bộ Bootloader (`switch-to-configuration boot`).
@@ -118,7 +118,7 @@ Sops sẽ tự động giải mã file vào một vùng nhớ tạm, mở lên c
 
 ### Theo dõi số dư DeepSeek
 
-Repo có sẵn lệnh `deepseek-balance` và custom module trên Wayle. DeepSeek cung cấp endpoint công khai để đọc số dư API:
+Repo có sẵn lệnh `deepseek-balance`. DeepSeek cung cấp endpoint công khai để đọc số dư API:
 `GET https://api.deepseek.com/user/balance`.
 
 Đặt API key trong môi trường shell, không ghi trực tiếp vào Nix:
@@ -135,4 +135,4 @@ Nếu dùng SOPS, có thể trỏ script tới một file secret đã được g
 export DEEPSEEK_API_KEY_FILE="$HOME/.config/secrets/deepseek-api-key"
 ```
 
-Custom module cập nhật mỗi 5 phút. Mặc định hiển thị số dư còn lại (remaining); click trái bật/tắt chế độ chi tiết gồm top-up, granted và remaining; click phải làm mới số dư. Sau khi đặt biến môi trường, chạy `nh home switch` và khởi động lại Wayle để áp dụng.
+Chạy `nh home switch` sau khi đặt biến môi trường để áp dụng.

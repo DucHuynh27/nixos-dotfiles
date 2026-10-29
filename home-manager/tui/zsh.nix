@@ -104,27 +104,16 @@
 
     # Extra configuration added to ~/.zprofile for login shells
     profileExtra = ''
-        # Autostart Mango sessions on TTY login.
-        # tty1 -> Noctalia shell, tty2 -> Wayle shell (selected via MANGO_SHELL).
+        # Autostart Umbriel + Noctalia trên TTY1 khi đăng nhập.
+        # (Noctalia được Umbriel tự autostart — xem wm/umbriel/config.toml.)
         if [[ -o interactive ]] && [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
           if [ "$(tty)" = "/dev/tty1" ]; then
-            export XDG_CURRENT_DESKTOP=mango
-            export XDG_SESSION_DESKTOP=mango
+            export XDG_CURRENT_DESKTOP=umbriel
+            export XDG_SESSION_DESKTOP=umbriel
             export XDG_SESSION_TYPE=wayland
-            export WLR_RENDERER=vulkan
-            export MANGO_SHELL=noctalia
-            exec mango > ~/.mango-noctalia.log 2>&1
-
-          elif [ "$(tty)" = "/dev/tty2" ]; then
-            export XDG_CURRENT_DESKTOP=mango
-            export XDG_SESSION_DESKTOP=mango
-            export XDG_SESSION_TYPE=wayland
-            export WLR_RENDERER=vulkan
-            export MANGO_SHELL=wayle
-            exec mango > ~/.mango-wayle.log 2>&1
-
+            exec umbriel > ~/.umbriel.log 2>&1
+          fi
         fi
-      fi
     '';
 
     # Extra configuration added to ~/.zshrc

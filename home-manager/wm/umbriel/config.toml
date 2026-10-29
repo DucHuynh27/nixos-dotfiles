@@ -1,0 +1,284 @@
+# Umbriel — cấu hình compositor (đã port từ MangoWM trước đây).
+# Bảng màu động do Noctalia sinh ở ~/.config/umbriel/noctalia.toml (include bên dưới).
+
+[general]
+mod_key = "Super"
+autostart = [
+  "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE QT_QPA_PLATFORMTHEME",
+  "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE QT_QPA_PLATFORMTHEME",
+  "fcitx5 -d",
+  "noctalia",
+]
+
+# Bảng màu do Noctalia ghi ra (builtin template "umbriel").
+# File chính áp sau include nên KHÔNG hardcode [colors] ở đây để theme động thắng.
+# Path tương đối -> cùng thư mục với config.toml (~/.config/umbriel/noctalia.toml);
+# giữ đúng "noctalia.toml" để apply.sh của Noctalia coi như đã xong (không ghi đè).
+[include.optional]
+files = ["noctalia.toml"]
+
+# ---------------------------------------------------------------- Outputs
+[output.eDP-1]
+mode = "1920x1080@144"
+position = [0, 0]
+scale = 1.0
+workspaces = 3
+workspace_axis = "horizontal"
+
+[output.HDMI-A-1]
+mode = "1920x1080@200"
+position = [1920, 0]
+scale = 1.0
+workspaces = 3
+workspace_axis = "horizontal"
+# Mango bật HDR cho màn rời khi chơi game (trước đây qua bind Super+Alt+H).
+# "auto": chỉ bật HDR khi có nội dung fullscreen HDR (Genshin...).
+hdr = "auto"
+
+# ------------------------------------------------------------- Workspaces
+# ws1 scrolling, ws2 master, ws3 floating (giống tag_rule của Mango).
+# Không kèm `output` nên áp cho mọi màn hình.
+[[workspace]]
+index = 1
+layout.mode = "scrolling"
+
+[[workspace]]
+index = 2
+layout.mode = "master"
+
+[[workspace]]
+index = 3
+layout.mode = "floating"
+
+# ---------------------------------------------------------------- Layout
+[layout]
+mode = "scrolling"
+gap = 5
+# Preset giống Mango: scroller_proportion_preset=0.5,0.8,1.0
+extent_presets = [0.5, 0.8, 1.0]
+
+[layout.scrolling]
+default_extent_fraction = 0.8
+center_focused = "never"
+
+[layout.master]
+position = "left"
+default_width_fraction = 0.55
+new_on_top = true
+new_becomes_master = false
+
+[layout.dwindle]
+preserve_split = false
+new_toward_cursor = false
+
+# ------------------------------------------------------------- Appearance
+[appearance]
+border_width = 0
+corner_radius = 10
+
+# Mango để blur=0, shadows=0 -> tắt, nhưng vẫn giữ thông số để bật lại nhanh.
+[appearance.blur]
+enabled = false
+optimized = true
+passes = 2
+radius = 5
+noise = 0.02
+brightness = 0.9
+contrast = 0.9
+saturation = 1.2
+
+[appearance.shadow]
+enabled = false
+softness = 15
+offset_x = 0
+offset_y = 0
+
+# -------------------------------------------------------------- Animation
+[animation]
+enabled = true
+duration_ms = 250
+
+[animation.windows_in]
+enabled = true
+style = "popin"
+scale = 0.85
+duration_ms = 400
+curve = "0.46,1.0,0.29,1"
+
+[animation.windows_out]
+enabled = true
+style = "popin"
+scale = 0.85
+duration_ms = 800
+curve = "0.08,0.92,0,1"
+
+[animation.windows_move]
+enabled = true
+duration_ms = 500
+curve = "0.46,1.0,0.29,1"
+
+[animation.windows_resize]
+enabled = true
+duration_ms = 500
+curve = "0.46,1.0,0.29,1"
+
+[animation.workspaces]
+enabled = true
+style = "slide"
+duration_ms = 350
+curve = "0.46,1.0,0.29,1"
+
+# ------------------------------------------------------------------ Input
+[input.keyboard]
+layout = "us"
+repeat_rate = 50
+repeat_delay = 250
+numlock_toggle = false
+
+[input.touchpad]
+tap = true
+tap_and_drag = true
+drag_lock = "sticky"
+natural_scroll = false
+disable_while_typing = true
+left_handed = false
+
+[input.mouse]
+natural_scroll = false
+
+[input.cursor]
+size = 24
+follows_focus = true
+
+[input.focus]
+follows_mouse = true
+
+# --------------------------------------------------------------- Keybinds
+# LƯU Ý: config này THAY THẾ hoàn toàn file mẫu của Umbriel (không merge),
+# nên phải tự khai báo cả những bind "mặc định" (close/float/focus/workspace...).
+[keybinds]
+
+# --- Ứng dụng & session (port từ Mango) ---
+"Mod" = { action = "spawn:noctalia msg panel-toggle launcher", repeat = false }
+"Mod+Return" = { action = "spawn:wezterm", repeat = false }
+"Mod+B" = "spawn:brave"
+"Mod+E" = "spawn:wezterm start -- yazi"
+"Mod+M" = "spawn:loginctl terminate-user $USER"
+"Mod+Alt+L" = "spawn:loginctl lock-session"
+"Mod+Q" = { action = "window-close", repeat = false }
+"Mod+Escape" = "session-quit"
+"Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
+
+# Screenshots (Noctalia built-in)
+"Print" = "spawn:noctalia msg screenshot-region"
+"Mod+Print" = "spawn:noctalia msg screenshot-fullscreen"
+
+# --- Focus & di chuyển (default Umbriel) ---
+"Mod+Left" = "window-focus-left"
+"Mod+Down" = "window-focus-down"
+"Mod+Up" = "window-focus-up"
+"Mod+Right" = "window-focus-right"
+"Mod+H" = "window-focus-left"
+"Mod+J" = "window-focus-down"
+"Mod+K" = "window-focus-up"
+"Mod+L" = "window-focus-right"
+"Mod+F1" = "window-focus-next"
+"Mod+Shift+Left" = "column-move-left"
+"Mod+Shift+Right" = "column-move-right"
+"Mod+Shift+Up" = "window-move-up"
+"Mod+Shift+Down" = "window-move-down"
+
+# --- Trạng thái cửa sổ & layout ---
+"Mod+T" = { action = "window-toggle-floating", repeat = false }
+"Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
+"Mod+P" = { action = "window-toggle-pinned", repeat = false }
+"Mod+F" = { action = "window-toggle-fullscreen", repeat = false }
+"Mod+Ctrl+F" = { action = "window-toggle-maximize", repeat = false }
+"Mod+R" = "window-cycle-primary-extent"
+"Mod+Shift+R" = "window-cycle-primary-extent-back"
+"Mod+Comma" = "window-consume-left"
+"Mod+Period" = "window-consume-right"
+"Mod+Ctrl+Comma" = "window-consume-from-left"
+"Mod+Ctrl+Period" = "window-consume-from-right"
+"Mod+W" = { action = "column-toggle-tabbed", repeat = false }
+"Mod+Alt+Left" = "column-focus-tab-previous"
+"Mod+Alt+Right" = "column-focus-tab-next"
+"Mod+WheelUp" = "window-focus-left"
+"Mod+WheelDown" = "window-focus-right"
+"Mod+O" = { action = "overview-toggle", repeat = false }
+
+# --- Workspaces (chỉ có 3, nhưng khai báo 1..9 cho đủ) ---
+"Mod+1" = "workspace-switch:1"
+"Mod+2" = "workspace-switch:2"
+"Mod+3" = "workspace-switch:3"
+"Mod+4" = "workspace-switch:4"
+"Mod+5" = "workspace-switch:5"
+"Mod+6" = "workspace-switch:6"
+"Mod+7" = "workspace-switch:7"
+"Mod+8" = "workspace-switch:8"
+"Mod+9" = "workspace-switch:9"
+"Mod+Shift+1" = "window-move-to-workspace:1"
+"Mod+Shift+2" = "window-move-to-workspace:2"
+"Mod+Shift+3" = "window-move-to-workspace:3"
+"Mod+Shift+4" = "window-move-to-workspace:4"
+"Mod+Shift+5" = "window-move-to-workspace:5"
+"Mod+Shift+6" = "window-move-to-workspace:6"
+"Mod+Shift+7" = "window-move-to-workspace:7"
+"Mod+Shift+8" = "window-move-to-workspace:8"
+"Mod+Shift+9" = "window-move-to-workspace:9"
+
+# --- Scratchpad ---
+"Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
+"Mod+Space" = "scratchpad-toggle"
+"Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
+"Mod+Tab" = "scratchpad-focus-next"
+
+# ------------------------------------------- Phím chức năng (Fn + F1..F12)
+# Map theo list Windows/Mac của bạn. Trên Linux các tổ hợp Fn này phát ra
+# keysym XF86* (xác nhận bằng `wev` nếu phím nào không ăn).
+# F1/F2 - độ sáng
+"XF86MonBrightnessDown" = { action = "spawn:noctalia msg brightness-down", allow_when_locked = true }
+"XF86MonBrightnessUp" = { action = "spawn:noctalia msg brightness-up", allow_when_locked = true }
+# F3 - mở trang chủ (dùng Brave)
+"XF86HomePage" = "spawn:brave"
+# F4 - Mail   : chưa cài app mail (để trống)
+# "XF86Mail" = "spawn:<app-mail>"
+# F5 - Máy tính: chưa cài app (để trống)
+# "XF86Calculator" = "spawn:<app-may-tinh>"
+# F6 - mở trình phát nhạc (Sonora)
+"XF86AudioMedia" = "spawn:sonora"
+# F7/F8/F9 - bài trước / phát-tạm dừng / bài kế
+"XF86AudioPrev" = { action = "spawn:noctalia msg media previous", allow_when_locked = true }
+"XF86AudioPlay" = { action = "spawn:noctalia msg media toggle", allow_when_locked = true, repeat = false }
+"XF86AudioNext" = { action = "spawn:noctalia msg media next", allow_when_locked = true }
+# F10/F11/F12 - tắt tiếng / giảm / tăng âm lượng
+"XF86AudioMute" = { action = "spawn:noctalia msg volume-mute", allow_when_locked = true, repeat = false }
+"XF86AudioLowerVolume" = { action = "spawn:noctalia msg volume-down", allow_when_locked = true }
+"XF86AudioRaiseVolume" = { action = "spawn:noctalia msg volume-up", allow_when_locked = true }
+# Tắt tiếng micro (không có trong list Windows nhưng hữu ích)
+"XF86AudioMicMute" = { action = "spawn:noctalia msg mic-mute", allow_when_locked = true, repeat = false }
+
+# ----------------------------------------------------------- Window rules
+# Picture-in-Picture: nổi + float. Mango có thêm is_global (hiện mọi tag);
+# Umbriel không có khái niệm đó nên chỉ map float + pin.
+[[window_rule]]
+match.title = ["Picture-in-Picture", "Picture in picture", "Hình trong hình"]
+default_floating = true
+default_pinned = true
+
+# Genshin: fake fullscreen -> maximize-to-edges (phủ kín, bỏ gaps/border/struts).
+[[window_rule]]
+match.title = "Genshin Impact"
+default_maximize_to_edges = true
+
+# Cửa sổ Settings của Noctalia: mở dạng nổi, kích thước 1020x900.
+[[window_rule]]
+match.app_id = "^dev.noctalia.Noctalia$"
+default_floating = true
+default_floating_size_px = { width = 1020, height = 900 }
+
+# UmbrielSharePicker (chọn nguồn chia sẻ màn hình): mở dạng nổi 800x600.
+[[window_rule]]
+match.app_id = "^dev.noctalia.UmbrielSharePicker$"
+default_floating = true
+default_floating_size_px = { width = 800, height = 600 }

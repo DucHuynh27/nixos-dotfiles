@@ -130,39 +130,23 @@
     runtimeInputs = with pkgs; [
       brightnessctl
       noctalia
-      wayle
     ];
     text = ''
       set -euo pipefail
 
-      shell="''${MANGO_SHELL:-noctalia}"
       action="''${1:-}"
 
-      if [ "$shell" = "noctalia" ]; then
-        case "$action" in
-          volume-up) exec noctalia msg volume-up ;;
-          volume-down) exec noctalia msg volume-down ;;
-          volume-mute) exec noctalia msg volume-mute ;;
-          mic-mute) exec noctalia msg mic-mute ;;
-          media-toggle) exec noctalia msg media toggle ;;
-          media-next) exec noctalia msg media next ;;
-          media-prev) exec noctalia msg media previous ;;
-          brightness-up) exec noctalia msg brightness-up ;;
-          brightness-down) exec noctalia msg brightness-down ;;
-        esac
-      else
-        case "$action" in
-          volume-up) exec wayle audio output-volume +5 ;;
-          volume-down) exec wayle audio output-volume -5 ;;
-          volume-mute) exec wayle audio output-mute ;;
-          mic-mute) exec wayle audio input-mute ;;
-          media-toggle) exec wayle media play-pause ;;
-          media-next) exec wayle media next ;;
-          media-prev) exec wayle media previous ;;
-          brightness-up) exec brightnessctl set 5%+ ;;
-          brightness-down) exec brightnessctl set 5%- ;;
-        esac
-      fi
+      case "$action" in
+        volume-up) exec noctalia msg volume-up ;;
+        volume-down) exec noctalia msg volume-down ;;
+        volume-mute) exec noctalia msg volume-mute ;;
+        mic-mute) exec noctalia msg mic-mute ;;
+        media-toggle) exec noctalia msg media toggle ;;
+        media-next) exec noctalia msg media next ;;
+        media-prev) exec noctalia msg media previous ;;
+        brightness-up) exec noctalia msg brightness-up ;;
+        brightness-down) exec noctalia msg brightness-down ;;
+      esac
 
       printf 'shell-msg: unknown action: %s\n' "$action" >&2
       exit 1

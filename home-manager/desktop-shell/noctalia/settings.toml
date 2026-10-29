@@ -186,7 +186,7 @@ mode = "dark"
 source = "custom"
 
     [theme.templates]
-    builtin_ids = [ "cava", "gtk3", "gtk4", "kitty", "mango", "qt", "wezterm" ]
+    builtin_ids = [ "cava", "gtk3", "gtk4", "kitty", "qt", "umbriel", "wezterm" ]
     community_ids = [
         "antigravity",
         "opencode",

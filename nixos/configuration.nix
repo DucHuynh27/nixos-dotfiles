@@ -20,7 +20,7 @@
     ./nitro-linux.nix
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}
-    inputs.mango.nixosModules.mango
+    inputs.umbriel.nixosModules.default
     inputs.fcitx5-lotus.nixosModules.fcitx5-lotus
   ];
 
@@ -51,12 +51,12 @@
       substituters = [
         "https://cache.nixos.org"
         "https://noctalia.cachix.org"
-        "https://look.cachix.org"
+        "https://umbriel.cachix.org"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "noctalia.cachix.org-1:Dr8Vop7J7fhFwzW/LGKsnpUTl/6dHDmQBLRVIoB6a5Q="
-        "look.cachix.org-1:8elPCeSVBzlDZXqIRKBK9GyLIK/Hoe1xiWZF0ir7uX4="
+        "umbriel.cachix.org-1:JfNq/2yg2S6D6z4Z2dVSZrZlDPQTKtexB6GAVLD98nw="
       ];
     };
     # Opinionated: disable channels
@@ -64,7 +64,7 @@
   };
 
   networking.hostName = "nixos";
-  programs.mango.enable = true;
+  programs.umbriel.enable = true;
   programs.anime-game-launcher.enable = true;
   programs.gamescope = {
     enable = true;

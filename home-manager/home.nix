@@ -37,11 +37,9 @@ in {
     ./apps/zathura.nix
 
     # Window Manager
-    ./wm/mango.nix
+    ./wm/umbriel.nix
 
     # Desktop Shell & UI
-    inputs.look.homeModules.default
-    ./desktop-shell/wayle.nix
     ./desktop-shell/noctalia.nix
 
     # Editors
@@ -73,6 +71,13 @@ in {
             doCheck = false;
           });
         });
+      })
+
+      # obsidian 1.14.5 crash renderer (webFrame.defineProperty /
+      # "i.webFrame[t] is not a function") với electron_43 = 43.8.3 trong
+      # nixpkgs hiện tại; ép dùng electron_44 = 44.9.3 (đã test chạy ổn).
+      (final: prev: {
+        obsidian = prev.obsidian.override { electron = prev.electron_44; };
       })
     ];
     # Configure your nixpkgs instance
@@ -137,28 +142,6 @@ in {
     "$HOME/.local/share/pnpm"
     "$HOME/.local/bin"
   ];
-
-  programs.lookapp = {
-    enable = true;
-    package = pkgs.lookapp;
-    settings = {
-      # Linux does not bind Look's global hotkey itself; Mango binds Alt+Space
-      # to `lookapp --toggle`. Keep `none` so Look does not try to grab it.
-      launcher_hotkey = "none";
-      # Do not autostart Look at login. Mango starts/toggles it on demand with
-      # `lookapp --toggle` from Alt+Space.
-      launch_at_login = false;
-      clipboard_history_limit = 30;
-    };
-    aliases = {
-      note = ["Notion" "Obsidian" "Notes" "Apple Notes" "Bear" "Logseq" "OneNote" "Microsoft OneNote" "Sticky Notes" "Joplin"];
-      code = ["Visual Studio Code" "VSCode" "Cursor" "Windsurf" "IntelliJ IDEA" "PyCharm" "WebStorm" "Neovim" "Xcode" "Zed" "Visual Studio" "Notepad++" "Sublime Text"];
-      term = ["Terminal" "iTerm" "iTerm2" "Ghostty" "WezTerm" "Alacritty" "Kitty" "Warp" "Windows Terminal" "PowerShell" "Command Prompt" "wsl"];
-      chat = ["Slack" "Discord" "Telegram" "Messages" "Microsoft Teams" "Teams" "WhatsApp" "Signal" "Zoom" "Vesktop" "Serein"];
-      music = ["Spotify" "Apple Music" "Music" "YouTube Music" "VLC" "Windows Media Player" "foobar2000" "Sonora"];
-      brow = ["Safari" "Arc" "Google Chrome" "Chrome" "Firefox" "Brave" "Microsoft Edge" "Edge" "Brave Browser" "Vivaldi" "Opera"];
-    };
-  };
 
   # Upstream home-manager still calls `nix profile install`, which Nix 2.34
   # deprecates in favour of `nix profile add`. Mirrors the upstream

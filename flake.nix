@@ -35,13 +35,8 @@
     sonora.url = "github:sonorahq/sonora";
     sonora.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Mango
-    mango.url = "github:mangowm/mango";
-    mango.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Look app launcher
-    look.url = "github:kunkka19xx/look";
-    look.inputs.nixpkgs.follows = "nixpkgs";
+    # Umbriel (compositor của Noctalia). KHÔNG set follows để dùng binary cache.
+    umbriel.url = "github:noctalia-dev/umbriel";
 
     # lgtm (terminal diff reviewer for agentic coding)
     lgtm.url = "github:kunkka19xx/lgtm";
