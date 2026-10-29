@@ -240,8 +240,8 @@ follows_mouse = true
 # eDP-1 -> dùng brightnessctl cho intel_backlight).
 "XF86MonBrightnessDown" = { action = "spawn:brightnessctl set 5%-", allow_when_locked = true }
 "XF86MonBrightnessUp" = { action = "spawn:brightnessctl set +5%", allow_when_locked = true }
-# F6 - mở trình phát nhạc (Sonora)
-"XF86AudioMedia" = "spawn:sonora"
+# F6 - mở trình phát nhạc (Sonora). Máy này Fn+F6 phát ra keysym XF86Tools.
+"XF86Tools" = "spawn:sonora"
 # F7/F8/F9 - bài trước / phát-tạm dừng / bài kế
 "XF86AudioPrev" = { action = "spawn:noctalia msg media previous", allow_when_locked = true }
 "XF86AudioPlay" = { action = "spawn:noctalia msg media toggle", allow_when_locked = true, repeat = false }
