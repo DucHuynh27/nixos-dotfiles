@@ -111,6 +111,9 @@ in {
     # Bắt app Qt (WPS, KeePassXC, Anki...) nạp plugin fcitx5
     # (waylandFrontend=true khiến module HM không tự set biến này).
     QT_IM_MODULE = "fcitx";
+    # JetBrains Toolbox/IDEs (Java AWT) không hiện cửa sổ đúng trên WM tiling
+    # nếu bị reparent; tắt reparent để window hiện ra bình thường.
+    _JAVA_AWT_WM_NONREPARENTING = "1";
     DEEPSEEK_API_KEY_FILE = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
   };
 
