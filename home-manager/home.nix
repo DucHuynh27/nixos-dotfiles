@@ -33,6 +33,7 @@ in {
     ./tui/opencode.nix
 
     # Apps
+    ./apps/anime-game-launcher.nix
     ./apps/mangohud.nix
     ./apps/zathura.nix
 
