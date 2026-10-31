@@ -159,19 +159,19 @@ follows_mouse = false
 [keybinds]
 
 # --- Ứng dụng & session (port từ Mango) ---
-"Mod" = { action = "spawn:noctalia msg panel-toggle launcher", repeat = false }
-"Mod+Return" = { action = "spawn:wezterm", repeat = false }
-"Mod+B" = "spawn:brave"
-"Mod+E" = "spawn:wezterm start -- yazi"
-"Mod+M" = "spawn:loginctl terminate-user $USER"
-"Mod+Alt+L" = "spawn:loginctl lock-session"
+"Mod" = { action = "spawn noctalia msg panel-toggle launcher", repeat = false }
+"Mod+Return" = { action = "spawn wezterm", repeat = false }
+"Mod+B" = "spawn brave"
+"Mod+E" = "spawn wezterm start -- yazi"
+"Mod+M" = "spawn loginctl terminate-user $USER"
+"Mod+Alt+L" = "spawn loginctl lock-session"
 "Mod+Q" = { action = "window-close", repeat = false }
 "Mod+Escape" = "session-quit"
 "Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
 
 # Screenshots (Noctalia built-in)
-"Print" = "spawn:noctalia msg screenshot-region"
-"Mod+Print" = "spawn:noctalia msg screenshot-fullscreen"
+"Print" = "spawn noctalia msg screenshot-region"
+"Mod+Print" = "spawn noctalia msg screenshot-fullscreen"
 
 # --- Focus & di chuyển (default Umbriel) ---
 "Mod+Left" = "window-focus-left"
@@ -210,24 +210,24 @@ follows_mouse = false
 "Mod+O" = { action = "overview-toggle", repeat = false }
 
 # --- Workspaces (chỉ có 3, nhưng khai báo 1..9 cho đủ) ---
-"Mod+1" = "workspace-switch:1"
-"Mod+2" = "workspace-switch:2"
-"Mod+3" = "workspace-switch:3"
-"Mod+4" = "workspace-switch:4"
-"Mod+5" = "workspace-switch:5"
-"Mod+6" = "workspace-switch:6"
-"Mod+7" = "workspace-switch:7"
-"Mod+8" = "workspace-switch:8"
-"Mod+9" = "workspace-switch:9"
-"Mod+Shift+1" = "window-move-to-workspace:1"
-"Mod+Shift+2" = "window-move-to-workspace:2"
-"Mod+Shift+3" = "window-move-to-workspace:3"
-"Mod+Shift+4" = "window-move-to-workspace:4"
-"Mod+Shift+5" = "window-move-to-workspace:5"
-"Mod+Shift+6" = "window-move-to-workspace:6"
-"Mod+Shift+7" = "window-move-to-workspace:7"
-"Mod+Shift+8" = "window-move-to-workspace:8"
-"Mod+Shift+9" = "window-move-to-workspace:9"
+"Mod+1" = "workspace-switch 1"
+"Mod+2" = "workspace-switch 2"
+"Mod+3" = "workspace-switch 3"
+"Mod+4" = "workspace-switch 4"
+"Mod+5" = "workspace-switch 5"
+"Mod+6" = "workspace-switch 6"
+"Mod+7" = "workspace-switch 7"
+"Mod+8" = "workspace-switch 8"
+"Mod+9" = "workspace-switch 9"
+"Mod+Shift+1" = "window-move-to-workspace 1"
+"Mod+Shift+2" = "window-move-to-workspace 2"
+"Mod+Shift+3" = "window-move-to-workspace 3"
+"Mod+Shift+4" = "window-move-to-workspace 4"
+"Mod+Shift+5" = "window-move-to-workspace 5"
+"Mod+Shift+6" = "window-move-to-workspace 6"
+"Mod+Shift+7" = "window-move-to-workspace 7"
+"Mod+Shift+8" = "window-move-to-workspace 8"
+"Mod+Shift+9" = "window-move-to-workspace 9"
 
 # --- Scratchpad ---
 "Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
@@ -240,18 +240,18 @@ follows_mouse = false
 # keysym XF86* (xác nhận bằng `wev` nếu phím nào không ăn).
 # F1/F2 - độ sáng (Noctalia không điều khiển được backlight của màn laptop
 # eDP-1 -> dùng brightnessctl cho intel_backlight).
-"XF86MonBrightnessDown" = { action = "spawn:brightnessctl set 5%-", allow_when_locked = true }
-"XF86MonBrightnessUp" = { action = "spawn:brightnessctl set +5%", allow_when_locked = true }
+"XF86MonBrightnessDown" = { action = "spawn brightnessctl set 5%-", allow_when_locked = true }
+"XF86MonBrightnessUp" = { action = "spawn brightnessctl set +5%", allow_when_locked = true }
 # F6 - mở trình phát nhạc (Sonora). Máy này Fn+F6 phát ra keysym XF86Tools.
-"XF86Tools" = "spawn:sonora"
+"XF86Tools" = "spawn sonora"
 # F7/F8/F9 - bài trước / phát-tạm dừng / bài kế
-"XF86AudioPrev" = { action = "spawn:noctalia msg media previous", allow_when_locked = true }
-"XF86AudioPlay" = { action = "spawn:noctalia msg media toggle", allow_when_locked = true, repeat = false }
-"XF86AudioNext" = { action = "spawn:noctalia msg media next", allow_when_locked = true }
+"XF86AudioPrev" = { action = "spawn noctalia msg media previous", allow_when_locked = true }
+"XF86AudioPlay" = { action = "spawn noctalia msg media toggle", allow_when_locked = true, repeat = false }
+"XF86AudioNext" = { action = "spawn noctalia msg media next", allow_when_locked = true }
 # F10/F11/F12 - tắt tiếng / giảm / tăng âm lượng
-"XF86AudioMute" = { action = "spawn:noctalia msg volume-mute", allow_when_locked = true, repeat = false }
-"XF86AudioLowerVolume" = { action = "spawn:noctalia msg volume-down", allow_when_locked = true }
-"XF86AudioRaiseVolume" = { action = "spawn:noctalia msg volume-up", allow_when_locked = true }
+"XF86AudioMute" = { action = "spawn noctalia msg volume-mute", allow_when_locked = true, repeat = false }
+"XF86AudioLowerVolume" = { action = "spawn noctalia msg volume-down", allow_when_locked = true }
+"XF86AudioRaiseVolume" = { action = "spawn noctalia msg volume-up", allow_when_locked = true }
 
 # ----------------------------------------------------------- Window rules
 # Picture-in-Picture: nổi + float. Mango có thêm is_global (hiện mọi tag);
