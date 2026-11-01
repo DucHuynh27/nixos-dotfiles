@@ -41,7 +41,6 @@
       config.scrollback_lines = 10000
 
       -- Màu: Noctalia sinh ~/.config/wezterm/colors/Noctalia.toml mỗi khi đổi theme.
-      -- Không hardcode palette ở đây; chỉ chọn scheme và theo dõi file để tự reload.
       local noctalia_scheme = wezterm.home_dir .. "/.config/wezterm/colors/Noctalia.toml"
       local scheme_file = io.open(noctalia_scheme, "r")
       if scheme_file then
@@ -56,9 +55,8 @@
       -- Keybindings
       config.disable_default_key_bindings = false
       config.keys = {
-        -- Splits (Ctrl+Shift+Enter for Horizontal, Ctrl+Shift+\ for Vertical)
-        { key = 'Enter', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-        { key = '|', mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+        { key = 'Enter', mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+        { key = '|', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
 
         -- Move between panes
         { key = 'H', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Left' },
