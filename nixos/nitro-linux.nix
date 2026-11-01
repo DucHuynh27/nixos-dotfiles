@@ -64,9 +64,6 @@ in {
     "d /var/lib/nitro 0755 root root -"
   ];
 
-  # Bản /etc/nitro.conf riêng: upstream mặc định "profile balanced" và
-  # nitro-apply.service áp lại MỖI lần boot, nên profile performance bị reset.
-  # Ghi thẳng ở đây để "performance" giữ nguyên sau reboot.
   environment.etc."nitro.conf".text = ''
     # applied at boot by nitro-apply.service
     static 1 255 255 255

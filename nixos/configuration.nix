@@ -24,8 +24,6 @@
     inputs.fcitx5-lotus.nixosModules.fcitx5-lotus
   ];
 
-  # Dựng fcitx5-lotus-server (uinput) để các mode Uinput của Lotus inject được
-  # phím xoá. Dùng package từ nixpkgs thay vì build lại từ source của flake.
   services.fcitx5-lotus = {
     enable = true;
     package = pkgs.fcitx5-lotus;
@@ -176,12 +174,10 @@
     };
   };
 
-  # Disable audio power saving to prevent stuttering/dropouts
   boot.extraModprobeConfig = ''
     options snd_hda_intel power_save=0 power_save_controller=N enable_msi=1
   '';
 
-  # Nvidia Optimus setup
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     modesetting.enable = true;
@@ -199,11 +195,6 @@
     };
   };
 
-  # NVIDIA HDMI audio dùng chung miền memory clock với GPU, nên khi GPU đổi
-  # xung nhịp bộ nhớ (hoặc bị RTD3 cho ngủ) thì audio HDMI bị nhảy.
-  #   - Cắm HDMI-A-1 (ở nhà): đánh thức GPU bằng persistence daemon + ghim clock
-  #   - Rút HDMI (đi học):    nhả clock + dừng persistence daemon để GPU ngủ (RTD3)
-  # Vì vậy nvidia-persistenced KHÔNG chạy lúc boot, chỉ bật/tắt theo cổng HDMI.
   systemd.services.nvidia-persistenced.wantedBy = lib.mkForce [];
 
   systemd.services.nvidia-hdmi-memclk = {
@@ -211,8 +202,6 @@
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       Type = "oneshot";
-      # Luôn exit 0: một lần lệch phiên bản driver không được phép làm hỏng
-      # cả lượt nixos-rebuild switch (xem nvidia-persistenced/nvidia-smi).
       ExecStart =
         let
           nvidiaSmi = pkgs.writeShellScript "nvidia-smi" ''
@@ -236,12 +225,9 @@
     };
   };
 
-  # Wayland / Nvidia environment variables
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
 
-    # Prisma NixOS fix: NixOS không có precompiled Prisma engines trên binaries.prisma.sh.
-    # Trỏ thẳng đến binary được build bởi nixpkgs thay vì để Prisma tự download.
     PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
   };
 
@@ -302,7 +288,6 @@
     enable = true;
   };
 
-  # Allow NixOS to run precompiled binaries (Node.js, JetBrains IDEs, etc.)
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
@@ -331,7 +316,6 @@
       libsecret
       nss
       nspr
-      # Prisma schema-engine cần libssl/libcrypto để chạy
       openssl
     ];
   };
@@ -343,7 +327,6 @@
     flake = "/home/hinne/nix-config";
   };
 
-  # Auto sync bootloader after NixOS garbage collection
   systemd.services.sync-bootloader = {
     description = "Sync bootloader after NixOS garbage collection";
     after = ["nh-clean.service"];
@@ -355,7 +338,6 @@
     };
   };
 
-  # Enable USB automounting and trash support
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
@@ -372,7 +354,6 @@
   };
   security.rtkit.enable = true;
 
-  # Bluetooth config (with battery reporting)
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -406,7 +387,6 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
-  # MChose Mouse Web Driver Udev Rule
   services.udev.packages = with pkgs; [brightnessctl ddcutil];
   services.udev.extraRules = ''
     KERNEL=="hidraw*", ATTRS{idVendor}=="5253", MODE="0666", TAG+="uaccess"
