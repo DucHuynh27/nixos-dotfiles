@@ -55,8 +55,9 @@
       -- Keybindings
       config.disable_default_key_bindings = false
       config.keys = {
-        { key = 'Enter', mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-        { key = '|', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+        -- Chia pane: Enter = trên/dưới, | = trái/phải (SplitHorizontal -> phải)
+        { key = 'Enter', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+        { key = '|', mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
 
         -- Move between panes
         { key = 'H', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Left' },
