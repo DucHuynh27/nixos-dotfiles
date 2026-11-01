@@ -28,13 +28,6 @@ return {
         },
       })
 
-      vim.keymap.set({ "n", "v" }, "<leader>fm", function()
-        conform.format({
-          lsp_format = "fallback",
-          async = false,
-          timeout_ms = 3000,
-        })
-      end, { desc = "Format file hiện tại" })
     end,
   }
 }

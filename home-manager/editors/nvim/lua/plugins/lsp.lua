@@ -66,7 +66,6 @@ return {
       vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Xem chi tiết lỗi (Float)" })
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Lỗi trước đó" })
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Lỗi tiếp theo" })
-      vim.keymap.set("n", "<leader>dd", function() require("fzf-lua").diagnostics_document() end, { desc = "Danh sách lỗi trong file" })
 
       vim.keymap.set("n", "gd", function() require("fzf-lua").lsp_definitions() end, { desc = "Đến định nghĩa (Definition)" })
       vim.keymap.set("n", "gr", function() require("fzf-lua").lsp_references() end, { desc = "Tìm các nơi sử dụng (References)" })

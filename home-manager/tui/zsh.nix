@@ -90,7 +90,15 @@
       db-stop-all = "podman stop db-postgres db-mysql db-mongodb db-mssql";
       db-status = "podman ps -a --filter name=db-";
 
-      lzd = "lazydocker";
+      # E-learning LMS dev stack (pod_backend)
+      lms-start = "podman pod start pod_backend";
+      lms-stop = "podman pod stop pod_backend";
+      lms-status = "podman ps -a --filter pod=pod_backend";
+
+      pdt = "podman-tui";
+
+      # Chat (DeepL auto-translate qua concord-tui-wezterm)
+      concord = "concord-tui-wezterm";
 
       # Network speed test (on-demand, byte units MB/s)
       speedtest = "nix run nixpkgs#speedtest-cli -- --bytes";

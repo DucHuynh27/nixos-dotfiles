@@ -294,15 +294,8 @@
     appimage-run
     git
     pkgs.noctalia
-    file-roller
-    jdk25
-    glfw3-minecraft
-    quickemu
-    virt-viewer
     nest-cli
     efibootmgr
-    glib
-    polymc
   ];
 
   programs.zsh = {

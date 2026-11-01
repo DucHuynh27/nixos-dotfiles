@@ -7,8 +7,6 @@
   pkgs,
   ...
 }: let
-  # The current nixpkgs source has a stale fixed-output hash for this package.
-  # Keep the package available while using the hash produced by its locked source.
   typescript-language-server = pkgs.typescript-language-server.overrideAttrs (old: {
     pnpmDeps = old.pnpmDeps.overrideAttrs (_: {
       outputHash = "sha256-xR/EF60lVBsITKgH7wCM2wHM46PFQevD51KfCENSUH4=";
@@ -21,7 +19,6 @@ in {
     ./colorscheme/catppuccin.nix
 
     # TUI & Shell
-    ./tui/aider.nix
     ./tui/lgtm.nix
     ./tui/wezterm.nix
     ./tui/zsh.nix
@@ -64,19 +61,6 @@ in {
       #   });
       # })
 
-      # posthog 7.71 (kéo theo bởi aider-chat) fail 1 test với mcp 2.x trong
-      # nixpkgs hiện tại; tắt check để build được (runtime không cần test).
-      (final: prev: {
-        python3Packages = prev.python3Packages.overrideScope (pf: pp: {
-          posthog = pp.posthog.overridePythonAttrs (_: {
-            doCheck = false;
-          });
-        });
-      })
-
-      # obsidian 1.14.5 crash renderer (webFrame.defineProperty /
-      # "i.webFrame[t] is not a function") với electron_43 = 43.8.3 trong
-      # nixpkgs hiện tại; ép dùng electron_44 = 44.9.3 (đã test chạy ổn).
       (final: prev: {
         obsidian = prev.obsidian.override { electron = prev.electron_44; };
       })
@@ -85,10 +69,6 @@ in {
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      # posthog 7.71 (gián tiếp qua aider-chat) bị đánh dấu broken trong
-      # nixpkgs gần đây do xung đột phiên bản mcp; hạ xuống "warn" để không
-      # chặn eval/home-manager.
-      problems.handlers.posthog.broken = "warn";
     };
   };
 
@@ -104,20 +84,14 @@ in {
     TERMINAL = "wezterm";
     BROWSER = "brave";
     LC_MEASUREMENT = "en_IE.UTF-8";
-    # Wayland/Qt variables (ported from Niri)
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    # Bắt app Qt (WPS, KeePassXC, Anki...) nạp plugin fcitx5
-    # (waylandFrontend=true khiến module HM không tự set biến này).
     QT_IM_MODULE = "fcitx";
-    # JetBrains Toolbox/IDEs (Java AWT) không hiện cửa sổ đúng trên WM tiling
-    # nếu bị reparent; tắt reparent để window hiện ra bình thường.
     _JAVA_AWT_WM_NONREPARENTING = "1";
     DEEPSEEK_API_KEY_FILE = "${config.home.homeDirectory}/.config/secrets/deepseek-api-key";
   };
 
-  # Tạo Desktop Entry đè lên mặc định để sửa lỗi launcher/file search
   xdg.desktopEntries = {
     yazi = {
       name = "Yazi";
@@ -147,9 +121,6 @@ in {
     "$HOME/.local/bin"
   ];
 
-  # Upstream home-manager still calls `nix profile install`, which Nix 2.34
-  # deprecates in favour of `nix profile add`. Mirrors the upstream
-  # installPackages activation, only the subcommand differs.
   home.activation.installPackages = lib.mkForce (lib.hm.dag.entryAfter ["writeBoundary"] (
     if config.submoduleSupport.externalPackageInstall
     then ''
@@ -202,6 +173,7 @@ in {
     xdg-utils
     keepassxc
     podman-compose
+    podman-tui
     qbittorrent
 
     # ---------------------------------------------------
@@ -217,7 +189,6 @@ in {
     fd
     gcc
     gnumake
-    lazydocker
     lazygit
     fnm
     pnpm
@@ -225,6 +196,12 @@ in {
     unzip
     posting
     openssl
+    glib
+
+    # ---------------------------------------------------
+    # Java Toolchain
+    # ---------------------------------------------------
+    jdk25
 
     # ---------------------------------------------------
     # Text Editor & IDE
@@ -262,6 +239,7 @@ in {
     postman
     pcmanfm-qt
     lxqt.lxqt-archiver
+    file-roller
     telegram-desktop
     vesktop
     wpsoffice
@@ -269,8 +247,8 @@ in {
     texlab
     (texliveMedium.withPackages (ps:
       with ps; [
-        scheme-medium # Gói nền tảng: ĐÃ BAO GỒM xetex, fontspec, geometry, setspace, indentfirst, graphics (chứa graphicx), hyperref, latexmk, v.v.
-        titlesec # Thêm riêng package format tiêu đề để đảm bảo chắc chắn
+        scheme-medium
+        titlesec
       ]))
     bilibili
     heroic
@@ -294,6 +272,18 @@ in {
     wl-screenrec
     zbar
     zenity
+
+    # ---------------------------------------------------
+    # Virtualisation (user tools)
+    # ---------------------------------------------------
+    quickemu
+    virt-viewer
+
+    # ---------------------------------------------------
+    # Gaming
+    # ---------------------------------------------------
+    polymc
+    glfw3-minecraft
 
     # ---------------------------------------------------
     # Yazi Plugins & Utilities
@@ -337,7 +327,6 @@ in {
 
   services.udiskie.enable = false;
 
-  # Continue.dev configuration (API keys are injected from sops)
   home.file.".continue/config.yaml" = {
     source = ./editors/VSCode/continue/config.yaml;
     force = true;
@@ -381,9 +370,8 @@ in {
     };
   };
 
-  # Sops-Nix configuration for secrets
   sops = {
-    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt"; # Phải trỏ đúng file chứa key
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     defaultSopsFile = ../secrets/secrets.yaml;
     secrets."ssh_key" = {
       path = "${config.home.homeDirectory}/.ssh/id_ed25519";
@@ -486,7 +474,6 @@ in {
   home.stateVersion = "25.11";
   news.display = "silent";
 
-  # Enable font discovery for home-manager fonts
   fonts.fontconfig.enable = true;
 
   xdg.configFile."fontconfig/conf.d/10-custom-fonts.conf".text = ''

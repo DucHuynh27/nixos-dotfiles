@@ -56,9 +56,9 @@
       -- Keybindings
       config.disable_default_key_bindings = false
       config.keys = {
-        -- Splits (Ctrl+Shift+Enter for Horizontal, Ctrl+Shift+O for Vertical)
+        -- Splits (Ctrl+Shift+Enter for Horizontal, Ctrl+Shift+\ for Vertical)
         { key = 'Enter', mods = 'CTRL|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-        { key = 'O', mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+        { key = '|', mods = 'CTRL|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
 
         -- Move between panes
         { key = 'H', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Left' },

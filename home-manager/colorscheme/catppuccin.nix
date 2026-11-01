@@ -20,7 +20,6 @@
     fcitx5.enable = true;
     fzf.enable = true;
     gtk.icon.enable = true;
-    kitty.enable = true;
     kvantum.enable = true;
     obs.enable = true;
     starship.enable = true;

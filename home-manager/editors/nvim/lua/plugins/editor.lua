@@ -31,14 +31,11 @@ return {
       local is_tex = function() return vim.bo.filetype == "tex" end
       wk.add({
         { "<leader>f", group = "Tìm kiếm (Find)" },
-        { "<leader>s", group = "Cửa sổ (Splits)" },
         { "<leader>u", group = "Giao diện (UI)" },
         { "<leader>n", group = "Tiện ích (Misc)" },
         { "<leader>c", group = "Code (LSP)" },
-        { "<leader>d", group = "Săn lỗi (Diagnostics)" },
         { "<leader>g", group = "Git" },
         { "<leader>q", group = "Phiên làm việc (Session)" },
-        { "<leader>x", group = "Bảng lỗi (Trouble)" },
         { "<localleader>l", group = "LaTeX (VimTeX)", cond = is_tex },
         { "<localleader>ll", desc = "Biên dịch (latexmk + xelatex)", cond = is_tex },
         { "<localleader>lS", desc = "Biên dịch một lần", cond = is_tex },
@@ -107,27 +104,7 @@ return {
     cmd = { "Trouble" },
     opts = {},
     keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Bảng lỗi Diagnostics (Trouble)" },
-      { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Lỗi trong file hiện tại" },
-      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Cấu trúc Symbols (Trouble)" },
       { "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP Definitions / References (Trouble)" },
-    },
-  },
-
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    keys = {
-      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "Mở LazyGit toàn màn hình" },
     },
   },
 }

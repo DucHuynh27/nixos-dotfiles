@@ -69,6 +69,7 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      overlays = [inputs.polymc.overlay];
     };
   in {
     formatter.${system} = pkgs.alejandra;

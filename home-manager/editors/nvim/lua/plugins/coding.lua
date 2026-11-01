@@ -11,7 +11,7 @@ return {
       },
     },
     opts = {
-      keymap = { preset = "enter" }, -- <CR> nhận, <Tab>/<S-Tab> chọn
+      keymap = { preset = "super-tab" },
       snippets = { preset = "luasnip" }, -- Dùng chung registry với LuaSnip
       appearance = { nerd_font_variant = "mono" },
       sources = { default = { "lsp", "path", "snippets", "buffer" } },
@@ -35,17 +35,6 @@ return {
   {
     "machakann/vim-sandwich",
     event = "BufRead",
-  },
-
-  -- Thoát insert mode cực nhanh (jk)
-  {
-    "max397574/better-escape.nvim",
-    event = "InsertEnter",
-    config = function()
-      require("better_escape").setup({
-        mapping = { "jk", "jj" },
-      })
-    end,
   },
 
   {

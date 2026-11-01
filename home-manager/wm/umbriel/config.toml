@@ -1,6 +1,3 @@
-# Umbriel — cấu hình compositor (đã port từ MangoWM trước đây).
-# Bảng màu động do Noctalia sinh ở ~/.config/umbriel/noctalia.toml (include bên dưới).
-
 [general]
 mod_key = "Super"
 autostart = [
@@ -10,10 +7,6 @@ autostart = [
   "noctalia",
 ]
 
-# Bảng màu do Noctalia ghi ra (builtin template "umbriel").
-# File chính áp sau include nên KHÔNG hardcode [colors] ở đây để theme động thắng.
-# Path tương đối -> cùng thư mục với config.toml (~/.config/umbriel/noctalia.toml);
-# giữ đúng "noctalia.toml" để apply.sh của Noctalia coi như đã xong (không ghi đè).
 [include.optional]
 files = ["noctalia.toml"]
 
@@ -31,13 +24,9 @@ position = [1920, 0]
 scale = 1.0
 workspaces = 3
 workspace_axis = "horizontal"
-# Mango bật HDR cho màn rời khi chơi game (trước đây qua bind Super+Alt+H).
-# "auto": chỉ bật HDR khi có nội dung fullscreen HDR (Genshin...).
 hdr = "auto"
 
 # ------------------------------------------------------------- Workspaces
-# ws1 scrolling, ws2 master, ws3 floating (giống tag_rule của Mango).
-# Không kèm `output` nên áp cho mọi màn hình.
 [[workspace]]
 index = 1
 layout.mode = "scrolling"
@@ -48,13 +37,12 @@ layout.mode = "master"
 
 [[workspace]]
 index = 3
-layout.mode = "floating"
+layout.mode = "master"
 
 # ---------------------------------------------------------------- Layout
 [layout]
 mode = "scrolling"
 gap = 5
-# Preset giống Mango: scroller_proportion_preset=0.5,0.8,1.0
 extent_presets = [0.5, 0.8, 1.0]
 
 [layout.scrolling]
@@ -76,7 +64,6 @@ new_toward_cursor = false
 border_width = 0
 corner_radius = 10
 
-# Mango để blur=0, shadows=0 -> tắt, nhưng vẫn giữ thông số để bật lại nhanh.
 [appearance.blur]
 enabled = false
 optimized = true
@@ -154,16 +141,15 @@ follows_focus = true
 follows_mouse = false
 
 # --------------------------------------------------------------- Keybinds
-# LƯU Ý: config này THAY THẾ hoàn toàn file mẫu của Umbriel (không merge),
-# nên phải tự khai báo cả những bind "mặc định" (close/float/focus/workspace...).
 [keybinds]
 
-# --- Ứng dụng & session (port từ Mango) ---
+# --- Ứng dụng & session ---
 "Mod" = { action = "spawn noctalia msg panel-toggle launcher", repeat = false }
 "Mod+Return" = { action = "spawn wezterm", repeat = false }
 "Mod+B" = "spawn brave"
+"Mod+D" = { action = "spawn concord-tui-wezterm", repeat = false }
 "Mod+E" = "spawn wezterm start -- yazi"
-"Mod+M" = "spawn loginctl terminate-user $USER"
+"Mod+M" = { action = "window-toggle-maximize-to-edges", repeat = false }
 "Mod+Alt+L" = "spawn loginctl lock-session"
 "Mod+Q" = { action = "window-close", repeat = false }
 "Mod+Escape" = "session-quit"
@@ -198,10 +184,10 @@ follows_mouse = false
 "Mod+Ctrl+F" = { action = "window-toggle-maximize", repeat = false }
 "Mod+R" = "window-cycle-primary-extent"
 "Mod+Shift+R" = "window-cycle-primary-extent-back"
-"Mod+Comma" = "window-consume-left"
-"Mod+Period" = "window-consume-right"
-"Mod+Ctrl+Comma" = "window-consume-from-left"
-"Mod+Ctrl+Period" = "window-consume-from-right"
+# "Mod+Comma" = "window-consume-left"
+# "Mod+Period" = "window-consume-right"
+# "Mod+Ctrl+Comma" = "window-consume-from-left"
+# "Mod+Ctrl+Period" = "window-consume-from-right"
 "Mod+W" = { action = "column-toggle-tabbed", repeat = false }
 "Mod+Alt+Left" = "column-focus-tab-previous"
 "Mod+Alt+Right" = "column-focus-tab-next"
@@ -236,13 +222,9 @@ follows_mouse = false
 "Mod+Tab" = "scratchpad-focus-next"
 
 # ------------------------------------------- Phím chức năng (Fn + F1..F12)
-# Map theo list Windows/Mac của bạn. Trên Linux các tổ hợp Fn này phát ra
-# keysym XF86* (xác nhận bằng `wev` nếu phím nào không ăn).
-# F1/F2 - độ sáng (Noctalia không điều khiển được backlight của màn laptop
-# eDP-1 -> dùng brightnessctl cho intel_backlight).
 "XF86MonBrightnessDown" = { action = "spawn brightnessctl set 5%-", allow_when_locked = true }
 "XF86MonBrightnessUp" = { action = "spawn brightnessctl set +5%", allow_when_locked = true }
-# F6 - mở trình phát nhạc (Sonora). Máy này Fn+F6 phát ra keysym XF86Tools.
+# F6 - mở trình phát nhạc (Sonora). keysym XF86Tools.
 "XF86Tools" = "spawn sonora"
 # F7/F8/F9 - bài trước / phát-tạm dừng / bài kế
 "XF86AudioPrev" = { action = "spawn noctalia msg media previous", allow_when_locked = true }
@@ -254,25 +236,20 @@ follows_mouse = false
 "XF86AudioRaiseVolume" = { action = "spawn noctalia msg volume-up", allow_when_locked = true }
 
 # ----------------------------------------------------------- Window rules
-# Picture-in-Picture: nổi + float. Mango có thêm is_global (hiện mọi tag);
-# Umbriel không có khái niệm đó nên chỉ map float + pin.
 [[window_rule]]
 match.title = ["Picture-in-Picture", "Picture in picture", "Hình trong hình"]
 default_floating = true
 default_pinned = true
 
-# Genshin: fake fullscreen -> maximize-to-edges (phủ kín, bỏ gaps/border/struts).
 [[window_rule]]
 match.title = "Genshin Impact"
 default_maximize_to_edges = true
 
-# Cửa sổ Settings của Noctalia: mở dạng nổi, kích thước 1020x900.
 [[window_rule]]
 match.app_id = "^dev.noctalia.Noctalia$"
 default_floating = true
 default_floating_size_px = { width = 1020, height = 900 }
 
-# UmbrielSharePicker (chọn nguồn chia sẻ màn hình): mở dạng nổi 800x600.
 [[window_rule]]
 match.app_id = "^dev.noctalia.UmbrielSharePicker$"
 default_floating = true

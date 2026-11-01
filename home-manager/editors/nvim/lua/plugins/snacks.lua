@@ -30,7 +30,6 @@ return {
       { "<C-\\>", function() Snacks.terminal() end, mode = { "n", "t" }, desc = "Bật/Tắt Terminal (Snacks)" },
       { "<leader>gg", function() Snacks.lazygit() end, desc = "Mở Lazygit" },
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Xóa thông báo (Dismiss)" },
-      { "jk", [[<C-\><C-n>]], mode = "t", desc = "Thoát Insert trong terminal" },
     },
   },
 }
