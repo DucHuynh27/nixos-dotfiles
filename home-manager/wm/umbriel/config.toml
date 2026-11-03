@@ -138,7 +138,7 @@ size = 24
 follows_focus = true
 
 [input.focus]
-follows_mouse = false
+follows_mouse = true 
 
 # --------------------------------------------------------------- Keybinds
 [keybinds]
