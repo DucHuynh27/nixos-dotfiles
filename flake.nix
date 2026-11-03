@@ -68,7 +68,12 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+        problems.handlers = {
+          "gtk+".broken = "warn";
+        };
+      };
       overlays = [inputs.polymc.overlay];
     };
   in {

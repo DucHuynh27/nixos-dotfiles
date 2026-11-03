@@ -36,6 +36,11 @@
     overlays = [inputs.polymc.overlay];
     config = {
       allowUnfree = true;
+      # gtk2 (gtk+) bị nixpkgs đánh dấu broken; fcitx5-gtk vẫn kéo nó vào.
+      # Hạ mức "broken" xuống warn để build được, tránh chặn eval.
+      problems.handlers = {
+        "gtk+".broken = "warn";
+      };
     };
   };
 
