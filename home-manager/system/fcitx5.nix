@@ -222,17 +222,22 @@
             brave-browser=1,25,6,15
             com.brave.Browser=1,25,6,15
 
-            # 4. Chat & Social (Electron/Chromium)
+            # 4. WPS Office (Qt: Writer=wps, Spreadsheets=et, Slides=wpp)
+            wps=1,25,6,15
+            et=1,25,6,15
+            wpp=1,25,6,15
+
+            # 5. Chat & Social (Electron/Chromium)
             vesktop=1
             org.telegram.desktop=1
-            cz.viceverse.serein=1
+            cz.viceverse.serein=1,25,6,15
 
-            # 5. Password manager / học tập (ưu tiên an toàn)
+            # 6. Khác
             org.keepassxc.KeePassXC=5
             anki=5
             net.ankiweb.Anki=5
 
-            # 6. Nhạc
+            # 7. Nhạc
             sonora=1
           '';
         });
