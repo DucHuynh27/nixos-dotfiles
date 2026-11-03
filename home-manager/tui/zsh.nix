@@ -81,13 +81,18 @@
       mongo-status = "podman ps -a --filter name=db-mongodb";
       mongo-log = "podman logs -f db-mongodb";
 
+      maria-start = "podman start db-mariadb";
+      maria-stop = "podman stop db-mariadb";
+      maria-status = "podman ps -a --filter name=db-mariadb";
+      maria-log = "podman logs -f db-mariadb";
+
       pg-start = "podman start db-postgres";
       pg-stop = "podman stop db-postgres";
       pg-status = "podman ps -a --filter name=db-postgres";
       pg-log = "podman logs -f db-postgres";
 
-      db-start-all = "podman start db-postgres db-mysql db-mongodb db-mssql";
-      db-stop-all = "podman stop db-postgres db-mysql db-mongodb db-mssql";
+      db-start-all = "podman start db-postgres db-mysql db-mongodb db-mssql db-mariadb";
+      db-stop-all = "podman stop db-postgres db-mysql db-mongodb db-mssql db-mariadb";
       db-status = "podman ps -a --filter name=db-";
 
       # E-learning LMS dev stack (pod_backend)
