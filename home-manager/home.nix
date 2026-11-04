@@ -69,7 +69,6 @@ in {
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      # gtk+ (gtk2) bị coi là broken; fcitx5-gtk vẫn kéo nó vào.
       problems.handlers = {
         "gtk+".broken = "warn";
       };

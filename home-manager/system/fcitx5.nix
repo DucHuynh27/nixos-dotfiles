@@ -222,7 +222,7 @@
             brave-browser=1,25,6,15
             com.brave.Browser=1,25,6,15
 
-            # 4. WPS Office (Qt: Writer=wps, Spreadsheets=et, Slides=wpp)
+            # 4. WPS Office
             wps=1,25,6,15
             et=1,25,6,15
             wpp=1,25,6,15

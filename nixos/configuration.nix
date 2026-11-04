@@ -30,9 +30,6 @@
     users = ["hinne"];
   };
 
-  # Race lúc boot: unit của package có thể chạy trước khi udev setfacl /dev/uinput
-  # cho uinput_proxy -> "Permission denied", restart 5 lần rồi dính start-limit-hit.
-  # Chờ device unit sẵn sàng và tắt rate-limit để tự thử lại tới khi udev xong.
   systemd.services."fcitx5-lotus-server@" = {
     unitConfig = {
       After = ["systemd-modules-load.service" "systemd-udevd.service" "dev-uinput.device"];
@@ -47,8 +44,6 @@
     overlays = [inputs.polymc.overlay];
     config = {
       allowUnfree = true;
-      # gtk2 (gtk+) bị nixpkgs đánh dấu broken; fcitx5-gtk vẫn kéo nó vào.
-      # Hạ mức "broken" xuống warn để build được, tránh chặn eval.
       problems.handlers = {
         "gtk+".broken = "warn";
       };
