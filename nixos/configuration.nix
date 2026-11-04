@@ -30,6 +30,17 @@
     users = ["hinne"];
   };
 
+  # Race lúc boot: unit của package có thể chạy trước khi udev setfacl /dev/uinput
+  # cho uinput_proxy -> "Permission denied", restart 5 lần rồi dính start-limit-hit.
+  # Chờ device unit sẵn sàng và tắt rate-limit để tự thử lại tới khi udev xong.
+  systemd.services."fcitx5-lotus-server@" = {
+    unitConfig = {
+      After = ["systemd-modules-load.service" "systemd-udevd.service" "dev-uinput.device"];
+      Wants = ["dev-uinput.device"];
+      StartLimitIntervalSec = 0;
+    };
+  };
+
   aagl.enableNixpkgsReleaseBranchCheck = false;
 
   nixpkgs = {
@@ -268,16 +279,9 @@
   # Feel free to remove if you don't need it.
   services.tailscale.enable = true;
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      # Opinionated: forbid root login through SSH.
-      PermitRootLogin = "no";
-      # Opinionated: use keys only.
-      # Remove if you want to SSH using passwords
-      PasswordAuthentication = false;
-    };
-  };
+  # SSH server tắt: không cần truy cập vào máy này từ xa.
+  # SSH client (lệnh `ssh`) vẫn dùng bình thường.
+  services.openssh.enable = false;
 
   environment.systemPackages = with pkgs; [
     brightnessctl
