@@ -12,6 +12,29 @@
       outputHash = "sha256-xR/EF60lVBsITKgH7wCM2wHM46PFQevD51KfCENSUH4=";
     });
   });
+
+  # GUI Linux Wallpaper Engine (jagrat7).
+  # 1) Flake upstream build bằng `bun package`, nhưng @electron-forge/plugin-vite
+  #    gọi `require('vite').default.build`, mà `vite` ở đây là
+  #    `@voidzero-dev/vite-plus-core` (ESM-only, không có default export).
+  #    Node interop được `require(ESM)` nên có `default`; bun thì không -> fail.
+  #    Vì vậy chạy electron-forge bằng node thay vì bun.
+  # 2) Electron (glibc 2.42 từ nixpkgs lock của repo) không load nổi Mesa của
+  #    hệ thống (glibc 2.43) -> GPU/EGL fail -> native Wayland (umbriel) vẽ ra
+  #    cửa sổ trong suốt không nội dung. Chạy qua XWayland thì render được.
+  linux-wallpaper-engine = (inputs.linux-wallpaper-engine.packages.${pkgs.stdenv.hostPlatform.system}.default)
+    .overrideAttrs (old: {
+    buildPhase =
+      builtins.replaceStrings
+      ["bun package"]
+      ["node node_modules/@electron-forge/cli/dist/electron-forge.js package"]
+      old.buildPhase;
+    postFixup =
+      (old.postFixup or "")
+      + ''
+        wrapProgram $out/bin/linux-wallpaper-engine --add-flags "--ozone-platform=x11"
+      '';
+  });
 in {
   # You can import other home-manager modules here
   imports = [
@@ -33,6 +56,7 @@ in {
     ./apps/anime-game-launcher.nix
     ./apps/mangohud.nix
     ./apps/zathura.nix
+    ./apps/zalo.nix
 
     # Window Manager
     ./wm/umbriel.nix
@@ -160,6 +184,29 @@ in {
     ''
   ));
 
+  # Tạo thư viện Steam tùy chỉnh + pre-seed libraryfolders.vdf để Steam nhận
+  # /home/hinne/Steam ngay lần đầu (chỉ ghi khi file chưa tồn tại, không đè
+  # state do Steam tự quản sau này).
+  home.activation.steamLibrary = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p "$HOME/Steam"
+    if [ ! -e "$HOME/.local/share/Steam/steamapps/libraryfolders.vdf" ]; then
+      mkdir -p "$HOME/.local/share/Steam/steamapps"
+      cat > "$HOME/.local/share/Steam/steamapps/libraryfolders.vdf" <<EOF
+"libraryfolders"
+{
+    "0"
+    {
+        "path"        "$HOME/.local/share/Steam"
+    }
+    "1"
+    {
+        "path"        "$HOME/Steam"
+    }
+}
+EOF
+    fi
+  '';
+
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [
     # ---------------------------------------------------
@@ -183,6 +230,7 @@ in {
     # Desktop Shell & WM
     # ---------------------------------------------------
     linux-wallpaperengine
+    linux-wallpaper-engine
     xwayland-satellite
     wlr-randr
 

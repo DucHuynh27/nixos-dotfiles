@@ -80,6 +80,21 @@
     capSysNice = false;
   };
 
+  # Steam: cần để cài/tải Wallpaper Engine (appid 431960) và wallpaper
+  # từ Steam Workshop cho GUI linux-wallpaper-engine.
+  programs.steam = {
+    enable = true;
+    # Không cần mở firewall cho Remote Play / dedicated server.
+    remotePlay.openFirewall = false;
+    dedicatedServer.openFirewall = false;
+  };
+
+  # Thư viện Steam cho Wallpaper Engine (Steam không có option Nix để set
+  # library path; đây chỉ tạo sẵn thư mục, việc gán library làm trong Steam UI).
+  systemd.tmpfiles.rules = [
+    "d /home/hinne/Steam 0755 hinne users -"
+  ];
+
   xdg.portal = {
     enable = true;
     wlr = {
