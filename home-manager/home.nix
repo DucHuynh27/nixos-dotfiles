@@ -7,12 +7,6 @@
   pkgs,
   ...
 }: let
-  typescript-language-server = pkgs.typescript-language-server.overrideAttrs (old: {
-    pnpmDeps = old.pnpmDeps.overrideAttrs (_: {
-      outputHash = "sha256-xR/EF60lVBsITKgH7wCM2wHM46PFQevD51KfCENSUH4=";
-    });
-  });
-
   # GUI Linux Wallpaper Engine (jagrat7).
   # 1) Flake upstream build bằng `bun package`, nhưng @electron-forge/plugin-vite
   #    gọi `require('vite').default.build`, mà `vite` ở đây là
