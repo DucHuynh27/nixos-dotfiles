@@ -55,6 +55,15 @@ zalo-backup
 
 Nếu `/mnt/dalu-occac` chưa mount, script tự bỏ qua và thoát 0.
 
+## Thông báo desktop
+
+Service tự gửi thông báo qua `notify-send`:
+
+- **Xong**: `Zalo Backup — Đã backup xong: <file> (<dung lượng>)`
+- **Lỗi**: `Zalo Backup THẤT BẠI — Backup lỗi (exit N). Xem: journalctl --user -u zalo-backup`
+
+Trường hợp bỏ qua (ổ chưa mount / không thấy dữ liệu Zalo) sẽ **không** thông báo.
+
 ## Kiểm tra & liệt kê bản backup
 
 ```bash

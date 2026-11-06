@@ -50,6 +50,7 @@
       gnutar
       zstd
       age
+      libnotify
     ];
     text = ''
       mountPoint="${mountPoint}"
@@ -58,6 +59,17 @@
       ageRecipient="${ageRecipient}"
       keep=${toString keep}
       stagingRoot="${homeDir}/.cache/zalo-backup"
+
+      # Thông báo desktop (không làm hỏng service nếu không có notification daemon).
+      notify() {
+        notify-send -a "Zalo Backup" -u "''${3:-normal}" "$1" "$2" 2>/dev/null || true
+      }
+      on_err() {
+        local st=$?
+        notify "Zalo Backup THẤT BẠI" "Backup lỗi (exit $st). Xem: journalctl --user -u zalo-backup" critical
+        exit "$st"
+      }
+      trap on_err ERR
 
       if ! mountpoint -q "$mountPoint"; then
         echo "zalo-backup: $mountPoint chưa được mount -> bỏ qua." >&2
@@ -130,6 +142,7 @@
           done
 
       echo "zalo-backup: hoàn tất -> $out"
+      notify "Zalo Backup" "Đã backup xong: $(basename "$out") ($(du -h "$out" | cut -f1))"
     '';
   };
 
@@ -204,6 +217,13 @@ in {
     Service = {
       Type = "oneshot";
       ExecStart = "${zaloBackup}/bin/zalo-backup";
+      # Để notify-send có bus/display của phiên đồ hoạ.
+      PassEnvironment = [
+        "DBUS_SESSION_BUS_ADDRESS"
+        "WAYLAND_DISPLAY"
+        "DISPLAY"
+        "XDG_RUNTIME_DIR"
+      ];
     };
   };
 
