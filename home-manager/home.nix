@@ -22,19 +22,24 @@
   # 2) Electron (glibc 2.42 từ nixpkgs lock của repo) không load nổi Mesa của
   #    hệ thống (glibc 2.43) -> GPU/EGL fail -> native Wayland (umbriel) vẽ ra
   #    cửa sổ trong suốt không nội dung. Chạy qua XWayland thì render được.
-  linux-wallpaper-engine = (inputs.linux-wallpaper-engine.packages.${pkgs.stdenv.hostPlatform.system}.default)
+  # 3) Backend `linux-wallpaperengine` bundled từ nixpkgs cũ cũng lệch glibc
+  #    -> `eglGetPlatformDisplayEXT failed`, Apply/scan fail. Override sang bản
+  #    của hệ thống (glibc khớp).
+  linux-wallpaper-engine =
+    ((inputs.linux-wallpaper-engine.packages.${pkgs.stdenv.hostPlatform.system}.default)
+      .override {linux-wallpaperengine = pkgs.linux-wallpaperengine;})
     .overrideAttrs (old: {
-    buildPhase =
-      builtins.replaceStrings
-      ["bun package"]
-      ["node node_modules/@electron-forge/cli/dist/electron-forge.js package"]
-      old.buildPhase;
-    postFixup =
-      (old.postFixup or "")
-      + ''
-        wrapProgram $out/bin/linux-wallpaper-engine --add-flags "--ozone-platform=x11"
-      '';
-  });
+      buildPhase =
+        builtins.replaceStrings
+        ["bun package"]
+        ["node node_modules/@electron-forge/cli/dist/electron-forge.js package"]
+        old.buildPhase;
+      postFixup =
+        (old.postFixup or "")
+        + ''
+          wrapProgram $out/bin/linux-wallpaper-engine --add-flags "--ozone-platform=x11"
+        '';
+    });
 in {
   # You can import other home-manager modules here
   imports = [
@@ -70,6 +75,7 @@ in {
     # System & Input
     ./system/fcitx5.nix
     ./system/nitro.nix
+    ./system/zalo-backup.nix
   ];
 
   nixpkgs = {

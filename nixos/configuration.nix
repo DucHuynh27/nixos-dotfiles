@@ -134,7 +134,16 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.supportedFilesystems = ["ntfs" "exfat" "vfat" "fat32"];
+  boot.supportedFilesystems = ["ntfs" "ntfs3" "exfat" "vfat" "fat32"];
+
+  # SSD SATA gắn trong (sda3, NTFS) làm nơi backup dữ liệu Zalo.
+  # uid/gid/umask: file hiện thuộc user hinne và ghi được; nofail: không chặn
+  # boot nếu ổ lỗi/chưa sẵn sàng.
+  fileSystems."/mnt/dalu-occac" = {
+    device = "/dev/disk/by-uuid/01DD4AB73420D360";
+    fsType = "ntfs3";
+    options = ["nofail" "x-systemd.device-timeout=10" "uid=1000" "gid=100" "umask=022"];
+  };
 
   networking.networkmanager.enable = true;
   networking.firewall.allowedTCPPorts = [ 53317 ];
