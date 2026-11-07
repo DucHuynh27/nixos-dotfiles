@@ -16,9 +16,10 @@
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
 
+    ../../modules/nixos/base.nix
+    ../../modules/nixos/hardware/audio.nix
     ./hardware-configuration.nix
     ./nitro-linux.nix
-    ../../modules/nixos/base.nix
     inputs.aagl.nixosModules.default
     {nix.settings = inputs.aagl.nixConfig;}
     inputs.umbriel.nixosModules.default
@@ -112,44 +113,6 @@
   fonts.packages = with pkgs; [
     corefonts
   ];
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    jack.enable = true;
-    extraConfig.pipewire."10-fix-audio" = {
-      "context.properties" = {
-        "default.clock.rate" = 48000;
-        "default.clock.quantum" = 1024;
-        "default.clock.min-quantum" = 1024;
-        "default.clock.max-quantum" = 8192;
-      };
-    };
-    wireplumber.extraConfig."50-alsa-suspend" = {
-      "monitor.alsa.rules" = [
-        {
-          matches = [
-            {"node.name" = "~alsa_card.*";}
-            {"node.name" = "~alsa_input.*";}
-            {"node.name" = "~alsa_output.*";}
-          ];
-          actions = {
-            update-props = {
-              "session.suspend-timeout-seconds" = 0;
-              "api.alsa.period-size" = 1024;
-              "api.alsa.headroom" = 8192;
-            };
-          };
-        }
-      ];
-    };
-  };
-
-  boot.extraModprobeConfig = ''
-    options snd_hda_intel power_save=0 power_save_controller=N enable_msi=1
-  '';
 
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
