@@ -18,6 +18,7 @@
 
     ../../modules/nixos/base.nix
     ../../modules/nixos/hardware/audio.nix
+    ../../modules/nixos/hardware/storage.nix
     ./hardware-configuration.nix
     ./nitro-linux.nix
     inputs.aagl.nixosModules.default
@@ -58,12 +59,6 @@
     dedicatedServer.openFirewall = false;
   };
 
-  # Thư viện Steam cho Wallpaper Engine (Steam không có option Nix để set
-  # library path; đây chỉ tạo sẵn thư mục, việc gán library làm trong Steam UI).
-  systemd.tmpfiles.rules = [
-    "d /home/hinne/Steam 0755 hinne users -"
-  ];
-
   xdg.portal = {
     enable = true;
     wlr = {
@@ -97,15 +92,6 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
-
-  # SSD SATA gắn trong (sda3, NTFS) làm nơi backup dữ liệu Zalo.
-  # uid/gid/umask: file hiện thuộc user hinne và ghi được; nofail: không chặn
-  # boot nếu ổ lỗi/chưa sẵn sàng.
-  fileSystems."/mnt/dalu-occac" = {
-    device = "/dev/disk/by-uuid/01DD4AB73420D360";
-    fsType = "ntfs3";
-    options = ["nofail" "x-systemd.device-timeout=10" "uid=1000" "gid=100" "umask=022"];
-  };
 
   networking.firewall.allowedTCPPorts = [53317];
   networking.firewall.allowedUDPPorts = [53317];
