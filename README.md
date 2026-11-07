@@ -13,25 +13,38 @@ Hệ thống gồm hai phần:
     ├── flake.lock
     ├── .sops.yaml
     │
-    ├── nixos/                     # Cấu hình hệ thống cấp root
-    │   ├── configuration.nix
-    │   ├── hardware-configuration.nix
-    │   └── nitro-linux.nix        # Kernel module + service
+    ├── hosts/                     # Cấu hình cho từng máy
+    │   └── nixos/
+    │       ├── configuration.nix
+    │       ├── hardware-configuration.nix
+    │       └── nitro-linux.nix        # Kernel module + service
     │
-    ├── packages/                  # Package tự đóng gói
-    │   └── ...
+    ├── modules/
+    │   ├── nixos/                     # Cấu hình hệ thống cấp root
+    │   │   ├── base.nix               # Bootloader, kernel, timezone, nix, networkmanager
+    │   │   ├── security.nix           # Polkit, rtkit, firewall, tailscale
+    │   │   ├── virtualization.nix     # Podman, waydroid, libvirt
+    │   │   ├── desktop.nix            # XDG portal, fonts, bluetooth, games
+    │   │   └── hardware/
+    │   │       ├── nvidia.nix
+    │   │       ├── audio.nix
+    │   │       └── storage.nix
+    │   │
+    │   └── home-manager/              # Cấu hình người dùng
+    │       ├── home.nix               # Orchestrator + home.packages
+    │       ├── dev/                   # languages.nix, lsp.nix
+    │       ├── apps/
+    │       ├── colorscheme/
+    │       ├── desktop-shell/
+    │       ├── editors/
+    │       ├── system/
+    │       ├── tui/
+    │       └── wm/
     │
-    ├── home-manager/              # Cấu hình người dùng
-    │   ├── home.nix               # home.packages
-    │   ├── apps/
-    │   ├── colorscheme/
-    │   ├── desktop-shell/
-    │   ├── editors/
-    │   ├── system/
-    │   ├── tui/
-    │   └── wm/
+    ├── packages/                      # Package tự đóng gói
+    │   └── nitro-linux.nix
     │
-    └── secrets/                   # Dữ liệu mã hóa bằng SOPS (Age)
+    └── secrets/                       # Dữ liệu mã hóa bằng SOPS (Age)
         └── secrets.yaml
 ```
 
@@ -66,7 +79,7 @@ _Lưu ý: Hãy tạo lại file hardware-configuration trước._
 
 ```bash
 # (Tuỳ chọn) Tạo file hardware-configuration.nix cho máy mới:
-# sudo nixos-generate-config --show-hardware-config > nixos/hardware-configuration.nix
+# sudo nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
 
 # Áp dụng cấu hình NixOS:
 sudo nixos-rebuild switch --flake .#nixos
@@ -101,3 +114,15 @@ nix shell nixpkgs#sops -c sops secrets/secrets.yaml
 ```
 
 Sops sẽ tự động giải mã file vào một vùng nhớ tạm, mở lên cho bạn chỉnh sửa, và tự động mã hóa lại khi bạn lưu file.
+
+---
+
+## 3. Backup định kỳ toàn bộ dữ liệu Zalo (tin nhắn + tệp phương tiện) ra ổ ngoài.
+
+- Ổ đích: /mnt/dalu-occac (sda3, NTFS) — xem nixos/configuration.nix.
+- Archive được nén (zstd) rồi mã hoá bằng age; recipient lấy từ .sops.yaml,
+  giải mã cần identity ở ~/.config/sops/age/keys.txt.
+- Các DB SQLite đang mở (Zalo đang chạy) được snapshot bằng `sqlite3 .backup`
+  cho nhất quán, thay vì copy thô lúc đang ghi WAL.
+
+Hướng dẫn sử dụng/restore: [./dalu_backup_usage.md](./modules/home-manager/system/dalu_backup_usage.md)

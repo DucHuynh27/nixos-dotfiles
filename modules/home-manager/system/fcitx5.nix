@@ -182,6 +182,8 @@
       pkgs.linkFarm "fcitx-config" (entries
         // {
           "conf/lotus-app-rules.conf" = pkgs.writeText "fcitx5-lotus-app-rules.conf" ''
+            # Mode ID: 0 = Off   1 = Uinput (Smooth)   3 = Uinput (Super Smooth) 4 = Surrounding Text   5 = Preedit   6 = Emoji   7 = Uinput (Select)
+
             # 1. Code Editor & IDE
             code=5
 

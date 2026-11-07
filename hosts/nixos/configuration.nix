@@ -27,7 +27,6 @@
     ../../modules/nixos/desktop.nix
     ../../modules/nixos/hardware/audio.nix
     ../../modules/nixos/hardware/storage.nix
-    ../../modules/nixos/hardware/system.nix
     ../../modules/nixos/hardware/nvidia.nix
 
     inputs.aagl.nixosModules.default
