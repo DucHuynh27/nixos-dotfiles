@@ -128,8 +128,6 @@
   # Feel free to remove if you don't need it.
   services.tailscale.enable = true;
 
-  # SSH server tắt: không cần truy cập vào máy này từ xa.
-  # SSH client (lệnh `ssh`) vẫn dùng bình thường.
   services.openssh.enable = false;
 
   environment.systemPackages = with pkgs; [

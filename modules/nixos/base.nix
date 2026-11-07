@@ -1,5 +1,3 @@
-# Cấu hình nền tảng dùng chung cho mọi host: bootloader, nix settings,
-# timezone/locale, network manager, shell và nix tooling.
 {pkgs, ...}: {
   nixpkgs = {
     config = {

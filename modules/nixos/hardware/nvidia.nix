@@ -1,4 +1,3 @@
-# NVIDIA: driver, PRIME offload và giữ memory clock khi cắm HDMI.
 {
   pkgs,
   lib,
@@ -52,8 +51,6 @@
   };
 
   services.udev.extraRules = ''
-    # Khi cổng HDMI đổi trạng thái (cắm/rút): kernel phát uevent HOTPLUG trên
-    # DRM card, nên bắt cả 2 dạng để service chạy lại đúng lúc.
     ACTION=="add|change", SUBSYSTEM=="drm", KERNEL=="card0-HDMI-A-1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="nvidia-hdmi-memclk.service"
     ACTION=="change", SUBSYSTEM=="drm", ENV{HOTPLUG}=="1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="nvidia-hdmi-memclk.service"
   '';

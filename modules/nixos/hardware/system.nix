@@ -1,4 +1,3 @@
-# Cấu hình phần cứng chung: kernel, graphics stack và swap nén.
 {pkgs, ...}: {
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
