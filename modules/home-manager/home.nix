@@ -6,35 +6,7 @@
   config,
   pkgs,
   ...
-}: let
-  # GUI Linux Wallpaper Engine (jagrat7).
-  # 1) Flake upstream build bằng `bun package`, nhưng @electron-forge/plugin-vite
-  #    gọi `require('vite').default.build`, mà `vite` ở đây là
-  #    `@voidzero-dev/vite-plus-core` (ESM-only, không có default export).
-  #    Node interop được `require(ESM)` nên có `default`; bun thì không -> fail.
-  #    Vì vậy chạy electron-forge bằng node thay vì bun.
-  # 2) Electron (glibc 2.42 từ nixpkgs lock của repo) không load nổi Mesa của
-  #    hệ thống (glibc 2.43) -> GPU/EGL fail -> native Wayland (umbriel) vẽ ra
-  #    cửa sổ trong suốt không nội dung. Chạy qua XWayland thì render được.
-  # 3) Backend `linux-wallpaperengine` bundled từ nixpkgs cũ cũng lệch glibc
-  #    -> `eglGetPlatformDisplayEXT failed`, Apply/scan fail. Override sang bản
-  #    của hệ thống (glibc khớp).
-  linux-wallpaper-engine =
-    ((inputs.linux-wallpaper-engine.packages.${pkgs.stdenv.hostPlatform.system}.default)
-      .override {linux-wallpaperengine = pkgs.linux-wallpaperengine;})
-    .overrideAttrs (old: {
-      buildPhase =
-        builtins.replaceStrings
-        ["bun package"]
-        ["node node_modules/@electron-forge/cli/dist/electron-forge.js package"]
-        old.buildPhase;
-      postFixup =
-        (old.postFixup or "")
-        + ''
-          wrapProgram $out/bin/linux-wallpaper-engine --add-flags "--ozone-platform=x11"
-        '';
-    });
-in {
+}: {
   # You can import other home-manager modules here
   imports = [
     # Colorscheme
@@ -86,7 +58,7 @@ in {
       # })
 
       (final: prev: {
-        obsidian = prev.obsidian.override { electron = prev.electron_44; };
+        obsidian = prev.obsidian.override {electron = prev.electron_44;};
       })
     ];
     # Configure your nixpkgs instance
@@ -148,63 +120,63 @@ in {
     "$HOME/.local/bin"
   ];
 
-  home.activation.installPackages = lib.mkForce (lib.hm.dag.entryAfter ["writeBoundary"] (
-    if config.submoduleSupport.externalPackageInstall
-    then ''
-      nixProfileRemove home-manager-path
-    ''
-    else ''
-      function nixReplaceProfile() {
-        local oldNix="$(command -v nix)"
-
-        nixProfileRemove 'home-manager-path'
-
-        run $oldNix profile add $1
-      }
-
-      if [[ -e ${config.home.profileDirectory}/manifest.json ]] ; then
-        INSTALL_CMD="nix profile add"
-        INSTALL_CMD_ACTUAL="nixReplaceProfile"
-        LIST_CMD="nix profile list"
-        REMOVE_CMD_SYNTAX='nix profile remove {number | store path}'
-      else
-        INSTALL_CMD="nix-env -i"
-        INSTALL_CMD_ACTUAL="run nix-env -i"
-        LIST_CMD="nix-env -q"
-        REMOVE_CMD_SYNTAX='nix-env -e {package name}'
-      fi
-
-      if ! $INSTALL_CMD_ACTUAL ${config.home.path} ; then
-        echo
-        _iError $'Oops, Nix failed to install your new Home Manager profile!\n\nPerhaps there is a conflict with a package that was installed using\n"%s"? Try running\n\n    %s\n\nand if there is a conflicting package you can remove it with\n\n    %s\n\nThen try activating your Home Manager configuration again.' "$INSTALL_CMD" "$LIST_CMD" "$REMOVE_CMD_SYNTAX"
-        exit 1
-      fi
-      unset -f nixReplaceProfile
-      unset INSTALL_CMD INSTALL_CMD_ACTUAL LIST_CMD REMOVE_CMD_SYNTAX
-    ''
-  ));
+  # home.activation.installPackages = lib.mkForce (lib.hm.dag.entryAfter ["writeBoundary"] (
+  #   if config.submoduleSupport.externalPackageInstall
+  #   then ''
+  #     nixProfileRemove home-manager-path
+  #   ''
+  #   else ''
+  #     function nixReplaceProfile() {
+  #       local oldNix="$(command -v nix)"
+  #
+  #       nixProfileRemove 'home-manager-path'
+  #
+  #       run $oldNix profile add $1
+  #     }
+  #
+  #     if [[ -e ${config.home.profileDirectory}/manifest.json ]] ; then
+  #       INSTALL_CMD="nix profile add"
+  #       INSTALL_CMD_ACTUAL="nixReplaceProfile"
+  #       LIST_CMD="nix profile list"
+  #       REMOVE_CMD_SYNTAX='nix profile remove {number | store path}'
+  #     else
+  #       INSTALL_CMD="nix-env -i"
+  #       INSTALL_CMD_ACTUAL="run nix-env -i"
+  #       LIST_CMD="nix-env -q"
+  #       REMOVE_CMD_SYNTAX='nix-env -e {package name}'
+  #     fi
+  #
+  #     if ! $INSTALL_CMD_ACTUAL ${config.home.path} ; then
+  #       echo
+  #       _iError $'Oops, Nix failed to install your new Home Manager profile!\n\nPerhaps there is a conflict with a package that was installed using\n"%s"? Try running\n\n    %s\n\nand if there is a conflicting package you can remove it with\n\n    %s\n\nThen try activating your Home Manager configuration again.' "$INSTALL_CMD" "$LIST_CMD" "$REMOVE_CMD_SYNTAX"
+  #       exit 1
+  #     fi
+  #     unset -f nixReplaceProfile
+  #     unset INSTALL_CMD INSTALL_CMD_ACTUAL LIST_CMD REMOVE_CMD_SYNTAX
+  #   ''
+  # ));
 
   # Tạo thư viện Steam tùy chỉnh + pre-seed libraryfolders.vdf để Steam nhận
   # /home/hinne/Steam ngay lần đầu (chỉ ghi khi file chưa tồn tại, không đè
   # state do Steam tự quản sau này).
   home.activation.steamLibrary = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    mkdir -p "$HOME/Steam"
-    if [ ! -e "$HOME/.local/share/Steam/steamapps/libraryfolders.vdf" ]; then
-      mkdir -p "$HOME/.local/share/Steam/steamapps"
-      cat > "$HOME/.local/share/Steam/steamapps/libraryfolders.vdf" <<EOF
-"libraryfolders"
-{
-    "0"
+        mkdir -p "$HOME/Steam"
+        if [ ! -e "$HOME/.local/share/Steam/steamapps/libraryfolders.vdf" ]; then
+          mkdir -p "$HOME/.local/share/Steam/steamapps"
+          cat > "$HOME/.local/share/Steam/steamapps/libraryfolders.vdf" <<EOF
+    "libraryfolders"
     {
-        "path"        "$HOME/.local/share/Steam"
+        "0"
+        {
+            "path"        "$HOME/.local/share/Steam"
+        }
+        "1"
+        {
+            "path"        "$HOME/Steam"
+        }
     }
-    "1"
-    {
-        "path"        "$HOME/Steam"
-    }
-}
-EOF
-    fi
+    EOF
+        fi
   '';
 
   # Add stuff for your user as you see fit:
@@ -229,8 +201,6 @@ EOF
     # ---------------------------------------------------
     # Desktop Shell & WM
     # ---------------------------------------------------
-    linux-wallpaperengine
-    linux-wallpaper-engine
     xwayland-satellite
     wlr-randr
 
@@ -333,7 +303,6 @@ EOF
     # ---------------------------------------------------
     # Gaming
     # ---------------------------------------------------
-    polymc
     glfw3-minecraft
 
     # ---------------------------------------------------

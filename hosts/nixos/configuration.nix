@@ -41,7 +41,6 @@
   aagl.enableNixpkgsReleaseBranchCheck = false;
 
   nixpkgs = {
-    overlays = [inputs.polymc.overlay];
     config = {
       allowUnfree = true;
       problems.handlers = {
@@ -80,8 +79,7 @@
     capSysNice = false;
   };
 
-  # Steam: cần để cài/tải Wallpaper Engine (appid 431960) và wallpaper
-  # từ Steam Workshop cho GUI linux-wallpaper-engine.
+  # Steam
   programs.steam = {
     enable = true;
     # Không cần mở firewall cho Remote Play / dedicated server.
@@ -146,8 +144,8 @@
   };
 
   networking.networkmanager.enable = true;
-  networking.firewall.allowedTCPPorts = [ 53317 ];
-  networking.firewall.allowedUDPPorts = [ 53317 ];
+  networking.firewall.allowedTCPPorts = [53317];
+  networking.firewall.allowedUDPPorts = [53317];
   services.resolved = {
     enable = true;
     settings.Resolve = {
@@ -237,26 +235,25 @@
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart =
-        let
-          nvidiaSmi = pkgs.writeShellScript "nvidia-smi" ''
-            export LD_LIBRARY_PATH=${lib.getLib config.hardware.nvidia.package}/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
-            exec ${lib.getBin config.hardware.nvidia.package}/origBin/nvidia-smi "$@"
-          '';
-        in
-          pkgs.writeShellScript "nvidia-hdmi-memclk" ''
-            set +e
-            systemctl=${config.systemd.package}/bin/systemctl
-            if [ "$(cat /sys/class/drm/card0-HDMI-A-1/status 2>/dev/null)" = "connected" ]; then
-              $systemctl start nvidia-persistenced.service
-              ${nvidiaSmi} --lock-memory-clocks=6001 \
-                || echo "nvidia-hdmi-memclk: không ghim được memory clock" >&2
-            else
-              ${nvidiaSmi} --reset-memory-clocks || true
-              $systemctl stop nvidia-persistenced.service
-            fi
-            exit 0
-          '';
+      ExecStart = let
+        nvidiaSmi = pkgs.writeShellScript "nvidia-smi" ''
+          export LD_LIBRARY_PATH=${lib.getLib config.hardware.nvidia.package}/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+          exec ${lib.getBin config.hardware.nvidia.package}/origBin/nvidia-smi "$@"
+        '';
+      in
+        pkgs.writeShellScript "nvidia-hdmi-memclk" ''
+          set +e
+          systemctl=${config.systemd.package}/bin/systemctl
+          if [ "$(cat /sys/class/drm/card0-HDMI-A-1/status 2>/dev/null)" = "connected" ]; then
+            $systemctl start nvidia-persistenced.service
+            ${nvidiaSmi} --lock-memory-clocks=6001 \
+              || echo "nvidia-hdmi-memclk: không ghim được memory clock" >&2
+          else
+            ${nvidiaSmi} --reset-memory-clocks || true
+            $systemctl stop nvidia-persistenced.service
+          fi
+          exit 0
+        '';
     };
   };
 
@@ -282,17 +279,17 @@
     };
   };
 
-  security.sudo.extraRules = [
-    {
-      users = ["hinne"];
-      commands = [
-        {
-          command = "ALL";
-          options = ["NOPASSWD"];
-        }
-      ];
-    }
-  ];
+  # security.sudo.extraRules = [
+  #   {
+  #     users = ["hinne"];
+  #     commands = [
+  #       {
+  #         command = "ALL";
+  #         options = ["NOPASSWD"];
+  #       }
+  #     ];
+  #   }
+  # ];
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
