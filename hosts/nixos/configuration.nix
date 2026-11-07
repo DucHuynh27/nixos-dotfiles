@@ -19,6 +19,7 @@
     ../../modules/nixos/base.nix
     ../../modules/nixos/hardware/audio.nix
     ../../modules/nixos/hardware/storage.nix
+    ../../modules/nixos/hardware/system.nix
     ./hardware-configuration.nix
     ./nitro-linux.nix
     inputs.aagl.nixosModules.default
@@ -80,18 +81,6 @@
   };
   programs.dconf.enable = true;
   services.gnome.gnome-keyring.enable = true;
-
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      libglvnd
-      intel-media-driver
-      intel-vaapi-driver
-      libvdpau-va-gl
-    ];
-  };
-
-  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   networking.firewall.allowedTCPPorts = [53317];
   networking.firewall.allowedUDPPorts = [53317];
@@ -228,9 +217,6 @@
 
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
-
-  zramSwap.enable = true;
-  zramSwap.memoryPercent = 50;
 
   programs.gamemode.enable = true;
 
