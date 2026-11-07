@@ -1,9 +1,6 @@
-{ pkgs }:
-
-let
+{pkgs}: let
   buildMarketplace = pkgs.vscode-utils.buildVscodeMarketplaceExtension;
-in
-{
+in {
   # Code Spell Checker Tiếng Việt
   code-spell-checker-vietnamese = buildMarketplace {
     mktplcRef = {

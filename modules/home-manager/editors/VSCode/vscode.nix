@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
-let
-  marketplaceExts = import ./marketplace-extensions.nix { inherit pkgs; };
+{pkgs, ...}: let
+  marketplaceExts = import ./marketplace-extensions.nix {inherit pkgs;};
   commonSettings = import ./common-settings.nix;
 
   nodejsProfile = import ./NodeJS.nix {
@@ -13,14 +11,17 @@ let
   };
 
   # Profile LaTeX dùng Xenon (dáng serif) cho văn bản, code vẫn Argon ở profile khác
-  latexProfileXenon = latexProfile // {
-    userSettings = latexProfile.userSettings // {
-      "editor.fontFamily" = "'Monaspace Xenon Frozen', 'Symbols Nerd Font Mono', monospace";
-      "terminal.integrated.fontFamily" = "'Monaspace Xenon Frozen', 'Symbols Nerd Font Mono'";
+  latexProfileXenon =
+    latexProfile
+    // {
+      userSettings =
+        latexProfile.userSettings
+        // {
+          "editor.fontFamily" = "'Monaspace Xenon Frozen', 'Symbols Nerd Font Mono', monospace";
+          "terminal.integrated.fontFamily" = "'Monaspace Xenon Frozen', 'Symbols Nerd Font Mono'";
+        };
     };
-  };
-in
-{
+in {
   programs.vscode = {
     enable = true;
 

@@ -11,8 +11,7 @@
   };
 
   # App tự ghi/xoá file autostart này; patch ở đây để chắc chắn tắt autostart.
-  home.activation.zaloNoAutostart =
-    lib.hm.dag.entryAfter ["writeBoundary"] ''
-      rm -f "$HOME/.config/autostart/zalo.desktop"
-    '';
+  home.activation.zaloNoAutostart = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    rm -f "$HOME/.config/autostart/zalo.desktop"
+  '';
 }

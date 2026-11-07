@@ -117,16 +117,16 @@
 
     # Extra configuration added to ~/.zprofile for login shells
     profileExtra = ''
-        # Autostart Umbriel + Noctalia trên TTY1 khi đăng nhập.
-        # (Noctalia được Umbriel tự autostart — xem wm/umbriel/config.toml.)
-        if [[ -o interactive ]] && [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
-          if [ "$(tty)" = "/dev/tty1" ]; then
-            export XDG_CURRENT_DESKTOP=umbriel
-            export XDG_SESSION_DESKTOP=umbriel
-            export XDG_SESSION_TYPE=wayland
-            exec umbriel > ~/.umbriel.log 2>&1
-          fi
+      # Autostart Umbriel + Noctalia trên TTY1 khi đăng nhập.
+      # (Noctalia được Umbriel tự autostart — xem wm/umbriel/config.toml.)
+      if [[ -o interactive ]] && [ -z "$WAYLAND_DISPLAY" ] && [ -z "$DISPLAY" ]; then
+        if [ "$(tty)" = "/dev/tty1" ]; then
+          export XDG_CURRENT_DESKTOP=umbriel
+          export XDG_SESSION_DESKTOP=umbriel
+          export XDG_SESSION_TYPE=wayland
+          exec umbriel > ~/.umbriel.log 2>&1
         fi
+      fi
     '';
 
     # Extra configuration added to ~/.zshrc

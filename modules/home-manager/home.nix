@@ -12,6 +12,10 @@
     # Colorscheme
     ./colorscheme/catppuccin.nix
 
+    # Dev
+    ./dev/languages.nix
+    ./dev/lsp.nix
+
     # TUI & Shell
     ./tui/lgtm.nix
     ./tui/wezterm.nix
@@ -208,11 +212,7 @@
     # Shell & CLI Tools
     # ---------------------------------------------------
     fd
-    gcc
-    gnumake
     lazygit
-    fnm
-    pnpm
     ripgrep
     unzip
     posting
@@ -220,36 +220,10 @@
     glib
 
     # ---------------------------------------------------
-    # Java Toolchain
-    # ---------------------------------------------------
-    jdk25
-
-    # ---------------------------------------------------
     # Text Editor & IDE
     # ---------------------------------------------------
     pkgs.jetbrains-toolbox
     neovim
-
-    # ---------------------------------------------------
-    # LSPs & Formatters (For Neovim)
-    # ---------------------------------------------------
-    typescript-language-server
-    prettier
-    tailwindcss-language-server
-    vscode-langservers-extracted
-    yaml-language-server
-    dockerfile-language-server
-    bash-language-server
-    nil
-    alejandra
-    pyright
-    isort
-    black
-    jdt-language-server
-    tree-sitter
-    lua-language-server
-    stylua
-    prettierd
 
     # ---------------------------------------------------
     # General Apps
@@ -265,7 +239,6 @@
     vesktop
     wpsoffice
     brave
-    texlab
     (texliveMedium.withPackages (ps:
       with ps; [
         scheme-medium
