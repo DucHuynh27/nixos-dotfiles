@@ -1,4 +1,3 @@
-# Zsh and Terminal Utilities Configuration
 {
   config,
   pkgs,
@@ -7,7 +6,6 @@
   programs.zsh = {
     enable = true;
 
-    # Enable syntax highlighting and autosuggestions
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
@@ -157,7 +155,7 @@
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-    options = ["--cmd cd"]; # alias cd="z"
+    options = ["--cmd cd"];
   };
 
   # Eza (better ls)

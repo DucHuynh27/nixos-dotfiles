@@ -1,4 +1,3 @@
-# Phần cứng âm thanh: PipeWire/WirePlumber và tham số module snd_hda_intel.
 {...}: {
   services.pipewire = {
     enable = true;

@@ -10,7 +10,6 @@
     inherit pkgs marketplaceExts commonSettings;
   };
 
-  # Profile LaTeX dùng Xenon (dáng serif) cho văn bản, code vẫn Argon ở profile khác
   latexProfileXenon =
     latexProfile
     // {

@@ -64,7 +64,6 @@ in {
   ];
 
   environment.etc."nitro.conf".text = ''
-    # applied at boot by nitro-apply.service
     static 1 255 255 255
     static 2 255 255 255
     static 4 255 255 255

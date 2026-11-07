@@ -33,8 +33,6 @@
     platformTheme.name = "qtct";
     style.name = "kvantum";
 
-    # Qt6 apps (pcmanfm-qt, LXQt) otherwise fall back to hicolor/oxygen,
-    # which has no folder icons. Keep the same Papirus theme as GTK.
     qt6ctSettings = {
       Appearance = {
         icon_theme = "Papirus-Dark";

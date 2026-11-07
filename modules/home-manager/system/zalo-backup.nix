@@ -1,12 +1,3 @@
-# Backup định kỳ toàn bộ dữ liệu Zalo (tin nhắn + tệp phương tiện) ra ổ ngoài.
-#
-# - Ổ đích: /mnt/dalu-occac (sda3, NTFS) — xem nixos/configuration.nix.
-# - Archive được nén (zstd) rồi mã hoá bằng age; recipient lấy từ .sops.yaml,
-#   giải mã cần identity ở ~/.config/sops/age/keys.txt.
-# - Các DB SQLite đang mở (Zalo đang chạy) được snapshot bằng `sqlite3 .backup`
-#   cho nhất quán, thay vì copy thô lúc đang ghi WAL.
-#
-# Hướng dẫn sử dụng/restore: ./dalu_backup_usage.md
 {
   config,
   lib,
@@ -18,11 +9,9 @@
   mountPoint = "/mnt/dalu-occac";
   backupDir = "${mountPoint}/zalo-backup";
   ageIdentity = "${homeDir}/.config/sops/age/keys.txt";
-  # Public key (recipient) — không phải secret, lấy từ .sops.yaml.
   ageRecipient = "age1t4wkm4w9lxlkqtaf9226609lw2raqvsxzac2aq89zhm9553f0fmqaxcjr6";
   keep = 7;
 
-  # Thư mục chỉ chứa cache/ML model, tự sinh lại được -> bỏ cho nhẹ.
   cacheExcludes = [
     "Cache/"
     "Code Cache/"
@@ -32,7 +21,6 @@
     "tf-models/"
     "Crashpad/"
     "blob_storage/"
-    # File runtime của Chromium (lock/socket theo PID), không nên backup.
     "Singleton*"
   ];
   excludeArgs = lib.concatMapStringsSep " " (p: "--exclude '${p}'") cacheExcludes;
@@ -60,7 +48,6 @@
       keep=${toString keep}
       stagingRoot="${homeDir}/.cache/zalo-backup"
 
-      # Thông báo desktop (không làm hỏng service nếu không có notification daemon).
       notify() {
         notify-send -a "Zalo Backup" -u "''${3:-normal}" "$1" "$2" 2>/dev/null || true
       }
@@ -217,7 +204,6 @@ in {
     Service = {
       Type = "oneshot";
       ExecStart = "${zaloBackup}/bin/zalo-backup";
-      # Để notify-send có bus/display của phiên đồ hoạ.
       PassEnvironment = [
         "DBUS_SESSION_BUS_ADDRESS"
         "WAYLAND_DISPLAY"

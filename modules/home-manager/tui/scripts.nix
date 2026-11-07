@@ -1,5 +1,3 @@
-# Custom Shell Scripts
-# This module defines global shell scripts directly in Nix, replacing things in ~/.local/bin
 {
   config,
   pkgs,

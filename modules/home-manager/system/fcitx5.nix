@@ -1,4 +1,3 @@
-# Fcitx5 Vietnamese Input Method (Lotus Engine) Module
 {
   config,
   lib,
@@ -148,25 +147,6 @@
     };
   };
 
-  # Quy tắc chế độ gõ riêng theo từng ứng dụng (Lotus App Rules)
-  # Mode ID trong Lotus:
-  # 0 = Off
-  # 1 = Uinput (Smooth)
-  # 2 = Uinput (Smooth, legacy)
-  # 3 = Uinput (Super Smooth)
-  # 4 = Surrounding Text
-  # 5 = Preedit
-  # 6 = Emoji Picker
-  # 7 = Uinput (Select)
-  #
-  # Cú pháp độ trễ tùy chỉnh theo app:
-  # app=mode[,commit_interval_ms[,backspace_interval_ms[,post_delay_ms]]]
-  # (0 hoặc bỏ qua = dùng mặc định)
-  #
-  # LƯU Ý: module i18n.inputMethod.fcitx5 của home-manager link CẢ thư mục
-  # ~/.config/fcitx5 vào một linkFarm trong /nix/store. Vì vậy KHÔNG thể dùng
-  # xdg.configFile."fcitx5/<file>" (builder sẽ báo "outside $HOME").
-  # Cách xử lý: tự dựng lại đúng linkFarm đó rồi gộp thêm file rules vào.
   xdg.configFile."fcitx5" = lib.mkForce {
     source = let
       im = config.i18n.inputMethod.fcitx5;
@@ -201,13 +181,7 @@
     in
       pkgs.linkFarm "fcitx-config" (entries
         // {
-          # lotus 5.x đọc rules tại $XDG_CONFIG_HOME/fcitx5/conf/lotus-app-rules.conf
           "conf/lotus-app-rules.conf" = pkgs.writeText "fcitx5-lotus-app-rules.conf" ''
-            # Mode ID (Lotus 5.x/6.x):
-            #   0 = Off   1 = Uinput (Smooth)   3 = Uinput (Super Smooth)
-            #   4 = Surrounding Text   5 = Preedit   6 = Emoji   7 = Uinput (Select)
-            # App không có rule -> dùng mode mặc định toàn cục (đang là Preedit).
-
             # 1. Code Editor & IDE
             code=5
 
@@ -216,9 +190,6 @@
             org.wezfurlong.wezterm=5
 
             # 3. Web Browser (Chromium)
-            # Brave gõ nhanh bị rơi chữ ở chế độ Uinput -> nới delay nhẹ:
-            # commit_interval=25ms, backspace_interval=6ms, post_delay=15ms
-            # (mặc định của Lotus: 20 / 5 / 10).
             brave-browser=1,25,6,15
             com.brave.Browser=1,25,6,15
 

@@ -35,7 +35,7 @@
     sonora.url = "github:sonorahq/sonora";
     sonora.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Umbriel (compositor của Noctalia). KHÔNG set follows để dùng binary cache.
+    # Umbriel (compositor của Noctalia)
     umbriel.url = "github:noctalia-dev/umbriel";
 
     # lgtm (terminal diff reviewer for agentic coding)
@@ -54,8 +54,7 @@
       flake = false;
     };
 
-    # fcitx5-lotus: cung cấp NixOS module `services.fcitx5-lotus` để dựng
-    # uinput server (user uinput_proxy, udev rule, systemd service).
+    # fcitx5-lotus
     fcitx5-lotus = {
       url = "github:LotusInputMethod/fcitx5-lotus";
       inputs.nixpkgs.follows = "nixpkgs";
