@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  nitroPackage = import ../../packages/nitro-linux.nix {
+  nitroPackage = import ../../../packages/nitro-linux.nix {
     inherit pkgs lib;
     nitroSrc = inputs.nitro-linux;
   };

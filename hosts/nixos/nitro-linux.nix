@@ -32,17 +32,16 @@
       })
     {};
 
-  acerWmiBattery =
-    config.boot.kernelPackages.acer-wmi-battery.overrideAttrs (old: {
-      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.kmodigest];
-      postFixup =
-        (old.postFixup or "")
-        + ''
-          find $out -name '*.ko' -exec ${lib.getExe pkgs.kmodigest} {} \;
-        '';
-    });
+  acerWmiBattery = config.boot.kernelPackages.acer-wmi-battery.overrideAttrs (old: {
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.kmodigest];
+    postFixup =
+      (old.postFixup or "")
+      + ''
+        find $out -name '*.ko' -exec ${lib.getExe pkgs.kmodigest} {} \;
+      '';
+  });
 
-  nitroPackage = import ../packages/nitro-linux.nix {
+  nitroPackage = import ../../packages/nitro-linux.nix {
     inherit pkgs lib nitroSrc;
     nvidiaPackage = config.hardware.nvidia.package;
   };

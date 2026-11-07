@@ -32,17 +32,15 @@
         AddKeysToAgent = "yes";
       };
     };
-    matchBlocks = {
-      "github.com" = {
-        hostname = "ssh.github.com";
-        port = 443;
-        user = "git";
-      };
+    "github.com" = {
+      Hostname = "ssh.github.com";
+      Port = 443;
+      User = "git";
+    };
 
-      "codeberg.org" = {
-        hostname = "codeberg.org";
-        user = "git";
-      };
+    "codeberg.org" = {
+      Hostname = "codeberg.org";
+      User = "git";
     };
   };
 
