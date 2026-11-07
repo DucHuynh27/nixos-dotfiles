@@ -42,9 +42,6 @@
     lgtm.url = "github:kunkka19xx/lgtm";
     lgtm.inputs.nixpkgs.follows = "nixpkgs";
 
-    # PolyMC (Minecraft launcher)
-    polymc.url = "github:PolyMC/PolyMC";
-
     # Zalo for Linux (unofficial AppImage port, home-manager module)
     zalo-for-linux = {
       url = "github:VN-Linux-Family/zalo-for-linux";
@@ -63,16 +60,6 @@
       url = "github:LotusInputMethod/fcitx5-lotus";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Linux Wallpaper Engine (GUI cho backend linux-wallpaperengine).
-    # Phải ghim nixpkgs cũ (rev lock gốc của repo, 2026-03-04) vì flake upstream
-    # dùng flake-utils `eachDefaultSystem` + overlay bun2nix (flake-parts) nên
-    # sẽ eval cả x86_64-darwin; nixpkgs 26.11 của hệ thống đã bỏ darwin -> nổ.
-    nixpkgs-lwe.url = "github:NixOS/nixpkgs/80bdc1e5ce51f56b19791b52b2901187931f5353";
-    linux-wallpaper-engine = {
-      url = "github:jagrat7/linux-wallpaper-engine";
-      inputs.nixpkgs.follows = "nixpkgs-lwe";
-    };
   };
 
   outputs = {
@@ -90,7 +77,6 @@
           "gtk+".broken = "warn";
         };
       };
-      overlays = [inputs.polymc.overlay];
     };
   in {
     formatter.${system} = pkgs.alejandra;
