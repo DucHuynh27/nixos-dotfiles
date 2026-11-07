@@ -31,16 +31,16 @@
       "*" = {
         AddKeysToAgent = "yes";
       };
-    };
-    "github.com" = {
-      Hostname = "ssh.github.com";
-      Port = 443;
-      User = "git";
-    };
+      "github.com" = {
+        Hostname = "ssh.github.com";
+        Port = 443;
+        User = "git";
+      };
 
-    "codeberg.org" = {
-      Hostname = "codeberg.org";
-      User = "git";
+      "codeberg.org" = {
+        Hostname = "codeberg.org";
+        User = "git";
+      };
     };
   };
 
