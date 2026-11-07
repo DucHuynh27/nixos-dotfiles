@@ -89,7 +89,7 @@
         specialArgs = {inherit inputs;};
         # > Our main nixos configuration file <
         modules = [
-          ./nixos/configuration.nix
+          ./hosts/nixos/configuration.nix
         ];
       };
     };
@@ -104,7 +104,7 @@
         modules = [
           inputs.sops-nix.homeManagerModules.sops
           inputs.zalo-for-linux.homeModules.default
-          ./home-manager/home.nix
+          ./modules/home-manager/home.nix
         ];
       };
     };
